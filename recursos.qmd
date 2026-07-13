@@ -6,22 +6,22 @@ Lecturas, herramientas y guía de instalación para el taller. La lista se compl
 
 ## Lecturas del taller
 
-Las investigaciones propias que estructuran los bloques.
+Las investigaciones propias que estructuran los bloques, en el orden en que aparecen durante el día.
 
 ::: {.resource-card}
-[Legislature Size and Welfare: Evidence From Brazil]{.resource-title}
+[Financial Incentives and Health Care Provision: Evidence from an Experimental *Aedes aegypti* Control Programme in Brazil]{.resource-title}
 
-[American Journal of Political Science · regresión discontinua]{.resource-meta}
+[Experimento de campo · incentivos y dengue (caso central del bloque de experimentos)]{.resource-meta}
 
 ::: {.resource-links}
-[DOI](https://doi.org/10.1111/ajps.12843)
+[Referencia por confirmar](#)
 :::
 :::
 
 ::: {.resource-card}
 [Bottom-Up Accountability and Public Service Provision: Evidence from a Field Experiment in Brazil]{.resource-title}
 
-[Research & Politics · experimento de campo]{.resource-meta}
+[Research & Politics · experimento de campo con resultado nulo]{.resource-meta}
 
 ::: {.resource-links}
 [DOI](https://doi.org/10.1177/2053168020914444)
@@ -39,13 +39,12 @@ Las investigaciones propias que estructuran los bloques.
 :::
 
 ::: {.resource-card}
-[The Effect of Legislature Size on Distributive Politics: A Meta-Analysis]{.resource-title}
+[Legislature Size and Welfare: Evidence From Brazil]{.resource-title}
 
-[British Journal of Political Science · meta-análisis]{.resource-meta}
+[American Journal of Political Science · regresión discontinua]{.resource-meta}
 
 ::: {.resource-links}
-[DOI](https://doi.org/10.1017/S0007123422000552) |
-[Réplica](https://github.com/danilofreire/legislature-size-meta-analysis)
+[DOI](https://doi.org/10.1111/ajps.12843)
 :::
 :::
 
@@ -59,9 +58,20 @@ Las investigaciones propias que estructuran los bloques.
 :::
 :::
 
+::: {.resource-card}
+[The Effect of Legislature Size on Distributive Politics: A Meta-Analysis]{.resource-title}
+
+[British Journal of Political Science · meta-análisis, cierra el bucle con la regresión discontinua de la mañana]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1017/S0007123422000552) |
+[Réplica](https://github.com/danilofreire/legislature-size-meta-analysis)
+:::
+:::
+
 ### Reproducibilidad y robustez
 
-Dos proyectos colaborativos grandes en los que participo, centrales para el Bloque 3.
+Dos proyectos colaborativos grandes en los que participo, centrales para el bloque de acumulación de evidencia.
 
 ::: {.resource-card}
 [Investigating the Analytical Robustness of the Social and Behavioural Sciences]{.resource-title}
@@ -92,15 +102,6 @@ Lista breve, en preparación.
 - PANES (Uruguay): Manacorda, Miguel y Vigorito (2011), un diseño de regresión discontinua sobre el puntaje de elegibilidad
 - Auditorías municipales (Brasil): Ferraz y Finan, auditorías al azar y rendición de cuentas electoral
 
-## Métodos computacionales y LLMs
-
-Lista breve, en preparación.
-
-- Argyle et al. (2023, *Political Analysis*), "Out of One, Many": el caso optimista de las poblaciones sintéticas
-- Bisbee et al. (2024, *Political Analysis*): los riesgos de reemplazar datos de encuesta con modelos de lenguaje
-- Angelopoulos et al. (2023, *Science*): inferencia potenciada por predicción (*prediction-powered inference*)
-- Egami et al.: aprendizaje supervisado basado en diseño para texto como dato
-
 ## Organizaciones
 
 - [J-PAL América Latina y el Caribe](https://www.povertyactionlab.org/es/regional-office/latin-america-and-caribbean)
@@ -110,10 +111,4 @@ Lista breve, en preparación.
 
 ## Instalación de software
 
-Para la parte práctica de la tarde necesitás tres herramientas, todas gratuitas:
-
-- [R](https://cran.r-project.org/): el lenguaje de análisis
-- [Quarto](https://quarto.org/docs/get-started/): documentos dinámicos y diapositivas
-- [git](https://git-scm.com/): control de versiones
-
-RStudio (>= 2022.07) ya incluye Quarto. Si usás otro editor, instalá Quarto por separado
+La práctica de cada bloque corre en R. En [Materiales](materiales.qmd#antes-de-empezar) está la guía paso a paso: instalá [R](https://cran.r-project.org/) y [RStudio](https://posit.co/download/rstudio-desktop/), y después corré el bloque que instala los seis paquetes del taller (tidyverse, estimatr, rdrobust, rddensity, tidysynth, metafor)

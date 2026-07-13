@@ -2,50 +2,110 @@
 title: "Materiales"
 ---
 
-Acá van las diapositivas de cada bloque y el material de la parte práctica (datos y código del ejercicio de reproducibilidad). Las diapositivas se publican a medida que se preparan.
+Acá están las diapositivas, los datos y el código de cada bloque. Cada bloque con práctica trae el archivo de código listo para correr y los datos que usa. Las diapositivas se publican a medida que se preparan, así que algunos enlaces se activan más cerca del taller
 
-## Diapositivas
-
-::: {.resource-card}
-[Bloque 1: Diseños causales]{.resource-title}
-
-[Mañana · regresión discontinua, experimentos y control sintético, con investigaciones aplicadas en la región]{.resource-meta}
-
-::: {.resource-links}
-[En preparación](#)
-:::
-:::
+## Antes de empezar
 
 ::: {.resource-card}
-[Bloque 2: Modelos de lenguaje como medición]{.resource-title}
+[Preparación: instalá R y los paquetes]{.resource-title}
 
-[Mañana · el texto como dato, validación y poblaciones sintéticas]{.resource-meta}
+[Traé tu computadora con todo listo · unos 10 minutos]{.resource-meta}
+
+Instalá [R](https://cran.r-project.org/) y [RStudio](https://posit.co/download/rstudio-desktop/) (RStudio ya incluye lo necesario para correr el código). Después abrí RStudio y corré este bloque una vez: instala solo los paquetes que te falten.
+
+```r
+paquetes <- c("tidyverse", "estimatr", "rdrobust",
+              "rddensity", "tidysynth", "metafor")
+faltan <- paquetes[!paquetes %in% installed.packages()[, "Package"]]
+if (length(faltan) > 0) install.packages(faltan)
+```
+:::
+
+## Diapositivas por bloque
+
+::: {.resource-card}
+[Bloque 1: Apertura]{.resource-title}
+
+[Mañana · 9:00–9:30 · 30 min]{.resource-meta}
+
+[El problema del contrafactual, el sesgo de selección y por qué la evaluación de impacto importa más en la región]{.resource-meta}
 
 ::: {.resource-links}
-[En preparación](#)
+[Diapositivas (.html)](diapositivas/01-apertura.html) |
+[Fuente (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/01-apertura.qmd)
 :::
 :::
 
 ::: {.resource-card}
-[Bloque 3.1: Síntesis de evidencia]{.resource-title}
+[Bloque 2: Experimentos]{.resource-title}
 
-[Tarde · por qué un solo estudio engaña, sesgo de publicación y meta-análisis del tamaño de la legislatura]{.resource-meta}
+[Mañana · 9:30–10:45 · 75 min]{.resource-meta}
+
+[El contrafactual que construís. Un experimento de campo sobre incentivos y dengue en Brasil, un resultado nulo que también enseña, y un experimento de encuesta sobre linchamientos]{.resource-meta}
 
 ::: {.resource-links}
-[En preparación](#)
+[Diapositivas (.html)](diapositivas/02-experimentos.html) |
+[Fuente (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/02-experimentos.qmd) |
+[Código (.R)](diapositivas/codigo/practica-02.R) |
+[Datos dengue (.csv)](diapositivas/datos/dengue_incentivos.csv) |
+[Datos linchamientos (.csv)](diapositivas/datos/linchamientos.csv)
 :::
 :::
 
 ::: {.resource-card}
-[Bloque 3.2: Investigación reproducible]{.resource-title}
+[Bloque 3: Regresión discontinua]{.resource-title}
 
-[Tarde · de la crisis de replicación al flujo reproducible: organización del proyecto, git y GitHub, Quarto y entornos]{.resource-meta}
+[Mañana · 11:00–12:30 · 75 min]{.resource-meta}
+
+[El contrafactual que encontrás en un umbral. El tamaño de las legislaturas y el bienestar en Brasil]{.resource-meta}
 
 ::: {.resource-links}
-[En preparación](#)
+[Diapositivas (.html)](diapositivas/03-rdd.html) |
+[Fuente (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/03-rdd.qmd) |
+[Código (.R)](diapositivas/codigo/practica-03.R) |
+[Datos (.csv)](diapositivas/datos/municipios.csv)
 :::
 :::
 
-## Parte práctica
+::: {.resource-card}
+[Bloque 4: Diferencias en diferencias y control sintético]{.resource-title}
 
-El ejercicio de la tarde usa un repositorio que vas a clonar y renderizar. El enlace y las instrucciones se publican acá antes del taller
+[Tarde · 13:30–14:15 · 45 min]{.resource-meta}
+
+[El contrafactual que armás con otras unidades. La prevención de homicidios en São Paulo]{.resource-meta}
+
+::: {.resource-links}
+[Diapositivas (.html)](diapositivas/04-did-sintetico.html) |
+[Fuente (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/04-did-sintetico.qmd) |
+[Código (.R)](diapositivas/codigo/practica-04.R) |
+[Datos (.csv)](diapositivas/datos/homicidios.csv)
+:::
+:::
+
+::: {.resource-card}
+[Bloque 5: Acumulación de evidencia]{.resource-title}
+
+[Tarde · 14:15–15:15 · 60 min]{.resource-meta}
+
+[Por qué un solo estudio engaña: sesgo de publicación, meta-análisis y la crisis de replicación contada desde adentro]{.resource-meta}
+
+::: {.resource-links}
+[Diapositivas (.html)](diapositivas/05-acumulacion.html) |
+[Fuente (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/05-acumulacion.qmd) |
+[Código (.R)](diapositivas/codigo/practica-05.R) |
+[Datos (.csv)](diapositivas/datos/meta_estudios.csv)
+:::
+:::
+
+::: {.resource-card}
+[Bloque 6: Cierre]{.resource-title}
+
+[Tarde · 15:15–15:30 · 15 min]{.resource-meta}
+
+[El mapa completo, hacia dónde va el campo y dónde enchufarse en la región]{.resource-meta}
+
+::: {.resource-links}
+[Diapositivas (.html)](diapositivas/06-cierre.html) |
+[Fuente (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/06-cierre.qmd)
+:::
+:::

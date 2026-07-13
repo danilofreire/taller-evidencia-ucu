@@ -3,14 +3,14 @@ title: "Políticas públicas basadas en evidencia"
 subtitle: "Lecciones desde la investigación aplicada en América Latina"
 ---
 
-Taller intensivo de un día sobre cómo producir, sintetizar y comunicar evidencia creíble para la política pública, con casos de América Latina. La mañana recorre los diseños que permiten estimar efectos causales (experimentos, regresión discontinua, control sintético) y los métodos computacionales recientes, incluidos los modelos de lenguaje. La tarde se centra en la síntesis de evidencia con meta-análisis y en la investigación reproducible, con una parte práctica.
+Taller intensivo de un día sobre cómo producir y acumular evidencia creíble para la política pública, con casos de América Latina. La mañana responde una pregunta: ¿de dónde sale tu contrafactual? Recorremos tres respuestas: los experimentos, la regresión discontinua y el control sintético. La tarde responde la segunda: ¿cuándo un resultado se vuelve evidencia? Vemos el sesgo de publicación, el meta-análisis y la crisis de replicación. Cada bloque termina con una práctica guiada en R.
 
 ::: {.info-box}
 ::: {.info-grid}
 ::: {.info-item}
 [Fecha]{.info-label}
 
-[Por confirmar]{.info-value}
+[Viernes 1 de agosto de 2026]{.info-value}
 :::
 ::: {.info-item}
 [Lugar]{.info-label}
@@ -35,21 +35,21 @@ Taller intensivo de un día sobre cómo producir, sintetizar y comunicar evidenc
 ::: {.bloque-card}
 [Mañana · 9:00–12:30]{.bloque-label}
 
-[Producir evidencia creíble]{.bloque-title}
+[¿De dónde sale tu contrafactual?]{.bloque-title}
 
-[Diseños causales contados a través de investigaciones aplicadas en la región: regresión discontinua, experimentos y control sintético. Luego, los modelos de lenguaje como herramienta de medición para la investigación social.]{.bloque-topics}
+[Tres formas de construir el contrafactual, contadas con investigaciones aplicadas en la región: los experimentos, la regresión discontinua y el control sintético.]{.bloque-topics}
 :::
 
 ::: {.bloque-card}
 [Tarde · 13:30–15:30]{.bloque-label}
 
-[Evidencia creíble y acumulativa]{.bloque-title}
+[¿Cuándo un resultado se vuelve evidencia?]{.bloque-title}
 
-[Síntesis de evidencia con meta-análisis e investigación reproducible, con una parte práctica con git, Quarto y la terminal.]{.bloque-topics}
+[Cuando sobrevive a la síntesis y la crítica: sesgo de publicación, meta-análisis y la crisis de replicación contada desde adentro.]{.bloque-topics}
 :::
 
 El [programa detallado](programa.qmd) tiene los tiempos y los contenidos de cada bloque.
 
 ## Qué traer
 
-Traé tu computadora con [R](https://cran.r-project.org/), [Quarto](https://quarto.org/docs/get-started/) y [git](https://git-scm.com/) instalados. En [Recursos](recursos.qmd) está la guía de instalación y las lecturas del taller
+Traé tu computadora con [R](https://cran.r-project.org/) instalado. Cada bloque tiene una práctica con el código ya escrito, que corremos juntos. En [Materiales](materiales.qmd) está la guía de instalación con los paquetes que vas a necesitar, y en [Recursos](recursos.qmd) están las lecturas del taller
