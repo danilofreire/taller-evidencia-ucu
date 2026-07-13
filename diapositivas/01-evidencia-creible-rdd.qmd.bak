@@ -1,0 +1,479 @@
+---
+title: "Políticas públicas basadas en evidencia"
+subtitle: "Evidencia creíble · del experimento ideal al RDD"
+author:
+  - name: Danilo Freire
+    orcid: 0000-0002-4712-6810
+    email: danilofreire@gmail.com
+    affiliations: "Department of Data and Decision Sciences <br> Emory University"
+format:
+  clean-revealjs:
+    self-contained: true
+    footer: "Políticas basadas en evidencia · Evidencia creíble · RDD"
+    transition: slide
+    transition-speed: default
+    scrollable: true
+revealjs-plugins:
+  - multimodal
+engine: knitr
+editor:
+  render-on-save: true
+lang: es
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(knitr)
+opts_chunk$set(
+  prompt = T,
+  fig.align = "center",
+  dpi = 300,
+  cache = T,
+  engine.opts = list(bash = "-l")
+)
+
+knit_hooks$set(
+  prompt = function(before, options, envir) {
+    options(
+      prompt = if (options$engine %in% c("sh", "bash", "zsh")) "$ " else "R> ",
+      continue = if (options$engine %in% c("sh", "bash", "zsh")) "$ " else "+ "
+    )
+  }
+)
+
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+
+ensure <- function(pkg) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg, dependencies = TRUE)
+  }
+}
+invisible(lapply(c("fontawesome", "rdrobust", "rddensity", "estimatr"), ensure))
+library(fontawesome)
+
+suppressPackageStartupMessages(library(ggplot2))
+```
+
+## Del experimento ideal a una estimación creíble
+
+:::{style="margin-top: 30px; font-size: 24px;"}
+:::{.columns}
+:::{.column width=52%}
+- Cuando mostramos que [agrandar los concejos municipales mejoró el bienestar en Brasil]{.alert}, muchos colegas del Norte global no lo podían creer ([Mignozzetti, Cepaluni y Freire, 2024](https://doi.org/10.1111/ajps.12843))
+
+- La intuición importada decía lo contrario: [más políticos, más gasto inútil]{.alert}. Acá los datos dicen otra cosa
+
+- Dos ideas para hoy: la [evidencia importada no siempre viaja]{.alert}, y se compite [siendo ingenioso, no rico]{.alert}: datos administrativos, sin presupuesto de experimento
+
+- ¿Cómo convencés a un escéptico? Con un [diseño creíble]{.alert} y una estimación que cualquiera puede correr
+:::
+
+:::{.column width=48%}
+:::{style="text-align: center;"}
+| Capa | Idea | Qué resuelve |
+|---|---|---|
+| [El ideal]{.alert} | el experimento | el azar borra el sesgo |
+| [El truco]{.alert} | un umbral | casi un experimento, gratis |
+| [La estimación]{.alert} | RDD en R | el salto en el corte |
+| [La validez]{.alert} | chequeos | ¿el diseño se sostiene? |
+:::
+
+Vamos de la lógica del experimento a una estimación que [vas a correr vos misma]{.alert}
+:::
+:::
+:::
+
+# El ideal experimental {background-color="#2d4563"}
+
+## El patrón de oro y por qué casi nunca lo tenemos
+
+:::{style="margin-top: 20px; font-size: 22px;"}
+:::{.columns}
+:::{.column width=50%}
+- Cada unidad tiene dos [resultados potenciales]{.alert}: con tratamiento y sin tratamiento, pero sólo vemos uno ([Holland, 1986](https://doi.org/10.2307/2289064))
+
+- El [problema fundamental]{.alert} de la inferencia causal: el contrafactual no se observa, hay que construirlo
+
+- Si comparás a quienes reciben con quienes no, y [eligen recibir]{.alert}, mezclás el efecto con el [sesgo de selección]{.alert}
+
+- El [experimento aleatorizado]{.alert} lo resuelve por diseño: el azar hace los grupos comparables [en todo lo demás]{.alert} ([Rubin, 1974](https://doi.org/10.1037/h0037350))
+:::
+
+:::{.column width=50%}
+- El azar no iguala caso por caso; iguala [en promedio]{.alert}, y eso alcanza para estimar el efecto sin sesgo
+
+- Es el [patrón de oro]{.alert} contra el que medimos todo lo demás
+
+- El problema práctico: en política pública [rara vez podemos aleatorizar]{.alert} (ética, costo, política)
+
+- La salida: buscar [experimentos naturales]{.alert}, situaciones donde una regla asigna el tratamiento casi al azar
+
+- Lo vemos primero en una simulación, después en un caso real
+:::
+:::
+:::
+
+## Lo vemos en R: por qué el azar arregla el sesgo
+
+:::{style="margin-top: 14px; font-size: 20px;"}
+Simulamos un programa cuyos beneficiarios [se autoseleccionan]{.alert} (los más motivados entran) y lo comparamos con asignarlo [al azar]{.alert}. El efecto verdadero es [+5]{.alert}.
+
+:::{.columns}
+:::{.column width=54%}
+```{r sim-sesgo, echo=TRUE}
+set.seed(385)
+n <- 2000
+motivacion <- rnorm(n)
+# Autoselección: los más motivados eligen entrar
+trata_sel  <- as.integer(motivacion > 0)
+# Asignación al azar, independiente de la motivación
+trata_azar <- rbinom(n, 1, 0.5)
+
+efecto <- 5
+y_sel  <- 10 + efecto * trata_sel  + 3 * motivacion + rnorm(n)
+y_azar <- 10 + efecto * trata_azar + 3 * motivacion + rnorm(n)
+
+c(seleccion = coef(lm(y_sel  ~ trata_sel))[2],
+  azar      = coef(lm(y_azar ~ trata_azar))[2])
+```
+:::
+
+:::{.column width=46%}
+- Con [autoselección]{.alert}, la diferencia de medias mezcla el efecto (+5) con la motivación: el número se [infla]{.alert}
+
+- Con [asignación al azar]{.alert}, la motivación queda balanceada y el estimador [recupera el +5]{.alert}
+
+- La pregunta de todo diseño observacional: ¿qué hace las veces del azar?
+:::
+:::
+:::
+
+# Regresión discontinua: el experimento que la burocracia ya corrió {background-color="#2d4563"}
+
+## La idea: un umbral que asigna casi al azar
+
+:::{style="margin-top: 16px; font-size: 21px;"}
+:::{.columns}
+:::{.column width=52%}
+- Muchas reglas asignan un tratamiento según si una [variable continua]{.alert} cruza un [umbral]{.alert}: la [variable de asignación]{.alert}
+
+- Justo al lado del corte, los casos de un lado y del otro son [casi idénticos]{.alert}, salvo que unos recibieron el tratamiento y otros no
+
+- Es una [aleatorización local]{.alert}: cerca del umbral, caer arriba o abajo es casi cuestión de azar ([Thistlethwaite y Campbell, 1960](https://doi.org/10.1037/h0044319))
+
+- El supuesto clave es de [continuidad]{.alert}: sin el tratamiento, el resultado cambiaría [suave]{.alert} al cruzar el corte ([Cattaneo, Idrobo y Titiunik, 2020](https://doi.org/10.1017/9781108684606))
+:::
+
+:::{.column width=48%}
+:::{style="margin-top: 6px; font-size: 20px;"}
+Forma lineal simple, con $X$ la variable de asignación y $c$ el corte:
+
+$$Y = \beta_0 + \beta_1 X + \beta_2\,\mathbf{1}(X \ge c) + \varepsilon$$
+
+- $\beta_2$ es el [salto]{.alert} en el corte: el efecto del tratamiento
+
+- Estimamos el efecto [sólo en el umbral]{.alert}, un efecto local, no para toda la población
+
+- Por eso conviene mirar [cerca del corte]{.alert}, donde la comparación es creíble
+:::
+:::
+:::
+:::
+
+## Umbrales por todos lados: el caso de Brasil
+
+:::{style="margin-top: 14px; font-size: 20px;"}
+:::{.columns}
+:::{.column width=55%}
+- La Constitución brasileña fija el [número de concejales]{.alert} (vereadores) por tramos de [población]{.alert}: al cruzar ciertos umbrales, el concejo [gana bancas]{.alert}
+
+- Eso es un RDD listo para usar: la [población]{.alert} es la variable de asignación y cada umbral, un corte
+
+- En [Mignozzetti, Cepaluni y Freire (2024)](https://doi.org/10.1111/ajps.12843) encontramos que los concejos más grandes [bajan la mortalidad infantil]{.alert}, [suben la matrícula preescolar]{.alert} y [aumentan el gasto en bienes públicos]{.alert}
+
+- Nada de esto necesitó un experimento: [datos administrativos]{.alert} que el Estado ya recoge. Rigor [barato]{.alert}, sobre un problema que importa
+:::
+
+:::{.column width=45%}
+:::{style="text-align: center; font-size: 18px;"}
+:::{style="border: 2px dashed #2d4563; border-radius: 8px; padding: 26px; color: #777;"}
+[Figura por agregar]{.alert}
+
+discontinuidad en el tamaño del concejo (o en un resultado) en el umbral de población
+:::
+
+El resto de la sesión [reconstruye esa lógica]{.alert} con datos sintéticos parecidos
+:::
+:::
+:::
+:::
+
+# Estimemos un RDD {background-color="#2d4563"}
+
+## Los datos: municipios y un umbral de población
+
+:::{style="margin-top: 14px; font-size: 19px;"}
+Un conjunto [sintético]{.alert} de 2.000 municipios, hecho a imagen del caso brasileño: el concejo se agranda al cruzar los [10.000 habitantes]{.alert}.
+
+:::{.columns}
+:::{.column width=54%}
+```{r datos, echo=TRUE, message=FALSE}
+library(readr)
+library(dplyr)
+municipios <- read_csv("datos/municipios.csv")
+
+municipios |>
+  select(poblacion, consejo_grande, n_concejales,
+         anos_escolaridad, mortalidad_infantil) |>
+  glimpse()
+```
+:::
+
+:::{.column width=46%}
+[Variables]{.alert}:
+
+- `poblacion`: variable de asignación; `umbral` = 10.000
+- `consejo_grande`: 1 si población ≥ umbral, el tratamiento
+- `n_concejales`: bancas del concejo (9 o 11)
+- Resultados: `anos_escolaridad`, `matricula_preescolar`, `camas_hospital`, `mortalidad_infantil`, `gasto_publico_pc`
+- Controles: `ingreso_pc`, `urbano_pct`, `region`, `escolaridad_base`
+:::
+:::
+:::
+
+## Paso 1: mirá la discontinuidad
+
+:::{style="margin-top: 12px; font-size: 19px;"}
+:::{.columns}
+:::{.column width=46%}
+- Promediamos el resultado en [ventanas]{.alert} de población y lo graficamos contra el corte
+
+- Si hay efecto, vas a [ver un salto]{.alert} en la línea del umbral, ver es creer
+
+- Acá los [años de escolaridad]{.alert} saltan hacia arriba justo en los 10.000
+:::
+
+:::{.column width=54%}
+```{r rdplot-bins, echo=TRUE, message=FALSE, warning=FALSE, fig.height=4, fig.width=5.5}
+azul <- "#2d4563"; rojo <- "#b85450"
+
+municipios |>
+  mutate(bin = round(poblacion / 500) * 500,
+         lado = poblacion >= 10000) |>
+  group_by(bin, lado) |>
+  summarise(y = mean(anos_escolaridad), .groups = "drop") |>
+  ggplot(aes(bin, y, colour = lado)) +
+  geom_point(size = 1.8, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_vline(xintercept = 10000, linetype = "dashed") +
+  scale_colour_manual(values = c(azul, rojo), guide = "none") +
+  labs(x = "Población", y = "Años de escolaridad (promedio por bin)") +
+  theme_minimal(base_size = 13)
+```
+:::
+:::
+:::
+
+## Paso 2: una regresión local a mano
+
+:::{style="margin-top: 12px; font-size: 19px;"}
+Tomamos una [ventana]{.alert} alrededor del corte y ajustamos una recta a cada lado. El [salto]{.alert} en el corte es el coeficiente del tratamiento.
+
+:::{.columns}
+:::{.column width=56%}
+```{r paso2, echo=TRUE, message=FALSE}
+library(estimatr)
+h <- 2000  # ventana: ±2.000 habitantes
+
+ajuste_local <- lm_robust(
+  anos_escolaridad ~ consejo_grande * poblacion_c,
+  data = filter(municipios, abs(poblacion_c) < h)
+)
+coef(ajuste_local)["consejo_grande"]
+```
+:::
+
+:::{.column width=44%}
+- `consejo_grande * poblacion_c` deja que la [pendiente]{.alert} sea distinta a cada lado del corte
+
+- El coeficiente de `consejo_grande` es el salto en el umbral: cerca de [+0,9 años]{.alert}
+
+- El problema: elegimos la ventana [a ojo]{.alert}. ¿Otra ventana daría otra cosa? Eso motiva el paso 3
+:::
+:::
+:::
+
+## Paso 3: la versión creíble con rdrobust
+
+:::{style="margin-top: 12px; font-size: 19px;"}
+:::{.columns}
+:::{.column width=54%}
+```{r paso3, echo=TRUE, message=FALSE, warning=FALSE}
+library(rdrobust)
+rd <- rdrobust(
+  y = municipios$anos_escolaridad,
+  x = municipios$poblacion,
+  c = 10000
+)
+round(c(efecto = unname(rd$coef["Conventional", 1]),
+        ee     = unname(rd$se["Robust", 1]),
+        ventana = unname(rd$bws["h", 1])), 3)
+```
+:::
+
+:::{.column width=46%}
+- `rdrobust` elige el [ancho de banda óptimo]{.alert} con un criterio basado en los datos y corrige el sesgo de la aproximación ([Calonico, Cattaneo y Titiunik, 2014](https://doi.org/10.3982/ECTA11757))
+
+- No elegís la ventana a mano: el método la fija y reporta un [error estándar honesto]{.alert}
+
+- El efecto queda cerca del [+0,9]{.alert} del paso 2: la conclusión [no dependía]{.alert} de nuestra ventana
+:::
+:::
+:::
+
+## El efecto en varias dimensiones del bienestar
+
+:::{style="margin-top: 12px; font-size: 19px;"}
+Corremos el [mismo RDD]{.alert} sobre cada resultado. Como en el paper, los concejos más grandes mejoran [servicios salientes de salud y educación]{.alert}.
+
+:::{.columns}
+:::{.column width=58%}
+```{r multi, echo=TRUE, message=FALSE, warning=FALSE}
+resultados <- c("anos_escolaridad", "matricula_preescolar",
+                "camas_hospital", "mortalidad_infantil",
+                "gasto_publico_pc")
+
+estimar <- function(y) {
+  rd <- rdrobust(municipios[[y]], municipios$poblacion, c = 10000)
+  c(efecto = unname(rd$coef["Conventional", 1]),
+    ee     = unname(rd$se["Robust", 1]))
+}
+
+round(t(sapply(resultados, estimar)), 2)
+```
+:::
+
+:::{.column width=42%}
+- Todos los efectos van en la dirección [esperada]{.alert}: más escolaridad, más matrícula, más camas, más gasto
+
+- [Mortalidad infantil]{.alert}: el salto es [negativo]{.alert}, y eso es una mejora. El signo importa, leé qué significa "mejor" en cada variable
+
+- Un mismo diseño, [cinco lecturas]{.alert} del bienestar
+:::
+:::
+:::
+
+## Chequeos de validez del diseño
+
+:::{style="margin-top: 10px; font-size: 18px;"}
+:::{.columns}
+:::{.column width=55%}
+```{r chequeos, echo=TRUE, message=FALSE, warning=FALSE}
+library(rddensity)
+# 1. ¿Manipularon la población para cruzar el umbral?
+dens <- rddensity(municipios$poblacion, c = 10000)
+round(dens$test$p_jk, 3)          # p alto = sin amontonamiento
+
+# 2. Balance: un control no debería saltar en el corte
+bal <- rdrobust(municipios$ingreso_pc, municipios$poblacion, c = 10000)
+round(c(salto_ingreso = unname(bal$coef["Conventional", 1]),
+        p             = unname(bal$pv["Robust", 1])), 3)
+
+# 3. Precisión: agregar controles achica el error estándar
+sin_c <- rdrobust(municipios$anos_escolaridad, municipios$poblacion, c = 10000)
+con_c <- rdrobust(municipios$anos_escolaridad, municipios$poblacion, c = 10000,
+                  covs = municipios[, c("ingreso_pc", "urbano_pct", "escolaridad_base")])
+round(c(ee_sin = unname(sin_c$se["Robust", 1]),
+        ee_con = unname(con_c$se["Robust", 1])), 3)
+```
+:::
+
+:::{.column width=45%}
+- [Manipulación]{.alert}: el test de densidad ([Cattaneo, Jansson y Ma, 2020](https://doi.org/10.1080/01621459.2019.1635480)) no rechaza la densidad continua. Nadie "empujó" su población para cruzar el corte
+
+- [Balance]{.alert}: el ingreso previo [no salta]{.alert} en el umbral; los grupos son comparables, como esperás de un buen RDD
+
+- [Precisión]{.alert}: sumar controles deja el efecto casi igual pero [achica el error estándar]{.alert}
+:::
+:::
+:::
+
+## Qué puede romper el diseño
+
+:::{style="margin-top: 18px; font-size: 21px;"}
+:::{.columns}
+:::{.column width=50%}
+- [Manipulación del corte]{.alert}: si la gente puede elegir de qué lado caer (amontonamiento), se rompe la aleatorización local. Por eso el test de densidad
+
+- [Otros saltos en el mismo umbral]{.alert}: si en esos 10.000 habitantes cambia [otra]{.alert} política a la vez, no sabés a cuál atribuir el efecto
+:::
+
+:::{.column width=50%}
+- [Sensibilidad al ancho de banda]{.alert}: reportá el efecto con varias ventanas; si cambia mucho, desconfiá
+
+- [Es un efecto local]{.alert}: vale [en el corte]{.alert}, no para municipios lejos del umbral, no lo extrapoles de más
+:::
+:::
+:::
+
+## ¿Hay un umbral en tu pregunta?
+
+:::{style="margin-top: 20px; font-size: 22px;"}
+:::{.columns}
+:::{.column width=52%}
+Pensá tu propia investigación y buscá la regla escondida:
+
+- ¿Hay un [punto de corte]{.alert} que decide quién recibe algo? Un puntaje, una población, una fecha, un ingreso
+
+- ¿La regla la fija [otro]{.alert} (una ley, una agencia), no la persona? Mejor todavía
+
+- ¿Tenés el resultado medido [a ambos lados]{.alert} del corte?
+:::
+
+:::{.column width=48%}
+- ¿Quién podría [manipular]{.alert} de qué lado cae? Si nadie, tu RDD es más creíble
+
+- En grupos de a dos, [escribí tu umbral]{.alert} y la variable de asignación, y contá qué resultado mirarías
+
+- Si no hay umbral, ¿hay otra fuente de variación [casi aleatoria]{.alert}?
+:::
+:::
+:::
+
+## Para llevarte
+
+:::{style="margin-top: 26px; font-size: 24px;"}
+- El experimento es el patrón de oro porque [el azar borra el sesgo]{.alert}; cuando no podés aleatorizar, buscás algo que lo imite
+
+- El RDD usa un [umbral administrativo]{.alert} como casi-experimento: rigor [barato]{.alert}, con datos que el Estado ya tiene
+
+- La estimación es una [escalera de tres pasos]{.alert}: mirá el salto, ajustá local, confirmá con `rdrobust`
+
+- Y siempre [chequeá el diseño]{.alert}: densidad, balance, sensibilidad. Un buen RDD se defiende, no se asume
+:::
+
+## Referencias
+
+:::{style="font-size: 18px;"}
+:::{.columns}
+:::{.column width=50%}
+Calonico, S., Cattaneo, M. y Titiunik, R. (2014). Robust nonparametric confidence intervals for regression-discontinuity designs. *Econometrica* 82(6):2295–2326. [doi](https://doi.org/10.3982/ECTA11757)
+
+Cattaneo, M., Idrobo, N. y Titiunik, R. (2020). *A Practical Introduction to Regression Discontinuity Designs: Foundations*. Cambridge University Press. [doi](https://doi.org/10.1017/9781108684606)
+
+Cattaneo, M., Jansson, M. y Ma, X. (2020). Simple local polynomial density estimators. *JASA* 115(531):1449–1455. [doi](https://doi.org/10.1080/01621459.2019.1635480)
+:::
+
+:::{.column width=50%}
+Holland, P. (1986). Statistics and causal inference. *JASA* 81(396):945–960. [doi](https://doi.org/10.2307/2289064)
+
+Mignozzetti, U., Cepaluni, G. y Freire, D. (2024). Legislature size and welfare: evidence from Brazil. *American Journal of Political Science*. [doi](https://doi.org/10.1111/ajps.12843)
+
+Rubin, D. (1974). Estimating causal effects of treatments in randomized and nonrandomized studies. *Journal of Educational Psychology* 66(5):688–701. [doi](https://doi.org/10.1037/h0037350)
+
+Thistlethwaite, D. y Campbell, D. (1960). Regression-discontinuity analysis. *Journal of Educational Psychology* 51(6):309–317. [doi](https://doi.org/10.1037/h0044319)
+:::
+:::
+:::
+
+# ¡Gracias! {background-color="#2d4563"}

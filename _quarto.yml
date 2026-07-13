@@ -1,0 +1,63 @@
+project:
+  type: website
+  output-dir: docs
+
+# Los renders del sitio completo reutilizan los resultados cacheados en
+# _freeze/ (commitear esa carpeta); un documento solo se re-ejecuta si su
+# fuente cambió o si se renderiza individualmente
+execute:
+  freeze: auto
+
+website:
+  title: "Políticas basadas en evidencia"
+  description: "Taller · Universidad Católica del Uruguay"
+  page-navigation: true
+  back-to-top-navigation: true
+  repo-url: https://github.com/danilofreire/taller-evidencia-ucu
+  repo-actions: [issue, source]
+  navbar:
+    pinned: true
+    background: "#7B2D2D"
+    foreground: "#F3ECE1"
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: programa.qmd
+        text: Programa
+      - href: materiales.qmd
+        text: Materiales
+      - href: recursos.qmd
+        text: Recursos
+    right:
+      - icon: envelope
+        href: mailto:danilofreire@gmail.com
+        aria-label: Email
+      - icon: github
+        href: https://github.com/danilofreire/taller-evidencia-ucu
+        aria-label: GitHub
+  page-footer:
+    left: |
+      &copy; 2026 [Danilo Freire](https://danilofreire.github.io). Contenido bajo licencia [MIT](https://opensource.org/licenses/MIT).
+    right: |
+      Hecho con [Quarto](https://quarto.org)
+
+format:
+  html:
+    theme:
+      light:
+        - litera
+        - theme.scss
+      dark:
+        - darkly
+        - theme-dark.scss
+    lang: es
+    toc: true
+    fontsize: "1.05rem"
+    linestretch: 1.6
+    mainfont: "'Source Sans 3', 'Helvetica Neue', sans-serif"
+    monofont: "'JetBrains Mono', monospace"
+    include-in-header:
+      - text: |
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">

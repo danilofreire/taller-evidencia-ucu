@@ -1,0 +1,251 @@
+/*-- scss:defaults --*/
+
+// Paleta oscura — caoba/terracota adaptados para fondo oscuro.
+// Mantiene los mismos nombres de variable que theme.scss para reutilizar
+// el bloque de reglas sin cambios; solo cambian los valores.
+$caoba:       #E2966E;  // en oscuro: terracota clara para títulos y acentos
+$terracota:   #CF7A54;  // terracota, acento (bordes, hover)
+$terracota-d: #E6A07C;  // terracota clara, enlaces y texto de acento
+$arena:       #1C1A19;  // fondo de página (negro cálido)
+$slate:       #E8E1D7;  // texto principal (claro cálido)
+$mid-grey:    #A89C8E;  // gris cálido secundario
+$taupe:       #3A3431;  // bordes
+$white:       #2A2624;  // superficie de tarjetas
+
+$body-bg:     $arena;
+$body-color:  $slate;
+$link-color:  $terracota-d;
+$primary:     $caoba;
+
+$font-family-sans-serif: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+$headings-font-family:   'Fraunces', 'Georgia', serif;
+$headings-font-weight:   600;
+$headings-color:         $caoba;
+
+$border-radius: 0.25rem;
+
+/*-- scss:rules --*/
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// ── Navbar ──────────────────────────────────────
+.navbar {
+  font-family: $font-family-sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-bottom: 3px solid $terracota;
+}
+
+.navbar-brand {
+  font-family: $headings-font-family;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+// ── Títulos ─────────────────────────────────────
+h1, .h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.3em;
+  border-bottom: 3px solid $terracota;
+}
+
+h2, .h2 {
+  font-size: 1.6rem;
+  color: $caoba;
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+}
+
+h3, .h3 {
+  font-size: 1.15rem;
+  color: $mid-grey;
+  font-family: $font-family-sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 1.8em;
+}
+
+// ── Tarjetas de bloque (agenda) ─────────────────
+.bloque-card {
+  background: $white;
+  border: 1px solid $taupe;
+  border-left: 5px solid $caoba;
+  border-radius: $border-radius;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s ease, border-left-color 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    border-left-color: $terracota;
+  }
+
+  .bloque-label {
+    display: inline-block;
+    font-family: $font-family-sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    background-color: rgba($caoba, 0.15);
+    color: $caoba;
+    margin-bottom: 0.6rem;
+  }
+
+  .bloque-title {
+    font-family: $headings-font-family;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: $caoba;
+    margin-bottom: 0.4rem;
+  }
+
+  .bloque-topics {
+    font-size: 0.95rem;
+    color: $slate;
+    margin-bottom: 0.5rem;
+  }
+}
+
+// ── Tarjetas de recurso (lecturas, materiales) ──
+.resource-card {
+  background: $white;
+  border: 1px solid $taupe;
+  border-radius: $border-radius;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  }
+
+  .resource-title {
+    font-family: $headings-font-family;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: $caoba;
+    margin-bottom: 0.3rem;
+  }
+
+  .resource-meta {
+    font-size: 0.92rem;
+    color: $mid-grey;
+    margin-bottom: 0.25rem;
+  }
+
+  .resource-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+
+    a {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-family: $font-family-sans-serif;
+      font-weight: 500;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      background-color: rgba($terracota, 0.2);
+      color: $terracota-d;
+      text-decoration: none;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background-color: $terracota;
+        color: $arena;
+      }
+    }
+  }
+}
+
+// ── Caja de datos (info del taller) ─────────────
+.info-box {
+  background: $white;
+  border: 1px solid $taupe;
+  border-radius: $border-radius;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .info-item {
+    .info-label {
+      display: block;
+      font-family: $font-family-sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: $mid-grey;
+      margin-bottom: 0.2rem;
+    }
+
+    .info-value {
+      font-size: 0.95rem;
+      color: $caoba;
+      font-weight: 500;
+    }
+  }
+}
+
+// ── Citas ───────────────────────────────────────
+blockquote {
+  border-left: 4px solid $terracota;
+  background-color: rgba($terracota, 0.1);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 0 $border-radius $border-radius 0;
+}
+
+// ── Énfasis en línea (.alert) ───────────────────
+span.alert {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  border-radius: 0;
+  color: $caoba;
+  font-weight: 600;
+}
+
+// ── Pie de página ───────────────────────────────
+.nav-footer {
+  border-top: 3px solid $terracota;
+  font-size: 0.85rem;
+  color: $mid-grey;
+}
+
+// ── Responsive ──────────────────────────────────
+@media (max-width: 768px) {
+  h1, .h1 {
+    font-size: 1.6rem;
+  }
+
+  h2, .h2 {
+    font-size: 1.3rem;
+  }
+
+  .info-box .info-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,518 @@
+---
+title: "Políticas públicas basadas en evidencia"
+subtitle: "Apertura: Evaluación de impacto y el mapa del día"
+author:
+  - name: Danilo Freire
+    orcid: 0000-0002-4712-6810
+    email: danilofreire@gmail.com
+    affiliations: "Department of Data and Decision Sciences <br> Emory University"
+format:
+  clean-revealjs:
+    self-contained: true
+    footer: "Políticas basadas en evidencia · Apertura"
+    transition: slide
+    transition-speed: default
+    scrollable: true
+revealjs-plugins:
+  - multimodal
+engine: knitr
+editor:
+  render-on-save: true
+lang: es
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(knitr)
+opts_chunk$set(
+  echo = FALSE,
+  fig.align = "center",
+  dpi = 300,
+  cache = FALSE
+)
+suppressPackageStartupMessages(library(ggplot2))
+```
+
+## ¿Por qué no nos creyeron?
+
+:::{style="margin-top: 30px; font-size: 23px;"}
+:::{.columns}
+:::{.column width=50%}
+:::{style="text-align: center;"}
+[![University of Lincoln, UK](figures/lincoln.jpeg){width="120%"}](#){data-modal-type="image" data-modal-url="figures/lincoln.jpeg"}
+:::
+- El hallazgo: en Brasil, los [concejos municipales más grandes mejoraron el bienestar]{.alert} ([Mignozzetti, Cepaluni y Freire, 2025](https://doi.org/10.1111/ajps.12843))
+
+- La reacción de varios colegas del Norte global, con toda amabilidad, fue [no poder creerlo]{.alert} 😅
+:::
+
+:::{.column width=50%}
+:::{style="font-size: 30px;"}
+:::{.incremental}
+- La pregunta que abre el taller: [¿cómo defender un resultado que cuesta creer, y cómo producir uno que sí sea creíble?]{.alert}
+
+- Foco en tres partes:
+  - [Producir]{.alert}
+  - [Reproducir]{.alert}
+  - [Acumular]{.alert} evidencia
+:::
+:::
+:::
+:::
+:::
+
+## El resultado que costó creer
+
+:::{style="margin-top: 30px; font-size: 24px;"}
+:::{.columns}
+:::{.column width=50%}
+- La Constitución brasileña fija el número de concejales por [tramos de población]{.alert}: cruzar un umbral le suma bancas al concejo
+
+- Comparando municipios [apenas por encima y apenas por debajo]{.alert} de cada umbral, los concejos más grandes:
+    - suben la [matrícula preescolar]{.alert} y los años de escolaridad
+    - bajan la [mortalidad infantil]{.alert}
+    - aumentan el [gasto en bienes públicos]{.alert}, que es el mecanismo
+
+- Ni experimento ni encuesta cara: sólo [datos administrativos]{.alert} que el Estado ya recoge. Rigor barato, sobre un problema que importa
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center; margin-top: -20px;"}
+[![](figures/population.png){width="100%"}](#){data-modal-type="image" data-modal-url="figures/population.png"}
+
+[![](figures/table-paper.png){width="120%"}](#){data-modal-type="image" data-modal-url="figures/table-paper.png"}
+
+[Mignozzetti, Cepaluni y Freire, 2025](https://doi.org/10.1111/ajps.12843)
+:::
+:::
+:::
+:::
+
+## Qué es una evaluación de impacto
+
+:::{style="margin-top: 24px; font-size: 24px;"}
+:::{.incremental}
+- Una [evaluación de impacto]{.alert} estima el efecto causal de una política: cuánto cambió un resultado [por la intervención]{.alert}, no por otra cosa ([Gertler et al., 2016](https://www.worldbank.org/en/programs/sief-trust-fund/publication/impact-evaluation-in-practice))
+
+- La pregunta es siempre [contrafactual]{.alert}: ¿qué habría pasado [sin]{.alert} la política? ([Imbens y Wooldridge, 2009](https://doi.org/10.1257/jel.47.1.5))
+
+- El desafío es que ese contrafactual [no se observa]{.alert}: hay que construirlo con un grupo de comparación creíble
+
+- Cada unidad tiene dos [resultados potenciales]{.alert}, con la política y sin ella, pero sólo observamos uno ([Holland, 1986](https://doi.org/10.2307/2289064))
+
+- Comparar a quienes reciben con quienes no, cuando [eligen recibir]{.alert}, mezcla el efecto con el [sesgo de selección]{.alert}
+
+- El [experimento aleatorizado]{.alert} lo resuelve por diseño: el azar hace los grupos comparables en todo lo demás ([Rubin, 1974](https://doi.org/10.1037/h0037350))
+
+- Cuando no podemos aleatorizar, por ética, costo o política, buscamos un [casi-experimento]{.alert}: una regla que asigne el tratamiento casi al azar
+
+- ¡Es el puente entre [los métodos]{.alert} y [la política pública]{.alert}!
+:::
+:::
+
+## ¿Cuál es el impacto de este programa?
+
+:::{style="margin-top: 30px; font-size: 24px; text-align: center;"}
+[![](figures/causal-01.png){width="120%"}](#){data-modal-type="image" data-modal-url="figures/causal-01.png"}
+:::
+
+## ¿Cuál es el impacto de este programa?
+
+:::{style="margin-top: 30px; font-size: 24px; text-align: center;"}
+[![](figures/causal-02.png){width="120%"}](#){data-modal-type="image" data-modal-url="figures/causal-02.png"}
+:::
+
+## ¿Cuál es el impact de este programa?
+
+:::{style="margin-top: 30px; font-size: 24px; text-align: center;"}
+[![](figures/causal-03.png){width="120%"}](#){data-modal-type="image" data-modal-url="figures/causal-03.png"}
+:::
+
+## ¿Cuál es el impacto de este programa?
+
+:::{style="margin-top: 30px; font-size: 24px; text-align: center;"}
+[![](figures/causal-04.png){width="120%"}](#){data-modal-type="image" data-modal-url="figures/causal-04.png"}
+:::
+
+
+
+## Qué es y qué no es
+
+:::{style="margin-top: 18px; font-size: 28px;"}
+:::{.columns}
+:::{.column width=50%}
+[Sí es]{.alert}
+
+- Estimar el [efecto causal]{.alert} de una intervención
+
+- Construir un [contrafactual]{.alert} y comparar contra él
+
+- Preguntar [cuánto]{.alert} cambió el resultado gracias a la política
+
+- Poder defender el número ante un [escéptico]{.alert}
+:::
+
+:::{.column width=50%}
+[No es]{.alert}
+
+- [Monitoreo]{.alert}: seguir indicadores no dice qué los causó
+
+- [Descripción]{.alert}: contar a quiénes llegó el programa
+
+- [Opinión]{.alert} de los actores sobre si funcionó
+
+- Una [correlación]{.alert} vestida de efecto
+:::
+:::
+
+Buena parte de lo que se presenta como "evaluación" se queda en la columna derecha
+:::
+
+## ¿Dónde se para este taller?
+
+:::{style="margin-top: 12px; font-size: 28px;"}
+:::{.columns}
+:::{.column width=50%}
+- Dos ejes para ubicarnos: de la [pregunta]{.alert} al [método]{.alert}, y de [consumir]{.alert} evidencia a [producirla]{.alert}
+
+- Hoy nos paramos en [producir con método]{.alert}: no sólo leer evaluaciones, sino aprender a hacerlas
+
+- Por eso es un taller [práctico]{.alert}: vas a ver el código corriendo y vas a pensar tu propio diseño
+
+- La meta no es coleccionar técnicas, es saber [cuándo le creemos]{.alert} a un resultado
+:::
+
+:::{.column width=50%}
+:::{style="margin-top: 30px;"}
+```{r ejes, fig.height=4.2, fig.width=5}
+azul <- "#2d4563"; rojo <- "#b85450"
+
+ggplot() +
+  # ejes acortados: las líneas no llegan a tocar las etiquetas
+  annotate("segment", x = -1.05, xend = 1.05, y = 0, yend = 0,
+           colour = azul, linewidth = 0.5) +
+  annotate("segment", x = 0, xend = 0, y = -1.02, yend = 1.02,
+           colour = azul, linewidth = 0.5) +
+  annotate("point", x = 0.62, y = 0.62, size = 7, colour = rojo) +
+  annotate("text", x = 0.62, y = 0.82, label = "el taller",
+           colour = rojo, fontface = "bold", size = 5.2) +
+  annotate("text", x =  1.18, y = -0.12, label = "método",
+           hjust = 1, colour = azul, fontface = "bold", size = 5) +
+  annotate("text", x = -1.18, y = -0.12, label = "pregunta",
+           hjust = 0, colour = azul, fontface = "bold", size = 5) +
+  annotate("text", x = 0, y =  1.20, label = "producir",
+           colour = azul, fontface = "bold", size = 5) +
+  annotate("text", x = 0, y = -1.20, label = "consumir",
+           colour = azul, fontface = "bold", size = 5) +
+  coord_cartesian(xlim = c(-1.35, 1.35), ylim = c(-1.3, 1.3), clip = "off") +
+  theme_void() +
+  theme(plot.margin = margin(8, 8, 8, 8))
+```
+:::
+:::
+:::
+:::
+
+# Por qué importa más en la región {background-color="#2d4563"}
+
+## Tres hechos regionales
+
+:::{style="margin-top: 14px; font-size: 25px;"}
+1. [La evidencia importada no siempre viaja]{.alert}
+    - Un programa que anduvo afuera puede rendir distinto acá: [el efecto depende del contexto]{.alert} ([Vivalt, 2020](https://doi.org/10.1093/jeea/jvaa019))
+    - Copiar la receta sin preguntarse si el contexto se parece es [apostar a ciegas]{.alert}
+
+2. [La base regional es delgada]{.alert}
+    - Pocas evaluaciones propias, y [casi ninguna réplica o meta-análisis]{.alert} que las acumule
+    - Un vacío, pero también [una oportunidad]{.alert}: hay preguntas de política sin responder
+
+3. [Rigor sin presupuesto de experimento]{.alert}
+    - Rara vez hay plata para un ensayo aleatorizado a gran escala
+    - La salida es ser [ingenioso, no rico]{.alert}: datos administrativos y cuasi-experimentos que el Estado ya corrió
+
+:::{style="margin-top: 10px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 22px;"}
+Cada hecho tiene su acto: sin presupuesto → [producir]{.alert}, base delgada → [acumular]{.alert}, y la reproducibilidad como [bisagra]{.alert}
+:::
+:::
+
+## Cuando el contexto manda
+
+:::{style="margin-top: 14px; font-size: 25px;"}
+:::{.columns}
+:::{.column width=50%}
+[Lo que vemos en los datos]{.alert}
+
+- El mismo programa da [efectos distintos]{.alert} según el país: la magnitud no es una constante de la naturaleza ([Vivalt, 2020](https://doi.org/10.1093/jeea/jvaa019))
+
+- La dispersión es enorme: un efecto puede [duplicarse, esfumarse o cambiar de signo]{.alert} según dónde se mida
+
+- A veces la evidencia [local pero imperfecta]{.alert} predice mejor que la experimental traída de afuera ([Pritchett y Sandefur, 2015](https://doi.org/10.1257/aer.p20151016))
+:::
+
+:::{.column width=50%}
+[Por qué varía tanto]{.alert}
+
+- La [implementación]{.alert}: la misma política se ejecuta distinto según la capacidad del Estado
+
+- La [población]{.alert}: quién recibe, con qué necesidades y qué alternativas tiene, cambia el efecto
+
+- La [escala]{.alert}: lo que anda en un piloto puede diluirse en equilibrio general al llevarlo a todo el país
+:::
+:::
+
+:::{style="margin-top: 10px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 22px;"}
+Por eso "¿funciona?" es incompleta. La buena es "[¿funciona acá, para quién y por qué?]{.alert}" ([Deaton, 2010](https://doi.org/10.1257/jel.48.2.424))
+:::
+:::
+
+## La evidencia en la región · educación y salud
+
+:::{style="margin-top: 8px; font-size: 25px;"}
+:::{.columns}
+:::{.column width=50%}
+[Educación]{.alert}
+
+- [Ser Pilo Paga]{.alert} en Colombia casi cerró la brecha de acceso universitario entre los mejores estudiantes pobres ([RDD]{.alert}; [Londoño-Vélez et al., 2020](https://doi.org/10.1257/pol.20180131))
+
+- El [aprendizaje remoto]{.alert} en la pandemia (Brasil) subió la deserción y hundió los aprendizajes ~0,3 DE ([dif-en-dif]{.alert}; [Lichand et al., 2022](https://doi.org/10.1038/s41562-022-01350-6))
+
+- Darles [información]{.alert} a las familias sobre el rendimiento de sus hijos mejoró los aprendizajes en Colombia ([RCT]{.alert}; [Barrera-Osorio et al., 2020](https://doi.org/10.1016/j.jpubeco.2020.104185))
+
+- El [Plan Ceibal]{.alert}, una laptop por alumno en Uruguay, es hoy un caso muy estudiado
+:::
+
+:::{.column width=50%}
+[Salud]{.alert}
+
+- El [Seguro Popular]{.alert} en México no movió la mortalidad adulta, pero bajó ~10% la infantil en municipios pobres ([dif-en-dif]{.alert}; [Conti y Ginja, 2023](https://doi.org/10.3368/jhr.58.3.1117-9157R2))
+
+- [CoronaVac]{.alert} en Chile: 66% de efectividad contra el COVID sintomático y ~86% contra UCI y muerte ([cohorte nacional]{.alert}; [Jara et al., 2021](https://doi.org/10.1056/NEJMoa2107715))
+
+- [Bolsa Família]{.alert} en Brasil se asocia a menor mortalidad, sobre todo entre los más pobres ([experimento natural]{.alert}; [Pescarini et al., 2022](https://doi.org/10.1093/ije/dyac188))
+:::
+:::
+:::
+
+## La evidencia en la región · seguridad y protección social
+
+:::{style="margin-top: 8px; font-size: 25px;"}
+:::{.columns}
+:::{.column width=50%}
+[Seguridad y crimen]{.alert}
+
+- Los homicidios en [São Paulo]{.alert} cayeron tras la política de prevención ([control sintético]{.alert}; [Freire, 2018](https://doi.org/10.25222/larr.334))
+
+- El [patrullaje en puntos calientes]{.alert} en Bogotá dio efectos directos modestos que casi no sobrevivieron a la escala ([RCT]{.alert}; [Blattman et al., 2021](https://doi.org/10.1093/jeea/jvab002))
+
+- Deportar pandilleros desde EE.UU. [exportó la violencia]{.alert} a El Salvador ([dif-en-dif]{.alert}; [Sviatschi, 2022](https://doi.org/10.1257/aer.20201540))
+:::
+
+:::{.column width=50%}
+[Protección social]{.alert}
+
+- [Oportunidades]{.alert} en México: la exposición en la niñez elevó la escolaridad de la próxima generación, sobre todo de las mujeres ([largo plazo]{.alert}; [Parker y Vogl, 2023](https://doi.org/10.1093/ej/uead049))
+
+- En Nicaragua, una transferencia temporal dejó efectos que [persistieron 10 años]{.alert} ([RCT]{.alert}; [Molina-Millán et al., 2020](https://doi.org/10.1016/j.jdeveco.2019.102385))
+
+- Otro programa nicaragüense [confirma la persistencia]{.alert} una década después: no fue un accidente ([RCT]{.alert}; [Barham et al., 2024](https://doi.org/10.1093/jeea/jvae005))
+:::
+:::
+
+:::{style="text-align: center;"}
+La misma lógica: comparar contra un [contrafactual creíble]{.alert}
+:::
+:::
+
+# El mapa del día {background-color="#2d4563"}
+
+## Tres actos
+
+:::{style="margin-top: 30px; font-size: 23px;"}
+
+```{=html}
+<div style="display:flex; align-items:stretch; justify-content:center; gap:0; margin:24px 0 6px 0;">
+  <div style="flex:1 1 0; max-width:250px; border:2px solid #2d4563; border-radius:12px; padding:16px 14px; text-align:center;">
+    <div style="font-weight:700; font-size:23px; color:#2d4563;">1 · Producir</div>
+    <div style="font-size:18px; color:#2d4563; margin-top:4px;">validez interna</div>
+    <div style="font-size:16px; color:#888; margin-top:10px;">¿es correcto acá?</div>
+  </div>
+  <div style="display:flex; align-items:center; font-size:34px; color:#2d4563; padding:0 12px;">&rarr;</div>
+  <div style="flex:1 1 0; max-width:250px; border:2px solid #2d4563; border-radius:12px; padding:16px 14px; text-align:center;">
+    <div style="font-weight:700; font-size:23px; color:#2d4563;">2 · Reproducir</div>
+    <div style="font-size:18px; color:#2d4563; margin-top:4px;">la bisagra</div>
+    <div style="font-size:16px; color:#888; margin-top:10px;">¿se puede rehacer?</div>
+  </div>
+  <div style="display:flex; align-items:center; font-size:34px; color:#2d4563; padding:0 12px;">&rarr;</div>
+  <div style="flex:1 1 0; max-width:250px; border:2px solid #2d4563; border-radius:12px; padding:16px 14px; text-align:center;">
+    <div style="font-weight:700; font-size:23px; color:#2d4563;">3 · Acumular</div>
+    <div style="font-size:18px; color:#2d4563; margin-top:4px;">validez externa</div>
+    <div style="font-size:16px; color:#888; margin-top:10px;">¿viaja a otro lado?</div>
+  </div>
+</div>
+```
+:::
+
+:::{style="margin-top: 30px; font-size: 26px;"}
+- El orden es una [cadena de dependencias]{.alert}: 
+  - No se puede acumular lo que no se puede reproducir, ni reproducir lo que no se produjo con un diseño creíble
+
+- Cada acto sube la [pretensión de la evidencia]{.alert}: 
+  - De "es correcto en mi caso" a "cualquiera lo puede rehacer" a "vale más allá de mi caso"
+
+- Un resultado puede tener [validez interna sin externa]{.alert}, o parecer general sin ser creíble en su origen: 
+  - Por eso separamos las preguntas en vez de mezclarlas
+:::
+
+## Cómo trabajamos hoy
+
+:::{style="margin-top: 20px; font-size: 30px;"}
+- El código [corre en vivo]{.alert}: no hace falta que tipees a la par, después te llevás todos los materiales
+
+- [Preguntá]{.alert} cuando algo no cierre; las pausas para pensar son parte del plan, no una interrupción
+
+- El objetivo no es que salgas [programando]{.alert}, es que sepas [cuándo creerle]{.alert} a una evaluación
+
+- La técnica se aprende usándola: el [taller de la tarde]{.alert} es donde la aplicás a tu propio proyecto
+
+:::{style="margin-top: 14px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 27px;"}
+Menos "mirá qué técnica", más "[¿por qué le creemos a este número?]{.alert}"
+:::
+:::
+
+## Hoja de ruta
+
+:::{style="margin-top: 14px; font-size: 24px;"}
+:::{.columns}
+:::{.column width=50%}
+[Mañana]{.alert}
+
+- [Apertura]{.alert}: el problema regional y el mapa (~30 min)
+
+- [Acto 1 · producir]{.alert}: el RDD de Brasil (~90 min)
+    - la lógica del umbral y el contrafactual
+    - correr el diseño en R, de los datos al efecto
+    - romperlo: manipulación, placebo, sensibilidad
+
+- [Acto 2 · reproducir]{.alert}: dejar el análisis rehacible (~75 min)
+    - organización del proyecto y control de versiones
+    - entornos y un flujo que se vuelve a correr solo
+:::
+
+:::{.column width=50%}
+[Tarde]{.alert}
+
+- [Acto 3 · acumular]{.alert}: ¿viaja el resultado? (~65 min)
+    - de un estudio suelto a la evidencia acumulada
+    - sesgo de publicación y meta-análisis
+
+- [Taller aplicado]{.alert}: tu proyecto en tres actos (~45 min)
+    - producir, reproducir y acumular sobre tu propia pregunta
+:::
+:::
+:::
+
+## Para pensar: ¿dónde está la trampa?
+
+:::{style="margin-top: 16px; font-size: 27px;"}
+Tres evaluaciones que parecen impecables. ¿Qué falla en cada una?
+
+1. Para medir el efecto de una beca sobre el salario, el análisis [controla por]{.alert} si la persona terminó la carrera
+
+2. Un RCT impecable, pero abandonó el 30% del grupo tratado y el 8% del control; comparamos a [los que quedaron]{.alert}
+
+3. Un programa llega a algunos pueblos; el grupo de control son los [pueblos vecinos]{.alert}
+
+:::{.fragment style="margin-top: 14px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 25px;"}
+:::{.incremental}
+1. [Mal control]{.alert}: terminar la carrera es consecuencia de la beca; controlar esa variable post-tratamiento tapa parte del efecto que queremos medir
+
+2. [Atrición diferencial]{.alert}: los que quedan ya no son grupos aleatorios, y "fue un RCT" no salva la comparación
+
+3. [Contaminación]{.alert}: si el programa se filtra a los pueblos vecinos, el control deja de ser un contrafactual limpio
+:::
+:::
+:::
+
+## Tu proyecto en una frase
+
+:::{style="margin-top: 40px; font-size: 30px;"}
+:::{style="border-left: 4px solid #b85450; padding: 4px 16px; font-size: 27px; margin-bottom: 16px;"}
+Si el tiempo da; si vamos justos, lo retomamos en el taller de la tarde
+:::
+
+- En una frase: ¿qué [política o intervención]{.alert} te gustaría evaluar?
+
+- ¿Cuál sería tu [resultado]{.alert}, lo que querés que cambie, y contra qué [grupo de comparación]{.alert}?
+
+- No hace falta resolverlo hoy: lo construimos juntos en el [taller aplicado]{.alert}
+:::
+
+## Para seguir la parte práctica
+
+:::{style="margin-top: 18px; font-size: 21px;"}
+Vamos a correr código en R. Abrí RStudio y dejá esto listo mientras arrancamos:
+
+```r
+# 1. Instalar (solo la primera vez)
+install.packages(c("estimatr", "rdrobust", "rddensity", "ggplot2"))
+
+# 2. Los datos del primer acto, directo desde la web:
+datos <- read.csv("https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/datos/municipios.csv")
+```
+
+:::{style="margin-top: 10px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 19px;"}
+No hace falta que corras el código conmigo: te lo muestro paso a paso. Pero al final de cada acto vas a tener un rato para [probarlo vos]{.alert}
+:::
+:::
+
+# ¡Empecemos! 😎 {background-color="#2d4563"}
+
+## Referencias
+
+:::{style="font-size: 15px;"}
+:::{.columns}
+:::{.column width=50%}
+Barham, T., Macours, K. y Maluccio, J. (2024). Experimental evidence from a conditional cash transfer program: schooling, learning, fertility, and labor market outcomes after 10 years. *Journal of the European Economic Association* 22(4):1844–1883. [doi](https://doi.org/10.1093/jeea/jvae005)
+
+Barrera-Osorio, F., Gonzalez, K., Lagos, F. y Deming, D. (2020). Providing performance information in education: an experimental evaluation in Colombia. *Journal of Public Economics* 186:104185. [doi](https://doi.org/10.1016/j.jpubeco.2020.104185)
+
+Blattman, C., Green, D., Ortega, D. y Tobón, S. (2021). Place-based interventions at scale: the direct and spillover effects of policing and city services on crime. *Journal of the European Economic Association* 19(4):2022–2051. [doi](https://doi.org/10.1093/jeea/jvab002)
+
+Conti, G. y Ginja, R. (2023). Who benefits from free health insurance? Evidence from Mexico. *Journal of Human Resources* 58(1):146–182. [doi](https://doi.org/10.3368/jhr.58.3.1117-9157R2)
+
+Deaton, A. (2010). Instruments, randomization, and learning about development. *Journal of Economic Literature* 48(2):424–455. [doi](https://doi.org/10.1257/jel.48.2.424)
+
+Freire, D. (2018). Evaluating the effect of homicide prevention strategies in São Paulo, Brazil: a synthetic control approach. *Latin American Research Review* 53(2):231–249. [doi](https://doi.org/10.25222/larr.334)
+
+Gertler, P., Martinez, S., Premand, P., Rawlings, L. y Vermeersch, C. (2016). *Impact Evaluation in Practice*, 2nd ed. World Bank and IDB. [enlace](https://www.worldbank.org/en/programs/sief-trust-fund/publication/impact-evaluation-in-practice)
+
+Holland, P. (1986). Statistics and causal inference. *JASA* 81(396):945–960. [doi](https://doi.org/10.2307/2289064)
+
+Imbens, G. y Wooldridge, J. (2009). Recent developments in the econometrics of program evaluation. *Journal of Economic Literature* 47(1):5–86. [doi](https://doi.org/10.1257/jel.47.1.5)
+
+Jara, A. et al. (2021). Effectiveness of an inactivated SARS-CoV-2 vaccine in Chile. *New England Journal of Medicine* 385(10):875–884. [doi](https://doi.org/10.1056/NEJMoa2107715)
+:::
+
+:::{.column width=50%}
+Lichand, G., Doria, C., Leal-Neto, O. y Fernandes, J. P. (2022). The impacts of remote learning in secondary education during the pandemic in Brazil. *Nature Human Behaviour* 6(8):1079–1086. [doi](https://doi.org/10.1038/s41562-022-01350-6)
+
+Londoño-Vélez, J., Rodríguez, C. y Sánchez, F. (2020). Upstream and downstream impacts of college merit-based financial aid for low-income students: Ser Pilo Paga in Colombia. *American Economic Journal: Economic Policy* 12(2):193–227. [doi](https://doi.org/10.1257/pol.20180131)
+
+Mignozzetti, U., Cepaluni, G. y Freire, D. (2025). Legislature size and welfare: evidence from Brazil. *American Journal of Political Science* 69(3):831–846. [doi](https://doi.org/10.1111/ajps.12843)
+
+Molina-Millán, T., Macours, K., Maluccio, J. y Tejerina, L. (2020). Experimental long-term effects of early-childhood and school-age exposure to a conditional cash transfer program. *Journal of Development Economics* 143:102385. [doi](https://doi.org/10.1016/j.jdeveco.2019.102385)
+
+Parker, S. y Vogl, T. (2023). Do conditional cash transfers improve economic outcomes in the next generation? Evidence from Mexico. *The Economic Journal* 133(655):2775–2806. [doi](https://doi.org/10.1093/ej/uead049)
+
+Pescarini, J. et al. (2022). Impact of Brazil's Bolsa Família Programme on cardiovascular and all-cause mortality: a natural experiment study using the 100 Million Brazilian Cohort. *International Journal of Epidemiology* 51(6):1847–1861. [doi](https://doi.org/10.1093/ije/dyac188)
+
+Pritchett, L. y Sandefur, J. (2015). Learning from experiments when context matters. *American Economic Review* 105(5):471–475. [doi](https://doi.org/10.1257/aer.p20151016)
+
+Rubin, D. (1974). Estimating causal effects of treatments in randomized and nonrandomized studies. *Journal of Educational Psychology* 66(5):688–701. [doi](https://doi.org/10.1037/h0037350)
+
+Sviatschi, M. (2022). Spreading gangs: exporting US criminal capital to El Salvador. *American Economic Review* 112(6):1985–2024. [doi](https://doi.org/10.1257/aer.20201540)
+
+Vivalt, E. (2020). How much can we generalize from impact evaluations? *Journal of the European Economic Association* 18(6):3045–3089. [doi](https://doi.org/10.1093/jeea/jvaa019)
+:::
+:::
+:::

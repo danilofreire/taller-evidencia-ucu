@@ -1,0 +1,23 @@
+/.quarto/
+*_cache/
+# Artefactos generados por Quarto (se regeneran al renderizar; publicar es tarea aparte)
+/docs/
+/_freeze/
+**/*_files/
+/.Rproj.user/
+.Rhistory
+.RData
+.Renviron
+.env
+.DS_Store
+
+**/*.quarto_ipynb
+
+# Archivos de Claude / agentes (nunca subir a este repo público)
+plan/
+CLAUDE.md
+AGENTS.md
+.claude/
+.remember/
+*humaniser*
+.mcp.json

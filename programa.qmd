@@ -1,0 +1,29 @@
+---
+title: "Programa"
+---
+
+El taller sigue el ciclo de la evidencia: producirla con diseños creíbles (mañana), y luego sintetizarla y hacerla reproducible para que sea acumulativa (tarde). Los casos vienen de investigaciones aplicadas en América Latina, y el hilo conductor es una misma pregunta estudiada de dos maneras: el efecto del tamaño de la legislatura, primero con un diseño de regresión discontinua y después a través de un meta-análisis.
+
+## Mañana · Producir evidencia creíble {#manana}
+
+De 9:00 a 12:30, con un corte para el café.
+
+| Hora | Min | Bloque |
+|------|-----|--------|
+| 9:00–9:25 | 25 | **Marco.** Políticas basadas en evidencia, la revolución de la credibilidad y por qué en América Latina tiene su propia historia (datos administrativos más débiles, límites políticos a la aleatorización, validez externa). Cierre con el "ciclo" como hoja de ruta del día |
+| 9:25–10:50 | 85 | **La caja de herramientas causal, contada con investigaciones propias.** Dos diseños en profundidad: regresión discontinua (tamaño de la legislatura y bienestar en Brasil) y experimentos (un experimento de campo y uno de encuesta). El control sintético aparece como caso breve (prevención de homicidios en São Paulo) |
+| 10:50–11:10 | 20 | Café |
+| 11:10–12:15 | 65 | **Modelos de lenguaje como medición.** El texto como dato para construir medidas donde el dato oficial falta o no es confiable. Conceptos, una demo en vivo, la disciplina de validación y un segmento sobre poblaciones sintéticas (útiles para pilotear, riesgosas como sustituto de datos) |
+| 12:15–12:30 | 15 | Cierre y discusión |
+
+## Tarde · Evidencia creíble y acumulativa {#tarde}
+
+De 13:30 a 15:30, con una parte práctica.
+
+| Hora | Min | Bloque |
+|------|-----|--------|
+| 13:30–14:30 | 60 | **Síntesis de evidencia.** Por qué un solo estudio engaña, sesgo de publicación y qué agrega el meta-análisis. Lectura guiada de un *forest plot*, construida sobre el meta-análisis del tamaño de la legislatura |
+| 14:30–15:25 | 55 | **Investigación reproducible, con la parte práctica.** Crisis de replicación y luego el flujo de trabajo: git, la terminal y Quarto. Ejercicio guiado: clonar un repositorio, renderizar un documento Quarto, editar una línea y volver a renderizar para ver el documento dinámico actualizarse |
+| 15:25–15:30 | 5 | Cierre: el ciclo completo, recursos y dónde enchufarse en la región (J-PAL LAC, IPA, BID, EGAP) |
+
+Las diapositivas de cada bloque y el material de la parte práctica estarán en [Materiales](materiales.qmd)

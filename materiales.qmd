@@ -1,0 +1,51 @@
+---
+title: "Materiales"
+---
+
+Acá van las diapositivas de cada bloque y el material de la parte práctica (datos y código del ejercicio de reproducibilidad). Las diapositivas se publican a medida que se preparan.
+
+## Diapositivas
+
+::: {.resource-card}
+[Bloque 1: Diseños causales]{.resource-title}
+
+[Mañana · regresión discontinua, experimentos y control sintético, con investigaciones aplicadas en la región]{.resource-meta}
+
+::: {.resource-links}
+[En preparación](#)
+:::
+:::
+
+::: {.resource-card}
+[Bloque 2: Modelos de lenguaje como medición]{.resource-title}
+
+[Mañana · el texto como dato, validación y poblaciones sintéticas]{.resource-meta}
+
+::: {.resource-links}
+[En preparación](#)
+:::
+:::
+
+::: {.resource-card}
+[Bloque 3.1: Síntesis de evidencia]{.resource-title}
+
+[Tarde · por qué un solo estudio engaña, sesgo de publicación y meta-análisis del tamaño de la legislatura]{.resource-meta}
+
+::: {.resource-links}
+[En preparación](#)
+:::
+:::
+
+::: {.resource-card}
+[Bloque 3.2: Investigación reproducible]{.resource-title}
+
+[Tarde · de la crisis de replicación al flujo reproducible: organización del proyecto, git y GitHub, Quarto y entornos]{.resource-meta}
+
+::: {.resource-links}
+[En preparación](#)
+:::
+:::
+
+## Parte práctica
+
+El ejercicio de la tarde usa un repositorio que vas a clonar y renderizar. El enlace y las instrucciones se publican acá antes del taller

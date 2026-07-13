@@ -1,0 +1,55 @@
+---
+title: "Políticas públicas basadas en evidencia"
+subtitle: "Lecciones desde la investigación aplicada en América Latina"
+---
+
+Taller intensivo de un día sobre cómo producir, sintetizar y comunicar evidencia creíble para la política pública, con casos de América Latina. La mañana recorre los diseños que permiten estimar efectos causales (experimentos, regresión discontinua, control sintético) y los métodos computacionales recientes, incluidos los modelos de lenguaje. La tarde se centra en la síntesis de evidencia con meta-análisis y en la investigación reproducible, con una parte práctica.
+
+::: {.info-box}
+::: {.info-grid}
+::: {.info-item}
+[Fecha]{.info-label}
+
+[Por confirmar]{.info-value}
+:::
+::: {.info-item}
+[Lugar]{.info-label}
+
+[Universidad Católica del Uruguay, Montevideo]{.info-value}
+:::
+::: {.info-item}
+[Duración]{.info-label}
+
+[Mañana 9:00–12:30 · Tarde 13:30–15:30]{.info-value}
+:::
+::: {.info-item}
+[Instructor]{.info-label}
+
+[Danilo Freire]{.info-value}
+:::
+:::
+:::
+
+## El taller de un vistazo
+
+::: {.bloque-card}
+[Mañana · 9:00–12:30]{.bloque-label}
+
+[Producir evidencia creíble]{.bloque-title}
+
+[Diseños causales contados a través de investigaciones aplicadas en la región: regresión discontinua, experimentos y control sintético. Luego, los modelos de lenguaje como herramienta de medición para la investigación social.]{.bloque-topics}
+:::
+
+::: {.bloque-card}
+[Tarde · 13:30–15:30]{.bloque-label}
+
+[Evidencia creíble y acumulativa]{.bloque-title}
+
+[Síntesis de evidencia con meta-análisis e investigación reproducible, con una parte práctica con git, Quarto y la terminal.]{.bloque-topics}
+:::
+
+El [programa detallado](programa.qmd) tiene los tiempos y los contenidos de cada bloque.
+
+## Qué traer
+
+Traé tu computadora con [R](https://cran.r-project.org/), [Quarto](https://quarto.org/docs/get-started/) y [git](https://git-scm.com/) instalados. En [Recursos](recursos.qmd) está la guía de instalación y las lecturas del taller

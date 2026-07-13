@@ -1,0 +1,965 @@
+---
+title: "Políticas públicas basadas en evidencia"
+subtitle: "Acto 1: Producir evidencia creíble"
+author:
+  - name: Danilo Freire
+    orcid: 0000-0002-4712-6810
+    email: danilofreire@gmail.com
+    affiliations: "Department of Data and Decision Sciences <br> Emory University"
+format:
+  clean-revealjs:
+    self-contained: true
+    footer: "Políticas basadas en evidencia"
+    transition: slide
+    transition-speed: default
+    scrollable: true
+revealjs-plugins:
+  - multimodal
+engine: knitr
+editor:
+  render-on-save: true
+lang: es
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(knitr)
+opts_chunk$set(
+  prompt = T,
+  fig.align = "center",
+  dpi = 300,
+  cache = T,
+  engine.opts = list(bash = "-l")
+)
+
+knit_hooks$set(
+  prompt = function(before, options, envir) {
+    options(
+      prompt = if (options$engine %in% c("sh", "bash", "zsh")) "$ " else "R> ",
+      continue = if (options$engine %in% c("sh", "bash", "zsh")) "$ " else "+ "
+    )
+  }
+)
+
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+
+ensure <- function(pkg) {
+  if (!require(pkg, character.only = TRUE)) {
+    install.packages(pkg, dependencies = TRUE)
+    library(pkg, character.only = TRUE)
+  }
+}
+invisible(lapply(c("fontawesome", "estimatr", "rdrobust", "rddensity"), ensure))
+
+suppressPackageStartupMessages(library(ggplot2))
+
+# paleta de la casa (mismo par azul/rojo que 00-apertura.qmd)
+azul <- "#2d4563"; rojo <- "#b85450"
+
+tema_taller <- theme_minimal(base_size = 15) +
+  theme(panel.grid.minor = element_blank(),
+        plot.margin = margin(6, 10, 6, 6))
+
+# los datos quedan cargados para todas las láminas siguientes
+datos <- read.csv("datos/municipios.csv")
+```
+
+<!--
+ACTO 1 · PRODUCIR EVIDENCIA CREÍBLE (validez interna).
+Extensiones: clean-revealjs (tema grantmcdermott/clean) + multimodal (zoom de imágenes),
+ambas ya instaladas en _extensions/ del repo (las usa 00-apertura.qmd).
+Estilo de la casa (ver 00-apertura.qmd): dos columnas, wrappers :::{style="font-size:..."},
+[término]{.alert} para enfatizar, callouts #2d4563 / #b85450, Para pensar con .fragment,
+citas [Autor (año)](url) juntadas en ## Referencias, español rioplatense, sin guiones largos.
+Ejercicios con apéndice y botones .button (patrón de los labs de introduccion-ia-ucu).
+
+Datos: datos/municipios.csv, simulado con datos/generar-municipios.R sobre el diseño de
+Mignozzetti, Cepaluni y Freire (2025, AJPS). Un umbral (47.619 hab: 9 -> 10 concejales),
+efectos por concejal replicando el paper. Todo el código va pre-renderizado (no en vivo).
+
+ARCO: setup -> historia -> contrafactual -> sesgo (con derivación) -> RDD -> validez ->
+familia de diseños -> hacerlo en la región -> ejercicios -> apéndice con soluciones.
+La derivación del sesgo reproduce (en español) la imagen de M. Romero de datasci385.
+-->
+
+## Antes de empezar: datos y paquetes
+
+:::{style="margin-top: 16px; font-size: 20px;"}
+Vas a necesitar el conjunto de datos y cuatro paquetes. Hacelo ahora, mientras arrancamos.
+
+```{r instalar, echo=TRUE, eval=FALSE}
+# 1. Instalar (solo la primera vez)
+install.packages(c("estimatr", "rdrobust", "rddensity", "ggplot2"))
+
+# 2. Cargar los datos (descargá municipios.csv del repo del taller)
+datos <- read.csv("municipios.csv")
+# Leélo directo desde la web, sin descargar nada:
+# datos <- read.csv("https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/datos/municipios.csv")
+```
+
+:::{style="margin-top: 8px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 18px;"}
+`estimatr` da errores robustos; `rdrobust` y `rddensity` son el estándar para RDD hoy. La línea comentada te evita bajar el archivo a mano
+:::
+:::
+
+# La historia: un resultado que costó creer {background-color="#2d4563"}
+
+## El caso: concejos más grandes en Brasil
+
+:::{style="margin-top: 18px; font-size: 21px;"}
+:::{.columns}
+:::{.column width=52%}
+- Pregunta: ¿el [tamaño del concejo municipal]{.alert} afecta el bienestar de la gente?
+
+- En marzo de 2004, el Tribunal Superior Electoral fijó el número de concejales por [tramos de población]{.alert}: 9 bancas, más una cada 47.619 habitantes, hasta 21
+
+- La regla surgió del caso [Mira Estrela]{.alert}, un pueblo de 2.651 personas que quería recortar su concejo de 11 a 9 bancas
+
+- Los municipios [no eligen su población]{.alert}: cruzar un umbral es casi un sorteo. Comparás los que quedaron [apenas por encima y apenas por debajo]{.alert} ([Mignozzetti, Cepaluni y Freire, 2025](https://doi.org/10.1111/ajps.12843))
+:::
+
+:::{.column width=48%}
+:::{style="text-align: center;"}
+[![Distribución de municipios por población y tamaño del concejo](figures/rdd-umbrales.png){width="100%"}](#){data-modal-type="image" data-modal-url="figures/rdd-umbrales.png"}
+:::
+:::{style="text-align: center; font-size: 16px; color: #6E665C;"}
+Cada escalón es un umbral: al cruzarlo, el concejo suma una banca
+:::
+:::
+:::
+:::
+
+## Lo que encontramos
+
+:::{style="margin-top: 18px; font-size: 21px;"}
+:::{.columns}
+:::{.column width=50%}
+[El mecanismo]{.alert}
+
+- Un concejal más tiene [91% de chance]{.alert} de estar en la coalición del intendente
+
+- Cada banca extra suma [104 cargos]{.alert} designados y [15% más]{.alert} de proyectos sobre servicios
+
+- Bajan los costos de negociación, sube la provisión de [bienes públicos]{.alert}
+:::
+
+:::{.column width=50%}
+[El bienestar]{.alert}
+
+- Mortalidad infantil: [−2,01 por mil]{.alert} nacidos, por concejal
+
+- Mortalidad postneonatal: [−0,90 por mil]{.alert}
+
+- Matrícula primaria: [+2,58 chicos]{.alert} por aula, sin caída de calidad (IDEB)
+:::
+:::
+
+:::{style="margin-top: 12px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 21px;"}
+Concejos más grandes, [mejor salud y educación]{.alert}. Un resultado que, con toda razón, cuesta creer a primera vista
+:::
+:::
+
+## De un resultado a una pregunta
+
+:::{style="margin-top: 24px; font-size: 24px;"}
+Cuando presentamos esto, la primera reacción, sana, fue una sospecha:
+
+:::{style="margin-top: 14px; border-left: 4px solid #2d4563; padding: 8px 20px; font-size: 26px;"}
+"¿No será que los municipios con concejos más grandes [ya eran distintos de entrada]{.alert}? Más poblados, más ricos, más urbanos. Quizás por eso tienen mejor salud, y el concejo no tiene nada que ver"
+:::
+
+:::{style="margin-top: 18px;"}
+Esa sospecha tiene nombre técnico: [sesgo de selección]{.alert}. Responderla es el trabajo de todo el Acto 1, y empieza por ser preciso sobre qué es un [efecto causal]{.alert}
+:::
+:::
+
+# Por qué cuesta creer: el contrafactual {background-color="#2d4563"}
+
+## El problema de fondo
+
+:::{style="margin-top: 20px; font-size: 23px;"}
+Queremos saber si algo [causó]{.alert} un cambio. Para eso necesitamos comparar dos mundos:
+
+:::{style="margin-top: 10px;"}
+:::{.columns}
+:::{.column width=50%}
+:::{style="text-align: center; border: 2px solid #2d4563; border-radius: 12px; padding: 14px;"}
+[El mundo que vimos]{.alert}
+
+el municipio recibió la banca extra
+:::
+:::
+
+:::{.column width=50%}
+:::{style="text-align: center; border: 2px dashed #b85450; border-radius: 12px; padding: 14px;"}
+[El mundo que no vimos]{.alert}
+
+el mismo municipio, sin la banca
+:::
+:::
+:::
+:::
+
+- El segundo mundo es el [contrafactual]{.alert}, y nunca lo observamos
+
+- Toda evaluación de impacto es el arte de [construir un contrafactual creíble]{.alert} para ese mundo que falta
+:::
+
+## Notación: resultados potenciales
+
+:::{style="margin-top: 16px; font-size: 22px;"}
+Nos interesa la relación entre un [tratamiento]{.alert} $T$ (la banca extra) y un resultado $Y$ (la salud, la matrícula).
+
+- $Y_i$ = valor del resultado para el municipio $i$
+
+- Para cada municipio hay [dos resultados potenciales]{.alert}:
+    - $Y_{1,i}$ = resultado si $i$ [recibe]{.alert} el tratamiento
+    - $Y_{0,i}$ = resultado si $i$ [no lo recibe]{.alert}
+
+- El [efecto causal]{.alert} del tratamiento sobre ese municipio es la diferencia entre sus dos mundos:
+
+:::{style="margin-top: 2px; font-size: 28px; text-align: center;"}
+$\tau_i = Y_{1,i} - Y_{0,i}$
+:::
+
+:::{style="margin-top: 8px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
+$\tau_i$ está definido para [cada]{.alert} municipio, no sólo en promedio. Pero, como vamos a ver, nunca lo podemos calcular directamente
+:::
+:::
+
+## El problema fundamental de la inferencia causal
+
+:::{style="margin-top: 14px; font-size: 21px;"}
+De los dos resultados potenciales, sólo observamos [uno]{.alert}: el que corresponde al tratamiento que el municipio efectivamente recibió.
+
+:::{style="margin-top: 2px; font-size: 22px; text-align: center;"}
+$$
+Y_i =
+\begin{cases}
+Y_{1,i} & \text{si } T_i = 1 \\
+Y_{0,i} & \text{si } T_i = 0
+\end{cases}
+\qquad\Longleftrightarrow\qquad
+Y_i = Y_{0,i} + (Y_{1,i} - Y_{0,i})\,T_i
+$$
+:::
+
+- Para un municipio tratado nunca vemos su $Y_{0,i}$; para uno de control nunca vemos su $Y_{1,i}$
+
+- Es un [problema de datos faltantes]{.alert}: siempre falta la mitad de la tabla ([Holland, 1986](https://doi.org/10.1080/01621459.1986.10478354); [Imbens y Rubin, 2015](https://doi.org/10.1017/CBO9781139025751))
+
+:::{style="margin-top: 8px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 20px;"}
+No podemos medir $\tau_i$ municipio por municipio. Apuntamos a un [promedio]{.alert}, y ahí, si no tenemos cuidado, aparece la trampa
+:::
+:::
+
+## Tu diseño es tu contrafactual
+
+:::{style="margin-top: 18px; font-size: 22px;"}
+En un mundo ideal [clonaríamos]{.alert} cada municipio tratado y veríamos al clon sin tratar. Como no se puede, buscamos un sustituto.
+
+- El sustituto es un [grupo de comparación]{.alert}: municipios que no recibieron la banca pero se parecen a los que sí
+
+- Nuestra estimación del efecto es la diferencia entre el grupo tratado y ese grupo de comparación
+
+- Todo el problema se reduce a una pregunta: [¿es un buen sustituto del mundo que no vimos?]{.alert}
+
+:::{style="margin-top: 10px; border-left: 4px solid #2d4563; padding: 8px 20px; font-size: 23px;"}
+Encontrar un buen grupo de comparación es difícil. Por eso decimos que [tu diseño de investigación es tu contrafactual]{.alert}
+:::
+:::
+
+## Para pensar: ¿cuál es el contrafactual?
+
+:::{style="margin-top: 18px; font-size: 24px;"}
+Un municipio con 50.000 habitantes cruzó el umbral, tiene 10 concejales y una mortalidad infantil de 18 por mil.
+
+¿Cuál es su [contrafactual]{.alert}?
+
+:::{.fragment style="margin-top: 14px; border-left: 4px solid #b85450; padding: 8px 20px; font-size: 23px;"}
+El contrafactual verdadero es [ese mismo municipio con 9 concejales]{.alert} ($Y_{0,i}$), y es [inobservable]{.alert}.
+
+Lo que sí podemos observar son municipios [parecidos apenas por debajo]{.alert} del umbral. La pregunta de todo el diseño es: ¿son un buen sustituto de ese mundo que no vimos?
+:::
+:::
+
+# El problema: sesgo de selección {background-color="#2d4563"}
+
+## La comparación ingenua
+
+:::{style="margin-top: 18px; font-size: 22px;"}
+Lo más fácil es comparar el promedio de los tratados con el de los no tratados. Pero eso rara vez es el efecto causal.
+
+- La gente (o los municipios) [no reciben el tratamiento al azar]{.alert}
+
+- Alguien entra a un programa cuando espera salir ganando, es decir cuando $Y_{1,i} - Y_{0,i} > 0$
+
+- Los que entran suelen ser [distintos]{.alert} de los que no, incluso [en ausencia del programa]{.alert}
+
+:::{style="margin-top: 10px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 21px;"}
+La diferencia de medias mezcla dos cosas: el [efecto]{.alert} que buscamos y la [brecha previa]{.alert} entre los grupos. A esa brecha la llamamos sesgo de selección
+:::
+:::
+
+## Cómo se estima el sesgo
+
+:::{style="margin-top: 12px; font-size: 20px;"}
+Un truco algebraico: a la diferencia observada le [sumamos y restamos]{.alert} $E[Y_{0,i}\mid T_i=1]$, el contrafactual de los tratados. No cambia nada, y separa el efecto del sesgo.
+
+:::{style="margin-top: 2px; font-size: 20px; text-align: center;"}
+$$
+\begin{aligned}
+\underbrace{E[Y_i \mid T_i=1] - E[Y_i \mid T_i=0]}_{\text{diferencia observada}}
+&= E[Y_{1i}\mid T_i=1] - E[Y_{0i}\mid T_i=0] \\[4pt]
+&= \underbrace{E[Y_{1i}\mid T_i=1] - E[Y_{0i}\mid T_i=1]}_{\text{efecto sobre los tratados (ATT)}}
+ + \underbrace{E[Y_{0i}\mid T_i=1] - E[Y_{0i}\mid T_i=0]}_{\text{sesgo de selección}}
+\end{aligned}
+$$
+:::
+
+- El [sesgo]{.alert} es la diferencia en $Y_0$ entre grupos: cómo se habrían visto los tratados, sin tratamiento, contra los controles
+
+- Si los grupos ya eran comparables, ese término es cero y la diferencia observada [sí]{.alert} es el efecto. Ese es todo el juego
+:::
+
+## Un ejemplo: ¿los hospitales enferman?
+
+:::{style="margin-top: 18px; font-size: 22px;"}
+Sos economista de la salud. Comparás la salud de quienes [fueron al hospital]{.alert} el último año con la de quienes [no fueron]{.alert}:
+
+:::{style="margin-top: 8px; font-size: 22px;"}
+| | Fue al hospital | No fue | Diferencia |
+|---|:---:|:---:|:---:|
+| Estado de salud | 3,21 | 3,93 | [−0,72]{.alert} |
+| | (0,014) | (0,003) | |
+| Observaciones | 7.774 | 90.049 | |
+:::
+
+:::{style="margin-top: 12px;"}
+Tomado literal, el número dice que el hospital [te enferma]{.alert}. ¿Tiene sentido? ([Angrist y Pischke, 2015](https://press.princeton.edu/books/paperback/9780691152844/mastering-metrics))
+:::
+:::
+
+## Descomponiendo la diferencia
+
+:::{style="margin-top: 16px; font-size: 21px;"}
+Pensá en [Alejandro]{.alert}, que se quebró una pierna y va al hospital, y [Benicio]{.alert}, sano, que no va. Los que van [ya estaban peor de entrada]{.alert}.
+
+- [Diferencia observada]{.alert}: $3{,}21 - 3{,}93 = -0{,}72$
+
+- [Efecto sobre los tratados (ATT)]{.alert}: salud real de los internados ($3{,}21$) contra su contrafactual, si no se hubieran internado (digamos $2{,}5$): $3{,}21 - 2{,}5 = [+0{,}71]{.alert}$
+
+- [Sesgo de selección]{.alert}: ese contrafactual ($2{,}5$) contra la salud de los que no fueron ($3{,}93$): $2{,}5 - 3{,}93 = [-1{,}43]{.alert}$
+
+:::{style="margin-top: 8px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 21px;"}
+$-0{,}72 = (+0{,}71) + (-1{,}43)$. El sesgo [tapó por completo]{.alert} el efecto positivo. La aleatorización lo elimina; sin ella, hay que ganárselo con el diseño
+:::
+:::
+
+## De vuelta a los concejos
+
+:::{style="margin-top: 22px; font-size: 24px;"}
+La sospecha del principio [es]{.alert}, exactamente, el sesgo de selección: los municipios con concejos grandes son más poblados, más ricos, más urbanos.
+
+- Comparar [todos]{.alert} los concejos grandes contra [todos]{.alert} los chicos mezcla el efecto de la banca con todo lo demás en que difieren
+
+- Lo vamos a ver en los datos: esa comparación ingenua [exagera]{.alert} el efecto
+
+:::{style="margin-top: 12px; border-left: 4px solid #2d4563; padding: 8px 20px; font-size: 24px;"}
+Necesitamos una comparación donde tratados y controles sean [casi idénticos]{.alert} salvo por el tratamiento. Ahí entra la regresión discontinua
+:::
+:::
+
+# La solución: regresión discontinua {background-color="#2d4563"}
+
+## La idea: aleatorización local
+
+:::{style="margin-top: 22px; font-size: 24px;"}
+Cuando el tratamiento se decide por un [umbral]{.alert} en una variable continua, los que quedan [apenas por debajo]{.alert} y [apenas por encima]{.alert} son casi indistinguibles.
+
+- Un municipio de 47.610 habitantes y otro de 47.630 se parecen en [todo]{.alert}, menos en que uno cruzó el corte y ganó una banca
+
+- Cerca del umbral, recibir el tratamiento es [casi un sorteo]{.alert}
+
+- Comparar justo ahí nos da un contrafactual creíble ([Lee y Lemieux, 2010](https://doi.org/10.1257/jel.48.2.281); [Cattaneo, Idrobo y Titiunik, 2020](https://doi.org/10.1017/9781108684606))
+
+:::{style="margin-top: 10px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 21px;"}
+El precio: el efecto es [local]{.alert}, vale cerca del corte. No dice qué pasaría con un concejo de 40 bancas
+:::
+:::
+
+## Una ecuación
+
+:::{style="margin-top: 20px; font-size: 23px;"}
+Con la población centrada en el umbral ($X_i = $ población $- 47.619$), estimamos:
+
+:::{style="margin-top: 4px; font-size: 27px; text-align: center;"}
+$$
+Y_i = \beta_0 + \beta_1 X_i + \beta_2\, \mathbf{1}(X_i \ge 0) + \varepsilon_i
+$$
+:::
+
+- $\beta_1 X_i$ deja que el resultado [varíe suave]{.alert} con la población (la tendencia, el confusor)
+
+- $\mathbf{1}(X_i \ge 0)$ vale 1 arriba del corte; su coeficiente $\beta_2$ es [el salto]{.alert}
+
+- Ese salto $\beta_2$ es el [efecto local]{.alert} que buscamos
+
+:::{style="margin-top: 8px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
+Supuesto clave: sin el tratamiento, el resultado habría seguido [la misma curva suave]{.alert} a través del corte. Todo salto abrupto es el tratamiento
+:::
+:::
+
+## Los datos sintéticos
+
+:::{style="margin-top: 14px; font-size: 20px;"}
+Un conjunto simulado sobre el diseño del paper: 2.000 municipios, corte en 47.619 habitantes (9 → 10 concejales), efectos calcados de la investigación real.
+
+```{r cabeza, echo=TRUE}
+head(datos[, c("municipio", "poblacion", "concejo_grande",
+               "n_concejales", "mortalidad_infantil")], 4)
+```
+
+:::{style="margin-top: 6px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 18px;"}
+Es un solo umbral, para enseñar limpio. El paper real tiene [12 cortes]{.alert} (9 a 21 bancas); volvemos a esa complicación en un rato
+:::
+:::
+
+## Ver el salto
+
+:::{style="margin-top: 4px; font-size: 20px;"}
+Antes de estimar nada, [mirá]{.alert} los datos: promedios por tramo de población, con la recta suave a cada lado del corte.
+
+```{r salto, echo=FALSE, fig.height=4.0, fig.width=9}
+d <- datos
+brks <- seq(-30000, 30000, by = 2500)
+d$bin <- cut(d$poblacion_c, breaks = brks)
+ctr <- (head(brks, -1) + tail(brks, -1)) / 2
+agg <- data.frame(centro = ctr,
+                  y = as.numeric(tapply(d$mortalidad_infantil, d$bin, mean)))
+agg <- agg[!is.na(agg$y), ]
+
+ggplot() +
+  geom_point(data = agg, aes(centro, y), colour = azul, size = 2.4) +
+  geom_smooth(data = subset(d, poblacion_c < 0),
+              aes(poblacion_c, mortalidad_infantil),
+              method = "lm", se = FALSE, colour = azul, linewidth = 1) +
+  geom_smooth(data = subset(d, poblacion_c >= 0),
+              aes(poblacion_c, mortalidad_infantil),
+              method = "lm", se = FALSE, colour = azul, linewidth = 1) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = rojo, linewidth = 0.8) +
+  labs(x = "Población centrada en el umbral (47.619 hab)",
+       y = "Mortalidad infantil (por mil)") +
+  tema_taller
+```
+
+:::{style="text-align: center; font-size: 18px; color: #6E665C;"}
+El salto hacia abajo en el corte es el efecto; la pendiente es la tendencia que hay que descontar
+:::
+:::
+
+## Comparación ingenua vs local
+
+:::{style="margin-top: 14px; font-size: 21px;"}
+La diferencia entre [todos]{.alert} los concejos grandes y chicos exagera el efecto, porque arrastra la tendencia:
+
+```{r naive, echo=TRUE}
+with(datos, mean(mortalidad_infantil[concejo_grande == 1]) -
+            mean(mortalidad_infantil[concejo_grande == 0]))
+```
+
+La regresión [local]{.alert}, cerca del corte, descuenta esa pendiente:
+
+```{r local, echo=TRUE}
+cerca <- subset(datos, abs(poblacion_c) < 8000)
+fit <- lm_robust(mortalidad_infantil ~ concejo_grande + poblacion_c +
+                   concejo_grande:poblacion_c, data = cerca)
+round(coef(summary(fit))["concejo_grande", 1:4], 3)
+```
+
+:::{style="margin-top: 4px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
+De [−3,36]{.alert} (ingenua) a [≈ −1,7]{.alert} (local): la brecha era sesgo de selección, no efecto
+:::
+:::
+
+## Estimarlo bien: `rdrobust`
+
+:::{style="margin-top: 12px; font-size: 21px;"}
+`rdrobust` elige el ancho de banda de forma óptima y corrige el sesgo de los bordes ([Calonico, Cattaneo y Titiunik, 2014](https://doi.org/10.3982/ECTA11757)):
+
+```{r rdrobust, echo=TRUE}
+rd <- rdrobust(datos$mortalidad_infantil, datos$poblacion_c)
+round(c(efecto = rd$coef[1], se = rd$se[1],
+        p = rd$pv[1], ancho = rd$bws[1, 1]), 3)
+```
+
+:::{style="margin-top: 8px;"}
+El efecto local es de [−1,84 muertes por mil]{.alert}, muy cerca del −2,01 del paper. Un coeficiente negativo acá es [buena noticia]{.alert}: menos muertes
+:::
+:::
+
+## El efecto en varias dimensiones
+
+:::{style="margin-top: 10px; font-size: 20px;"}
+El mismo salto, resultado por resultado:
+
+```{r coda, echo=FALSE}
+outs <- c(matricula_primaria = "Matrícula primaria (chicos/aula)",
+          mortalidad_infantil = "Mortalidad infantil (por mil)",
+          mortalidad_postneonatal = "Mortalidad postneonatal (por mil)",
+          ideb = "Calidad educativa (IDEB, 0-10)",
+          burocratas = "Cargos designados",
+          proyectos_servicios = "Proyectos de servicios")
+tab <- t(sapply(names(outs), function(v) {
+  m <- rdrobust(datos[[v]], datos$poblacion_c)
+  c(Efecto = round(m$coef[1], 2), p = round(m$pv[1], 3))
+}))
+rownames(tab) <- outs
+knitr::kable(tab)
+```
+
+:::{style="margin-top: 2px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 19px;"}
+Mejor salud, más matrícula, más cargos y proyectos. La [calidad (IDEB) no salta]{.alert}: más chicos en la escuela sin bajar el nivel
+:::
+:::
+
+## Muchos umbrales, una complicación
+
+:::{style="margin-top: 22px; font-size: 23px;"}
+El paper real no tiene un corte, tiene [doce]{.alert} (de 9 a 21 bancas).
+
+- Si juntás todos los cortes [sin corregir]{.alert}, comparás municipios chicos (9-10 bancas) con grandes (20-21): aparece un desbalance de 1,63 concejales, y el estimador se sesga
+
+- La solución de los autores: agregar controles, sobre todo la [población de 2003]{.alert}, que es la variable que asigna cada umbral
+
+:::{style="margin-top: 10px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 21px;"}
+Moraleja: un diseño creíble casi nunca es una sola línea de código. Es el diseño [más]{.alert} el cuidado con sus supuestos
+:::
+:::
+
+## Para pensar: leer el coeficiente
+
+:::{style="margin-top: 20px; font-size: 24px;"}
+`rdrobust` devolvió un efecto de [−1,84]{.alert} sobre la mortalidad infantil. ¿Qué afirma, exactamente, ese número?
+
+:::{.fragment style="margin-top: 14px; border-left: 4px solid #b85450; padding: 8px 20px; font-size: 22px;"}
+:::{.incremental}
+- Una banca más [baja]{.alert} la mortalidad infantil en unas 1,84 muertes por cada mil nacidos
+
+- Es un efecto [local]{.alert}: vale para municipios cerca de las 47.619 personas, no para cualquier tamaño de concejo
+
+- Es [causal]{.alert} sólo si nada más salta en el umbral. El próximo bloque se dedica a mostrar que así es
+:::
+:::
+:::
+
+# Hacerlo creíble: validez y pruebas {background-color="#2d4563"}
+
+## Tres supuestos
+
+:::{style="margin-top: 22px; font-size: 23px;"}
+El RDD del paper descansa en tres supuestos, y cada uno tiene su prueba:
+
+1. [Nadie manipula el umbral]{.alert}: los municipios no pueden elegir de qué lado caer
+
+2. [El salto es nítido]{.alert}: el concejo crece exactamente como manda la ley (RDD sharp)
+
+3. [Las covariables previas no saltan]{.alert}: medidas antes de 2004, no deberían cambiar en el corte
+
+:::{style="margin-top: 12px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 21px;"}
+Un supuesto no se declara: se [pone a prueba]{.alert}. Vamos una por una, y después rompemos el diseño a propósito
+:::
+:::
+
+## Chequeo 1: ¿manipularon el umbral?
+
+:::{style="margin-top: 14px; font-size: 21px;"}
+Si los municipios se acomodaran para cruzar el corte, se [amontonarían]{.alert} de un lado. El test de densidad busca ese amontonamiento ([McCrary, 2008](https://doi.org/10.1016/j.jeconom.2007.05.005); [Cattaneo, Jansson y Ma, 2020](https://doi.org/10.1080/01621459.2019.1635480)):
+
+```{r densidad, echo=TRUE}
+dens <- rddensity(datos$poblacion_c)
+round(c(T = dens$test$t_jk, p = dens$test$p_jk), 3)
+```
+
+:::{style="margin-top: 8px;"}
+$p = 0{,}83$: [no hay salto]{.alert} en la densidad. La población de 2003 no se podía manipular, tal como esperábamos
+:::
+:::
+
+## Chequeo 2: balance en covariables
+
+:::{style="margin-top: 14px; font-size: 21px;"}
+Las variables medidas [antes]{.alert} del tratamiento (PIB per cápita, pobreza) no deberían saltar en el umbral. Corremos el RDD sobre ellas como [placebo]{.alert}:
+
+```{r balance, echo=TRUE}
+sapply(c("pib_pc", "prop_pobres"), function(v) {
+  m <- rdrobust(datos[[v]], datos$poblacion_c)
+  round(m$pv[1], 3)
+})
+```
+
+:::{style="margin-top: 8px;"}
+Los dos $p$ son [altos]{.alert}: ningún salto donde no debería haberlo. Los grupos son comparables de entrada
+:::
+:::
+
+## Chequeo 3: un corte placebo
+
+:::{style="margin-top: 14px; font-size: 21px;"}
+Si inventamos un umbral [falso]{.alert} donde la ley no cambia nada, no debería aparecer ningún efecto:
+
+```{r placebo, echo=TRUE}
+rdrobust(datos$mortalidad_infantil, datos$poblacion_c,
+         c = -15000)$pv[1]
+```
+
+:::{style="margin-top: 8px;"}
+$p \approx 0{,}36$: [nada]{.alert} en el corte inventado. El salto aparece sólo en el umbral verdadero
+:::
+
+:::{style="margin-top: 8px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
+Un efecto que aparece en umbrales placebo es una [señal de alarma]{.alert}: probablemente estás capturando la tendencia, no un salto
+:::
+:::
+
+## Chequeo 4: ¿depende del ancho de banda?
+
+:::{style="margin-top: 2px; font-size: 20px;"}
+Un resultado creíble no cambia de signo ni de tamaño según cuán ancha sea la ventana:
+
+```{r ancho, echo=FALSE, fig.height=3.9, fig.width=9}
+hs <- seq(4000, 16000, by = 2000)
+est <- sapply(hs, function(h) {
+  m <- rdrobust(datos$mortalidad_infantil, datos$poblacion_c, h = h)
+  c(m$coef[1], m$se[1])
+})
+bw <- data.frame(h = hs, tau = est[1, ], se = est[2, ])
+
+ggplot(bw, aes(h, tau)) +
+  geom_hline(yintercept = 0, colour = "grey70") +
+  geom_ribbon(aes(ymin = tau - 1.96 * se, ymax = tau + 1.96 * se),
+              fill = azul, alpha = 0.15) +
+  geom_line(colour = azul, linewidth = 1) +
+  geom_point(colour = azul, size = 2.4) +
+  labs(x = "Ancho de banda (habitantes)", y = "Efecto estimado") +
+  tema_taller
+```
+
+:::{style="text-align: center; font-size: 18px; color: #6E665C;"}
+El efecto se queda estable en torno a −1,8, ventana tras ventana
+:::
+:::
+
+## Romperlo: saboteemos el diseño
+
+:::{style="margin-top: 10px; font-size: 20px;"}
+Para creerle a un chequeo, hay que verlo [fallar]{.alert} cuando debe. Empujamos a la mayoría de los que estaban justo por debajo a cruzar el corte, como si hubieran manipulado la población:
+
+```{r sabotaje, echo=TRUE}
+set.seed(1)
+malo <- datos
+borde <- malo$poblacion_c > -1500 & malo$poblacion_c < 0
+mover <- borde & runif(nrow(malo)) < 0.7
+malo$poblacion_c[mover] <- abs(malo$poblacion_c[mover]) + 200
+
+# el test de densidad, antes limpio, ahora rechaza
+round(rddensity(malo$poblacion_c)$test$p_jk, 4)
+```
+
+:::{style="margin-top: 6px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 19px;"}
+De $p = 0{,}83$ a $p \approx 0$. El test [detecta]{.alert} la manipulación que fabricamos: por eso vale la pena correrlo
+:::
+:::
+
+# Más allá del RDD: la familia de diseños {background-color="#2d4563"}
+
+## El patrón de oro: el experimento
+
+:::{style="margin-top: 18px; font-size: 22px;"}
+El RDD imita un sorteo [cerca de un umbral]{.alert}. Cuando podés sortear de verdad, el contrafactual sale casi gratis.
+
+:::{.columns}
+:::{.column width=50%}
+- En un [experimento aleatorizado]{.alert}, el tratamiento se asigna al azar
+
+- Por construcción, tratados y controles son iguales en promedio: el sesgo de selección [desaparece]{.alert}
+
+- La diferencia de medias ya es el efecto causal
+:::
+
+:::{.column width=50%}
+:::{style="border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
+No siempre se puede sortear: hay razones éticas, políticas y de costo. Ahí entran los diseños [cuasi-experimentales]{.alert}, que buscan un azar que ya ocurrió ([Duflo, Glennerster y Kremer, 2007](https://doi.org/10.1016/S1573-4471(07)04061-2))
+:::
+:::
+:::
+:::
+
+## Cuando no hay umbral ni sorteo
+
+:::{style="margin-top: 14px; font-size: 21px;"}
+:::{.columns}
+:::{.column width=50%}
+[Diferencias en diferencias]{.alert}
+
+Comparás el antes y después de un grupo tratado contra un control que sigue una tendencia paralela ([Card y Krueger, 1994](https://www.jstor.org/stable/2118030))
+
+[Control sintético]{.alert}
+
+Construís un "clon" del caso tratado como promedio ponderado de casos no tratados; hoy admite varios tratados ([Abadie, 2021](https://doi.org/10.1257/jel.20191450))
+:::
+
+:::{.column width=50%}
+:::{style="border-left: 4px solid #b85450; padding: 6px 18px; font-size: 20px;"}
+[Cuidado con el matching]{.alert}
+
+Emparejar por características observables [no]{.alert} resuelve la selección en lo que no observás. Ya no lo tomamos como un diseño creíble por sí solo; usalo sólo si no te queda otra ([King y Nielsen, 2019](https://doi.org/10.1017/pan.2019.11))
+:::
+:::
+:::
+
+:::{style="margin-top: 8px; text-align: center; font-size: 22px;"}
+Distintos diseños, la misma pregunta: ¿de dónde sale el [contrafactual]{.alert}?
+:::
+:::
+
+# Hacerlo en la región {background-color="#2d4563"}
+
+## Cómo encontrar un buen RDD
+
+:::{style="margin-top: 14px; font-size: 20px;"}
+Un RDD vive donde una regla [asigna algo por un umbral]{.alert}. América Latina está llena de reglas así:
+
+:::{.columns}
+:::{.column width=50%}
+- [Puntajes de focalización]{.alert}: SISBEN (Colombia), Cadastro Único (Brasil), Ficha CAS (Chile) deciden quién entra a un programa
+
+- [Umbrales de población]{.alert}: transferencias federales, cantidad de concejales, categoría del municipio
+
+- [Notas de corte]{.alert}: becas y admisión, como Ser Pilo Paga en Colombia ([Londoño-Vélez et al., 2020](https://doi.org/10.1257/pol.20180131))
+:::
+
+:::{.column width=50%}
+- [Edad de elegibilidad]{.alert}: jubilaciones, pensiones no contributivas, entrada a la escuela
+
+- [Elecciones cerradas]{.alert}: ganar por poco (el umbral del 50%) reparte cargos y recursos casi al azar
+
+- [Fronteras administrativas]{.alert}: una política cambia de golpe al cruzar un límite municipal o estatal
+:::
+:::
+
+:::{style="margin-top: 6px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 18px;"}
+Regla práctica: buscá primero la [ley o norma]{.alert} que crea el corte; si el umbral es arbitrario y no se puede manipular, tenés un candidato
+:::
+:::
+
+## Dónde buscar los datos
+
+:::{style="margin-top: 14px; font-size: 20px;"}
+La región tiene mucha [microdata administrativa]{.alert} abierta, que es justo lo que un RDD necesita:
+
+:::{.columns}
+:::{.column width=50%}
+- [Salud]{.alert}: DataSUS (Brasil) y los ministerios y observatorios de salud de cada país
+
+- [Censos y hogares]{.alert}: IBGE, INE y los institutos nacionales; IPUMS International los deja comparables
+
+- [Encuestas armonizadas]{.alert}: SEDLAC (CEDLAS y Banco Mundial), Latinobarómetro
+:::
+
+:::{.column width=50%}
+- [Electorales]{.alert}: TSE (Brasil) y las autoridades electorales publican resultados por sección
+
+- [Portales abiertos]{.alert}: datos.gob de cada país y los portales de transparencia
+
+- [Multilaterales]{.alert}: BID (Números para el Desarrollo), CAF, Banco Mundial Microdata
+:::
+:::
+
+:::{style="margin-top: 6px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 18px;"}
+Pedí la variable de asignación [con la mayor resolución posible]{.alert}: el puntaje exacto, la población exacta. Sin eso, no hay salto que mirar
+:::
+:::
+
+## Para llevarte
+
+:::{style="margin-top: 20px; font-size: 22px;"}
+- Todo efecto causal es una comparación con un [contrafactual]{.alert} que no vemos: $\tau_i = Y_{1,i} - Y_{0,i}$
+
+- La comparación ingenua mezcla efecto y [sesgo de selección]{.alert}; el ejemplo del hospital lo muestra de un lado a otro del cero
+
+- El [RDD]{.alert} recupera el contrafactual cerca de un umbral, y su credibilidad vive en los [chequeos]{.alert}, no en el estimador
+
+- Estimar el efecto fue [una línea]{.alert}; mostrar que es causal fueron [muchas]{.alert}
+
+:::{style="margin-top: 10px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 21px;"}
+Ya sabemos producir un resultado creíble. Falta que [alguien más pueda rehacerlo]{.alert}: esa es la bisagra del Acto 2, reproducir
+:::
+:::
+
+# Ejercicios para practicar {background-color="#2d4563"}
+
+## Manos a la obra {#sec:ejercicios}
+
+:::{style="margin-top: 22px; font-size: 22px;"}
+Ahora te toca a vos. Con el mismo conjunto de datos, vas a estimar un RDD sobre [otra variable]{.alert} y a ponerlo a prueba.
+
+- Trabajá en `municipios.csv`, el archivo que cargaste al principio
+
+- Cada ejercicio tiene su [solución en el apéndice]{.alert}: intentalo primero, después revisá
+
+- Tenés unos [25 minutos]{.alert}. No hace falta terminar los tres; lo importante es discutir lo que encontrás
+:::
+
+## Ejercicio 1: estimá otro resultado {#sec:exercise01}
+
+:::{style="margin-top: 16px; font-size: 19px;"}
+**Tarea (8 min):** repetí el análisis, pero sobre la [matrícula primaria]{.alert} (`matricula_primaria`) en lugar de la mortalidad. Hacé el gráfico del salto y estimá el efecto con `rdrobust`.
+
+```{r ej1-skeleton, eval=FALSE, echo=TRUE, prompt=FALSE}
+datos <- read.csv("municipios.csv")
+
+# 1. Ver el salto: promedios por tramo (o un scatter con dos rectas)
+plot(___, ___)                 # TODO: matricula_primaria contra poblacion_c
+abline(v = 0, col = "red")
+
+# 2. Estimar el efecto local
+rd <- rdrobust(datos$___, datos$___)   # TODO: resultado y variable de asignación
+round(c(efecto = rd$coef[1], p = rd$pv[1]), 3)
+```
+
+:::{.callout-note appearance="simple" icon=false}
+**Pista**: la variable de asignación es siempre `poblacion_c` (población centrada en el corte). ¿El signo del efecto tiene sentido?
+:::
+
+[[Apéndice: Solución]{.button}](#sec:appendix01)
+:::
+
+## Ejercicio 2: poné el diseño a prueba {#sec:exercise02}
+
+:::{style="margin-top: 16px; font-size: 19px;"}
+**Tarea (8 min):** ¿le creerías a tu estimación del Ejercicio 1? Corré los mismos chequeos que vimos: densidad, un corte placebo y balance en una covariable.
+
+```{r ej2-skeleton, eval=FALSE, echo=TRUE, prompt=FALSE}
+# a) manipulación: test de densidad
+rddensity(datos$___)$test$p_jk          # TODO: variable de asignación
+
+# b) corte placebo: un umbral falso donde no debería pasar nada
+rdrobust(datos$matricula_primaria, datos$poblacion_c, c = ___)$pv[1]   # TODO: probá -15000
+
+# c) balance: una covariable previa no debería saltar
+rdrobust(datos$___, datos$poblacion_c)$pv[1]   # TODO: pib_pc o prop_pobres
+```
+
+:::{.callout-note appearance="simple" icon=false}
+**Pista**: un $p$ alto en (a) y (c) es buena señal; en (b) también. ¿Cuál de los tres te preocuparía más si fallara?
+:::
+
+[[Apéndice: Solución]{.button}](#sec:appendix02)
+:::
+
+## Ejercicio 3: ingenua vs local, y a discutir {#sec:exercise03}
+
+:::{style="margin-top: 16px; font-size: 19px;"}
+**Tarea (9 min):** compará la diferencia [ingenua]{.alert} (todos los grandes vs todos los chicos) con la estimación [local]{.alert} del RDD, para `matricula_primaria`. Después, discutí con quien tengas al lado.
+
+```{r ej3-skeleton, eval=FALSE, echo=TRUE, prompt=FALSE}
+# diferencia ingenua
+with(datos, mean(matricula_primaria[concejo_grande == 1]) -
+            mean(matricula_primaria[concejo_grande == 0]))
+
+# efecto local
+rdrobust(datos$matricula_primaria, datos$poblacion_c)$coef[1]
+```
+
+:::{.callout-note appearance="simple" icon=false}
+**Para discutir**: ¿por qué difieren los dos números? ¿Cuál reportarías y por qué? ¿Qué covariable podría explicar la brecha?
+:::
+
+[[Apéndice: Solución]{.button}](#sec:appendix03)
+:::
+
+# Apéndice: soluciones {background-color="#2d4563"}
+
+## Solución Ejercicio 1 {#sec:appendix01}
+
+:::{style="margin-top: 12px; font-size: 18px;"}
+```{r ej1-sol, eval=TRUE, echo=TRUE}
+datos <- read.csv("datos/municipios.csv")
+
+# efecto local sobre la matrícula primaria
+rd <- rdrobust(datos$matricula_primaria, datos$poblacion_c)
+round(c(efecto = rd$coef[1], se = rd$se[1], p = rd$pv[1]), 3)
+```
+
+El efecto es [positivo]{.alert} (unos 3 a 4 chicos más por aula) y significativo: cruzar el umbral, y ganar una banca, sube la matrícula. El signo coincide con el mecanismo de más [bienes públicos]{.alert}
+
+[[Volver al ejercicio]{.button}](#sec:exercise01)
+:::
+
+## Solución Ejercicio 2 {#sec:appendix02}
+
+:::{style="margin-top: 12px; font-size: 18px;"}
+```{r ej2-sol, eval=TRUE, echo=TRUE}
+c(densidad = round(rddensity(datos$poblacion_c)$test$p_jk, 3),
+  placebo  = round(rdrobust(datos$matricula_primaria, datos$poblacion_c, c = -15000)$pv[1], 3),
+  balance  = round(rdrobust(datos$pib_pc, datos$poblacion_c)$pv[1], 3))
+```
+
+Los tres $p$ son altos: no hay amontonamiento en el corte, no hay salto en el umbral falso, y el PIB per cápita no salta. El diseño [aguanta]{.alert}. El chequeo más grave si fallara sería el de [densidad]{.alert}: manipulación en el umbral rompe toda la comparación
+
+[[Volver al ejercicio]{.button}](#sec:exercise02)
+:::
+
+## Solución Ejercicio 3 {#sec:appendix03}
+
+:::{style="margin-top: 12px; font-size: 18px;"}
+```{r ej3-sol, eval=TRUE, echo=TRUE}
+ingenua <- with(datos, mean(matricula_primaria[concejo_grande == 1]) -
+                       mean(matricula_primaria[concejo_grande == 0]))
+local   <- rdrobust(datos$matricula_primaria, datos$poblacion_c)$coef[1]
+round(c(ingenua = ingenua, local = local), 2)
+```
+
+La diferencia ingenua arrastra la [tendencia]{.alert}: los municipios más grandes ya tenían más matrícula por otras razones (más recursos, más urbanos). La estimación local descuenta esa pendiente. Reportás la [local]{.alert}; la brecha entre ambas es, otra vez, [sesgo de selección]{.alert}
+
+[[Volver al ejercicio]{.button}](#sec:exercise03)
+:::
+
+## Referencias
+
+:::{style="font-size: 15px;"}
+:::{.columns}
+:::{.column width=50%}
+Abadie, A. (2021). Using synthetic controls: feasibility, data requirements, and methodological aspects. *Journal of Economic Literature* 59(2):391–425. [doi](https://doi.org/10.1257/jel.20191450)
+
+Angrist, J. y Pischke, J.-S. (2015). *Mastering 'Metrics: The Path from Cause to Effect*. Princeton University Press. [enlace](https://press.princeton.edu/books/paperback/9780691152844/mastering-metrics)
+
+Calonico, S., Cattaneo, M. y Titiunik, R. (2014). Robust nonparametric confidence intervals for regression-discontinuity designs. *Econometrica* 82(6):2295–2326. [doi](https://doi.org/10.3982/ECTA11757)
+
+Card, D. y Krueger, A. (1994). Minimum wages and employment: a case study of the fast-food industry in New Jersey and Pennsylvania. *American Economic Review* 84(4):772–793. [enlace](https://www.jstor.org/stable/2118030)
+
+Cattaneo, M., Idrobo, N. y Titiunik, R. (2020). *A Practical Introduction to Regression Discontinuity Designs: Foundations*. Cambridge University Press. [doi](https://doi.org/10.1017/9781108684606)
+
+Cattaneo, M., Jansson, M. y Ma, X. (2020). Simple local polynomial density estimators. *Journal of the American Statistical Association* 115(531):1449–1455. [doi](https://doi.org/10.1080/01621459.2019.1635480)
+
+Duflo, E., Glennerster, R. y Kremer, M. (2007). Using randomization in development economics research: a toolkit. *Handbook of Development Economics* 4:3895–3962. [doi](https://doi.org/10.1016/S1573-4471(07)04061-2)
+:::
+
+:::{.column width=50%}
+Holland, P. (1986). Statistics and causal inference. *Journal of the American Statistical Association* 81(396):945–960. [doi](https://doi.org/10.1080/01621459.1986.10478354)
+
+Imbens, G. y Rubin, D. (2015). *Causal Inference for Statistics, Social, and Biomedical Sciences*. Cambridge University Press. [doi](https://doi.org/10.1017/CBO9781139025751)
+
+King, G. y Nielsen, R. (2019). Why propensity scores should not be used for matching. *Political Analysis* 27(4):435–454. [doi](https://doi.org/10.1017/pan.2019.11)
+
+Lee, D. y Lemieux, T. (2010). Regression discontinuity designs in economics. *Journal of Economic Literature* 48(2):281–355. [doi](https://doi.org/10.1257/jel.48.2.281)
+
+Londoño-Vélez, J., Rodríguez, C. y Sánchez, F. (2020). Upstream and downstream impacts of college merit-based financial aid for low-income students: Ser Pilo Paga in Colombia. *American Economic Journal: Economic Policy* 12(2):193–227. [doi](https://doi.org/10.1257/pol.20180131)
+
+McCrary, J. (2008). Manipulation of the running variable in the regression discontinuity design: a density test. *Journal of Econometrics* 142(2):698–714. [doi](https://doi.org/10.1016/j.jeconom.2007.05.005)
+
+Mignozzetti, U., Cepaluni, G. y Freire, D. (2025). Legislature size and welfare: evidence from Brazil. *American Journal of Political Science* 69(3):831–846. [doi](https://doi.org/10.1111/ajps.12843)
+:::
+:::
+:::

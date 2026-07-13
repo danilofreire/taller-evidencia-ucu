@@ -1,0 +1,70 @@
+---
+title: "Políticas públicas basadas en evidencia"
+subtitle: "Bloque 3 · Síntesis de evidencia"
+author:
+  - name: Danilo Freire
+    orcid: 0000-0002-4712-6810
+    email: danilofreire@gmail.com
+    affiliations: "Department of Data and Decision Sciences <br> Emory University"
+format:
+  clean-revealjs:
+    self-contained: true
+    footer: "Políticas basadas en evidencia · Bloque 3 · Síntesis"
+    transition: slide
+    transition-speed: default
+    scrollable: true
+revealjs-plugins:
+  - multimodal
+engine: knitr
+editor:
+  render-on-save: true
+lang: es
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(knitr)
+opts_chunk$set(
+  prompt = T,
+  fig.align = "center",
+  dpi = 300,
+  cache = T,
+  engine.opts = list(bash = "-l")
+)
+
+knit_hooks$set(
+  prompt = function(before, options, envir) {
+    options(
+      prompt = if (options$engine %in% c("sh", "bash", "zsh")) "$ " else "R> ",
+      continue = if (options$engine %in% c("sh", "bash", "zsh")) "$ " else "+ "
+    )
+  }
+)
+
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+
+if (!require("fontawesome", character.only = TRUE)) {
+  install.packages("fontawesome", dependencies = TRUE)
+  library(fontawesome, character.only = TRUE)
+}
+
+suppressPackageStartupMessages(library(ggplot2))
+```
+
+<!--
+BLOQUE 3 · PARTE 1: SÍNTESIS DE EVIDENCIA (deck propio).
+La reproducibilidad vive en 02-investigacion-reproducible.qmd y se presenta antes (Acto 2).
+Esqueleto: divisores en orden; los cuerpos se construyen en el estilo de la casa
+(dos columnas, font-size wrappers, una visual por diapositiva, callouts).
+Anclas: el meta-análisis del tamaño de la legislatura (BJPS) con su forest plot;
+el sesgo de publicación con un funnel plot; cierra en robustez analítica (Nature)
+como bisagra hacia la sesión de reproducibilidad. Ver [[reference-ia-deck-house-style]].
+-->
+
+# Del estudio único a la evidencia acumulada {background-color="#2d4563"}
+
+# Sesgo de publicación y meta-análisis {background-color="#2d4563"}
+
+# El meta-análisis del tamaño de la legislatura {background-color="#2d4563"}
+
+# El límite de la síntesis: robustez analítica {background-color="#2d4563"}

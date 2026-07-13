@@ -1,0 +1,119 @@
+---
+title: "Recursos"
+---
+
+Lecturas, herramientas y guía de instalación para el taller. La lista se completa antes del evento.
+
+## Lecturas del taller
+
+Las investigaciones propias que estructuran los bloques.
+
+::: {.resource-card}
+[Legislature Size and Welfare: Evidence From Brazil]{.resource-title}
+
+[American Journal of Political Science · regresión discontinua]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1111/ajps.12843)
+:::
+:::
+
+::: {.resource-card}
+[Bottom-Up Accountability and Public Service Provision: Evidence from a Field Experiment in Brazil]{.resource-title}
+
+[Research & Politics · experimento de campo]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1177/2053168020914444)
+:::
+:::
+
+::: {.resource-card}
+[Vigilantism and Institutions: Attitudes toward Lynching in Brazil]{.resource-title}
+
+[Research & Politics · experimento de encuesta]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1177/20531680221150389)
+:::
+:::
+
+::: {.resource-card}
+[The Effect of Legislature Size on Distributive Politics: A Meta-Analysis]{.resource-title}
+
+[British Journal of Political Science · meta-análisis]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1017/S0007123422000552) |
+[Réplica](https://github.com/danilofreire/legislature-size-meta-analysis)
+:::
+:::
+
+::: {.resource-card}
+[Evaluating the Effect of Homicide Prevention Strategies in São Paulo, Brazil: A Synthetic Control Approach]{.resource-title}
+
+[Latin American Research Review · control sintético]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.25222/larr.334)
+:::
+:::
+
+### Reproducibilidad y robustez
+
+Dos proyectos colaborativos grandes en los que participo, centrales para el Bloque 3.
+
+::: {.resource-card}
+[Investigating the Analytical Robustness of the Social and Behavioural Sciences]{.resource-title}
+
+[Nature · robustez analítica con muchos equipos]{.resource-meta}
+
+::: {.resource-links}
+[Publicación](https://www.nature.com/articles/s41586-025-09844-9)
+:::
+:::
+
+::: {.resource-card}
+[The Reliability of Replications: A Study in Computational Reproductions]{.resource-title}
+
+[Royal Society Open Science · reproducciones computacionales]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1098/rsos.241038) |
+[Réplica](https://github.com/nbreznau/how_many_replicators)
+:::
+:::
+
+## Casos y referencias de la región
+
+Lista breve, en preparación.
+
+- Progresa/Oportunidades (México): el experimento aleatorizado que impulsó las transferencias monetarias condicionadas
+- PANES (Uruguay): Manacorda, Miguel y Vigorito (2011), un diseño de regresión discontinua sobre el puntaje de elegibilidad
+- Auditorías municipales (Brasil): Ferraz y Finan, auditorías al azar y rendición de cuentas electoral
+
+## Métodos computacionales y LLMs
+
+Lista breve, en preparación.
+
+- Argyle et al. (2023, *Political Analysis*), "Out of One, Many": el caso optimista de las poblaciones sintéticas
+- Bisbee et al. (2024, *Political Analysis*): los riesgos de reemplazar datos de encuesta con modelos de lenguaje
+- Angelopoulos et al. (2023, *Science*): inferencia potenciada por predicción (*prediction-powered inference*)
+- Egami et al.: aprendizaje supervisado basado en diseño para texto como dato
+
+## Organizaciones
+
+- [J-PAL América Latina y el Caribe](https://www.povertyactionlab.org/es/regional-office/latin-america-and-caribbean)
+- [Innovations for Poverty Action (IPA)](https://poverty-action.org)
+- [Banco Interamericano de Desarrollo (BID)](https://www.iadb.org)
+- [EGAP: Evidence in Governance and Politics](https://egap.org)
+
+## Instalación de software
+
+Para la parte práctica de la tarde necesitás tres herramientas, todas gratuitas:
+
+- [R](https://cran.r-project.org/): el lenguaje de análisis
+- [Quarto](https://quarto.org/docs/get-started/): documentos dinámicos y diapositivas
+- [git](https://git-scm.com/): control de versiones
+
+RStudio (>= 2022.07) ya incluye Quarto. Si usás otro editor, instalá Quarto por separado
