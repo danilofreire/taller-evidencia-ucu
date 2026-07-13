@@ -9,13 +9,9 @@ Lecturas, herramientas y guía de instalación para el taller. La lista se compl
 Las investigaciones propias que estructuran los bloques, en el orden en que aparecen durante el día.
 
 ::: {.resource-card}
-[Financial Incentives and Health Care Provision: Evidence from an Experimental *Aedes aegypti* Control Programme in Brazil]{.resource-title}
+[Financial Incentives and Health Care Provision: Evidence from an *Aedes aegypti* Control Programme in Brazil]{.resource-title}
 
-[Experimento de campo · incentivos y dengue (caso central del bloque de experimentos)]{.resource-meta}
-
-::: {.resource-links}
-[Referencia por confirmar](#)
-:::
+[Experimento de campo · con Umberto Mignozzetti · manuscrito en revisión (caso central del bloque de experimentos)]{.resource-meta}
 :::
 
 ::: {.resource-card}
@@ -34,7 +30,8 @@ Las investigaciones propias que estructuran los bloques, en el orden en que apar
 [Research & Politics · experimento de encuesta]{.resource-meta}
 
 ::: {.resource-links}
-[DOI](https://doi.org/10.1177/20531680221150389)
+[DOI](https://doi.org/10.1177/20531680221150389) |
+[Réplica](https://github.com/danilofreire/lynching-experiment-brazil)
 :::
 :::
 
@@ -54,7 +51,8 @@ Las investigaciones propias que estructuran los bloques, en el orden en que apar
 [Latin American Research Review · control sintético]{.resource-meta}
 
 ::: {.resource-links}
-[DOI](https://doi.org/10.25222/larr.334)
+[DOI](https://doi.org/10.25222/larr.334) |
+[Réplica](https://github.com/danilofreire/homicides-sp-synth)
 :::
 :::
 
