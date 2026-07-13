@@ -1,7 +1,6 @@
 /.quarto/
 *_cache/
-# Artefactos generados por Quarto (se regeneran al renderizar; publicar es tarea aparte)
-/docs/
+# Cache de Quarto (se regenera al renderizar); docs/ SÍ se versiona (sitio publicado)
 /_freeze/
 **/*_files/
 /.Rproj.user/
