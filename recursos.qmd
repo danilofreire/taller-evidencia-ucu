@@ -41,7 +41,8 @@ Las investigaciones propias que estructuran los bloques, en el orden en que apar
 [American Journal of Political Science · regresión discontinua]{.resource-meta}
 
 ::: {.resource-links}
-[DOI](https://doi.org/10.1111/ajps.12843)
+[DOI](https://doi.org/10.1111/ajps.12843) |
+[PDF (acceso abierto)](https://escholarship.org/uc/item/5gk7x3zg)
 :::
 :::
 
