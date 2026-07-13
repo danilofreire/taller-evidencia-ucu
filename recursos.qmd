@@ -24,7 +24,8 @@ Las investigaciones propias que estructuran los bloques, en el orden en que apar
 [Research & Politics · experimento de campo con resultado nulo]{.resource-meta}
 
 ::: {.resource-links}
-[DOI](https://doi.org/10.1177/2053168020914444)
+[DOI](https://doi.org/10.1177/2053168020914444) |
+[Réplica](https://github.com/umbertomig/tdp-accountability)
 :::
 :::
 
