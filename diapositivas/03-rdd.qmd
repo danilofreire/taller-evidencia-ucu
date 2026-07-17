@@ -25,20 +25,10 @@ lang: es
 options(htmltools.dir.version = FALSE)
 library(knitr)
 opts_chunk$set(
-  prompt = T,
+  echo = FALSE,
   fig.align = "center",
   dpi = 300,
-  cache = T,
-  engine.opts = list(bash = "-l")
-)
-
-knit_hooks$set(
-  prompt = function(before, options, envir) {
-    options(
-      prompt = if (options$engine %in% c("sh", "bash", "zsh")) "$ " else "R> ",
-      continue = if (options$engine %in% c("sh", "bash", "zsh")) "$ " else "+ "
-    )
-  }
+  cache = FALSE
 )
 
 options(repos = c(CRAN = "https://cran.rstudio.com/"))
@@ -49,77 +39,98 @@ ensure <- function(pkg) {
     library(pkg, character.only = TRUE)
   }
 }
-invisible(lapply(c("fontawesome", "estimatr", "rdrobust", "rddensity"), ensure))
+invisible(lapply(c("ggplot2", "dplyr", "estimatr", "rdrobust", "rddensity",
+                   "fabricatr"), ensure))
 
-suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages({
+  library(ggplot2); library(dplyr); library(estimatr)
+  library(rdrobust); library(rddensity); library(fabricatr)
+})
 
-# paleta de la casa (mismo par azul/rojo que 00-apertura.qmd)
+# paleta de la casa (mismo par azul/rojo que 01-apertura.qmd)
 azul <- "#2d4563"; rojo <- "#b85450"
 
 tema_taller <- theme_minimal(base_size = 15) +
   theme(panel.grid.minor = element_blank(),
         plot.margin = margin(6, 10, 6, 6))
 
-# los datos quedan cargados para todas las láminas siguientes
-datos <- read.csv("datos/municipios.csv")
+# los datos del caso: simulados con fabricatr, el MISMO generador que se
+# muestra en la slide "Generá los datos del caso".
+# Semilla fija => reproduce exactamente datos/municipios.csv.
+set.seed(148)
+datos <- fabricate(
+  N = 2000,
+  poblacion      = round(runif(N, 20000, 75000)),
+  poblacion_c    = poblacion - 47619,
+  x              = poblacion_c / 10000,
+  concejo_grande = as.integer(poblacion_c >= 0),
+  n_concejales   = 9 + concejo_grande,
+  pib_pc         = round(12 + 0.8 * x + rnorm(N, 0, 2), 1),
+  prop_pobres    = round(pmin(pmax(0.34 - 0.02 * x + rnorm(N, 0, 0.05), 0.05), 0.75), 3),
+  bancas_2000    = 9 + rbinom(N, 1, 0.15),
+  mortalidad_infantil     = pmax(2,   round(20 - 0.5 * x - 2.01 * concejo_grande + rnorm(N, 0, 2.5), 1)),
+  mortalidad_postneonatal = pmax(0.5, round(7 - 0.2 * x - 0.9 * concejo_grande + rnorm(N, 0, 1.3), 1)),
+  matricula_primaria      = pmax(0,   round(24 + 0.4 * x + 2.58 * concejo_grande + rnorm(N, 0, 3), 1)),
+  ideb           = pmin(10, pmax(0, round(4.5 + 0.1 * x + rnorm(N, 0, 0.5), 1))),
+  burocratas     = pmax(0, round(480 + 12 * x + 104 * concejo_grande + rnorm(N, 0, 45))),
+  proyectos_servicios = pmax(0, round(40 + 2 * x + 6 * concejo_grande + rnorm(N, 0, 7)))
+)
+datos$municipio <- sprintf("M%04d", seq_len(nrow(datos)))
+datos <- datos[, c("municipio", "poblacion", "poblacion_c", "concejo_grande",
+                   "n_concejales", "pib_pc", "prop_pobres", "bancas_2000",
+                   "mortalidad_infantil", "mortalidad_postneonatal",
+                   "matricula_primaria", "ideb", "burocratas",
+                   "proyectos_servicios")]
 ```
 
 # Regresión discontinua: el contrafactual que encontrás {background-color="#2d4563"}
 
 ## El plan del bloque
 
-:::{style="margin-top: 10px; font-size: 20px;"}
+:::{style="margin-top: 10px; font-size: 24px;"}
 :::{.columns}
-:::{.column width=34%}
+:::{.column width=50%}
 [Las ideas]{.alert}
 
 - La [aleatorización local]{.alert} y el contrafactual que se [encuentra]{.alert}, no se construye
 - El efecto [local]{.alert} (LATE) y a quién le aplica de verdad
 - Los tres supuestos y sus [chequeos]{.alert}: densidad, balance, placebo
 - Qué cambia cuando hay [muchos umbrales]{.alert} en vez de uno
-:::
-
-:::{.column width=34%}
-[El caso]{.alert}
-
-- Concejos municipales y bienestar en [Brasil]{.alert}
-- Nuestro paper en el [AJPS]{.alert} ([Mignozzetti, Cepaluni y Freire, 2025](https://doi.org/10.1111/ajps.12843))
-- La regla del TSE de 2004 como [experimento accidental]{.alert}
 - El [mecanismo político]{.alert} detrás del efecto sobre salud y educación
 :::
 
-:::{.column width=32%}
+:::{.column width=50%}
 [Las herramientas]{.alert}
 
+- `fabricatr` para [generar]{.alert} los datos del caso, como a la mañana
 - `rdplot` para ver el [salto]{.alert} antes de estimar
 - `rdrobust` para estimarlo con [ancho de banda óptimo]{.alert}
 - `rddensity` para testear [manipulación]{.alert}
-- Los chequeos como [rutina]{.alert}, no como adorno
+- Los chequeos como [rutina]{.alert}
 :::
 :::
 
-:::{style="margin-top: 8px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
-Terminamos con una práctica guiada: corrés el código, lo leés y completás un par de líneas
+:::{style="margin-top: 15px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 23px;"}
+Un caso de nuestra propia [investigación en la región]{.alert}: concejos municipales y bienestar en Brasil ([Mignozzetti, Cepaluni y Freire, 2025](https://doi.org/10.1111/ajps.12843), *AJPS*), con la regla del TSE de 2004 como [experimento accidental]{.alert}, y una práctica guiada donde generás los datos y corrés el código
 :::
 :::
 
-## Antes de empezar: datos y paquetes
+## Antes de empezar: los paquetes
 
-:::{style="margin-top: 16px; font-size: 20px;"}
-Vas a necesitar el conjunto de datos y cuatro paquetes. Hacelo ahora, mientras arrancamos.
+:::{style="margin-top: 16px; font-size: 23px;"}
+Vas a necesitar cinco paquetes. Instalalos ahora, mientras arrancamos.
 
 ```{r instalar, echo=TRUE, eval=FALSE}
-# 1. Instalar (solo la primera vez)
-install.packages(c("estimatr", "rdrobust", "rddensity", "ggplot2"))
+# Instalar (solo la primera vez)
+install.packages(c("tidyverse", "estimatr", "rdrobust", "rddensity", "fabricatr"))
 
-# 2. Cargar los datos (descargá municipios.csv del repo del taller)
-datos <- read.csv("municipios.csv")
-# Leélo directo desde la web, sin descargar nada:
+# Los datos los generamos nosotros en un rato, con fabricatr.
+# ¿Preferís bajar el CSV ya armado? Leélo directo desde la web:
 # datos <- read.csv("https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/datos/municipios.csv")
 ```
 
-:::{style="margin-top: 8px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 18px;"}
-`estimatr` da errores robustos; `rdrobust` y `rddensity` son el estándar para RDD hoy. La línea comentada te evita bajar el archivo a mano
+:::{style="margin-top: 40px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 22px;"}
+`estimatr` da errores robustos; `rdrobust` y `rddensity` son el estándar para RDD hoy; `fabricatr` ya lo conocés de la mañana. La línea comentada te evita generar los datos a mano
 :::
 :::
 
@@ -127,26 +138,28 @@ datos <- read.csv("municipios.csv")
 
 ## El caso: concejos más grandes en Brasil
 
-:::{style="margin-top: 10px; font-size: 19px;"}
+:::{style="margin-top: 10px; font-size: 22px;"}
 :::{.columns}
 :::{.column width=52%}
 Pregunta: ¿el [tamaño del concejo municipal]{.alert} afecta el bienestar de la gente?
 
-- Hasta 2004 cada municipio fijaba el tamaño de su propio concejo, y el [desbalance]{.alert} era enorme: Nova Russas (Ceará), 30.009 habitantes y 21 concejales (uno cada 1.429); Sorocaba (São Paulo), 528.735 habitantes y sólo 15 (uno cada 35.249)
+- Hasta 2004 cada municipio fijaba su propio concejo
 
-- La regla surgió del caso [Mira Estrela]{.alert}, un pueblo de 2.651 personas que quiso recortar su concejo de 11 a 9 bancas por razones fiscales; la disputa llegó al Supremo Tribunal Federal
+- El [desbalance]{.alert} era enorme: Nova Russas, un concejal cada 1.429 habitantes; Sorocaba, uno cada 35.249
 
-- En marzo de 2004 el Tribunal Superior Electoral fijó el número de concejales por [tramos de población]{.alert}: 9 bancas, más una cada 47.619 habitantes, hasta 21
+- Todo empezó con [Mira Estrela]{.alert}, un pueblo que quiso recortar su concejo de 11 a 9 bancas; el caso llegó al Supremo
 
-- Los municipios [no eligen su población]{.alert}: cruzar un umbral es casi un sorteo. Comparás los que quedaron [apenas por encima y apenas por debajo]{.alert} ([Mignozzetti, Cepaluni y Freire, 2025](https://doi.org/10.1111/ajps.12843))
+- La respuesta del TSE, en 2004: [tramos de población]{.alert}. 9 bancas, más una cada 47.619 habitantes, hasta 21
+
+- Los municipios [no eligen su población]{.alert}: comparás los que quedaron [apenas arriba y apenas abajo]{.alert} de un corte ([Mignozzetti, Cepaluni y Freire, 2025](https://doi.org/10.1111/ajps.12843))
 :::
 
 :::{.column width=48%}
 :::{style="text-align: center;"}
-[![Distribución de municipios por población y tamaño del concejo](figures/rdd-umbrales.png){width="100%"}](#){data-modal-type="image" data-modal-url="figures/rdd-umbrales.png"}
+[![](figures/rdd-primera-pagina.png){width="72%"}](#){data-modal-type="image" data-modal-url="figures/rdd-primera-pagina.png"}
 :::
-:::{style="text-align: center; font-size: 16px; color: #6E665C;"}
-Cada escalón es un umbral: al cruzarlo, el concejo suma una banca
+:::{style="text-align: center; font-size: 18px; color: #555;"}
+Mignozzetti, Cepaluni y Freire (2025), *American Journal of Political Science*
 :::
 :::
 :::
@@ -154,25 +167,27 @@ Cada escalón es un umbral: al cruzarlo, el concejo suma una banca
 
 ## La regla que crea el experimento
 
-:::{style="margin-top: 6px; font-size: 19px;"}
+:::{style="margin-top: 6px; font-size: 22px;"}
 :::{.columns}
 :::{.column width=52%}
-La ley funciona como el [mecanismo de asignación]{.alert}: 9 concejales, más uno cada 47.619 habitantes, hasta 21. Son [12 umbrales]{.alert} donde el número de bancas salta de golpe.
+La ley funciona como el [mecanismo de asignación]{.alert}: 9 concejales, más uno cada 47.619 habitantes, hasta 21. Son [12 umbrales]{.alert} donde el número de bancas salta de golpe
 
-- La variable de asignación es la [proyección de población de 2003]{.alert} del IBGE, predeterminada: ningún municipio puede acomodarse para caer de un lado o del otro
+- La variable de asignación es la [proyección de población de 2003]{.alert} del IBGE, predeterminada: nadie puede acomodarse para caer de un lado o del otro
 
-- La regla llegó unos [siete meses antes]{.alert} de la elección de octubre de 2004: sin tiempo para que los candidatos ajustaran sus estrategias
+- La regla llegó [siete meses antes]{.alert} de la elección de octubre de 2004: sin tiempo para ajustar estrategias
 
 - Los efectos se miden en el mandato [2005-2008]{.alert}, ya con los concejos nuevos funcionando
 
-- Nadie diseñó un experimento: la [ley lo creó sin querer]{.alert}, y nosotros lo aprovechamos
+- Nadie diseñó un experimento: la [ley lo creó sin querer]{.alert}, y nosotros lo aprovechamos 😉
 :::
 
 :::{.column width=48%}
-<img src="figures/population.png" style="border-radius: 8px; width: 100%;"/>
+:::{style="text-align: center;"}
+[![](figures/rdd-umbrales.png){width="100%"}](#){data-modal-type="image" data-modal-url="figures/rdd-umbrales.png"}
+:::
 
-:::{style="font-size: 15px; text-align: center; color: #555;"}
-La Figura 1 del paper: el tamaño del concejo salta en cada umbral de población
+:::{style="font-size: 18px; text-align: center; color: #555;"}
+Cada escalón es un umbral: al cruzarlo, el concejo suma una banca
 :::
 :::
 :::
@@ -180,7 +195,7 @@ La Figura 1 del paper: el tamaño del concejo salta en cada umbral de población
 
 ## Lo que encontramos
 
-:::{style="margin-top: 6px; font-size: 19px;"}
+:::{style="margin-top: 6px; font-size: 22px;"}
 :::{.columns}
 :::{.column width=50%}
 Por cada [concejal extra]{.alert}, midiendo apenas alrededor de cada umbral:
@@ -191,49 +206,53 @@ Por cada [concejal extra]{.alert}, midiendo apenas alrededor de cada umbral:
 
 - [Matrícula primaria]{.alert}: +2,58 chicos por aula (~0,20 DE)
 
-- La [calidad educativa]{.alert} (IDEB) no cae ni sube: −0,02, no significativo. Los placebos también dan nulos
+- La [calidad educativa]{.alert} (IDEB) no cae ni sube: −0,03, no significativo. Los placebos también dan nulos
 
 - Detrás de estos números hay una [historia política]{.alert}, y la vemos en unos minutos
 :::
 
 :::{.column width=50%}
-<img src="figures/rdd-bienestar.png" style="border-radius: 8px; width: 100%;"/>
+:::{style="text-align: center;"}
+[![](figures/rdd-bienestar.png){width="100%"}](#){data-modal-type="image" data-modal-url="figures/rdd-bienestar.png"}
+:::
 
-:::{style="font-size: 15px; text-align: center; color: #555;"}
+:::{style="font-size: 18px; text-align: center; color: #555;"}
 Estimados de bienestar por concejal extra, con sus placebos
 :::
 :::
 :::
 
-:::{style="margin-top: 6px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 17px;"}
-Concejos más grandes, mejor salud y mejor educación: un resultado que, con toda razón, cuesta creer a primera vista
+:::{style="margin-top: 6px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 20px;"}
+Concejos más grandes, mejor salud y mejor educación... **¡en Brasil!** ¿Quién lo hubiera imaginado? 😅
 :::
 :::
 
 ## De un resultado a una pregunta
 
-:::{style="margin-top: 6px; font-size: 19px;"}
+:::{style="margin-top: 6px; font-size: 25px;"}
 :::{.columns}
 :::{.column width=62%}
-Cuando presentamos esto, la primera reacción sana siempre fue la [sospecha]{.alert}.
+Como discutimos esta mañana, la primera reacción sana siempre fue la [sospecha]{.alert}:
 
-:::{style="border-left: 4px solid #b85450; padding: 6px 18px; font-size: 18px;"}
+:::{style="border-left: 4px solid #b85450; padding: 6px 18px; font-size: 25px; margin-top: 30px; margin-bottom: 30px;"}
 "¿No será que esos municipios [ya eran distintos de entrada]{.alert}? Más poblados, más ricos, más urbanos"
 :::
 
-- Esa sospecha [ya tiene nombre]{.alert}, y la vimos a las 9:30: es el [sesgo de selección]{.alert}. Los municipios con concejos grandes son más poblados, más ricos, más urbanos; comparar todos contra todos [mezcla]{.alert} el efecto del concejo con todo lo demás
+- Esa sospecha [ya tiene nombre]{.alert}: [sesgo de selección]{.alert}
 
-- La diferencia con el bloque anterior es dura: acá [nadie]{.alert} puede sortear bancas de concejales entre municipios, no hay experimento posible
+- Comparar todos contra todos [mezcla]{.alert} el efecto del concejo con todo lo demás
+
+- Acá [nadie]{.alert} puede sortear concejales, no hay experimento posible
 
 - Entonces el contrafactual no se puede construir: hay que [encontrarlo]{.alert} ya hecho en el mundo
 :::
 
 :::{.column width=38%}
 :::{style="text-align: center;"}
-<img src="figures/rdd-paper.png" style="border-radius: 8px; width: 74%; box-shadow: 0 4px 12px rgba(0,0,0,0.2);"/>
+[![](figures/xkcd.webp){width="74%"}](#){data-modal-type="image" data-modal-url="figures/xkcd.webp"}
 
-:::{style="font-size: 15px; color: #555;"}
-Mignozzetti, Cepaluni y Freire (2025), *American Journal of Political Science*
+:::{style="font-size: 22px; color: #555;"}
+Fuente: [Randall Munroe, XKCD](https://xkcd.com/2618/) 😄
 :::
 :::
 :::
@@ -253,91 +272,121 @@ Cuando el tratamiento se decide por un [umbral]{.alert} en una variable continua
 
 - Comparar justo ahí nos da un contrafactual creíble ([Lee y Lemieux, 2010](https://doi.org/10.1257/jel.48.2.281); [Cattaneo, Idrobo y Titiunik, 2020](https://doi.org/10.1017/9781108684606))
 
-:::{style="margin-top: 10px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 21px;"}
-El precio: lo que estimás es un [efecto local promedio]{.alert}, el LATE. Vale para municipios pegados al corte, no dice nada de un concejo de 40 bancas
+:::{style="margin-top: 30px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 23px;"}
+Lo que estimás es un [efecto local promedio]{.alert}, el LATE. Vale para municipios pegados al corte
 :::
 :::
 
-## Gemelos en el umbral
+## La ecuación
 
-:::{style="margin-top: 18px; font-size: 22px;"}
-Si la idea es cierta, arriba y abajo del corte los municipios tienen que ser [gemelos]{.alert} en todo lo que se decidió antes. Mirá los que caen a menos de 4.000 habitantes del umbral:
-
-```{r gemelos, echo=TRUE}
-cerca <- subset(datos, abs(poblacion_c) < 4000)
-aggregate(cbind(pib_pc, prop_pobres, bancas_2000, n_concejales)
-          ~ concejo_grande, data = cerca, FUN = mean)
-```
-
-:::{style="margin-top: 8px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
-PIB, pobreza y bancas previas casi no se mueven entre los dos grupos. Lo único que cambia de golpe es [una banca]{.alert}: ese es el experimento que escribió la ley
-:::
-:::
-
-## Una ecuación
-
-:::{style="margin-top: 20px; font-size: 23px;"}
-Con la población centrada en el umbral ($X_i = $ población $- 47.619$), estimamos:
+:::{style="margin-top: 20px; font-size: 24px;"}
+Con la población centrada ($X_i =$ población $- 47.619$) y $T_i = \mathbf{1}(X_i \ge 0)$ el indicador de haber cruzado el corte, estimamos:
 
 :::{style="margin-top: 4px; font-size: 27px; text-align: center;"}
 $$
-Y_i = \beta_0 + \beta_1 X_i + \beta_2\, \mathbf{1}(X_i \ge 0) + \varepsilon_i
+Y_i = \beta_0 + \beta_1 X_i + \beta_2\, T_i + \beta_3\,(X_i \cdot T_i) + \varepsilon_i
 $$
 :::
 
-- $\beta_1 X_i$ deja que el resultado [varíe suave]{.alert} con la población (la tendencia, el confusor)
+- $X_i$ es la población [centrada]{.alert} en el umbral: el corte queda en $X_i = 0$
 
-- $\mathbf{1}(X_i \ge 0)$ vale 1 arriba del corte; su coeficiente $\beta_2$ es [el salto]{.alert}
+- $\beta_1 X_i$ y $\beta_3\,(X_i \cdot T_i)$ dejan que el resultado [varíe suave]{.alert} con la población, con una [pendiente a cada lado]{.alert} del corte (es lo que hace `rdrobust`)
 
-- Ese salto $\beta_2$ es el [efecto local]{.alert} que buscamos
+- $T_i$ vale 1 arriba del corte; su coeficiente $\beta_2$ es [el salto]{.alert}, el [efecto local]{.alert} que buscamos
 
-- Acá el diseño es [sharp]{.alert}: cruzar el corte determina el tratamiento sin excepciones. Existen diseños [fuzzy]{.alert}, donde cruzar sólo cambia la probabilidad de tratarse; se estiman con una variante del mismo método
+- Acá el diseño es [sharp]{.alert}: cruzar el corte determina el tratamiento sin excepciones
 
-:::{style="margin-top: 8px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
+- Existen diseños [fuzzy]{.alert}, donde cruzar sólo cambia la probabilidad de tratarse; se estiman con una variante del mismo método
+
+:::{style="margin-top: 8px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 24px;"}
 Supuesto clave: sin el tratamiento, el resultado habría seguido [la misma curva suave]{.alert} a través del corte. Todo salto abrupto es el tratamiento
 :::
 :::
 
-## Los datos sintéticos
+## Generá los datos del caso
 
-:::{style="margin-top: 14px; font-size: 20px;"}
-Un conjunto simulado sobre el diseño del paper: 2.000 municipios, corte en 47.619 habitantes (9 → 10 concejales), efectos calcados de la investigación real.
+:::{style="margin-top: 4px; font-size: 22px;"}
+Con `fabricatr` simulamos 2.000 municipios sobre el diseño del paper: un solo corte (47.619 habitantes, 9 → 10 bancas) y efectos calcados de la investigación real. Leamos el código juntos:
 
 :::{.columns}
 :::{.column width=55%}
-```{r cabeza, echo=TRUE}
-head(datos[, c("municipio", "poblacion", "concejo_grande",
-               "n_concejales", "mortalidad_infantil")], 4)
+:::{style="margin-top: 6px; font-size: 17px;"}
+```{r gen-datos-show, echo=TRUE, eval=FALSE}
+library(fabricatr)
+set.seed(148)
+
+datos <- fabricate(
+  N = 2000,
+  poblacion      = round(runif(N, 20000, 75000)),
+  poblacion_c    = poblacion - 47619,           # población centrada en el umbral
+  x              = poblacion_c / 10000,          # en decenas de miles
+  concejo_grande = as.integer(poblacion_c >= 0), # cruzar el umbral asigna
+  n_concejales   = 9 + concejo_grande,           # 9 → 10 bancas
+  pib_pc         = round(12 + 0.8 * x + rnorm(N, 0, 2), 1),
+  prop_pobres    = round(pmin(pmax(0.34 - 0.02 * x
+                     + rnorm(N, 0, 0.05), 0.05), 0.75), 3),
+  bancas_2000    = 9 + rbinom(N, 1, 0.15),
+  mortalidad_infantil     = pmax(2,   round(20 - 0.5 * x
+    - 2.01 * concejo_grande + rnorm(N, 0, 2.5), 1)),  # el salto del paper: −2,01
+  mortalidad_postneonatal = pmax(0.5, round(7 - 0.2 * x
+    - 0.9 * concejo_grande + rnorm(N, 0, 1.3), 1)),
+  matricula_primaria      = pmax(0,   round(24 + 0.4 * x
+    + 2.58 * concejo_grande + rnorm(N, 0, 3), 1)),
+  ideb           = pmin(10, pmax(0, round(4.5 + 0.1 * x
+    + rnorm(N, 0, 0.5), 1))),
+  burocratas     = pmax(0, round(480 + 12 * x
+    + 104 * concejo_grande + rnorm(N, 0, 45))),
+  proyectos_servicios = pmax(0, round(40 + 2 * x
+    + 6 * concejo_grande + rnorm(N, 0, 7)))
+)
 ```
+:::
 :::
 
 :::{.column width=45%}
-:::{style="font-size: 14px;"}
-| Variable | Qué es |
-|---|---|
-| `poblacion_c` | Población − 47.619 |
-| `concejo_grande` | 1 si cruzó el umbral |
-| `n_concejales` | 9 o 10 bancas |
-| `mortalidad_infantil` | Muertes por mil nacidos |
-| `matricula_primaria` | Chicos por aula |
-| `ideb` | Calidad educativa (0-10) |
-| `pib_pc` | PIB per cápita (miles R$) |
-| `prop_pobres` | Familias pobres (proporción) |
+:::{style="margin-top: 6px; font-size: 20px;"}
+```{r gen-datos-head, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE}
+datos |>
+  select(poblacion_c, n_concejales,
+         mortalidad_infantil) |>
+  head()
+```
+:::
+
+:::{style="margin-top: 6px; font-size: 22px; color: #555;"}
+La línea que importa es `concejo_grande`: acá no hay sorteo, [asigna la ley]{.alert}. El resto son variables de resultado con el salto del paper cargado a mano
+:::
+
+:::{style="margin-top: 6px; font-size: 19px; color: #555;"}
+El mismo código está en el script de la práctica; el CSV del repo es idéntico (misma semilla)
+:::
 :::
 :::
 :::
 
-:::{style="margin-top: 6px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 18px;"}
-Es un solo umbral, para enseñar limpio; el resto de las variables está en la intro de la práctica. El paper real tiene [12 cortes]{.alert} (9 a 21 bancas); volvemos a esa complicación en un rato
+## "Gemelos" en el umbral
+
+:::{style="margin-top: 14px; font-size: 24px;"}
+Si la idea es cierta, arriba y abajo del corte los municipios tienen que ser [gemelos]{.alert} en todo lo que se decidió antes. Mirá los que caen a menos de 4.000 habitantes del umbral:
+
+```{r gemelos, echo=TRUE}
+datos |>
+  filter(abs(poblacion_c) < 4000) |>
+  group_by(concejo_grande) |>
+  summarise(across(c(pib_pc, prop_pobres, bancas_2000, n_concejales), mean))
+```
+
+:::{style="margin-top: 30px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 24px;"}
+PIB, pobreza y bancas previas casi no se mueven entre los dos grupos. Lo único que cambia de golpe es [una banca]{.alert}: ese es el experimento que escribió la ley
 :::
 :::
 
 ## Ver el salto
 
-:::{style="margin-top: 4px; font-size: 20px;"}
+:::{style="margin-top: 4px; font-size: 23px;"}
 Antes de estimar nada, [mirá]{.alert} los datos: promedios por tramo de población, con la recta suave a cada lado del corte.
 
-```{r salto, echo=FALSE, fig.height=4.0, fig.width=9}
+```{r salto, echo=FALSE, fig.height=4.0, fig.width=10}
 d <- datos
 brks <- seq(-30000, 30000, by = 2500)
 d$bin <- cut(d$poblacion_c, breaks = brks)
@@ -360,7 +409,7 @@ ggplot() +
   tema_taller
 ```
 
-:::{style="text-align: center; font-size: 18px; color: #6E665C;"}
+:::{style="text-align: center; font-size: 20px; color: #555;"}
 El salto hacia abajo en el corte es el efecto; la pendiente es la tendencia que hay que descontar
 :::
 :::
@@ -370,20 +419,16 @@ El salto hacia abajo en el corte es el efecto; la pendiente es la tendencia que 
 :::{style="margin-top: 16px; font-size: 21px;"}
 Lo que armamos a mano lo hace `rdplot` en una línea: elige los bins de forma óptima y ajusta un polinomio a cada lado. Es el gráfico estándar de los papers de RDD:
 
-```{r verrdplot, echo=TRUE, fig.height=4.0, fig.width=8.5}
+```{r verrdplot, echo=TRUE, fig.height=4.0, fig.width=10}
 rdplot(datos$mortalidad_infantil, datos$poblacion_c,
        x.label = "Población centrada en el umbral",
        y.label = "Mortalidad infantil (por mil)", title = "")
 ```
-
-:::{style="margin-top: 6px; font-size: 19px;"}
-Mismo salto que dibujamos recién, ahora sin trabajo manual. Ver que no hay magia atrás es lo que te deja [confiar]{.alert} en el atajo
-:::
 :::
 
 ## Comparación ingenua vs local
 
-:::{style="margin-top: 14px; font-size: 21px;"}
+:::{style="margin-top: 14px; font-size: 24px;"}
 La diferencia entre [todos]{.alert} los concejos grandes y chicos exagera el efecto, porque arrastra la tendencia:
 
 ```{r naive, echo=TRUE}
@@ -400,30 +445,29 @@ fit <- lm_robust(mortalidad_infantil ~ concejo_grande + poblacion_c +
 round(coef(summary(fit))["concejo_grande", 1:4], 3)
 ```
 
-:::{style="margin-top: 4px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
-De [−3,36]{.alert} (ingenua) a [≈ −1,7]{.alert} (local): la brecha era sesgo de selección, no efecto
+:::{style="margin-top: 4px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 21px;"}
+De [−3,57]{.alert} (ingenua) a [≈ −1,9]{.alert} (local): la brecha era sesgo de selección, no efecto
 :::
 :::
 
 ## Estimarlo bien: `rdrobust`
 
-:::{style="margin-top: 12px; font-size: 21px;"}
+:::{style="margin-top: 12px; font-size: 19px;"}
 `rdrobust` elige el ancho de banda de forma óptima y corrige el sesgo de los bordes ([Calonico, Cattaneo y Titiunik, 2014](https://doi.org/10.3982/ECTA11757)):
 
 ```{r rdrobust, echo=TRUE}
 rd <- rdrobust(datos$mortalidad_infantil, datos$poblacion_c)
-round(c(efecto = rd$coef[1], se = rd$se[1],
-        p = rd$pv[1], ancho = rd$bws[1, 1]), 3)
+summary(rd)
 ```
 
 :::{style="margin-top: 8px;"}
-El efecto local es de [−1,84 muertes por mil]{.alert}. En el paper, con los datos reales y los 12 umbrales agrupados, da [−2,01]{.alert} (Tabla 4): la misma lógica, en su versión simulada y simplificada para enseñar. Un coeficiente negativo acá es [buena noticia]{.alert}: menos muertes
+El efecto local es de [−1,92 muertes por mil]{.alert}. En el paper, con los datos reales y los 12 umbrales agrupados, da [−2,01]{.alert} (Tabla 4)
 :::
 :::
 
 ## El efecto en varias dimensiones
 
-:::{style="margin-top: 10px; font-size: 20px;"}
+:::{style="margin-top: 10px; font-size: 25px;"}
 El mismo salto, resultado por resultado:
 
 ```{r coda, echo=FALSE}
@@ -441,65 +485,49 @@ rownames(tab) <- outs
 knitr::kable(tab)
 ```
 
-:::{style="margin-top: 2px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 19px;"}
-Mejor salud, más matrícula, más cargos y proyectos. La [calidad (IDEB) no salta]{.alert}: entran más chicos al aula sin que el nivel medido caiga, igual que en el paper (−0,02, no significativo). Un nulo acá es [información]{.alert}, no un fracaso
+:::{style="margin-top: 2px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 21px;"}
+Mejor salud, más matrícula, más cargos y proyectos. La [calidad (IDEB) no salta]{.alert}: entran más chicos al aula sin que el nivel medido caiga, igual que en el paper (−0,03, no significativo). Un nulo acá es [información]{.alert}, no un fracaso
 :::
 :::
 
 ## Muchos umbrales, una complicación
 
-:::{style="margin-top: 22px; font-size: 23px;"}
+:::{style="margin-top: 22px; font-size: 25px;"}
 El paper real no tiene un corte, tiene [doce]{.alert} (de 9 a 21 bancas).
 
 - Si juntás todos los cortes [sin corregir]{.alert}, comparás municipios chicos (9-10 bancas) con grandes (20-21): aparece un desbalance de 1,63 concejales, y el estimador se sesga
 
-- La solución del paper es [normalizar y agrupar]{.alert}: a cada municipio se lo mide como distancia a [su]{.alert} umbral más cercano, y después se apilan los doce cortes en un solo RDD ([Cattaneo, Titiunik, Vazquez-Bare y Keele, 2016](https://doi.org/10.1086/686802))
+- La solución del paper es [normalizar y agrupar]{.alert}: 
+  - A cada municipio se lo mide como distancia a [su]{.alert} umbral más cercano, y después se apilan los doce cortes en un solo RDD ([Cattaneo, Titiunik, Vazquez-Bare y Keele, 2016](https://doi.org/10.1086/686802))
 
-- Encima se suman controles: la [población de 2003]{.alert} (la variable que asigna cada umbral), el PIB per cápita, las bancas de 2000 y una dummy de Nordeste
-
-:::{style="margin-top: 10px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 21px;"}
-Moraleja: un diseño creíble casi nunca es una sola línea de código. Es el diseño [más]{.alert} el cuidado con sus supuestos
-:::
-:::
-
-## Para pensar: leer el coeficiente
-
-:::{style="margin-top: 20px; font-size: 24px;"}
-`rdrobust` devolvió un efecto de [−1,84]{.alert} sobre la mortalidad infantil. ¿Qué afirma, exactamente, ese número?
-
-:::{.fragment style="margin-top: 14px; border-left: 4px solid #b85450; padding: 8px 20px; font-size: 22px;"}
-:::{.incremental}
-- Afirma que una banca más [baja]{.alert} la mortalidad infantil en unas 1,84 muertes por cada mil nacidos, cerca del corte
-
-- Es un [LATE]{.alert}: vale para municipios pegados a las 47.619 personas, no dice nada de una ciudad de 300.000 ni de un concejo de 40 bancas
-
-- Es [causal]{.alert} sólo si nada más salta en el umbral; lo que sigue se dedica a mostrar que así es
-:::
-:::
+- Encima se suman [controles]{.alert}:
+  - La población de 2003 (la variable que asigna cada umbral), el PIB per cápita, las bancas de 2000 y una dummy de Nordeste
 :::
 
 # ¿Por qué un concejal más mejora el bienestar? {background-color="#2d4563"}
 
 ## El mecanismo: alineamiento con el intendente
 
-:::{style="margin-top: 6px; font-size: 19px;"}
+:::{style="margin-top: 6px; font-size: 25px;"}
 :::{.columns}
 :::{.column width=52%}
 ¿Por qué una banca más se traduce en mejor bienestar? Empieza por la [política]{.alert}.
 
-- Un concejal extra tiene [91%]{.alert} de chance de entrar a la coalición preelectoral del intendente (0,91, p<0,1): la banca marginal casi siempre [suma al oficialismo]{.alert}
+- Un concejal extra tiene [91%]{.alert} de chance de entrar a la coalición preelectoral del intendente: la banca marginal casi siempre [suma al oficialismo]{.alert}
 
-- Eso baja los [costos de negociar]{.alert}: el intendente consigue aprobar su agenda con menos fricción
+- Eso baja los [costos de negociar]{.alert}: el intendente aprueba su agenda con menos fricción
 
 - ¿Cómo asegura ese apoyo? Con [cargos]{.alert}: +104 burócratas designados políticamente por banca extra
 
-- Los burócratas de [carrera]{.alert} y los asistentes del concejo no se mueven: un [placebo interno]{.alert} que descarta que el municipio simplemente contrate más de todo
+- Los burócratas de [carrera]{.alert} y los asistentes del concejo no se mueven: un [placebo interno]{.alert} que descarta que el municipio contrate más de todo
 :::
 
 :::{.column width=48%}
-<img src="figures/rdd-tabla3-mecanismo.png" style="border-radius: 8px; width: 100%;"/>
+:::{style="text-align: center;"}
+[![](figures/rdd-tabla3-mecanismo.png){width="100%"}](#){data-modal-type="image" data-modal-url="figures/rdd-tabla3-mecanismo.png"}
+:::
 
-:::{style="font-size: 15px; text-align: center; color: #555;"}
+:::{style="font-size: 22px; text-align: center; color: #555;"}
 Tabla 3 del paper: coalición y designados saltan; carrera y asistentes, no
 :::
 :::
@@ -508,7 +536,7 @@ Tabla 3 del paper: coalición y designados saltan; carrera y asistentes, no
 
 ## Lo que dicen los propios concejales
 
-:::{style="margin-top: 6px; font-size: 19px;"}
+:::{style="margin-top: 6px; font-size: 25px;"}
 :::{.columns}
 :::{.column width=52%}
 Encuestamos online a [174 ex concejales]{.alert} del mandato 2005-2008. ¿Con qué instrumentos los intendentes aseguran apoyo?
@@ -523,15 +551,17 @@ Encuestamos online a [174 ex concejales]{.alert} del mandato 2005-2008. ¿Con qu
 
 - [Apoyo legislativo]{.alert} explícito: 26,6%
 
-:::{style="border-left: 4px solid #b85450; padding: 6px 18px; font-size: 16px;"}
+:::{style="border-left: 4px solid #b85450; padding: 6px 18px; font-size: 24px;"}
 Una encuesta a políticos tiene sus propios sesgos (memoria, deseabilidad social): acá [triangula]{.alert} el mecanismo, no lo prueba por sí sola
 :::
 :::
 
 :::{.column width=48%}
-<img src="figures/rdd-fig2-encuesta.png" style="border-radius: 8px; width: 100%;"/>
+:::{style="text-align: center;"}
+[![](figures/rdd-fig2-encuesta.png){width="100%"}](#){data-modal-type="image" data-modal-url="figures/rdd-fig2-encuesta.png"}
+:::
 
-:::{style="font-size: 15px; text-align: center; color: #555;"}
+:::{style="font-size: 22px; text-align: center; color: #555;"}
 Figura 2 del paper: qué instrumentos usan los intendentes, según los ex concejales
 :::
 :::
@@ -540,7 +570,7 @@ Figura 2 del paper: qué instrumentos usan los intendentes, según los ex concej
 
 ## Lo que muestran las leyes
 
-:::{style="margin-top: 6px; font-size: 19px;"}
+:::{style="margin-top: 6px; font-size: 25px;"}
 :::{.columns}
 :::{.column width=52%}
 Miramos también lo que el concejo [efectivamente hace]{.alert}: las leyes que aprueba.
@@ -550,19 +580,19 @@ Miramos también lo que el concejo [efectivamente hace]{.alert}: las leyes que a
 - [3.466]{.alert} las codificamos a mano en cuatro categorías, y el resto lo clasificamos con [aprendizaje automático]{.alert} (SVM)
 
 - Por cada concejal extra: +15,0% de leyes per cápita sobre [bienes públicos]{.alert}, y +19,7% de leyes de [salud y educación]{.alert}
+
+- [Coalición]{.alert} más grande → [designaciones]{.alert} que aseguran apoyo → más [leyes de servicios]{.alert} → mejor [salud y educación]{.alert}
 :::
 
 :::{.column width=48%}
-<img src="figures/rdd-fig3-leyes.png" style="border-radius: 8px; width: 100%;"/>
+:::{style="text-align: center;"}
+[![](figures/rdd-fig3-leyes.png){width="100%"}](#){data-modal-type="image" data-modal-url="figures/rdd-fig3-leyes.png"}
+:::
 
-:::{style="font-size: 15px; text-align: center; color: #555;"}
+:::{style="font-size: 22px; text-align: center; color: #555;"}
 Figura 3 del paper: leyes aprobadas, municipios de control frente a los de tratamiento
 :::
 :::
-:::
-
-:::{style="margin-top: 6px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 17px;"}
-La cadena completa: [coalición]{.alert} más grande → [designaciones]{.alert} que aseguran apoyo → más [leyes de servicios]{.alert} → mejor [salud y educación]{.alert}
 :::
 :::
 
@@ -570,7 +600,7 @@ La cadena completa: [coalición]{.alert} más grande → [designaciones]{.alert}
 
 ## Tres supuestos
 
-:::{style="margin-top: 22px; font-size: 23px;"}
+:::{style="margin-top: 22px; font-size: 25px;"}
 El RDD del paper descansa en tres supuestos, y cada uno tiene su prueba:
 
 1. [Nadie manipula el umbral]{.alert}: los municipios no pueden elegir de qué lado caer
@@ -581,14 +611,14 @@ El RDD del paper descansa en tres supuestos, y cada uno tiene su prueba:
 
 Y una pregunta que le hacés [siempre]{.alert} a tu RDD: ¿cambia [otra política]{.alert} en el mismo umbral (transferencias, salarios, categorías administrativas)? Si la respuesta es sí, el salto mezcla los dos tratamientos y ya no medís sólo la banca.
 
-:::{style="margin-top: 12px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 21px;"}
+:::{style="margin-top: 50px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 24px;"}
 Un supuesto no se declara: se [pone a prueba]{.alert}. Vamos una por una, y después rompemos el diseño a propósito
 :::
 :::
 
 ## Chequeo 1: ¿manipularon el umbral?
 
-:::{style="margin-top: 14px; font-size: 21px;"}
+:::{style="margin-top: 14px; font-size: 25px;"}
 Si los municipios se acomodaran para cruzar el corte, se [amontonarían]{.alert} de un lado. El test de densidad busca ese amontonamiento ([McCrary, 2008](https://doi.org/10.1016/j.jeconom.2007.05.005); [Cattaneo, Jansson y Ma, 2020](https://doi.org/10.1080/01621459.2019.1635480)):
 
 ```{r densidad, echo=TRUE}
@@ -596,39 +626,46 @@ dens <- rddensity(datos$poblacion_c)
 round(c(T = dens$test$t_jk, p = dens$test$p_jk), 3)
 ```
 
-:::{style="margin-top: 8px;"}
-$p = 0{,}83$: [no hay salto]{.alert} en la densidad. La población de 2003 no se podía manipular, tal como esperábamos
+:::{style="margin-top: 30px;"}
+$p = 0{,}709$: [no hay salto]{.alert} en la densidad. La población de 2003 no se podía manipular, tal como esperábamos
 :::
 
-:::{style="margin-top: 6px; font-size: 17px; color: #555;"}
+:::{style="margin-top: 6px; font-size: 24px; color: #555;"}
 En el paper: los mismos tests tampoco rechazan en ningún corte; la proyección del IBGE no dependía de los municipios
 :::
 :::
 
 ## Chequeo 2: balance en covariables
 
-:::{style="margin-top: 14px; font-size: 21px;"}
+:::{style="margin-top: 14px; font-size: 23px;"}
 Las variables medidas [antes]{.alert} del tratamiento (PIB per cápita, pobreza) no deberían saltar en el umbral. Corremos el RDD sobre ellas como [placebo]{.alert}:
 
 ```{r balance, echo=TRUE}
-sapply(c("pib_pc", "prop_pobres"), function(v) {
-  m <- rdrobust(datos[[v]], datos$poblacion_c)
-  round(m$pv[1], 3)
-})
+# 1. un RDD por covariable: ¿salta en el corte?
+b_pib    <- rdrobust(datos$pib_pc, datos$poblacion_c)
+b_pobres <- rdrobust(datos$prop_pobres, datos$poblacion_c)
+
+# 2. juntamos el salto y su valor p en una tabla
+balance <- data.frame(
+  variable = c("pib_pc", "prop_pobres"),
+  salto    = round(c(b_pib$coef[1], b_pobres$coef[1]), 3),
+  p_valor  = round(c(b_pib$pv[1], b_pobres$pv[1]), 3)
+)
+balance
 ```
 
 :::{style="margin-top: 8px;"}
 Los dos $p$ son [altos]{.alert}: ningún salto donde no debería haberlo. Los grupos son comparables de entrada
 :::
 
-:::{style="margin-top: 6px; font-size: 17px; color: #555;"}
+:::{style="margin-top: 6px; font-size: 22px; color: #555;"}
 En el paper: bancas del período previo, población, PIB y familias de bajos ingresos (datos del TSE y del censo 2000) no saltan en el corte (Tabla 2)
 :::
 :::
 
 ## Chequeo 3: un corte placebo
 
-:::{style="margin-top: 14px; font-size: 21px;"}
+:::{style="margin-top: 14px; font-size: 25px;"}
 Si inventamos un umbral [falso]{.alert} donde la ley no cambia nada, no debería aparecer ningún efecto:
 
 ```{r placebo, echo=TRUE}
@@ -637,24 +674,24 @@ rdrobust(datos$mortalidad_infantil, datos$poblacion_c,
 ```
 
 :::{style="margin-top: 8px;"}
-$p \approx 0{,}16$: [nada]{.alert} en el corte inventado. El salto aparece sólo en el umbral verdadero
+$p \approx 0{,}88$: [nada]{.alert} en el corte inventado. El salto aparece sólo en el umbral verdadero
 :::
 
-:::{style="margin-top: 8px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
+:::{style="margin-top: 30px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 23px; margin-bottom: 30px;"}
 Un efecto que aparece en umbrales placebo es una [señal de alarma]{.alert}: probablemente estás capturando la tendencia, no un salto
 :::
 
-:::{style="margin-top: 6px; font-size: 17px; color: #555;"}
+:::{style="margin-top: 6px; font-size: 22px; color: #555;"}
 En el paper: se ajustaron cortes falsos entre los umbrales reales; ninguno muestra efecto
 :::
 :::
 
 ## Chequeo 4: ¿depende del ancho de banda?
 
-:::{style="margin-top: 2px; font-size: 20px;"}
+:::{style="margin-top: 2px; font-size: 23px;"}
 Un resultado creíble no cambia de signo ni de tamaño según cuán ancha sea la ventana:
 
-```{r ancho, echo=FALSE, fig.height=3.9, fig.width=9}
+```{r ancho, echo=FALSE, fig.height=3.9, fig.width=12}
 hs <- seq(4000, 16000, by = 2000)
 est <- sapply(hs, function(h) {
   m <- rdrobust(datos$mortalidad_infantil, datos$poblacion_c, h = h)
@@ -672,33 +709,41 @@ ggplot(bw, aes(h, tau)) +
   tema_taller
 ```
 
-:::{style="text-align: center; font-size: 18px; color: #6E665C;"}
-El efecto se queda estable en torno a −1,8, ventana tras ventana
+:::{style="text-align: center; font-size: 20px; color: #555;"}
+El efecto se queda estable en torno a −1,9, ventana tras ventana
 :::
 
-:::{style="margin-top: 6px; font-size: 17px; color: #555;"}
+:::{style="margin-top: 6px; font-size: 19px; color: #555;"}
 En el paper: el ancho lo elige el método de Calonico, Cattaneo y Titiunik (2014), y los resultados aguantan variarlo
 :::
 :::
 
 ## Romperlo: saboteemos el diseño
 
-:::{style="margin-top: 10px; font-size: 20px;"}
+:::{style="margin-top: 10px; font-size: 22px;"}
 Para creerle a un chequeo, hay que verlo [fallar]{.alert} cuando debe. Empujamos a la mayoría de los que estaban justo por debajo a cruzar el corte, como si hubieran manipulado la población:
 
 ```{r sabotaje, echo=TRUE}
 set.seed(1)
+
+# copia para no tocar los datos buenos
 malo <- datos
+
+# marcamos a los que están justo por debajo del corte
 borde <- malo$poblacion_c > -1500 & malo$poblacion_c < 0
+
+# elegimos al azar el 70% de ese borde
 mover <- borde & runif(nrow(malo)) < 0.7
+
+# los empujamos al otro lado: ahora parecen manipulados
 malo$poblacion_c[mover] <- abs(malo$poblacion_c[mover]) + 200
 
 # el test de densidad, antes limpio, ahora rechaza
 round(rddensity(malo$poblacion_c)$test$p_jk, 4)
 ```
 
-:::{style="margin-top: 6px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 19px;"}
-De $p = 0{,}83$ a $p \approx 0$. El test [detecta]{.alert} la manipulación que fabricamos: por eso vale la pena correrlo
+:::{style="margin-top: 6px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 21px;"}
+De $p = 0{,}71$ a $p \approx 0{,}002$. El test [detecta]{.alert} la manipulación que fabricamos: por eso vale la pena correrlo
 :::
 :::
 
@@ -706,14 +751,14 @@ De $p = 0{,}83$ a $p \approx 0$. El test [detecta]{.alert} la manipulación que 
 
 ## Cómo encontrar un buen RDD
 
-:::{style="margin-top: 14px; font-size: 20px;"}
+:::{style="margin-top: 14px; font-size: 25px;"}
 Un RDD vive donde una regla [asigna algo por un umbral]{.alert}. América Latina está llena de reglas así:
 
 :::{.columns}
 :::{.column width=50%}
 - [Puntajes de focalización]{.alert}: SISBEN (Colombia), Cadastro Único (Brasil), Ficha CAS (Chile) deciden quién entra a un programa social
 
-- [Umbrales de población]{.alert}: transferencias federales, categoría del municipio, o la cantidad de concejales de nuestro caso ([Mignozzetti, Cepaluni y Freire, 2025](https://doi.org/10.1111/ajps.12843))
+- [Umbrales de población]{.alert}: transferencias federales, categoría del municipio, o la cantidad de concejales de nuestro caso
 
 - [Notas de corte]{.alert}: becas y admisión; en Ser Pilo Paga (Colombia), el puntaje del examen de Estado abría la puerta a una beca universitaria ([Londoño-Vélez, Rodríguez y Sánchez, 2020](https://doi.org/10.1257/pol.20180131))
 :::
@@ -724,17 +769,15 @@ Un RDD vive donde una regla [asigna algo por un umbral]{.alert}. América Latina
 - [Elecciones cerradas]{.alert}: ganar por poco, alrededor del umbral del 50%, reparte cargos y recursos casi al azar
 
 - [Fronteras administrativas]{.alert}: una política cambia de golpe al cruzar un límite municipal o estatal
-:::
-:::
 
-:::{style="margin-top: 6px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 18px;"}
-Regla práctica: buscá primero la [ley o norma]{.alert} que crea el corte; si el umbral es arbitrario y no se puede manipular, tenés un candidato
+- Regla práctica: [buscá primero la ley o norma]{.alert} que crea el corte; si el umbral es arbitrario y no se puede manipular, tenés un candidato
+:::
 :::
 :::
 
 ## Dónde buscar los datos
 
-:::{style="margin-top: 14px; font-size: 20px;"}
+:::{style="margin-top: 14px; font-size: 25px;"}
 La región tiene mucha [microdata administrativa]{.alert} abierta, que es justo lo que un RDD necesita:
 
 :::{.columns}
@@ -755,7 +798,7 @@ La región tiene mucha [microdata administrativa]{.alert} abierta, que es justo 
 :::
 :::
 
-:::{style="margin-top: 6px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 18px;"}
+:::{style="margin-top: 30px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 23px;"}
 Pedí la variable de asignación [con la mayor resolución posible]{.alert}: el puntaje exacto, la población exacta. Sin eso, no hay salto que mirar
 :::
 :::
@@ -764,10 +807,10 @@ Pedí la variable de asignación [con la mayor resolución posible]{.alert}: el 
 
 ## De qué se trata la práctica {#sec:ejercicios}
 
-:::{style="margin-top: 6px; font-size: 18px;"}
+:::{style="margin-top: 6px; font-size: 22px;"}
 :::{.columns}
 :::{.column width=56%}
-Ahora te toca a vos: con `municipios.csv`, el archivo que cargaste al principio, vas a estimar un RDD sobre [otra variable]{.alert} y a ponerlo a prueba.
+Ahora te toca a vos: con los datos que [generaste]{.alert}, vas a estimar un RDD sobre [otra variable]{.alert} y a ponerlo a prueba.
 
 Objetivos:
 
@@ -780,9 +823,9 @@ Objetivos:
 :::{.column width=44%}
 [Las variables]{.alert}
 
-:::{style="font-size: 15px;"}
+:::{style="font-size: 20px;"}
 | Variable | Qué es |
-|---|---|
+|:--|:--|
 | `poblacion` | Proyección de población 2003 |
 | `poblacion_c` | Población menos 47.619 |
 | `concejo_grande` | 1 si cruzó el umbral |
@@ -792,33 +835,33 @@ Objetivos:
 | `pib_pc`, `prop_pobres` | Covariables previas al corte |
 :::
 
-Bajá los datos desde [la página del taller](https://danilofreire.github.io/taller-evidencia-ucu/materiales.html)
+Usamos los datos que creamos, pero también podés bajarlos desde [la página del taller](https://danilofreire.github.io/taller-evidencia-ucu/materiales.html)
 :::
 :::
 
-:::{style="margin-top: 6px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 17px;"}
-Tenés unos [25 minutos]{.alert}. Cada ejercicio tiene su [solución en el apéndice]{.alert}: intentalo primero, después revisá. No hace falta terminar los tres; lo importante es discutir lo que encontrás
+:::{style="margin-top: 6px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
+Tenés unos [20 minutos]{.alert}. Cada ejercicio tiene su [solución en el apéndice]{.alert}: intentalo primero, después revisá. No hace falta terminar los tres; lo importante es discutir lo que encontrás
 :::
 :::
 
-## Ejercicio 1: estimá otro resultado {#sec:exercise01}
+## Ejercicio 1: estimá otro resultado {#sec:ej1}
 
-:::{style="margin-top: 16px; font-size: 19px;"}
-**Tarea (8 min):** repetí el análisis, pero sobre la [matrícula primaria]{.alert} (`matricula_primaria`) en lugar de la mortalidad. Hacé el gráfico del salto y estimá el efecto con `rdrobust`.
+:::{style="margin-top: 16px; font-size: 22px;"}
+**Tarea:** repetí el análisis, pero sobre la [matrícula primaria]{.alert} (`matricula_primaria`) en lugar de la mortalidad. Hacé el gráfico del salto y estimá el efecto con `rdrobust`.
 
 ```{r}
 #| label: ej1-skeleton
 #| eval: false
 #| echo: true
-#| prompt: false
-datos <- read.csv("municipios.csv")
-
-# 1. Ver el salto: promedios por tramo (o un scatter con dos rectas)
+# 1. Ver el salto: primero a mano (un scatter con el corte marcado)...
 plot(___, ___)                 # TODO: matricula_primaria contra poblacion_c
 abline(v = 0, col = "red")
 
+# ...y después con la herramienta estándar
+___(datos$___, datos$___)      # TODO: ¿qué función dibuja el RDD?
+
 # 2. Estimar el efecto local
-rd <- rdrobust(datos$___, datos$___)   # TODO: resultado y variable de asignación
+rd <- ___(datos$___, datos$___)        # TODO: ¿y cuál lo estima?
 round(c(efecto = rd$coef[1], p = rd$pv[1]), 3)
 ```
 
@@ -826,64 +869,68 @@ round(c(efecto = rd$coef[1], p = rd$pv[1]), 3)
 **Pista**: la variable de asignación es siempre `poblacion_c` (población centrada en el corte). ¿El signo del efecto tiene sentido?
 :::
 
-[[Apéndice: Solución]{.button}](#sec:appendix01)
+[[Ver solución](#sec:sol-ej1)]{.button}
 :::
 
-## Ejercicio 2: poné el diseño a prueba {#sec:exercise02}
+## Ejercicio 2: poné el diseño a prueba {#sec:ej2}
 
-:::{style="margin-top: 16px; font-size: 19px;"}
-**Tarea (8 min):** ¿le creerías a tu estimación del Ejercicio 1? Corré los mismos chequeos que vimos: densidad, un corte placebo y balance en una covariable.
+:::{style="margin-top: 16px; font-size: 22px;"}
+**Tarea:** ¿le creerías a tu estimación del Ejercicio 1? Corré los mismos chequeos que vimos: densidad, un corte placebo y balance en una covariable. Esta vez las funciones las ponés vos.
 
 ```{r}
 #| label: ej2-skeleton
 #| eval: false
 #| echo: true
-#| prompt: false
-# a) manipulación: test de densidad
-rddensity(datos$___)$test$p_jk          # TODO: variable de asignación
+# a) manipulación: ¿qué test busca amontonamiento en el corte?
+___(datos$___)$test$p_jk
 
 # b) corte placebo: un umbral falso donde no debería pasar nada
-rdrobust(datos$matricula_primaria, datos$poblacion_c, c = ___)$pv[1]   # TODO: probá -15000
+___(datos$matricula_primaria, datos$poblacion_c, c = ___)$pv[1]
 
 # c) balance: una covariable previa no debería saltar
-rdrobust(datos$___, datos$poblacion_c)$pv[1]   # TODO: pib_pc o prop_pobres
+___(datos$___, datos$poblacion_c)$pv[1]
 ```
 
 :::{.callout-note appearance="simple" icon=false}
-**Pista**: un $p$ alto en (a) y (c) es buena señal; en (b) también. ¿Cuál de los tres te preocuparía más si fallara?
+**Pista**: son las dos funciones que ya usaste hoy; para el placebo, probá un corte donde la ley no cambia nada (por ejemplo, 12000). ¿Cuál de los tres chequeos te preocuparía más si fallara?
 :::
 
-[[Apéndice: Solución]{.button}](#sec:appendix02)
+[[Ver solución](#sec:sol-ej2)]{.button}
 :::
 
-## Ejercicio 3: ingenua vs local, y a discutir {#sec:exercise03}
+## Ejercicio 3: ingenua vs local, y a discutir {#sec:ej3}
 
-:::{style="margin-top: 16px; font-size: 19px;"}
-**Tarea (9 min):** compará la diferencia [ingenua]{.alert} (todos los grandes vs todos los chicos) con la estimación [local]{.alert} del RDD, para `matricula_primaria`. Después, discutí con quien tengas al lado.
+:::{style="margin-top: 16px; font-size: 22px;"}
+**Tarea:** compará la diferencia [ingenua]{.alert} (todos los grandes vs todos los chicos) con la estimación [local]{.alert} del RDD, para `matricula_primaria`. Escribí la regresión local vos, como hicimos con la mortalidad. Después, discutí con quien tengas al lado.
 
 ```{r}
 #| label: ej3-skeleton
 #| eval: false
 #| echo: true
-#| prompt: false
 # diferencia ingenua
 with(datos, mean(matricula_primaria[concejo_grande == 1]) -
             mean(matricula_primaria[concejo_grande == 0]))
 
-# efecto local
-rdrobust(datos$matricula_primaria, datos$poblacion_c)$coef[1]
+# regresión local a mano: sólo cerca del corte, con la pendiente
+# a cada lado (¿qué operador pide pendientes distintas?)
+cerca <- filter(datos, abs(poblacion_c) < 8000)
+lm_robust(matricula_primaria ~ concejo_grande ___ poblacion_c,
+          data = cerca)
+
+# efecto local con la herramienta estándar
+___(datos$matricula_primaria, datos$poblacion_c)$coef[1]
 ```
 
 :::{.callout-note appearance="simple" icon=false}
-**Para discutir**: ¿por qué difieren los dos números? ¿Cuál reportarías y por qué? ¿Qué covariable podría explicar la brecha?
+**Para discutir**: ¿por qué difieren la ingenua y la local? ¿Cuál reportarías y por qué? ¿Qué covariable podría explicar la brecha?
 :::
 
-[[Apéndice: Solución]{.button}](#sec:appendix03)
+[[Ver solución](#sec:sol-ej3)]{.button}
 :::
 
 ## Para llevarte
 
-:::{style="margin-top: 8px; font-size: 19px;"}
+:::{style="margin-top: 8px; font-size: 22px;"}
 :::{.columns}
 :::{.column width=50%}
 [Las ideas]{.alert}
@@ -892,6 +939,8 @@ rdrobust(datos$matricula_primaria, datos$poblacion_c)$coef[1]
 
 - Cerca del corte, caer de un lado o del otro es casi un [sorteo]{.alert}
 
+- Acá no sortea nadie: [la regla asigna]{.alert}, y el diseño vive en la ley
+
 - El efecto es [local]{.alert} (LATE): vale en el umbral, no en todos lados
 
 - La credibilidad vive en los [chequeos]{.alert} (densidad, balance, placebo, ancho de banda), no en el estimador
@@ -899,6 +948,8 @@ rdrobust(datos$matricula_primaria, datos$poblacion_c)$coef[1]
 
 :::{.column width=50%}
 [La caja de herramientas]{.alert}
+
+- `fabricatr` para [generar]{.alert} los datos del caso, con la regla adentro
 
 - `rdplot` para [mirar]{.alert} antes de estimar
 
@@ -910,25 +961,29 @@ rdrobust(datos$matricula_primaria, datos$poblacion_c)$coef[1]
 :::
 :::
 
-:::{style="margin-top: 8px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 19px;"}
+:::{style="margin-top: 8px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 21px;"}
 Ya sabés [construir]{.alert} un contrafactual (sortear) y [encontrarlo]{.alert} (un umbral); a la tarde vemos qué hacer cuando no hay ninguno de los dos, y cómo se [acumula]{.alert} la evidencia entre estudios
 :::
 :::
 
 ## Para seguir
 
-:::{style="margin-top: 10px; font-size: 19px;"}
+:::{style="margin-top: 8px; font-size: 20px;"}
 :::{.columns}
 :::{.column width=50%}
 [Para leer]{.alert}
 
-- [Cattaneo, Idrobo y Titiunik (2020)](https://doi.org/10.1017/9781108684606), *A Practical Introduction to Regression Discontinuity Designs*: gratis online, la guía moderna
+- [Cattaneo, Idrobo y Titiunik (2020)](https://doi.org/10.1017/9781108684606), *A Practical Introduction to RD Designs: Foundations*, y su segundo volumen, [*Extensions* (2024)](https://doi.org/10.1017/9781009441896): gratis online, la guía moderna
 
 - [Lee y Lemieux (2010)](https://doi.org/10.1257/jel.48.2.281), el survey clásico en el *Journal of Economic Literature*
 
-- [Angrist y Pischke (2015)](https://press.princeton.edu/books/paperback/9780691152844/mastering-metrics), *Mastering 'Metrics*: el capítulo de RDD
+- [Angrist y Pischke (2015)](https://press.princeton.edu/books/paperback/9780691152844/mastering-metrics), *Mastering 'Metrics*; los capítulos de RDD de [*The Effect*](https://theeffectbook.net/) (Huntington-Klein, 2021) y de [*The Mixtape*](https://mixtape.scunning.com/) (Cunningham, 2021), gratis online
 
-- Los papers de hoy están enlazados en las [referencias](#sec:referencias)
+[Nuestro caso de hoy]{.alert}
+
+- [Mignozzetti, Cepaluni y Freire (2025)](https://doi.org/10.1111/ajps.12843): concejos y bienestar
+
+- Fichas completas en las [referencias](#sec:referencias)
 :::
 
 :::{.column width=50%}
@@ -941,6 +996,12 @@ Ya sabés [construir]{.alert} un contrafactual (sortear) y [encontrarlo]{.alert}
 - [`rddensity`](https://rdpackages.github.io/rddensity/): tests de manipulación
 
 - [`rdlocrand`](https://rdpackages.github.io/rdlocrand/): inferencia de aleatorización local en ventanas chicas
+
+- [`rdmulti`](https://rdpackages.github.io/rdmulti/): varios cortes a la vez, como los 12 umbrales del paper
+
+- [`rdpower`](https://rdpackages.github.io/rdpower/): poder y tamaño de muestra para RDD
+
+- `regression_discontinuity_designer`, de la `DesignLibrary` que viste a la mañana: simulá tu RDD antes de correrlo
 :::
 :::
 :::
@@ -949,7 +1010,7 @@ Ya sabés [construir]{.alert} un contrafactual (sortear) y [encontrarlo]{.alert}
 
 ## Dos contrafactuales, una pregunta
 
-:::{style="margin-top: 10px; font-size: 20px;"}
+:::{style="margin-top: 10px; font-size: 22px;"}
 Toda la mañana giró alrededor de una sola pregunta: [comparado con qué]{.alert}. El experimento y el RDD la responden distinto, pero apuntan al mismo lugar.
 
 | | [Experimento]{.alert} | [RDD]{.alert} |
@@ -996,7 +1057,7 @@ b) El RDD de los concejos vale cerca de [47.619]{.alert} habitantes. ¿Qué le d
 
 ## Cuando no hay umbral ni sorteo
 
-:::{style="margin-top: 10px; font-size: 20px;"}
+:::{style="margin-top: 10px; font-size: 22px;"}
 :::{.columns}
 :::{.column width=50%}
 [Diferencias en diferencias]{.alert}
@@ -1020,6 +1081,76 @@ Esto es exactamente lo de la tarde: a las 13:30 usamos las [trayectorias]{.alert
 :::
 :::
 
+# Apéndice: soluciones {background-color="#2d4563"}
+
+## Solución Ejercicio 1 {#sec:sol-ej1}
+
+:::{style="margin-top: 10px; font-size: 20px;"}
+```{r}
+#| label: ej1-sol
+#| eval: true
+#| echo: true
+#| fig-height: 3.0
+#| fig-width: 7
+# el gráfico estándar (la versión artesanal era plot() + abline(v = 0))
+rdplot(datos$matricula_primaria, datos$poblacion_c,
+       x.label = "Población centrada en el umbral",
+       y.label = "Matrícula primaria (chicos por aula)", title = "")
+
+rd <- rdrobust(datos$matricula_primaria, datos$poblacion_c)
+round(c(efecto = rd$coef[1], se = rd$se[1], p = rd$pv[1]), 3)
+```
+
+El efecto es [positivo]{.alert} (unos 3 chicos más por aula) y significativo: cruzar el umbral, y ganar una banca, sube la matrícula. El signo coincide con el mecanismo de más [bienes públicos]{.alert}
+
+[[Volver al ejercicio](#sec:ej1)]{.button}
+:::
+
+## Solución Ejercicio 2 {#sec:sol-ej2}
+
+:::{style="margin-top: 10px; font-size: 20px;"}
+```{r}
+#| label: ej2-sol
+#| eval: true
+#| echo: true
+c(densidad = round(rddensity(datos$poblacion_c)$test$p_jk, 3),
+  placebo  = round(rdrobust(datos$matricula_primaria, datos$poblacion_c,
+                            c = 12000)$pv[1], 3),
+  balance  = round(rdrobust(datos$pib_pc, datos$poblacion_c)$pv[1], 3))
+```
+
+Los tres $p$ son altos: no hay amontonamiento en el corte, no hay salto en el umbral falso, y el PIB per cápita no salta. El diseño [aguanta]{.alert}. El chequeo más grave si fallara sería el de [densidad]{.alert}: manipulación en el umbral rompe toda la comparación
+
+:::{style="margin-top: 6px; font-size: 18px; color: #555;"}
+¿Probaste el placebo en −15000? Ahí da $p \approx 0{,}03$: con muchos cortes falsos, alguno cae por azar, igual que las covariables "significativas" de la mañana. Un placebo aislado no voltea el diseño; un [patrón]{.alert} de placebos sí
+:::
+
+[[Volver al ejercicio](#sec:ej2)]{.button}
+:::
+
+## Solución Ejercicio 3 {#sec:sol-ej3}
+
+:::{style="margin-top: 10px; font-size: 20px;"}
+```{r}
+#| label: ej3-sol
+#| eval: true
+#| echo: true
+ingenua <- with(datos, mean(matricula_primaria[concejo_grande == 1]) -
+                       mean(matricula_primaria[concejo_grande == 0]))
+
+cerca <- filter(datos, abs(poblacion_c) < 8000)
+local_lm <- lm_robust(matricula_primaria ~ concejo_grande * poblacion_c,
+                      data = cerca)$coefficients[["concejo_grande"]]
+
+local_rd <- rdrobust(datos$matricula_primaria, datos$poblacion_c)$coef[1]
+round(c(ingenua = ingenua, local_lm = local_lm, local_rd = local_rd), 2)
+```
+
+El operador es `*`: pide las dos pendientes [más]{.alert} el salto, igual que la versión larga con `+` y `:` que usamos con la mortalidad. La ingenua arrastra la [tendencia]{.alert} (los municipios grandes ya tenían más matrícula); las dos locales la descuentan. Reportás la [local]{.alert}; la brecha es, otra vez, [sesgo de selección]{.alert}
+
+[[Volver al ejercicio](#sec:ej3)]{.button}
+:::
+
 # Nos vemos a la tarde 🍽️ {background-color="#2d4563"}
 
 ## Referencias {#sec:referencias}
@@ -1037,11 +1168,17 @@ Card, D. y Krueger, A. (1994). Minimum wages and employment: a case study of the
 
 Cattaneo, M., Idrobo, N. y Titiunik, R. (2020). *A Practical Introduction to Regression Discontinuity Designs: Foundations*. Cambridge University Press. [doi](https://doi.org/10.1017/9781108684606)
 
+Cattaneo, M., Idrobo, N. y Titiunik, R. (2024). *A Practical Introduction to Regression Discontinuity Designs: Extensions*. Cambridge University Press. [doi](https://doi.org/10.1017/9781009441896)
+
 Cattaneo, M., Jansson, M. y Ma, X. (2020). Simple local polynomial density estimators. *Journal of the American Statistical Association* 115(531):1449–1455. [doi](https://doi.org/10.1080/01621459.2019.1635480)
 :::
 
 :::{.column width=50%}
 Cattaneo, M., Titiunik, R., Vazquez-Bare, G. y Keele, L. (2016). Interpreting regression discontinuity designs with multiple cutoffs. *The Journal of Politics* 78(4):1229–1248. [doi](https://doi.org/10.1086/686802)
+
+Cunningham, S. (2021). *Causal Inference: The Mixtape*. Yale University Press. [enlace](https://mixtape.scunning.com/)
+
+Huntington-Klein, N. (2021). *The Effect: An Introduction to Research Design and Causality*. Chapman & Hall/CRC. [enlace](https://theeffectbook.net/)
 
 King, G. y Nielsen, R. (2019). Why propensity scores should not be used for matching. *Political Analysis* 27(4):435–454. [doi](https://doi.org/10.1017/pan.2019.11)
 
@@ -1056,58 +1193,3 @@ Mignozzetti, U., Cepaluni, G. y Freire, D. (2025). Legislature size and welfare:
 :::
 :::
 
-# Apéndice: soluciones {background-color="#2d4563"}
-
-## Solución Ejercicio 1 {#sec:appendix01}
-
-:::{style="margin-top: 12px; font-size: 18px;"}
-```{r}
-#| label: ej1-sol
-#| eval: true
-#| echo: true
-datos <- read.csv("datos/municipios.csv")
-
-# efecto local sobre la matrícula primaria
-rd <- rdrobust(datos$matricula_primaria, datos$poblacion_c)
-round(c(efecto = rd$coef[1], se = rd$se[1], p = rd$pv[1]), 3)
-```
-
-El efecto es [positivo]{.alert} (unos 3 a 4 chicos más por aula) y significativo: cruzar el umbral, y ganar una banca, sube la matrícula. El signo coincide con el mecanismo de más [bienes públicos]{.alert}
-
-[[Volver al ejercicio]{.button}](#sec:exercise01)
-:::
-
-## Solución Ejercicio 2 {#sec:appendix02}
-
-:::{style="margin-top: 12px; font-size: 18px;"}
-```{r}
-#| label: ej2-sol
-#| eval: true
-#| echo: true
-c(densidad = round(rddensity(datos$poblacion_c)$test$p_jk, 3),
-  placebo  = round(rdrobust(datos$matricula_primaria, datos$poblacion_c, c = -15000)$pv[1], 3),
-  balance  = round(rdrobust(datos$pib_pc, datos$poblacion_c)$pv[1], 3))
-```
-
-Los tres $p$ son altos: no hay amontonamiento en el corte, no hay salto en el umbral falso, y el PIB per cápita no salta. El diseño [aguanta]{.alert}. El chequeo más grave si fallara sería el de [densidad]{.alert}: manipulación en el umbral rompe toda la comparación
-
-[[Volver al ejercicio]{.button}](#sec:exercise02)
-:::
-
-## Solución Ejercicio 3 {#sec:appendix03}
-
-:::{style="margin-top: 12px; font-size: 18px;"}
-```{r}
-#| label: ej3-sol
-#| eval: true
-#| echo: true
-ingenua <- with(datos, mean(matricula_primaria[concejo_grande == 1]) -
-                       mean(matricula_primaria[concejo_grande == 0]))
-local   <- rdrobust(datos$matricula_primaria, datos$poblacion_c)$coef[1]
-round(c(ingenua = ingenua, local = local), 2)
-```
-
-La diferencia ingenua arrastra la [tendencia]{.alert}: los municipios más grandes ya tenían más matrícula por otras razones (más recursos, más urbanos). La estimación local descuenta esa pendiente. Reportás la [local]{.alert}; la brecha entre ambas es, otra vez, [sesgo de selección]{.alert}
-
-[[Volver al ejercicio]{.button}](#sec:exercise03)
-:::
