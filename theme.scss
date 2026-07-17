@@ -1,7 +1,7 @@
 /*-- scss:defaults --*/
 
-// Paleta — base caoba con acento terracota (Mahogany académico)
-$caoba:       #7B2D2D;  // caoba, primario
+// Paleta — azul pizarra con acento terracota (combina con las diapositivas)
+$pizarra:     #2D4563;  // azul pizarra, primario (mismo tono que los divisores de las diapositivas)
 $terracota:   #C26B4A;  // terracota, acento
 $terracota-d: #A8512E;  // terracota oscura, enlaces y texto de acento
 $arena:       #F3ECE1;  // arena, fondo de página
@@ -9,16 +9,17 @@ $slate:       #33312E;  // texto principal
 $mid-grey:    #6E665C;  // gris cálido secundario
 $taupe:       #E4DACB;  // bordes
 $white:       #FFFFFF;
+$card:        #FBF9F3;  // arena suave, relleno de tarjetas
 
 $body-bg:     $arena;
 $body-color:  $slate;
 $link-color:  $terracota-d;
-$primary:     $caoba;
+$primary:     $pizarra;
 
 $font-family-sans-serif: 'Source Sans 3', 'Helvetica Neue', sans-serif;
 $headings-font-family:   'Fraunces', 'Georgia', serif;
 $headings-font-weight:   600;
-$headings-color:         $caoba;
+$headings-color:         $pizarra;
 
 $border-radius: 0.25rem;
 
@@ -56,7 +57,7 @@ h1, .h1 {
 
 h2, .h2 {
   font-size: 1.6rem;
-  color: $caoba;
+  color: $pizarra;
   margin-top: 2em;
   margin-bottom: 0.6em;
 }
@@ -73,9 +74,9 @@ h3, .h3 {
 
 // ── Tarjetas de bloque (agenda) ─────────────────
 .bloque-card {
-  background: $white;
+  background: $card;
   border: 1px solid $taupe;
-  border-left: 5px solid $caoba;
+  border-left: 5px solid $pizarra;
   border-radius: $border-radius;
   padding: 1.5rem 1.75rem;
   margin-bottom: 1.25rem;
@@ -96,8 +97,8 @@ h3, .h3 {
     letter-spacing: 0.05em;
     padding: 0.2rem 0.7rem;
     border-radius: 999px;
-    background-color: rgba($caoba, 0.1);
-    color: $caoba;
+    background-color: rgba($pizarra, 0.1);
+    color: $pizarra;
     margin-bottom: 0.6rem;
   }
 
@@ -105,7 +106,7 @@ h3, .h3 {
     font-family: $headings-font-family;
     font-size: 1.15rem;
     font-weight: 600;
-    color: $caoba;
+    color: $pizarra;
     margin-bottom: 0.4rem;
   }
 
@@ -118,7 +119,7 @@ h3, .h3 {
 
 // ── Tarjetas de recurso (lecturas, materiales) ──
 .resource-card {
-  background: $white;
+  background: $card;
   border: 1px solid $taupe;
   border-radius: $border-radius;
   padding: 1.25rem 1.5rem;
@@ -134,7 +135,7 @@ h3, .h3 {
     font-family: $headings-font-family;
     font-size: 1.05rem;
     font-weight: 600;
-    color: $caoba;
+    color: $pizarra;
     margin-bottom: 0.3rem;
   }
 
@@ -172,7 +173,7 @@ h3, .h3 {
 
 // ── Caja de datos (info del taller) ─────────────
 .info-box {
-  background: $white;
+  background: $card;
   border: 1px solid $taupe;
   border-radius: $border-radius;
   padding: 1.5rem;
@@ -199,7 +200,7 @@ h3, .h3 {
 
     .info-value {
       font-size: 0.95rem;
-      color: $caoba;
+      color: $pizarra;
       font-weight: 500;
     }
   }
@@ -222,7 +223,7 @@ span.alert {
   border: 0;
   background: none;
   border-radius: 0;
-  color: $caoba;
+  color: $pizarra;
   font-weight: 600;
 }
 

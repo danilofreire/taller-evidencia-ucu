@@ -11,7 +11,7 @@ Traé tu computadora con R instalado. Cada bloque termina con una práctica guia
 | Hora | Bloque |
 |------|--------|
 | 9:00–9:30 | **Apertura.** El problema del contrafactual, el sesgo de selección y por qué la evaluación de impacto importa más en la región |
-| 9:30–10:45 | **Experimentos.** El contrafactual que construís. Un experimento de campo sobre incentivos y dengue en Brasil, un resultado nulo que también enseña, y un experimento de encuesta sobre linchamientos. Práctica en R: diferencia de medias y tabla de balance |
+| 9:30–10:45 | **Experimentos.** El contrafactual que construís. Un experimento de campo sobre incentivos y dengue en Brasil, un resultado nulo que también enseña, y una introducción a DeclareDesign para simular diseños antes del campo. Práctica en R: diferencia de medias, tabla de balance y efectos heterogéneos |
 | 10:45–11:00 | Café |
 | 11:00–12:15 | **Regresión discontinua.** El contrafactual que encontrás en un umbral. El tamaño de las legislaturas y el bienestar en Brasil. Práctica en R: `rdplot`, `rdrobust` y los chequeos de validez |
 | 12:15–12:30 | **Cierre de la mañana.** Los contrafactuales comparados, y discusión |

@@ -1,0 +1,21 @@
+"estudio","pais","diseno","n","ee","efecto"
+"García (2014)","Uruguay","RDD",1537,0.056,0.11
+"Souza (2006)","Perú","RDD",843,0.076,0.069
+"Lima y Ortiz (2008)","Argentina","RDD",145,0.183,0.419
+"Rojas y Mendoza (2009)","Chile","RDD",268,0.134,0.246
+"Fernández (2019)","Chile","OLS",838,0.076,0.174
+"Muñoz y Torres (2005)","Uruguay","OLS",89,0.233,0.511
+"Silva (2021)","Perú","DiD",575,0.092,0.156
+"Torres (2013)","México","RDD",3055,0.04,0.321
+"Vargas y Lima (2017)","Argentina","OLS",233,0.144,0.435
+"Herrera y Castro (2016)","Chile","DiD",934,0.072,0.156
+"Castro y Sosa (2022)","Uruguay","DiD",82,0.243,0.591
+"Mendoza (2016)","Chile","RDD",1494,0.057,0.098
+"Ríos (2013)","Colombia","OLS",213,0.151,0.349
+"Acosta (2007)","México","RDD",2898,0.041,0.203
+"Núñez y García (2006)","México","DiD",153,0.178,0.302
+"Ferreira (2021)","Colombia","OLS",362,0.116,-0.02
+"Ortiz (2006)","Argentina","OLS",803,0.078,0.184
+"Cabrera (2014)","Chile","DiD",80,0.246,0.517
+"Duarte y Silva (2017)","Argentina","OLS",307,0.126,0.256
+"Sosa (2014)","Colombia","RDD",86,0.237,0.438

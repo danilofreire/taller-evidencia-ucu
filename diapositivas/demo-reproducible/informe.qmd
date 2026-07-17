@@ -1,0 +1,39 @@
+---
+title: "Informe de reclamos viales"
+author: "Intendencia (demo del taller)"
+format:
+  html:
+    embed-resources: true
+lang: es
+---
+
+<!--
+Demo del Bloque 4: un informe donde TODOS los números salen del código.
+Guion: 1) quarto render informe.qmd  2) abrir el HTML  3) editar un valor
+en datos.csv (p. ej., los respondidos del Cerro)  4) volver a renderizar:
+el texto, el total y el gráfico se actualizan solos.
+-->
+
+```{r}
+#| include: false
+datos <- read.csv("datos.csv")
+total <- sum(datos$reclamos)
+tasa  <- round(100 * sum(datos$respondidos) / total, 1)
+peor  <- datos$barrio[which.min(datos$respondidos / datos$reclamos)]
+```
+
+La intendencia recibió `r total` reclamos viales en `r nrow(datos)` barrios
+durante el último trimestre. Se respondió a tiempo el `r tasa`% de los
+reclamos. El barrio con menor tasa de respuesta fue `r peor`.
+
+```{r}
+#| echo: false
+#| fig-height: 3.5
+tasas <- sort(datos$respondidos / datos$reclamos)
+nombres <- datos$barrio[order(datos$respondidos / datos$reclamos)]
+barplot(100 * tasas, names.arg = nombres, las = 2, col = "#2d4563",
+        ylab = "Respuesta a tiempo (%)", border = NA, cex.names = 0.8)
+```
+
+Ningún número de este informe está escrito a mano: si cambian los datos,
+el texto y el gráfico cambian con ellos al volver a renderizar.

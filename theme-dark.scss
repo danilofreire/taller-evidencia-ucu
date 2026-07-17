@@ -1,9 +1,9 @@
 /*-- scss:defaults --*/
 
-// Paleta oscura — caoba/terracota adaptados para fondo oscuro.
+// Paleta oscura — azul pizarra claro con acento terracota, para fondo oscuro.
 // Mantiene los mismos nombres de variable que theme.scss para reutilizar
 // el bloque de reglas sin cambios; solo cambian los valores.
-$caoba:       #E2966E;  // en oscuro: terracota clara para títulos y acentos
+$pizarra:     #8AACD6;  // en oscuro: azul pizarra claro para títulos y acentos
 $terracota:   #CF7A54;  // terracota, acento (bordes, hover)
 $terracota-d: #E6A07C;  // terracota clara, enlaces y texto de acento
 $arena:       #1C1A19;  // fondo de página (negro cálido)
@@ -15,12 +15,12 @@ $white:       #2A2624;  // superficie de tarjetas
 $body-bg:     $arena;
 $body-color:  $slate;
 $link-color:  $terracota-d;
-$primary:     $caoba;
+$primary:     $pizarra;
 
 $font-family-sans-serif: 'Source Sans 3', 'Helvetica Neue', sans-serif;
 $headings-font-family:   'Fraunces', 'Georgia', serif;
 $headings-font-weight:   600;
-$headings-color:         $caoba;
+$headings-color:         $pizarra;
 
 $border-radius: 0.25rem;
 
@@ -58,7 +58,7 @@ h1, .h1 {
 
 h2, .h2 {
   font-size: 1.6rem;
-  color: $caoba;
+  color: $pizarra;
   margin-top: 2em;
   margin-bottom: 0.6em;
 }
@@ -77,7 +77,7 @@ h3, .h3 {
 .bloque-card {
   background: $white;
   border: 1px solid $taupe;
-  border-left: 5px solid $caoba;
+  border-left: 5px solid $pizarra;
   border-radius: $border-radius;
   padding: 1.5rem 1.75rem;
   margin-bottom: 1.25rem;
@@ -98,8 +98,8 @@ h3, .h3 {
     letter-spacing: 0.05em;
     padding: 0.2rem 0.7rem;
     border-radius: 999px;
-    background-color: rgba($caoba, 0.15);
-    color: $caoba;
+    background-color: rgba($pizarra, 0.15);
+    color: $pizarra;
     margin-bottom: 0.6rem;
   }
 
@@ -107,7 +107,7 @@ h3, .h3 {
     font-family: $headings-font-family;
     font-size: 1.15rem;
     font-weight: 600;
-    color: $caoba;
+    color: $pizarra;
     margin-bottom: 0.4rem;
   }
 
@@ -136,7 +136,7 @@ h3, .h3 {
     font-family: $headings-font-family;
     font-size: 1.05rem;
     font-weight: 600;
-    color: $caoba;
+    color: $pizarra;
     margin-bottom: 0.3rem;
   }
 
@@ -201,7 +201,7 @@ h3, .h3 {
 
     .info-value {
       font-size: 0.95rem;
-      color: $caoba;
+      color: $pizarra;
       font-weight: 500;
     }
   }
@@ -224,7 +224,7 @@ span.alert {
   border: 0;
   background: none;
   border-radius: 0;
-  color: $caoba;
+  color: $pizarra;
   font-weight: 600;
 }
 

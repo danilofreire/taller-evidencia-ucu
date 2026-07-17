@@ -1,0 +1,289 @@
+---
+title: "Referencias"
+---
+
+Las lecturas del taller, más una lista por método para quienes quieran profundizar. Nada de esto hace falta leerlo antes: las sesiones son autocontenidas. Los enlaces apuntan al DOI o a una versión de acceso abierto cuando existe.
+
+## Lecturas del taller
+
+Las investigaciones propias que estructuran los bloques, en el orden en que aparecen durante el día.
+
+::: {.resource-card}
+[Financial Incentives and Health Care Provision: Evidence from an *Aedes aegypti* Control Programme in Brazil]{.resource-title}
+
+[Experimento de campo · con Umberto Mignozzetti · manuscrito en revisión (caso central del bloque de experimentos)]{.resource-meta}
+
+::: {.resource-links}
+[Preprint (medRxiv)](https://www.medrxiv.org/content/10.1101/2021.03.10.21252321v1)
+:::
+:::
+
+::: {.resource-card}
+[Bottom-Up Accountability and Public Service Provision: Evidence from a Field Experiment in Brazil]{.resource-title}
+
+[Research & Politics · experimento de campo con resultado nulo]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1177/2053168020914444) |
+[Réplica](https://github.com/umbertomig/tdp-accountability)
+:::
+:::
+
+::: {.resource-card}
+[Vigilantism and Institutions: Attitudes toward Lynching in Brazil]{.resource-title}
+
+[Research & Politics · experimento de encuesta]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1177/20531680221150389) |
+[Réplica](https://github.com/danilofreire/lynching-experiment-brazil)
+:::
+:::
+
+::: {.resource-card}
+[Legislature Size and Welfare: Evidence From Brazil]{.resource-title}
+
+[American Journal of Political Science · regresión discontinua]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1111/ajps.12843) |
+[PDF (acceso abierto)](https://escholarship.org/uc/item/5gk7x3zg)
+:::
+:::
+
+::: {.resource-card}
+[Evaluating the Effect of Homicide Prevention Strategies in São Paulo, Brazil: A Synthetic Control Approach]{.resource-title}
+
+[Latin American Research Review · control sintético]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.25222/larr.334) |
+[Réplica](https://github.com/danilofreire/homicides-sp-synth)
+:::
+:::
+
+::: {.resource-card}
+[The Effect of Legislature Size on Distributive Politics: A Meta-Analysis]{.resource-title}
+
+[British Journal of Political Science · meta-análisis, cierra el bucle con la regresión discontinua de la mañana]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1017/S0007123422000552) |
+[Réplica](https://github.com/danilofreire/legislature-size-meta-analysis)
+:::
+:::
+
+### Reproducibilidad y robustez
+
+Dos proyectos colaborativos grandes en los que participo, centrales para el bloque de acumulación de evidencia.
+
+::: {.resource-card}
+[Investigating the Analytical Robustness of the Social and Behavioural Sciences]{.resource-title}
+
+[Nature · robustez analítica con muchos equipos]{.resource-meta}
+
+::: {.resource-links}
+[Publicación](https://www.nature.com/articles/s41586-025-09844-9)
+:::
+:::
+
+::: {.resource-card}
+[The Reliability of Replications: A Study in Computational Reproductions]{.resource-title}
+
+[Royal Society Open Science · reproducciones computacionales]{.resource-meta}
+
+::: {.resource-links}
+[DOI](https://doi.org/10.1098/rsos.241038) |
+[Réplica](https://github.com/nbreznau/how_many_replicators)
+:::
+:::
+
+## Para profundizar por método
+
+Una entrada por método, ordenada de lo más aplicado a lo más técnico. Las que aparecen en las diapositivas van marcadas con el bloque al que pertenecen.
+
+### Experimentos
+
+::: {.resource-card}
+[Gerber, A. y Green, D. (2012). *Field Experiments: Design, Analysis, and Interpretation*. W. W. Norton.]{.resource-title}
+
+[El manual de referencia para diseñar y analizar experimentos, del diseño a la interpretación.]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Gertler, P., Martinez, S., Premand, P., Rawlings, L. y Vermeersch, C. (2016). *Impact Evaluation in Practice*, 2ª ed. Banco Mundial y BID.]{.resource-title}
+
+[Introducción accesible a la evaluación de impacto, pensada para quienes hacen política. Disponible gratis en el [Banco Mundial](https://www.worldbank.org/en/programs/sief-trust-fund/publication/impact-evaluation-in-practice).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Duflo, E., Glennerster, R. y Kremer, M. (2007). Using randomization in development economics research: a toolkit. *Handbook of Development Economics* 4:3895–3962.]{.resource-title}
+
+[Guía práctica para llevar un experimento aleatorizado al campo. [DOI](https://doi.org/10.1016/S1573-4471(07)04061-2).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Athey, S. e Imbens, G. (2017). The econometrics of randomized experiments. *Handbook of Economic Field Experiments* 1:73–140.]{.resource-title}
+
+[El tratamiento econométrico moderno de los experimentos: inferencia, análisis de subgrupos y buenas prácticas. [DOI](https://doi.org/10.1016/bs.hefe.2016.10.003).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Blair, G., Cooper, J., Coppock, A. y Humphreys, M. (2019). Declaring and diagnosing research designs. *American Political Science Review* 113(3):838–859.]{.resource-title}
+
+[Bloque de experimentos. Cómo declarar un diseño y simular su desempeño antes de recoger datos. [DOI](https://doi.org/10.1017/S0003055419000194).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Mutz, D., Pemantle, R. y Pham, P. (2019). The perils of balance testing in experimental design. *The American Statistician* 73(1):32–42.]{.resource-title}
+
+[Bloque de experimentos. Por qué la tabla de balance se malinterpreta seguido, y qué reporta de verdad. [DOI](https://doi.org/10.1080/00031305.2017.1322143).]{.resource-meta}
+:::
+
+### Regresión discontinua
+
+::: {.resource-card}
+[Cattaneo, M., Idrobo, N. y Titiunik, R. (2020). *A Practical Introduction to Regression Discontinuity Designs: Foundations*. Cambridge University Press.]{.resource-title}
+
+[Bloque de RDD. La guía práctica más usada; explica estimación, ventana óptima y gráficos paso a paso. [DOI](https://doi.org/10.1017/9781108684606).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Cattaneo, M., Idrobo, N. y Titiunik, R. (2024). *A Practical Introduction to Regression Discontinuity Designs: Extensions*. Cambridge University Press.]{.resource-title}
+
+[La segunda parte: umbrales múltiples, RDD difuso, variable de asignación discreta y chequeos de validez.]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Lee, D. y Lemieux, T. (2010). Regression discontinuity designs in economics. *Journal of Economic Literature* 48(2):281–355.]{.resource-title}
+
+[Bloque de RDD. La revisión que fijó las buenas prácticas del método en economía. [DOI](https://doi.org/10.1257/jel.48.2.281).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Calonico, S., Cattaneo, M. y Titiunik, R. (2014). Robust nonparametric confidence intervals for regression-discontinuity designs. *Econometrica* 82(6):2295–2326.]{.resource-title}
+
+[Bloque de RDD. La base teórica de `rdrobust`, el paquete que usamos en la práctica. [DOI](https://doi.org/10.3982/ECTA11757).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[McCrary, J. (2008). Manipulation of the running variable in the regression discontinuity design: a density test. *Journal of Econometrics* 142(2):698–714.]{.resource-title}
+
+[Bloque de RDD. El test de densidad para detectar si las unidades manipulan su posición en el umbral. [DOI](https://doi.org/10.1016/j.jeconom.2007.05.005).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Gelman, A. e Imbens, G. (2019). Why high-order polynomials should not be used in regression discontinuity designs. *Journal of Business & Economic Statistics* 37(3):447–456.]{.resource-title}
+
+[Una advertencia práctica muy citada: por qué conviene el ajuste local lineal y no los polinomios de alto grado. [DOI](https://doi.org/10.1080/07350015.2017.1366909).]{.resource-meta}
+:::
+
+### Diferencias en diferencias y control sintético
+
+::: {.resource-card}
+[Card, D. y Krueger, A. (1994). Minimum wages and employment: a case study of the fast-food industry in New Jersey and Pennsylvania. *American Economic Review* 84(4):772–793.]{.resource-title}
+
+[Bloque de DiD. El estudio que popularizó diferencias en diferencias en economía. [Enlace](https://www.jstor.org/stable/2118030).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Abadie, A., Diamond, A. y Hainmueller, J. (2010). Synthetic control methods for comparative case studies. *Journal of the American Statistical Association* 105(490):493–505.]{.resource-title}
+
+[Bloque de control sintético. El artículo que formalizó el método con el caso del tabaco en California. [DOI](https://doi.org/10.1198/jasa.2009.ap08746).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Abadie, A. (2021). Using synthetic controls: feasibility, data requirements, and methodological aspects. *Journal of Economic Literature* 59(2):391–425.]{.resource-title}
+
+[Bloque de control sintético. La revisión práctica: cuándo se puede usar y qué datos exige. [DOI](https://doi.org/10.1257/jel.20191450).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Callaway, B. y Sant'Anna, P. (2021). Difference-in-differences with multiple time periods. *Journal of Econometrics* 225(2):200–230.]{.resource-title}
+
+[El DiD moderno cuando el tratamiento llega en momentos distintos, con un estimador robusto a la heterogeneidad. [DOI](https://doi.org/10.1016/j.jeconom.2020.12.001).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Goodman-Bacon, A. (2021). Difference-in-differences with variation in treatment timing. *Journal of Econometrics* 225(2):254–277.]{.resource-title}
+
+[Por qué el DiD de dos vías puede engañar cuando el tratamiento es escalonado, y cómo descomponerlo. [DOI](https://doi.org/10.1016/j.jeconom.2021.03.014).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Roth, J., Sant'Anna, P., Bilinski, A. y Poe, J. (2023). What's trending in difference-in-differences? A synthesis of the recent econometrics literature. *Journal of Econometrics* 235(2):2218–2244.]{.resource-title}
+
+[La síntesis reciente que ordena toda la literatura nueva de DiD en un solo lugar. [DOI](https://doi.org/10.1016/j.jeconom.2023.03.008).]{.resource-meta}
+:::
+
+### Meta-análisis y replicación
+
+::: {.resource-card}
+[Borenstein, M., Hedges, L., Higgins, J. y Rothstein, H. (2009). *Introduction to Meta-Analysis*. Wiley.]{.resource-title}
+
+[El manual de entrada al meta-análisis: tamaños de efecto, modelos de efectos fijos y aleatorios, heterogeneidad.]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Harrer, M., Cuijpers, P., Furukawa, T. y Ebert, D. (2021). *Doing Meta-Analysis with R: A Hands-On Guide*. Chapman & Hall/CRC.]{.resource-title}
+
+[Bloque de acumulación. Guía práctica en R, con forest y funnel plots. Disponible gratis en [bookdown](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Viechtbauer, W. (2010). Conducting meta-analyses in R with the metafor package. *Journal of Statistical Software* 36(3):1–48.]{.resource-title}
+
+[Bloque de acumulación. La documentación del paquete `metafor` que usamos en la práctica. [DOI](https://doi.org/10.18637/jss.v036.i03).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Egger, M., Davey Smith, G., Schneider, M. y Minder, C. (1997). Bias in meta-analysis detected by a simple, graphical test. *BMJ* 315(7109):629–634.]{.resource-title}
+
+[Bloque de acumulación. El funnel plot y su test para detectar sesgo de publicación. [DOI](https://doi.org/10.1136/bmj.315.7109.629).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Franco, A., Malhotra, N. y Simonovits, G. (2014). Publication bias in the social sciences: unlocking the file drawer. *Science* 345(6203):1502–1505.]{.resource-title}
+
+[Bloque de acumulación. Evidencia directa de cuántos resultados nulos nunca se publican. [DOI](https://doi.org/10.1126/science.1255484).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Open Science Collaboration (2015). Estimating the reproducibility of psychological science. *Science* 349(6251):aac4716.]{.resource-title}
+
+[Bloque de acumulación. El estudio que abrió la crisis de replicación al replicar 100 experimentos. [DOI](https://doi.org/10.1126/science.aac4716).]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Nosek, B., Ebersole, C., DeHaven, A. y Mellor, D. (2018). The preregistration revolution. *PNAS* 115(11):2600–2606.]{.resource-title}
+
+[La preregistración como respuesta a los grados de libertad del analista. [DOI](https://doi.org/10.1073/pnas.1708274114).]{.resource-meta}
+:::
+
+## Casos y referencias de la región
+
+- Progresa/Oportunidades (México): el experimento aleatorizado que impulsó las transferencias monetarias condicionadas
+- PANES (Uruguay): Manacorda, Miguel y Vigorito (2011), un diseño de regresión discontinua sobre el puntaje de elegibilidad
+- Auditorías municipales (Brasil): Ferraz y Finan, auditorías al azar y rendición de cuentas electoral
+
+## Bibliografía complementaria
+
+Textos generales de inferencia causal que cruzan todos los métodos del taller.
+
+- Angrist, J. y Pischke, J.-S. (2015). *Mastering 'Metrics: The Path from Cause to Effect*. Princeton University Press. Accesible y con ejemplos. [Enlace](https://press.princeton.edu/books/paperback/9780691152844/mastering-metrics)
+- Angrist, J. y Pischke, J.-S. (2009). *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton University Press
+- Cunningham, S. (2021). *Causal Inference: The Mixtape*. Yale University Press. Disponible gratis en [mixtape.scunning.com](https://mixtape.scunning.com/)
+- Huntington-Klein, N. (2022). *The Effect: An Introduction to Research Design and Causality*. Chapman & Hall/CRC. Disponible gratis en [theeffectbook.net](https://theeffectbook.net/)
+- Imbens, G. y Rubin, D. (2015). *Causal Inference for Statistics, Social, and Biomedical Sciences*. Cambridge University Press
+- Morgan, S. y Winship, C. (2015). *Counterfactuals and Causal Inference*, 2ª ed. Cambridge University Press
+
+## Organizaciones
+
+- [J-PAL América Latina y el Caribe](https://www.povertyactionlab.org/es/regional-office/latin-america-and-caribbean)
+- [Innovations for Poverty Action (IPA)](https://poverty-action.org)
+- [Banco Interamericano de Desarrollo (BID)](https://www.iadb.org)
+- [EGAP: Evidence in Governance and Politics](https://egap.org)
+
+## Instalación de software
+
+La práctica de cada bloque corre en R. En [Materiales](materiales.qmd#antes-de-empezar) está la guía paso a paso: instalá [R](https://cran.r-project.org/) y [RStudio](https://posit.co/download/rstudio-desktop/), y después corré el bloque que instala los seis paquetes del taller (tidyverse, estimatr, rdrobust, rddensity, tidysynth, metafor)

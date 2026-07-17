@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Referencia R: experimentos – Políticas basadas en evidencia</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e68f30e75591e36100235718a786973.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Políticas basadas en evidencia</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./programa.html"> 
+<span class="menu-text">Programa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./materiales.html"> 
+<span class="menu-text">Materiales</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-referencia-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Referencia R</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-referencia-r">    
+        <li>
+    <a class="dropdown-item" href="./referencia-r.html">
+ <span class="dropdown-text">Todas las referencias</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-experimentos.html">
+ <span class="dropdown-text">Experimentos</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./referencias.html"> 
+<span class="menu-text">Referencias</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:danilofreire@gmail.com"> <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/danilofreire/taller-evidencia-ucu"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo lector">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#paquetes-y-datos" id="toc-paquetes-y-datos" class="nav-link active" data-scroll-target="#paquetes-y-datos"><span class="header-section-number">1</span> Paquetes y datos</a></li>
+  <li><a href="#diferencia-de-medias" id="toc-diferencia-de-medias" class="nav-link" data-scroll-target="#diferencia-de-medias"><span class="header-section-number">2</span> Diferencia de medias</a></li>
+  <li><a href="#la-regresión-da-lo-mismo" id="toc-la-regresión-da-lo-mismo" class="nav-link" data-scroll-target="#la-regresión-da-lo-mismo"><span class="header-section-number">3</span> La regresión da lo mismo</a></li>
+  <li><a href="#controles-precisión-no-sesgo" id="toc-controles-precisión-no-sesgo" class="nav-link" data-scroll-target="#controles-precisión-no-sesgo"><span class="header-section-number">4</span> Controles: precisión, no sesgo</a></li>
+  <li><a href="#ajuste-a-la-lin" id="toc-ajuste-a-la-lin" class="nav-link" data-scroll-target="#ajuste-a-la-lin"><span class="header-section-number">5</span> Ajuste a la Lin</a></li>
+  <li><a href="#efectos-heterogéneos" id="toc-efectos-heterogéneos" class="nav-link" data-scroll-target="#efectos-heterogéneos"><span class="header-section-number">6</span> Efectos heterogéneos</a></li>
+  <li><a href="#tabla-de-balance" id="toc-tabla-de-balance" class="nav-link" data-scroll-target="#tabla-de-balance"><span class="header-section-number">7</span> Tabla de balance</a></li>
+  <li><a href="#errores-estándar-agrupados" id="toc-errores-estándar-agrupados" class="nav-link" data-scroll-target="#errores-estándar-agrupados"><span class="header-section-number">8</span> Errores estándar agrupados</a></li>
+  <li><a href="#inferencia-por-aleatorización" id="toc-inferencia-por-aleatorización" class="nav-link" data-scroll-target="#inferencia-por-aleatorización"><span class="header-section-number">9</span> Inferencia por aleatorización</a></li>
+  <li><a href="#múltiples-resultados" id="toc-múltiples-resultados" class="nav-link" data-scroll-target="#múltiples-resultados"><span class="header-section-number">10</span> Múltiples resultados</a></li>
+  <li><a href="#declarar-el-diseño-con-declaredesign" id="toc-declarar-el-diseño-con-declaredesign" class="nav-link" data-scroll-target="#declarar-el-diseño-con-declaredesign"><span class="header-section-number">11</span> Declarar el diseño con DeclareDesign</a></li>
+  <li><a href="#diseños-listos-designlibrary" id="toc-diseños-listos-designlibrary" class="nav-link" data-scroll-target="#diseños-listos-designlibrary"><span class="header-section-number">12</span> Diseños listos: DesignLibrary</a></li>
+  <li><a href="#para-seguir" id="toc-para-seguir" class="nav-link" data-scroll-target="#para-seguir"><span class="header-section-number">13</span> Para seguir</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/referencia-experimentos.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Referencia R: experimentos</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Código</button></div></div>
+<p class="subtitle lead">Bloque 1 · diferencia de medias, balance, ajuste de covariables y diseño</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Esta página reúne, con código que podés correr y copiar, todas las funciones de R que aparecen en el bloque de experimentos (<a href="diapositivas/02-experimentos.html">diapositivas</a>). La idea es que después del taller tengas un lugar donde volver: cada sección explica en dos o tres frases qué hace el comando, muestra un bloque ejecutable con su salida real, y cierra con una nota sobre cuándo conviene usarlo y qué mirar.</p>
+<p>Todos los ejemplos trabajan sobre los mismos datos simulados del experimento del dengue. Como la semilla está fija (<code>set.seed(3043)</code>), los números que ves acá son idénticos a los de las diapositivas y a los del archivo <a href="diapositivas/datos/dengue_incentivos.csv"><code>dengue_incentivos.csv</code></a>. Si corrés el código en tu computadora vas a obtener exactamente lo mismo.</p>
+<section id="paquetes-y-datos" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="paquetes-y-datos"><span class="header-section-number">1</span> Paquetes y datos</h2>
+<p>Cargá los paquetes del bloque. El bucle recorre la lista <code>paquetes</code> e instala cada uno solo si te falta, así el código corre igual en cualquier máquina. Después generá los datos con <code>fabricatr</code> y <code>randomizr</code>, la misma “cocina” que usa <code>DeclareDesign</code> por dentro.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># instala cada paquete solo si te falta, y después lo carga</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"estimatr"</span>, <span class="st">"fabricatr"</span>, <span class="st">"randomizr"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"DeclareDesign"</span>, <span class="st">"DesignLibrary"</span>, <span class="st">"ri2"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> paquetes) {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>fabricate()</code> arma una tabla variable por variable; <code>complete_ra()</code> sortea exactamente 200 agentes al tratamiento (un sorteo simple, “completo”). El resto de las variables son rasgos previos de cada agente de salud.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3043</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">400</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">edad            =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(N, <span class="dv">38</span>, <span class="fl">7.5</span>)),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mujer           =</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.7</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">experiencia     =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(N, <span class="dv">7</span>, <span class="fl">2.6</span>)),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">zona            =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"urbana"</span>, <span class="st">"rural"</span>), N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">visitas_previas =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(N, <span class="dv">35</span>, <span class="dv">6</span>)),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">tratamiento     =</span> <span class="fu">complete_ra</span>(N, <span class="at">m =</span> <span class="dv">200</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">visitas =</span> <span class="fu">round</span>(<span class="dv">20</span> <span class="sc">+</span> <span class="fl">4.5</span> <span class="sc">*</span> tratamiento</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                  <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> tratamiento <span class="sc">*</span> (zona <span class="sc">==</span> <span class="st">"urbana"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                  <span class="sc">+</span> <span class="fl">0.4</span> <span class="sc">*</span> visitas_previas <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">9</span>)),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">indice_larvario =</span> <span class="fu">round</span>(<span class="fu">pmax</span>(<span class="dv">0</span>, <span class="dv">12</span> <span class="sc">-</span> <span class="fl">2.8</span> <span class="sc">*</span> tratamiento <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">4</span>)), <span class="dv">1</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ID edad mujer experiencia   zona visitas_previas tratamiento visitas
+1 001   24     0           3 urbana              27           1      51
+2 002   38     0           6  rural              39           0      36
+3 003   30     1           8 urbana              34           0      42
+4 004   32     1           5 urbana              30           1      32
+5 005   32     1           8 urbana              28           0      48
+6 006   26     1           3  rural              38           1      47
+  indice_larvario
+1             5.4
+2            11.0
+3            11.6
+4             9.2
+5             7.8
+6            13.0</code></pre>
+</div>
+</div>
+<p>Las variables clave: <code>tratamiento</code> (1 si el agente recibió el incentivo económico), <code>visitas</code> (criaderos tratados, el resultado principal) e <code>indice_larvario</code> (larvas por casa, un segundo resultado). Las demás (<code>edad</code>, <code>experiencia</code>, <code>zona</code>, <code>visitas_previas</code>) se midieron antes del sorteo.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Simulá tus datos con <code>fabricatr</code> cuando quieras probar tu código de análisis antes de tener datos reales, o para armar un ejemplo reproducible. Con la semilla fija, cualquiera reproduce tu tabla exactamente.</p>
+</div>
+</div>
+</section>
+<section id="diferencia-de-medias" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="diferencia-de-medias"><span class="header-section-number">2</span> Diferencia de medias</h2>
+<p>Como el incentivo se sorteó, el efecto causal promedio es simplemente la media de <code>visitas</code> en el grupo tratado menos la del grupo control. <code>difference_in_means()</code> de <code>estimatr</code> calcula esa resta con su error estándar y su intervalo de confianza.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">difference_in_means</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Design:  Standard 
+            Estimate Std. Error  t value   Pr(&gt;|t|) CI Lower CI Upper       DF
+tratamiento     6.03  0.9261048 6.511142 2.2883e-10 4.209244 7.850756 391.8158</code></pre>
+</div>
+</div>
+<p>El estimado (≈ 6,03) son las visitas de más que produjo el incentivo. El intervalo de confianza no cruza el cero, así que el efecto es distinto de cero con holgura.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es la forma más directa de estimar el efecto en un experimento aleatorizado simple. Mirá el punto estimado y si el intervalo de confianza incluye el cero. Para diseños con bloques o conglomerados, esta misma función acepta los argumentos <code>blocks =</code> y <code>clusters =</code> (lo vemos más abajo).</p>
+</div>
+</div>
+</section>
+<section id="la-regresión-da-lo-mismo" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="la-regresión-da-lo-mismo"><span class="header-section-number">3</span> La regresión da lo mismo</h2>
+<p>La misma diferencia sale de una regresión de <code>visitas</code> sobre <code>tratamiento</code>. <code>lm_robust()</code> ajusta esa regresión con errores estándar robustos (corrigen la heterocedasticidad sin costo). El coeficiente de <code>tratamiento</code> coincide con la diferencia de medias hasta el último decimal.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ajuste_visitas <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ajuste_visitas)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm_robust(formula = visitas ~ tratamiento, data = datos)
+
+Standard error type:  HC2 
+
+Coefficients:
+            Estimate Std. Error t value   Pr(&gt;|t|) CI Lower CI Upper  DF
+(Intercept)    33.45     0.6123  54.618 5.263e-187   32.241   34.649 398
+tratamiento     6.03     0.9261   6.511  2.251e-10    4.209    7.851 398
+
+Multiple R-squared:  0.09627 ,  Adjusted R-squared:  0.094 
+F-statistic: 42.39 on 1 and 398 DF,  p-value: 2.251e-10</code></pre>
+</div>
+</div>
+<p>El coeficiente de <code>tratamiento</code> es idéntico al de <code>difference_in_means()</code>. ¿Para qué la regresión, entonces? Porque escala: le sumás controles, interacciones o efectos fijos sin cambiar de herramienta. El test <span class="math inline">\(t\)</span> del coeficiente es un caso particular de la regresión, no una técnica aparte.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Usá <code>lm_robust()</code> como caballo de batalla para estimar efectos en experimentos. Fijate en el coeficiente de <code>tratamiento</code>, su error estándar y su valor <span class="math inline">\(p\)</span>. Los errores robustos (<code>se_type = "HC2"</code> por defecto) son la opción segura.</p>
+</div>
+</div>
+</section>
+<section id="controles-precisión-no-sesgo" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="controles-precisión-no-sesgo"><span class="header-section-number">4</span> Controles: precisión, no sesgo</h2>
+<p>En un experimento no controlás para quitar sesgo, porque el sorteo ya lo quitó. Pero sumar covariables medidas antes del tratamiento puede achicar el error estándar y darte un estimado más preciso.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ajuste_ctrl <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(visitas <span class="sc">~</span> tratamiento <span class="sc">+</span> edad <span class="sc">+</span> visitas_previas,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> datos)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ajuste_ctrl)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm_robust(formula = visitas ~ tratamiento + edad + visitas_previas, 
+    data = datos)
+
+Standard error type:  HC2 
+
+Coefficients:
+                Estimate Std. Error t value  Pr(&gt;|t|) CI Lower CI Upper  DF
+(Intercept)     20.31588    3.58382   5.669 2.775e-08  13.2702  27.3616 396
+tratamiento      5.80070    0.88953   6.521 2.132e-10   4.0519   7.5495 396
+edad            -0.02701    0.06524  -0.414 6.791e-01  -0.1553   0.1012 396
+visitas_previas  0.41151    0.07455   5.520 6.154e-08   0.2649   0.5581 396
+
+Multiple R-squared:  0.1678 ,   Adjusted R-squared:  0.1615 
+F-statistic: 24.19 on 3 and 396 DF,  p-value: 2.158e-14</code></pre>
+</div>
+</div>
+<p>El coeficiente de <code>tratamiento</code> casi no se mueve, pero su error estándar suele bajar. Cuidado con un detalle importante: los coeficientes de <code>edad</code> o <code>visitas_previas</code> no tienen lectura causal. Esas variables no se sortearon, así que sus coeficientes son asociaciones, no efectos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Agregá covariables pre-tratamiento cuando expliquen bien el resultado y quieras ganar precisión. Compará el error estándar de <code>tratamiento</code> con y sin controles. Nunca controles por variables medidas después del tratamiento: podrían estar afectadas por él y sesgar el estimado.</p>
+</div>
+</div>
+</section>
+<section id="ajuste-a-la-lin" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="ajuste-a-la-lin"><span class="header-section-number">5</span> Ajuste a la Lin</h2>
+<p>Meter covariables “a lo bruto” (sumándolas sin más) puede colar un sesgo chico en muestras finitas; es la crítica de Freedman. La receta de <a href="https://doi.org/10.1214/12-AOAS583">Lin (2013)</a> lo arregla: centra cada covariable en su media y la interactúa con el tratamiento. <code>lm_lin()</code> hace todo eso por vos; vos solo pasás las covariables en <code>covariates = ~ ...</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ajuste_lin <span class="ot">&lt;-</span> <span class="fu">lm_lin</span>(visitas <span class="sc">~</span> tratamiento,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">covariates =</span> <span class="sc">~</span> edad <span class="sc">+</span> visitas_previas,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> datos)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ajuste_lin)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm_lin(formula = visitas ~ tratamiento, covariates = ~edad + 
+    visitas_previas, data = datos)
+
+Standard error type:  HC2 
+
+Coefficients:
+                              Estimate Std. Error t value   Pr(&gt;|t|) CI Lower
+(Intercept)                    33.5887    0.57750 58.1626 1.758e-195 32.45330
+tratamiento                     5.8032    0.88540  6.5544  1.753e-10  4.06256
+edad_c                          0.1172    0.08488  1.3813  1.680e-01 -0.04963
+visitas_previas_c               0.4640    0.09452  4.9090  1.343e-06  0.27815
+tratamiento:edad_c             -0.2775    0.12836 -2.1619  3.123e-02 -0.52984
+tratamiento:visitas_previas_c  -0.1176    0.14778 -0.7959  4.266e-01 -0.40815
+                              CI Upper  DF
+(Intercept)                   34.72402 394
+tratamiento                    7.54394 394
+edad_c                         0.28413 394
+visitas_previas_c              0.64979 394
+tratamiento:edad_c            -0.02514 394
+tratamiento:visitas_previas_c  0.17291 394
+
+Multiple R-squared:  0.1795 ,   Adjusted R-squared:  0.1691 
+F-statistic: 16.13 on 5 and 394 DF,  p-value: 1.781e-14</code></pre>
+</div>
+</div>
+<p>El efecto estimado (≈ 5,80) queda con un error estándar de ≈ 0,885, menor que el ≈ 0,926 de la regresión sin ajustar. Mismo efecto, más precisión, sin el riesgo de sesgo de la regresión ingenua.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es el ajuste de covariables recomendado para experimentos. Usalo en lugar de sumar controles a mano cuando quieras precisión con garantías teóricas. Mirá que el error estándar sea igual o menor que el de <code>lm_robust()</code> sin covariables.</p>
+</div>
+</div>
+</section>
+<section id="efectos-heterogéneos" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="efectos-heterogéneos"><span class="header-section-number">6</span> Efectos heterogéneos</h2>
+<p>¿El incentivo rinde igual en la zona urbana que en la rural? Una interacción lo responde. El operador <code>*</code> en la fórmula pide los dos efectos principales más su producto: <code>tratamiento * zona</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ajuste_hetero <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(visitas <span class="sc">~</span> tratamiento <span class="sc">*</span> zona, <span class="at">data =</span> datos)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ajuste_hetero)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm_robust(formula = visitas ~ tratamiento * zona, data = datos)
+
+Standard error type:  HC2 
+
+Coefficients:
+                       Estimate Std. Error t value   Pr(&gt;|t|) CI Lower CI Upper
+(Intercept)              34.089     0.8918  38.226 5.793e-135   32.336   35.842
+tratamiento               4.450     1.2980   3.429  6.703e-04    1.898    7.002
+zonaurbana               -1.301     1.2234  -1.064  2.882e-01   -3.706    1.104
+tratamiento:zonaurbana    2.987     1.8379   1.625  1.049e-01   -0.626    6.600
+                        DF
+(Intercept)            396
+tratamiento            396
+zonaurbana             396
+tratamiento:zonaurbana 396
+
+Multiple R-squared:  0.1022 ,   Adjusted R-squared:  0.09542 
+F-statistic: 14.85 on 3 and 396 DF,  p-value: 3.514e-09</code></pre>
+</div>
+</div>
+<p>Como <code>rural</code> es la categoría de referencia (va primero en el alfabeto), el coeficiente de <code>tratamiento</code> (≈ 4,45) es el efecto del incentivo en la zona rural. El término <code>tratamiento:zonaurbana</code> (≈ +2,99) dice cuánto más rinde en la zona urbana. El efecto urbano total es la suma de los dos, ≈ 7,4.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Buscá efectos heterogéneos con una interacción cuando tengas una hipótesis sobre para quién funciona el programa. Leé el término de interacción como exploración, no como prueba, salvo que lo hayas pre-registrado: los subgrupos que salen “significativos” por azar son una fuente clásica de resultados que no se replican.</p>
+</div>
+</div>
+</section>
+<section id="tabla-de-balance" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="tabla-de-balance"><span class="header-section-number">7</span> Tabla de balance</h2>
+<p>Un buen sorteo deja los grupos parejos en las variables previas. Para chequearlo, corré una regresión por covariable (la covariable explicada por <code>tratamiento</code>) y juntá las diferencias con su valor <span class="math inline">\(p\)</span>. Sin bucles: tres modelos explícitos que van a una <code>data.frame</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>b_edad    <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(edad <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>b_exp     <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(experiencia <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>b_previas <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(visitas_previas <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>balance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"edad"</span>, <span class="st">"experiencia"</span>, <span class="st">"visitas_previas"</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">dif      =</span> <span class="fu">round</span>(<span class="fu">c</span>(b_edad<span class="sc">$</span>coefficients[<span class="st">"tratamiento"</span>],</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                     b_exp<span class="sc">$</span>coefficients[<span class="st">"tratamiento"</span>],</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                     b_previas<span class="sc">$</span>coefficients[<span class="st">"tratamiento"</span>]), <span class="dv">2</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_valor  =</span> <span class="fu">round</span>(<span class="fu">c</span>(b_edad<span class="sc">$</span>p.value[<span class="st">"tratamiento"</span>],</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                     b_exp<span class="sc">$</span>p.value[<span class="st">"tratamiento"</span>],</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>                     b_previas<span class="sc">$</span>p.value[<span class="st">"tratamiento"</span>]), <span class="dv">3</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>balance</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         variable  dif p_valor
+1            edad 0.19   0.787
+2     experiencia 0.59   0.021
+3 visitas_previas 0.57   0.366</code></pre>
+</div>
+</div>
+<p>Casi ninguna diferencia debería ser significativa, y así es: <code>edad</code> y <code>visitas_previas</code> tienen valores <span class="math inline">\(p\)</span> altos. Pero <code>experiencia</code> sale significativa (<span class="math inline">\(p ≈ 0{,}021\)</span>) aunque el tratamiento se sorteó.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar (y una advertencia)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar (y una advertencia)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Con muchas covariables, alrededor del 5% van a salir significativas solo por azar, aun con un sorteo perfecto. Un valor <span class="math inline">\(p\)</span> chico en una prueba de balance no prueba que la aleatorización falló; es lo esperable en cada muestra concreta. Y el balance solo cubre lo que medís: el sorteo también equilibra, en expectativa, las variables que no observaste.</p>
+</div>
+</div>
+</section>
+<section id="errores-estándar-agrupados" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="errores-estándar-agrupados"><span class="header-section-number">8</span> Errores estándar agrupados</h2>
+<p>Si sorteás por conglomerados (por ejemplo, sorteás barrios enteros en vez de personas), las observaciones dentro de un mismo conglomerado se parecen entre sí. Ignorarlo produce errores estándar demasiado chicos y falsos positivos. <code>lm_robust()</code> los corrige con el argumento <code>clusters =</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># demo de sintaxis: si "zona" fuese la unidad de sorteo, agruparías por ella</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm_robust</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">clusters =</span> zona, <span class="at">data =</span> datos)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Estimate Std. Error   t value   Pr(&gt;|t|)  CI Lower CI Upper
+(Intercept)   33.445  0.6505825 51.407775 0.01238216  25.17857 41.71143
+tratamiento    6.030  1.4877553  4.053086 0.15364776 -12.79330 24.85330
+                  DF
+(Intercept) 1.000000
+tratamiento 1.001808</code></pre>
+</div>
+</div>
+<p><code>difference_in_means()</code> acepta la misma lógica, más <code>blocks =</code> para diseños por bloques. Ojo con un detalle: cuando pasás <code>clusters =</code>, esta función espera que el tratamiento sea constante dentro de cada conglomerado, porque asume que sorteaste el conglomerado entero. Nuestros datos se sortearon a nivel individual, así que este bloque queda como demostración de sintaxis:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># diseño por conglomerados: se sortea el conglomerado entero</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">difference_in_means</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">clusters =</span> conglomerado, <span class="at">data =</span> tus_datos)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># diseño por bloques: se sortea dentro de cada bloque</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">difference_in_means</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">blocks =</span> bloque, <span class="at">data =</span> tus_datos)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>En un diseño por conglomerados real tendrías decenas o cientos de conglomerados, cada uno tratado o control por completo.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Esto conecta con la idea de SUTVA del bloque: cuando el tratamiento de una unidad puede afectar a sus vecinas, una salida es “sortear por conglomerados” y separar los brazos. Regla práctica: si aleatorizaste por grupo, tenés que agrupar los errores por ese mismo grupo, o van a salir más chicos de lo que corresponde.</p>
+</div>
+</div>
+</section>
+<section id="inferencia-por-aleatorización" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="inferencia-por-aleatorización"><span class="header-section-number">9</span> Inferencia por aleatorización</h2>
+<p>¿El efecto es real o pura suerte del sorteo? La inferencia por aleatorización lo contesta sin apoyarse en la normalidad de muestras grandes. La idea: bajo la hipótesis nula de “efecto cero para todos”, reasignás el tratamiento al azar miles de veces y mirás qué tan raro es el efecto que observaste dentro de esa nube. El paquete <code>ri2</code> de Alexander Coppock lo automatiza con <code>conduct_ri()</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>declaracion <span class="ot">&lt;-</span> <span class="fu">declare_ra</span>(<span class="at">N =</span> <span class="dv">400</span>, <span class="at">m =</span> <span class="dv">200</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ri <span class="ot">&lt;-</span> <span class="fu">conduct_ri</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  visitas <span class="sc">~</span> tratamiento,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">declaration =</span> declaracion,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">assignment  =</span> <span class="st">"tratamiento"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sharp_hypothesis =</span> <span class="dv">0</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> datos,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> <span class="dv">1000</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ri)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         term estimate two_tailed_p_value
+1 tratamiento     6.03                  0</code></pre>
+</div>
+</div>
+<p>El valor <span class="math inline">\(p\)</span> por aleatorización sale prácticamente cero: en 1000 reasignaciones al azar, ninguna produjo un efecto tan grande como el observado. Podés ver la distribución de permutación con el efecto observado marcado; esto reproduce la Figura 4 de <a href="https://doi.org/10.1177/2053168020914444">Freire, Galdino y Mignozzetti (2020)</a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ri<span class="sc">$</span>sims_df, <span class="fu">aes</span>(<span class="at">x =</span> est_sim)) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">fill =</span> azul, <span class="at">alpha =</span> <span class="fl">0.75</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> ri<span class="sc">$</span>sims_df<span class="sc">$</span>est_obs[<span class="dv">1</span>],</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> rojo, <span class="at">linewidth =</span> <span class="fl">1.1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> ri<span class="sc">$</span>sims_df<span class="sc">$</span>est_obs[<span class="dv">1</span>], <span class="at">y =</span> <span class="cn">Inf</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"  efecto observado (6,03)"</span>, <span class="at">color =</span> rojo,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">size =</span> <span class="fl">3.6</span>) <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Efecto bajo reasignación al azar (hipótesis nula)"</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Frecuencia"</span>) <span class="sc">+</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-experimentos_files/figure-html/ri2-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="975"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es la prueba a la que recurrir con muestras chicas, diseños complejos (bloques, conglomerados) o cuando no querés confiar en la aproximación normal. Mirá dónde cae la línea del efecto observado: si queda lejos de la nube, el nulo es poco creíble; si cae dentro, no podés descartar que el efecto sea cero.</p>
+</div>
+</div>
+</section>
+<section id="múltiples-resultados" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="múltiples-resultados"><span class="header-section-number">10</span> Múltiples resultados</h2>
+<p>Cuando probás varios resultados a la vez (acá <code>visitas</code> e <code>indice_larvario</code>), la chance de encontrar al menos un falso positivo crece. Es el problema de las comparaciones múltiples. Una salida sencilla es ajustar los valores <span class="math inline">\(p\)</span> con <code>p.adjust()</code>; otra es combinar los resultados en un índice estandarizado y probar ese índice una sola vez.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>o_visitas <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>o_larvas  <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(indice_larvario <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>p_crudos <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">visitas         =</span> o_visitas<span class="sc">$</span>p.value[<span class="st">"tratamiento"</span>],</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">indice_larvario =</span> o_larvas<span class="sc">$</span>p.value[<span class="st">"tratamiento"</span>]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Benjamini-Hochberg: controla la tasa de falsos descubrimientos</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_crudos, <span class="at">method =</span> <span class="st">"BH"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        visitas.tratamiento indice_larvario.tratamiento 
+               2.251313e-10                2.327320e-12 </code></pre>
+</div>
+</div>
+<p>Acá los dos efectos son enormes, así que siguen dando cero tras el ajuste. La diferencia se nota cuando los efectos son chicos y estás cerca del umbral. Como alternativa, un índice estandarizado promedia los resultados en la misma escala:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>indice <span class="ot">&lt;-</span> <span class="fu">scale</span>(datos<span class="sc">$</span>visitas) <span class="sc">+</span> <span class="fu">scale</span>(<span class="sc">-</span>datos<span class="sc">$</span>indice_larvario)  <span class="co"># más visitas, menos larvas = mejor</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lm_robust</span>(indice <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Estimate Std. Error   t value     Pr(&gt;|t|)   CI Lower   CI Upper
+(Intercept)   -0.655 0.09376286 -6.985708 1.197608e-11 -0.8393324 -0.4706676
+tratamiento    1.310 0.13530626  9.681739 4.777422e-20  1.0439957  1.5760043
+             DF
+(Intercept) 398
+tratamiento 398</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ajustá los valores <span class="math inline">\(p\)</span> (o armá un índice) siempre que declares varios resultados. <code>method = "BH"</code> controla la proporción de falsos descubrimientos y es menos conservador que Bonferroni. Decidí de antemano cuál es tu resultado principal, para no elegir a posteriori el que salió significativo.</p>
+</div>
+</div>
+</section>
+<section id="declarar-el-diseño-con-declaredesign" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="declarar-el-diseño-con-declaredesign"><span class="header-section-number">11</span> Declarar el diseño con DeclareDesign</h2>
+<p>Antes de gastar un peso en el campo, podés escribir tu diseño como código y simularlo. <code>DeclareDesign</code> arma el diseño en piezas (el esquema MIDA: modelo, pregunta, asignación, estimación) que se suman con <code>+</code>, como las capas de <code>ggplot</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>diseno <span class="ot">&lt;-</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_model</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">400</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">U =</span> <span class="fu">rnorm</span>(N),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">potential_outcomes</span>(Y <span class="sc">~</span> <span class="fl">0.3</span> <span class="sc">*</span> Z <span class="sc">+</span> U)   <span class="co"># resultados potenciales</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_inquiry</span>(<span class="at">ATE =</span> <span class="fu">mean</span>(Y_Z_1 <span class="sc">-</span> Y_Z_0)) <span class="sc">+</span>       <span class="co"># la pregunta: el ATE</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_assignment</span>(<span class="at">Z =</span> <span class="fu">complete_ra</span>(N, <span class="at">m =</span> <span class="dv">200</span>)) <span class="sc">+</span>  <span class="co"># el sorteo</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_measurement</span>(<span class="at">Y =</span> <span class="fu">reveal_outcomes</span>(Y <span class="sc">~</span> Z)) <span class="sc">+</span>  <span class="co"># qué se observa</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_estimator</span>(Y <span class="sc">~</span> Z, <span class="at">.method =</span> lm_robust, <span class="at">inquiry =</span> <span class="st">"ATE"</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>diseno</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Research design declaration summary
+
+Step 1 (model): declare_model(N = 400, U = rnorm(N), potential_outcomes(Y ~ 0.3 * Z + U)) 
+
+Step 2 (inquiry): declare_inquiry(ATE = mean(Y_Z_1 - Y_Z_0)) -------------------
+
+Step 3 (assignment): declare_assignment(Z = complete_ra(N, m = 200)) -----------
+
+Step 4 (measurement): declare_measurement(Y = reveal_outcomes(Y ~ Z)) ----------
+
+Step 5 (estimator): declare_estimator(Y ~ Z, .method = lm_robust, inquiry = "ATE") 
+
+Run of the design:
+
+ inquiry estimand estimator term estimate std.error statistic p.value conf.low
+     ATE      0.3 estimator    Z    0.178    0.0963      1.84   0.066  -0.0118
+ conf.high  df outcome
+     0.367 398       Y
+
+No modifiable parameters saved in design </code></pre>
+</div>
+</div>
+<p><code>diagnose_design()</code> simula el diseño muchas veces y devuelve sus propiedades: sesgo, poder (la chance de detectar el efecto), cobertura del intervalo de confianza. Todo esto antes de recoger un solo dato real.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3043</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>diagnostico <span class="ot">&lt;-</span> <span class="fu">diagnose_design</span>(diseno, <span class="at">sims =</span> <span class="dv">500</span>, <span class="at">bootstrap_sims =</span> <span class="dv">100</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>diagnostico</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Research design diagnosis based on 500 simulations. Diagnosis completed in 1 secs. Diagnosand estimates with bootstrapped standard errors in parentheses (100 replicates).
+
+ Design Inquiry Estimator Outcome Term N Sims Mean Estimand Mean Estimate
+ diseno     ATE estimator       Y    Z    500          0.30          0.30
+                                                     (0.00)        (0.00)
+   Bias SD Estimate   RMSE  Power Coverage
+   0.00        0.11   0.10   0.84     0.94
+ (0.00)      (0.00) (0.00) (0.02)   (0.01)</code></pre>
+</div>
+</div>
+<p>Con <code>N = 400</code> y un efecto de 0,3 desvíos, el poder ronda 0,84: detectaríamos ese efecto en el 84% de los experimentos. Si el poder saliera bajo, sabrías que necesitás más muestra antes de salir al campo. La referencia completa es <a href="https://book.declaredesign.org/">Blair, Coppock y Humphreys (2023)</a>, gratis online.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Declará y diagnosticá tu diseño en la etapa de planificación, para responder “¿con esta muestra, detecto un efecto de este tamaño?”. Mirá el poder (querés ≥ 0,8), el sesgo (cerca de cero) y la cobertura (cerca de 0,95). Subí <code>N</code> o el tamaño de efecto asumido y volvé a diagnosticar para ver cómo cambian.</p>
+</div>
+</div>
+</section>
+<section id="diseños-listos-designlibrary" class="level2" data-number="12">
+<h2 data-number="12" class="anchored" data-anchor-id="diseños-listos-designlibrary"><span class="header-section-number">12</span> Diseños listos: DesignLibrary</h2>
+<p>No hace falta declarar todo a mano. <code>DesignLibrary</code> trae diseñadores ya codificados: les pasás unos pocos parámetros y sale un diseño completo, listo para <code>diagnose_design()</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">two_arm_designer</span>(<span class="at">N =</span> <span class="dv">200</span>, <span class="at">ate =</span> <span class="fl">0.3</span>)              <span class="co"># dos brazos</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">multi_arm_designer</span>(<span class="at">N =</span> <span class="dv">300</span>, <span class="at">m_arms =</span> <span class="dv">3</span>,           <span class="co"># varios brazos (como el dengue)</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">outcome_means =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.6</span>))</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> <span class="fu">block_cluster_two_arm_designer</span>(                   <span class="co"># bloques y conglomerados</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">N_blocks =</span> <span class="dv">5</span>, <span class="at">N_clusters_in_block =</span> <span class="dv">10</span>, <span class="at">N_i_in_cluster =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The implied ICC in (control) is 0.667"
+[1] "The implied ICC in (control) conditional on block is  0.5"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>d4 <span class="ot">&lt;-</span> <span class="fu">regression_discontinuity_designer</span>(<span class="at">N =</span> <span class="dv">1000</span>,       <span class="co"># el RDD de la tarde</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">cutoff =</span> <span class="fl">0.5</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># cada uno es un diseño completo, listo para diagnosticar</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnose_design</span>(d1, <span class="at">sims =</span> <span class="dv">500</span>, <span class="at">bootstrap_sims =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Research design diagnosis based on 500 simulations. Diagnosis completed in 1 secs. Diagnosand estimates with bootstrapped standard errors in parentheses (100 replicates).
+
+ Design Inquiry Estimator Outcome Term N Sims Mean Estimand Mean Estimate
+     d1     ATE estimator       Y    Z    500          0.30          0.30
+                                                     (0.00)        (0.01)
+   Bias SD Estimate   RMSE  Power Coverage
+   0.00        0.14   0.14   0.56     0.96
+ (0.01)      (0.00) (0.00) (0.02)   (0.01)</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Empezá por un diseñador de la librería cuando tu diseño encaje en un molde común (dos brazos, varios brazos, bloques y conglomerados, discontinuidad). Ajustás los parámetros, diagnosticás, y solo bajás a declarar a mano si tu diseño tiene algo que la librería no cubre. La lista completa está en <a href="https://declaredesign.org/r/designlibrary/">declaredesign.org/r/designlibrary</a>.</p>
+</div>
+</div>
+</section>
+<section id="para-seguir" class="level2" data-number="13">
+<h2 data-number="13" class="anchored" data-anchor-id="para-seguir"><span class="header-section-number">13</span> Para seguir</h2>
+<div class="callout callout-style-default callout-tip callout-titled" title="Enlaces y lecturas">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Enlaces y lecturas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Documentación de los paquetes</strong></p>
+<ul>
+<li><a href="https://declaredesign.org/r/estimatr/"><code>estimatr</code></a>: <code>lm_robust</code>, <code>lm_lin</code>, <code>difference_in_means</code></li>
+<li><a href="https://declaredesign.org/"><code>DeclareDesign</code></a>: declarar, diagnosticar y simular diseños</li>
+<li><a href="https://declaredesign.org/r/fabricatr/"><code>fabricatr</code></a> y <a href="https://declaredesign.org/r/randomizr/"><code>randomizr</code></a>: simular datos y sortear</li>
+<li><a href="https://cran.r-project.org/package=ri2"><code>ri2</code></a>: inferencia por aleatorización</li>
+</ul>
+<p><strong>Para leer</strong></p>
+<ul>
+<li><a href="https://book.declaredesign.org/">Blair, Coppock y Humphreys (2023)</a>, <em>Research Design in the Social Sciences</em>: el libro de <code>DeclareDesign</code>, gratis online</li>
+<li><a href="https://doi.org/10.1214/12-AOAS583">Lin (2013)</a>: el ajuste de covariables que implementa <code>lm_lin()</code></li>
+</ul>
+<p><strong>Nuestros casos del bloque</strong></p>
+<ul>
+<li><a href="https://github.com/danilofreire/incentives-healthcare">Freire y Mignozzetti (2022)</a>: incentivos económicos y control del dengue</li>
+<li><a href="https://doi.org/10.1177/2053168020914444">Freire, Galdino y Mignozzetti (2020)</a>: el resultado nulo creíble y la inferencia por aleatorización de la Figura 4</li>
+</ul>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Volver arriba</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Ejecutar el código</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Referencia R: experimentos"</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Bloque 1 · diferencia de medias, balance, ajuste de covariables y diseño"</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="an">toc-depth:</span><span class="co"> 3</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> true</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="an">code-copy:</span><span class="co"> true</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> es</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="an">engine:</span><span class="co"> knitr</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">eval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.width =</span> <span class="fl">6.5</span>,</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.height =</span> <span class="dv">4</span>,</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="dv">150</span>,</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">cache =</span> <span class="cn">TRUE</span></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a><span class="co"># paleta de la casa (el mismo par azul/rojo de las diapositivas)</span></span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>azul <span class="ot">&lt;-</span> <span class="st">"#2d4563"</span></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>rojo <span class="ot">&lt;-</span> <span class="st">"#b85450"</span></span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>Esta página reúne, con código que podés correr y copiar, todas las funciones de R que aparecen en el bloque de experimentos (<span class="co">[</span><span class="ot">diapositivas</span><span class="co">](diapositivas/02-experimentos.html)</span>). La idea es que después del taller tengas un lugar donde volver: cada sección explica en dos o tres frases qué hace el comando, muestra un bloque ejecutable con su salida real, y cierra con una nota sobre cuándo conviene usarlo y qué mirar.</span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>Todos los ejemplos trabajan sobre los mismos datos simulados del experimento del dengue. Como la semilla está fija (<span class="in">`set.seed(3043)`</span>), los números que ves acá son idénticos a los de las diapositivas y a los del archivo <span class="co">[</span><span class="ot">`dengue_incentivos.csv`</span><span class="co">](diapositivas/datos/dengue_incentivos.csv)</span>. Si corrés el código en tu computadora vas a obtener exactamente lo mismo.</span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paquetes y datos</span></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>Cargá los paquetes del bloque. El bucle recorre la lista <span class="in">`paquetes`</span> e instala cada uno solo si te falta, así el código corre igual en cualquier máquina. Después generá los datos con <span class="in">`fabricatr`</span> y <span class="in">`randomizr`</span>, la misma "cocina" que usa <span class="in">`DeclareDesign`</span> por dentro.</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r paquetes}</span></span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a><span class="co"># instala cada paquete solo si te falta, y después lo carga</span></span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"estimatr"</span>, <span class="st">"fabricatr"</span>, <span class="st">"randomizr"</span>,</span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>              <span class="st">"DeclareDesign"</span>, <span class="st">"DesignLibrary"</span>, <span class="st">"ri2"</span>)</span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> paquetes) {</span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a><span class="in">`fabricate()`</span> arma una tabla variable por variable; <span class="in">`complete_ra()`</span> sortea exactamente 200 agentes al tratamiento (un sorteo simple, "completo"). El resto de las variables son rasgos previos de cada agente de salud.</span>
+<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r generar-datos}</span></span>
+<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3043</span>)</span>
+<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">400</span>,</span>
+<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">edad            =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(N, <span class="dv">38</span>, <span class="fl">7.5</span>)),</span>
+<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">mujer           =</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.7</span>),</span>
+<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">experiencia     =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(N, <span class="dv">7</span>, <span class="fl">2.6</span>)),</span>
+<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">zona            =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"urbana"</span>, <span class="st">"rural"</span>), N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a>  <span class="at">visitas_previas =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(N, <span class="dv">35</span>, <span class="dv">6</span>)),</span>
+<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a>  <span class="at">tratamiento     =</span> <span class="fu">complete_ra</span>(N, <span class="at">m =</span> <span class="dv">200</span>),</span>
+<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a>  <span class="at">visitas =</span> <span class="fu">round</span>(<span class="dv">20</span> <span class="sc">+</span> <span class="fl">4.5</span> <span class="sc">*</span> tratamiento</span>
+<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a>                  <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> tratamiento <span class="sc">*</span> (zona <span class="sc">==</span> <span class="st">"urbana"</span>)</span>
+<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a>                  <span class="sc">+</span> <span class="fl">0.4</span> <span class="sc">*</span> visitas_previas <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">9</span>)),</span>
+<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a>  <span class="at">indice_larvario =</span> <span class="fu">round</span>(<span class="fu">pmax</span>(<span class="dv">0</span>, <span class="dv">12</span> <span class="sc">-</span> <span class="fl">2.8</span> <span class="sc">*</span> tratamiento <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">4</span>)), <span class="dv">1</span>)</span>
+<span id="cb34-71"><a href="#cb34-71" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-72"><a href="#cb34-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-73"><a href="#cb34-73" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos)</span>
+<span id="cb34-74"><a href="#cb34-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-75"><a href="#cb34-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-76"><a href="#cb34-76" aria-hidden="true" tabindex="-1"></a>Las variables clave: <span class="in">`tratamiento`</span> (1 si el agente recibió el incentivo económico), <span class="in">`visitas`</span> (criaderos tratados, el resultado principal) e <span class="in">`indice_larvario`</span> (larvas por casa, un segundo resultado). Las demás (<span class="in">`edad`</span>, <span class="in">`experiencia`</span>, <span class="in">`zona`</span>, <span class="in">`visitas_previas`</span>) se midieron antes del sorteo.</span>
+<span id="cb34-77"><a href="#cb34-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-78"><a href="#cb34-78" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-79"><a href="#cb34-79" aria-hidden="true" tabindex="-1"></a>Simulá tus datos con <span class="in">`fabricatr`</span> cuando quieras probar tu código de análisis antes de tener datos reales, o para armar un ejemplo reproducible. Con la semilla fija, cualquiera reproduce tu tabla exactamente.</span>
+<span id="cb34-80"><a href="#cb34-80" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-81"><a href="#cb34-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-82"><a href="#cb34-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## Diferencia de medias</span></span>
+<span id="cb34-83"><a href="#cb34-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-84"><a href="#cb34-84" aria-hidden="true" tabindex="-1"></a>Como el incentivo se sorteó, el efecto causal promedio es simplemente la media de <span class="in">`visitas`</span> en el grupo tratado menos la del grupo control. <span class="in">`difference_in_means()`</span> de <span class="in">`estimatr`</span> calcula esa resta con su error estándar y su intervalo de confianza.</span>
+<span id="cb34-85"><a href="#cb34-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-86"><a href="#cb34-86" aria-hidden="true" tabindex="-1"></a><span class="in">```{r diff-in-means}</span></span>
+<span id="cb34-87"><a href="#cb34-87" aria-hidden="true" tabindex="-1"></a><span class="fu">difference_in_means</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb34-88"><a href="#cb34-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-89"><a href="#cb34-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-90"><a href="#cb34-90" aria-hidden="true" tabindex="-1"></a>El estimado (≈ 6,03) son las visitas de más que produjo el incentivo. El intervalo de confianza no cruza el cero, así que el efecto es distinto de cero con holgura.</span>
+<span id="cb34-91"><a href="#cb34-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-92"><a href="#cb34-92" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-93"><a href="#cb34-93" aria-hidden="true" tabindex="-1"></a>Es la forma más directa de estimar el efecto en un experimento aleatorizado simple. Mirá el punto estimado y si el intervalo de confianza incluye el cero. Para diseños con bloques o conglomerados, esta misma función acepta los argumentos <span class="in">`blocks =`</span> y <span class="in">`clusters =`</span> (lo vemos más abajo).</span>
+<span id="cb34-94"><a href="#cb34-94" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-95"><a href="#cb34-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-96"><a href="#cb34-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## La regresión da lo mismo</span></span>
+<span id="cb34-97"><a href="#cb34-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-98"><a href="#cb34-98" aria-hidden="true" tabindex="-1"></a>La misma diferencia sale de una regresión de <span class="in">`visitas`</span> sobre <span class="in">`tratamiento`</span>. <span class="in">`lm_robust()`</span> ajusta esa regresión con errores estándar robustos (corrigen la heterocedasticidad sin costo). El coeficiente de <span class="in">`tratamiento`</span> coincide con la diferencia de medias hasta el último decimal.</span>
+<span id="cb34-99"><a href="#cb34-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-100"><a href="#cb34-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r lm-robust}</span></span>
+<span id="cb34-101"><a href="#cb34-101" aria-hidden="true" tabindex="-1"></a>ajuste_visitas <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb34-102"><a href="#cb34-102" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ajuste_visitas)</span>
+<span id="cb34-103"><a href="#cb34-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-104"><a href="#cb34-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-105"><a href="#cb34-105" aria-hidden="true" tabindex="-1"></a>El coeficiente de <span class="in">`tratamiento`</span> es idéntico al de <span class="in">`difference_in_means()`</span>. ¿Para qué la regresión, entonces? Porque escala: le sumás controles, interacciones o efectos fijos sin cambiar de herramienta. El test $t$ del coeficiente es un caso particular de la regresión, no una técnica aparte.</span>
+<span id="cb34-106"><a href="#cb34-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-107"><a href="#cb34-107" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-108"><a href="#cb34-108" aria-hidden="true" tabindex="-1"></a>Usá <span class="in">`lm_robust()`</span> como caballo de batalla para estimar efectos en experimentos. Fijate en el coeficiente de <span class="in">`tratamiento`</span>, su error estándar y su valor $p$. Los errores robustos (<span class="in">`se_type = "HC2"`</span> por defecto) son la opción segura.</span>
+<span id="cb34-109"><a href="#cb34-109" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-110"><a href="#cb34-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-111"><a href="#cb34-111" aria-hidden="true" tabindex="-1"></a><span class="fu">## Controles: precisión, no sesgo</span></span>
+<span id="cb34-112"><a href="#cb34-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-113"><a href="#cb34-113" aria-hidden="true" tabindex="-1"></a>En un experimento no controlás para quitar sesgo, porque el sorteo ya lo quitó. Pero sumar covariables medidas antes del tratamiento puede achicar el error estándar y darte un estimado más preciso.</span>
+<span id="cb34-114"><a href="#cb34-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-115"><a href="#cb34-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r controles}</span></span>
+<span id="cb34-116"><a href="#cb34-116" aria-hidden="true" tabindex="-1"></a>ajuste_ctrl <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(visitas <span class="sc">~</span> tratamiento <span class="sc">+</span> edad <span class="sc">+</span> visitas_previas,</span>
+<span id="cb34-117"><a href="#cb34-117" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> datos)</span>
+<span id="cb34-118"><a href="#cb34-118" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ajuste_ctrl)</span>
+<span id="cb34-119"><a href="#cb34-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-120"><a href="#cb34-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-121"><a href="#cb34-121" aria-hidden="true" tabindex="-1"></a>El coeficiente de <span class="in">`tratamiento`</span> casi no se mueve, pero su error estándar suele bajar. Cuidado con un detalle importante: los coeficientes de <span class="in">`edad`</span> o <span class="in">`visitas_previas`</span> no tienen lectura causal. Esas variables no se sortearon, así que sus coeficientes son asociaciones, no efectos.</span>
+<span id="cb34-122"><a href="#cb34-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-123"><a href="#cb34-123" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-124"><a href="#cb34-124" aria-hidden="true" tabindex="-1"></a>Agregá covariables pre-tratamiento cuando expliquen bien el resultado y quieras ganar precisión. Compará el error estándar de <span class="in">`tratamiento`</span> con y sin controles. Nunca controles por variables medidas después del tratamiento: podrían estar afectadas por él y sesgar el estimado.</span>
+<span id="cb34-125"><a href="#cb34-125" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-126"><a href="#cb34-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-127"><a href="#cb34-127" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ajuste a la Lin</span></span>
+<span id="cb34-128"><a href="#cb34-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-129"><a href="#cb34-129" aria-hidden="true" tabindex="-1"></a>Meter covariables "a lo bruto" (sumándolas sin más) puede colar un sesgo chico en muestras finitas; es la crítica de Freedman. La receta de <span class="co">[</span><span class="ot">Lin (2013)</span><span class="co">](https://doi.org/10.1214/12-AOAS583)</span> lo arregla: centra cada covariable en su media y la interactúa con el tratamiento. <span class="in">`lm_lin()`</span> hace todo eso por vos; vos solo pasás las covariables en <span class="in">`covariates = ~ ...`</span>.</span>
+<span id="cb34-130"><a href="#cb34-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-131"><a href="#cb34-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{r lm-lin}</span></span>
+<span id="cb34-132"><a href="#cb34-132" aria-hidden="true" tabindex="-1"></a>ajuste_lin <span class="ot">&lt;-</span> <span class="fu">lm_lin</span>(visitas <span class="sc">~</span> tratamiento,</span>
+<span id="cb34-133"><a href="#cb34-133" aria-hidden="true" tabindex="-1"></a>                     <span class="at">covariates =</span> <span class="sc">~</span> edad <span class="sc">+</span> visitas_previas,</span>
+<span id="cb34-134"><a href="#cb34-134" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> datos)</span>
+<span id="cb34-135"><a href="#cb34-135" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ajuste_lin)</span>
+<span id="cb34-136"><a href="#cb34-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-137"><a href="#cb34-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-138"><a href="#cb34-138" aria-hidden="true" tabindex="-1"></a>El efecto estimado (≈ 5,80) queda con un error estándar de ≈ 0,885, menor que el ≈ 0,926 de la regresión sin ajustar. Mismo efecto, más precisión, sin el riesgo de sesgo de la regresión ingenua.</span>
+<span id="cb34-139"><a href="#cb34-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-140"><a href="#cb34-140" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-141"><a href="#cb34-141" aria-hidden="true" tabindex="-1"></a>Es el ajuste de covariables recomendado para experimentos. Usalo en lugar de sumar controles a mano cuando quieras precisión con garantías teóricas. Mirá que el error estándar sea igual o menor que el de <span class="in">`lm_robust()`</span> sin covariables.</span>
+<span id="cb34-142"><a href="#cb34-142" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-143"><a href="#cb34-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-144"><a href="#cb34-144" aria-hidden="true" tabindex="-1"></a><span class="fu">## Efectos heterogéneos</span></span>
+<span id="cb34-145"><a href="#cb34-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-146"><a href="#cb34-146" aria-hidden="true" tabindex="-1"></a>¿El incentivo rinde igual en la zona urbana que en la rural? Una interacción lo responde. El operador <span class="in">`*`</span> en la fórmula pide los dos efectos principales más su producto: <span class="in">`tratamiento * zona`</span>.</span>
+<span id="cb34-147"><a href="#cb34-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-148"><a href="#cb34-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r heterogeneos}</span></span>
+<span id="cb34-149"><a href="#cb34-149" aria-hidden="true" tabindex="-1"></a>ajuste_hetero <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(visitas <span class="sc">~</span> tratamiento <span class="sc">*</span> zona, <span class="at">data =</span> datos)</span>
+<span id="cb34-150"><a href="#cb34-150" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ajuste_hetero)</span>
+<span id="cb34-151"><a href="#cb34-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-152"><a href="#cb34-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-153"><a href="#cb34-153" aria-hidden="true" tabindex="-1"></a>Como <span class="in">`rural`</span> es la categoría de referencia (va primero en el alfabeto), el coeficiente de <span class="in">`tratamiento`</span> (≈ 4,45) es el efecto del incentivo en la zona rural. El término <span class="in">`tratamiento:zonaurbana`</span> (≈ +2,99) dice cuánto más rinde en la zona urbana. El efecto urbano total es la suma de los dos, ≈ 7,4.</span>
+<span id="cb34-154"><a href="#cb34-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-155"><a href="#cb34-155" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-156"><a href="#cb34-156" aria-hidden="true" tabindex="-1"></a>Buscá efectos heterogéneos con una interacción cuando tengas una hipótesis sobre para quién funciona el programa. Leé el término de interacción como exploración, no como prueba, salvo que lo hayas pre-registrado: los subgrupos que salen "significativos" por azar son una fuente clásica de resultados que no se replican.</span>
+<span id="cb34-157"><a href="#cb34-157" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-158"><a href="#cb34-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-159"><a href="#cb34-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tabla de balance</span></span>
+<span id="cb34-160"><a href="#cb34-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-161"><a href="#cb34-161" aria-hidden="true" tabindex="-1"></a>Un buen sorteo deja los grupos parejos en las variables previas. Para chequearlo, corré una regresión por covariable (la covariable explicada por <span class="in">`tratamiento`</span>) y juntá las diferencias con su valor $p$. Sin bucles: tres modelos explícitos que van a una <span class="in">`data.frame`</span>.</span>
+<span id="cb34-162"><a href="#cb34-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-163"><a href="#cb34-163" aria-hidden="true" tabindex="-1"></a><span class="in">```{r balance}</span></span>
+<span id="cb34-164"><a href="#cb34-164" aria-hidden="true" tabindex="-1"></a>b_edad    <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(edad <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb34-165"><a href="#cb34-165" aria-hidden="true" tabindex="-1"></a>b_exp     <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(experiencia <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb34-166"><a href="#cb34-166" aria-hidden="true" tabindex="-1"></a>b_previas <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(visitas_previas <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb34-167"><a href="#cb34-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-168"><a href="#cb34-168" aria-hidden="true" tabindex="-1"></a>balance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb34-169"><a href="#cb34-169" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"edad"</span>, <span class="st">"experiencia"</span>, <span class="st">"visitas_previas"</span>),</span>
+<span id="cb34-170"><a href="#cb34-170" aria-hidden="true" tabindex="-1"></a>  <span class="at">dif      =</span> <span class="fu">round</span>(<span class="fu">c</span>(b_edad<span class="sc">$</span>coefficients[<span class="st">"tratamiento"</span>],</span>
+<span id="cb34-171"><a href="#cb34-171" aria-hidden="true" tabindex="-1"></a>                     b_exp<span class="sc">$</span>coefficients[<span class="st">"tratamiento"</span>],</span>
+<span id="cb34-172"><a href="#cb34-172" aria-hidden="true" tabindex="-1"></a>                     b_previas<span class="sc">$</span>coefficients[<span class="st">"tratamiento"</span>]), <span class="dv">2</span>),</span>
+<span id="cb34-173"><a href="#cb34-173" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_valor  =</span> <span class="fu">round</span>(<span class="fu">c</span>(b_edad<span class="sc">$</span>p.value[<span class="st">"tratamiento"</span>],</span>
+<span id="cb34-174"><a href="#cb34-174" aria-hidden="true" tabindex="-1"></a>                     b_exp<span class="sc">$</span>p.value[<span class="st">"tratamiento"</span>],</span>
+<span id="cb34-175"><a href="#cb34-175" aria-hidden="true" tabindex="-1"></a>                     b_previas<span class="sc">$</span>p.value[<span class="st">"tratamiento"</span>]), <span class="dv">3</span>)</span>
+<span id="cb34-176"><a href="#cb34-176" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-177"><a href="#cb34-177" aria-hidden="true" tabindex="-1"></a>balance</span>
+<span id="cb34-178"><a href="#cb34-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-179"><a href="#cb34-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-180"><a href="#cb34-180" aria-hidden="true" tabindex="-1"></a>Casi ninguna diferencia debería ser significativa, y así es: <span class="in">`edad`</span> y <span class="in">`visitas_previas`</span> tienen valores $p$ altos. Pero <span class="in">`experiencia`</span> sale significativa ($p ≈ 0{,}021$) aunque el tratamiento se sorteó.</span>
+<span id="cb34-181"><a href="#cb34-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-182"><a href="#cb34-182" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar (y una advertencia)"}</span>
+<span id="cb34-183"><a href="#cb34-183" aria-hidden="true" tabindex="-1"></a>Con muchas covariables, alrededor del 5% van a salir significativas solo por azar, aun con un sorteo perfecto. Un valor $p$ chico en una prueba de balance no prueba que la aleatorización falló; es lo esperable en cada muestra concreta. Y el balance solo cubre lo que medís: el sorteo también equilibra, en expectativa, las variables que no observaste.</span>
+<span id="cb34-184"><a href="#cb34-184" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-185"><a href="#cb34-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-186"><a href="#cb34-186" aria-hidden="true" tabindex="-1"></a><span class="fu">## Errores estándar agrupados</span></span>
+<span id="cb34-187"><a href="#cb34-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-188"><a href="#cb34-188" aria-hidden="true" tabindex="-1"></a>Si sorteás por conglomerados (por ejemplo, sorteás barrios enteros en vez de personas), las observaciones dentro de un mismo conglomerado se parecen entre sí. Ignorarlo produce errores estándar demasiado chicos y falsos positivos. <span class="in">`lm_robust()`</span> los corrige con el argumento <span class="in">`clusters =`</span>.</span>
+<span id="cb34-189"><a href="#cb34-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-190"><a href="#cb34-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r clusters}</span></span>
+<span id="cb34-191"><a href="#cb34-191" aria-hidden="true" tabindex="-1"></a><span class="co"># demo de sintaxis: si "zona" fuese la unidad de sorteo, agruparías por ella</span></span>
+<span id="cb34-192"><a href="#cb34-192" aria-hidden="true" tabindex="-1"></a><span class="fu">lm_robust</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">clusters =</span> zona, <span class="at">data =</span> datos)</span>
+<span id="cb34-193"><a href="#cb34-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-194"><a href="#cb34-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-195"><a href="#cb34-195" aria-hidden="true" tabindex="-1"></a><span class="in">`difference_in_means()`</span> acepta la misma lógica, más <span class="in">`blocks =`</span> para diseños por bloques. Ojo con un detalle: cuando pasás <span class="in">`clusters =`</span>, esta función espera que el tratamiento sea constante dentro de cada conglomerado, porque asume que sorteaste el conglomerado entero. Nuestros datos se sortearon a nivel individual, así que este bloque queda como demostración de sintaxis:</span>
+<span id="cb34-196"><a href="#cb34-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-197"><a href="#cb34-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{r clusters-dim}</span></span>
+<span id="cb34-198"><a href="#cb34-198" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb34-199"><a href="#cb34-199" aria-hidden="true" tabindex="-1"></a><span class="co"># diseño por conglomerados: se sortea el conglomerado entero</span></span>
+<span id="cb34-200"><a href="#cb34-200" aria-hidden="true" tabindex="-1"></a><span class="fu">difference_in_means</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">clusters =</span> conglomerado, <span class="at">data =</span> tus_datos)</span>
+<span id="cb34-201"><a href="#cb34-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-202"><a href="#cb34-202" aria-hidden="true" tabindex="-1"></a><span class="co"># diseño por bloques: se sortea dentro de cada bloque</span></span>
+<span id="cb34-203"><a href="#cb34-203" aria-hidden="true" tabindex="-1"></a><span class="fu">difference_in_means</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">blocks =</span> bloque, <span class="at">data =</span> tus_datos)</span>
+<span id="cb34-204"><a href="#cb34-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-205"><a href="#cb34-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-206"><a href="#cb34-206" aria-hidden="true" tabindex="-1"></a>En un diseño por conglomerados real tendrías decenas o cientos de conglomerados, cada uno tratado o control por completo.</span>
+<span id="cb34-207"><a href="#cb34-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-208"><a href="#cb34-208" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-209"><a href="#cb34-209" aria-hidden="true" tabindex="-1"></a>Esto conecta con la idea de SUTVA del bloque: cuando el tratamiento de una unidad puede afectar a sus vecinas, una salida es "sortear por conglomerados" y separar los brazos. Regla práctica: si aleatorizaste por grupo, tenés que agrupar los errores por ese mismo grupo, o van a salir más chicos de lo que corresponde.</span>
+<span id="cb34-210"><a href="#cb34-210" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-211"><a href="#cb34-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-212"><a href="#cb34-212" aria-hidden="true" tabindex="-1"></a><span class="fu">## Inferencia por aleatorización</span></span>
+<span id="cb34-213"><a href="#cb34-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-214"><a href="#cb34-214" aria-hidden="true" tabindex="-1"></a>¿El efecto es real o pura suerte del sorteo? La inferencia por aleatorización lo contesta sin apoyarse en la normalidad de muestras grandes. La idea: bajo la hipótesis nula de "efecto cero para todos", reasignás el tratamiento al azar miles de veces y mirás qué tan raro es el efecto que observaste dentro de esa nube. El paquete <span class="in">`ri2`</span> de Alexander Coppock lo automatiza con <span class="in">`conduct_ri()`</span>.</span>
+<span id="cb34-215"><a href="#cb34-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-216"><a href="#cb34-216" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ri2}</span></span>
+<span id="cb34-217"><a href="#cb34-217" aria-hidden="true" tabindex="-1"></a>declaracion <span class="ot">&lt;-</span> <span class="fu">declare_ra</span>(<span class="at">N =</span> <span class="dv">400</span>, <span class="at">m =</span> <span class="dv">200</span>)</span>
+<span id="cb34-218"><a href="#cb34-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-219"><a href="#cb34-219" aria-hidden="true" tabindex="-1"></a>ri <span class="ot">&lt;-</span> <span class="fu">conduct_ri</span>(</span>
+<span id="cb34-220"><a href="#cb34-220" aria-hidden="true" tabindex="-1"></a>  visitas <span class="sc">~</span> tratamiento,</span>
+<span id="cb34-221"><a href="#cb34-221" aria-hidden="true" tabindex="-1"></a>  <span class="at">declaration =</span> declaracion,</span>
+<span id="cb34-222"><a href="#cb34-222" aria-hidden="true" tabindex="-1"></a>  <span class="at">assignment  =</span> <span class="st">"tratamiento"</span>,</span>
+<span id="cb34-223"><a href="#cb34-223" aria-hidden="true" tabindex="-1"></a>  <span class="at">sharp_hypothesis =</span> <span class="dv">0</span>,</span>
+<span id="cb34-224"><a href="#cb34-224" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> datos,</span>
+<span id="cb34-225"><a href="#cb34-225" aria-hidden="true" tabindex="-1"></a>  <span class="at">sims =</span> <span class="dv">1000</span></span>
+<span id="cb34-226"><a href="#cb34-226" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-227"><a href="#cb34-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-228"><a href="#cb34-228" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ri)</span>
+<span id="cb34-229"><a href="#cb34-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-230"><a href="#cb34-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-231"><a href="#cb34-231" aria-hidden="true" tabindex="-1"></a>El valor $p$ por aleatorización sale prácticamente cero: en 1000 reasignaciones al azar, ninguna produjo un efecto tan grande como el observado. Podés ver la distribución de permutación con el efecto observado marcado; esto reproduce la Figura 4 de <span class="co">[</span><span class="ot">Freire, Galdino y Mignozzetti (2020)</span><span class="co">](https://doi.org/10.1177/2053168020914444)</span>.</span>
+<span id="cb34-232"><a href="#cb34-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-233"><a href="#cb34-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ri2-plot, fig.width=6.5, fig.height=3.6}</span></span>
+<span id="cb34-234"><a href="#cb34-234" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb34-235"><a href="#cb34-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-236"><a href="#cb34-236" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ri<span class="sc">$</span>sims_df, <span class="fu">aes</span>(<span class="at">x =</span> est_sim)) <span class="sc">+</span></span>
+<span id="cb34-237"><a href="#cb34-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">fill =</span> azul, <span class="at">alpha =</span> <span class="fl">0.75</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb34-238"><a href="#cb34-238" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> ri<span class="sc">$</span>sims_df<span class="sc">$</span>est_obs[<span class="dv">1</span>],</span>
+<span id="cb34-239"><a href="#cb34-239" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> rojo, <span class="at">linewidth =</span> <span class="fl">1.1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb34-240"><a href="#cb34-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> ri<span class="sc">$</span>sims_df<span class="sc">$</span>est_obs[<span class="dv">1</span>], <span class="at">y =</span> <span class="cn">Inf</span>,</span>
+<span id="cb34-241"><a href="#cb34-241" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"  efecto observado (6,03)"</span>, <span class="at">color =</span> rojo,</span>
+<span id="cb34-242"><a href="#cb34-242" aria-hidden="true" tabindex="-1"></a>           <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">vjust =</span> <span class="dv">2</span>, <span class="at">size =</span> <span class="fl">3.6</span>) <span class="sc">+</span></span>
+<span id="cb34-243"><a href="#cb34-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Efecto bajo reasignación al azar (hipótesis nula)"</span>,</span>
+<span id="cb34-244"><a href="#cb34-244" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Frecuencia"</span>) <span class="sc">+</span></span>
+<span id="cb34-245"><a href="#cb34-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb34-246"><a href="#cb34-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb34-247"><a href="#cb34-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-248"><a href="#cb34-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-249"><a href="#cb34-249" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-250"><a href="#cb34-250" aria-hidden="true" tabindex="-1"></a>Es la prueba a la que recurrir con muestras chicas, diseños complejos (bloques, conglomerados) o cuando no querés confiar en la aproximación normal. Mirá dónde cae la línea del efecto observado: si queda lejos de la nube, el nulo es poco creíble; si cae dentro, no podés descartar que el efecto sea cero.</span>
+<span id="cb34-251"><a href="#cb34-251" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-252"><a href="#cb34-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-253"><a href="#cb34-253" aria-hidden="true" tabindex="-1"></a><span class="fu">## Múltiples resultados</span></span>
+<span id="cb34-254"><a href="#cb34-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-255"><a href="#cb34-255" aria-hidden="true" tabindex="-1"></a>Cuando probás varios resultados a la vez (acá <span class="in">`visitas`</span> e <span class="in">`indice_larvario`</span>), la chance de encontrar al menos un falso positivo crece. Es el problema de las comparaciones múltiples. Una salida sencilla es ajustar los valores $p$ con <span class="in">`p.adjust()`</span>; otra es combinar los resultados en un índice estandarizado y probar ese índice una sola vez.</span>
+<span id="cb34-256"><a href="#cb34-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-257"><a href="#cb34-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r multiples}</span></span>
+<span id="cb34-258"><a href="#cb34-258" aria-hidden="true" tabindex="-1"></a>o_visitas <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(visitas <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb34-259"><a href="#cb34-259" aria-hidden="true" tabindex="-1"></a>o_larvas  <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(indice_larvario <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb34-260"><a href="#cb34-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-261"><a href="#cb34-261" aria-hidden="true" tabindex="-1"></a>p_crudos <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb34-262"><a href="#cb34-262" aria-hidden="true" tabindex="-1"></a>  <span class="at">visitas         =</span> o_visitas<span class="sc">$</span>p.value[<span class="st">"tratamiento"</span>],</span>
+<span id="cb34-263"><a href="#cb34-263" aria-hidden="true" tabindex="-1"></a>  <span class="at">indice_larvario =</span> o_larvas<span class="sc">$</span>p.value[<span class="st">"tratamiento"</span>]</span>
+<span id="cb34-264"><a href="#cb34-264" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-265"><a href="#cb34-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-266"><a href="#cb34-266" aria-hidden="true" tabindex="-1"></a><span class="co"># Benjamini-Hochberg: controla la tasa de falsos descubrimientos</span></span>
+<span id="cb34-267"><a href="#cb34-267" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_crudos, <span class="at">method =</span> <span class="st">"BH"</span>)</span>
+<span id="cb34-268"><a href="#cb34-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-269"><a href="#cb34-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-270"><a href="#cb34-270" aria-hidden="true" tabindex="-1"></a>Acá los dos efectos son enormes, así que siguen dando cero tras el ajuste. La diferencia se nota cuando los efectos son chicos y estás cerca del umbral. Como alternativa, un índice estandarizado promedia los resultados en la misma escala:</span>
+<span id="cb34-271"><a href="#cb34-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-272"><a href="#cb34-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{r indice}</span></span>
+<span id="cb34-273"><a href="#cb34-273" aria-hidden="true" tabindex="-1"></a>indice <span class="ot">&lt;-</span> <span class="fu">scale</span>(datos<span class="sc">$</span>visitas) <span class="sc">+</span> <span class="fu">scale</span>(<span class="sc">-</span>datos<span class="sc">$</span>indice_larvario)  <span class="co"># más visitas, menos larvas = mejor</span></span>
+<span id="cb34-274"><a href="#cb34-274" aria-hidden="true" tabindex="-1"></a><span class="fu">lm_robust</span>(indice <span class="sc">~</span> tratamiento, <span class="at">data =</span> datos)</span>
+<span id="cb34-275"><a href="#cb34-275" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-276"><a href="#cb34-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-277"><a href="#cb34-277" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-278"><a href="#cb34-278" aria-hidden="true" tabindex="-1"></a>Ajustá los valores $p$ (o armá un índice) siempre que declares varios resultados. <span class="in">`method = "BH"`</span> controla la proporción de falsos descubrimientos y es menos conservador que Bonferroni. Decidí de antemano cuál es tu resultado principal, para no elegir a posteriori el que salió significativo.</span>
+<span id="cb34-279"><a href="#cb34-279" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-280"><a href="#cb34-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-281"><a href="#cb34-281" aria-hidden="true" tabindex="-1"></a><span class="fu">## Declarar el diseño con DeclareDesign</span></span>
+<span id="cb34-282"><a href="#cb34-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-283"><a href="#cb34-283" aria-hidden="true" tabindex="-1"></a>Antes de gastar un peso en el campo, podés escribir tu diseño como código y simularlo. <span class="in">`DeclareDesign`</span> arma el diseño en piezas (el esquema MIDA: modelo, pregunta, asignación, estimación) que se suman con <span class="in">`+`</span>, como las capas de <span class="in">`ggplot`</span>.</span>
+<span id="cb34-284"><a href="#cb34-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-285"><a href="#cb34-285" aria-hidden="true" tabindex="-1"></a><span class="in">```{r declaredesign}</span></span>
+<span id="cb34-286"><a href="#cb34-286" aria-hidden="true" tabindex="-1"></a>diseno <span class="ot">&lt;-</span></span>
+<span id="cb34-287"><a href="#cb34-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_model</span>(</span>
+<span id="cb34-288"><a href="#cb34-288" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">400</span>,</span>
+<span id="cb34-289"><a href="#cb34-289" aria-hidden="true" tabindex="-1"></a>    <span class="at">U =</span> <span class="fu">rnorm</span>(N),</span>
+<span id="cb34-290"><a href="#cb34-290" aria-hidden="true" tabindex="-1"></a>    <span class="fu">potential_outcomes</span>(Y <span class="sc">~</span> <span class="fl">0.3</span> <span class="sc">*</span> Z <span class="sc">+</span> U)   <span class="co"># resultados potenciales</span></span>
+<span id="cb34-291"><a href="#cb34-291" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb34-292"><a href="#cb34-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_inquiry</span>(<span class="at">ATE =</span> <span class="fu">mean</span>(Y_Z_1 <span class="sc">-</span> Y_Z_0)) <span class="sc">+</span>       <span class="co"># la pregunta: el ATE</span></span>
+<span id="cb34-293"><a href="#cb34-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_assignment</span>(<span class="at">Z =</span> <span class="fu">complete_ra</span>(N, <span class="at">m =</span> <span class="dv">200</span>)) <span class="sc">+</span>  <span class="co"># el sorteo</span></span>
+<span id="cb34-294"><a href="#cb34-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_measurement</span>(<span class="at">Y =</span> <span class="fu">reveal_outcomes</span>(Y <span class="sc">~</span> Z)) <span class="sc">+</span>  <span class="co"># qué se observa</span></span>
+<span id="cb34-295"><a href="#cb34-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">declare_estimator</span>(Y <span class="sc">~</span> Z, <span class="at">.method =</span> lm_robust, <span class="at">inquiry =</span> <span class="st">"ATE"</span>)</span>
+<span id="cb34-296"><a href="#cb34-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-297"><a href="#cb34-297" aria-hidden="true" tabindex="-1"></a>diseno</span>
+<span id="cb34-298"><a href="#cb34-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-299"><a href="#cb34-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-300"><a href="#cb34-300" aria-hidden="true" tabindex="-1"></a><span class="in">`diagnose_design()`</span> simula el diseño muchas veces y devuelve sus propiedades: sesgo, poder (la chance de detectar el efecto), cobertura del intervalo de confianza. Todo esto antes de recoger un solo dato real.</span>
+<span id="cb34-301"><a href="#cb34-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-302"><a href="#cb34-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r diagnose}</span></span>
+<span id="cb34-303"><a href="#cb34-303" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3043</span>)</span>
+<span id="cb34-304"><a href="#cb34-304" aria-hidden="true" tabindex="-1"></a>diagnostico <span class="ot">&lt;-</span> <span class="fu">diagnose_design</span>(diseno, <span class="at">sims =</span> <span class="dv">500</span>, <span class="at">bootstrap_sims =</span> <span class="dv">100</span>)</span>
+<span id="cb34-305"><a href="#cb34-305" aria-hidden="true" tabindex="-1"></a>diagnostico</span>
+<span id="cb34-306"><a href="#cb34-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-307"><a href="#cb34-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-308"><a href="#cb34-308" aria-hidden="true" tabindex="-1"></a>Con <span class="in">`N = 400`</span> y un efecto de 0,3 desvíos, el poder ronda 0,84: detectaríamos ese efecto en el 84% de los experimentos. Si el poder saliera bajo, sabrías que necesitás más muestra antes de salir al campo. La referencia completa es <span class="co">[</span><span class="ot">Blair, Coppock y Humphreys (2023)</span><span class="co">](https://book.declaredesign.org/)</span>, gratis online.</span>
+<span id="cb34-309"><a href="#cb34-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-310"><a href="#cb34-310" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-311"><a href="#cb34-311" aria-hidden="true" tabindex="-1"></a>Declará y diagnosticá tu diseño en la etapa de planificación, para responder "¿con esta muestra, detecto un efecto de este tamaño?". Mirá el poder (querés ≥ 0,8), el sesgo (cerca de cero) y la cobertura (cerca de 0,95). Subí <span class="in">`N`</span> o el tamaño de efecto asumido y volvé a diagnosticar para ver cómo cambian.</span>
+<span id="cb34-312"><a href="#cb34-312" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-313"><a href="#cb34-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-314"><a href="#cb34-314" aria-hidden="true" tabindex="-1"></a><span class="fu">## Diseños listos: DesignLibrary</span></span>
+<span id="cb34-315"><a href="#cb34-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-316"><a href="#cb34-316" aria-hidden="true" tabindex="-1"></a>No hace falta declarar todo a mano. <span class="in">`DesignLibrary`</span> trae diseñadores ya codificados: les pasás unos pocos parámetros y sale un diseño completo, listo para <span class="in">`diagnose_design()`</span>.</span>
+<span id="cb34-317"><a href="#cb34-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-318"><a href="#cb34-318" aria-hidden="true" tabindex="-1"></a><span class="in">```{r designlibrary}</span></span>
+<span id="cb34-319"><a href="#cb34-319" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">two_arm_designer</span>(<span class="at">N =</span> <span class="dv">200</span>, <span class="at">ate =</span> <span class="fl">0.3</span>)              <span class="co"># dos brazos</span></span>
+<span id="cb34-320"><a href="#cb34-320" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">multi_arm_designer</span>(<span class="at">N =</span> <span class="dv">300</span>, <span class="at">m_arms =</span> <span class="dv">3</span>,           <span class="co"># varios brazos (como el dengue)</span></span>
+<span id="cb34-321"><a href="#cb34-321" aria-hidden="true" tabindex="-1"></a>                         <span class="at">outcome_means =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.3</span>, <span class="fl">0.6</span>))</span>
+<span id="cb34-322"><a href="#cb34-322" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> <span class="fu">block_cluster_two_arm_designer</span>(                   <span class="co"># bloques y conglomerados</span></span>
+<span id="cb34-323"><a href="#cb34-323" aria-hidden="true" tabindex="-1"></a>        <span class="at">N_blocks =</span> <span class="dv">5</span>, <span class="at">N_clusters_in_block =</span> <span class="dv">10</span>, <span class="at">N_i_in_cluster =</span> <span class="dv">5</span>)</span>
+<span id="cb34-324"><a href="#cb34-324" aria-hidden="true" tabindex="-1"></a>d4 <span class="ot">&lt;-</span> <span class="fu">regression_discontinuity_designer</span>(<span class="at">N =</span> <span class="dv">1000</span>,       <span class="co"># el RDD de la tarde</span></span>
+<span id="cb34-325"><a href="#cb34-325" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">cutoff =</span> <span class="fl">0.5</span>)</span>
+<span id="cb34-326"><a href="#cb34-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-327"><a href="#cb34-327" aria-hidden="true" tabindex="-1"></a><span class="co"># cada uno es un diseño completo, listo para diagnosticar</span></span>
+<span id="cb34-328"><a href="#cb34-328" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnose_design</span>(d1, <span class="at">sims =</span> <span class="dv">500</span>, <span class="at">bootstrap_sims =</span> <span class="dv">100</span>)</span>
+<span id="cb34-329"><a href="#cb34-329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb34-330"><a href="#cb34-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-331"><a href="#cb34-331" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb34-332"><a href="#cb34-332" aria-hidden="true" tabindex="-1"></a>Empezá por un diseñador de la librería cuando tu diseño encaje en un molde común (dos brazos, varios brazos, bloques y conglomerados, discontinuidad). Ajustás los parámetros, diagnosticás, y solo bajás a declarar a mano si tu diseño tiene algo que la librería no cubre. La lista completa está en <span class="co">[</span><span class="ot">declaredesign.org/r/designlibrary</span><span class="co">](https://declaredesign.org/r/designlibrary/)</span>.</span>
+<span id="cb34-333"><a href="#cb34-333" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb34-334"><a href="#cb34-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-335"><a href="#cb34-335" aria-hidden="true" tabindex="-1"></a><span class="fu">## Para seguir</span></span>
+<span id="cb34-336"><a href="#cb34-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-337"><a href="#cb34-337" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip title="Enlaces y lecturas"}</span>
+<span id="cb34-338"><a href="#cb34-338" aria-hidden="true" tabindex="-1"></a>**Documentación de los paquetes**</span>
+<span id="cb34-339"><a href="#cb34-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-340"><a href="#cb34-340" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`estimatr`</span><span class="co">](https://declaredesign.org/r/estimatr/)</span>: <span class="in">`lm_robust`</span>, <span class="in">`lm_lin`</span>, <span class="in">`difference_in_means`</span></span>
+<span id="cb34-341"><a href="#cb34-341" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`DeclareDesign`</span><span class="co">](https://declaredesign.org/)</span>: declarar, diagnosticar y simular diseños</span>
+<span id="cb34-342"><a href="#cb34-342" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`fabricatr`</span><span class="co">](https://declaredesign.org/r/fabricatr/)</span> y <span class="co">[</span><span class="ot">`randomizr`</span><span class="co">](https://declaredesign.org/r/randomizr/)</span>: simular datos y sortear</span>
+<span id="cb34-343"><a href="#cb34-343" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`ri2`</span><span class="co">](https://cran.r-project.org/package=ri2)</span>: inferencia por aleatorización</span>
+<span id="cb34-344"><a href="#cb34-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-345"><a href="#cb34-345" aria-hidden="true" tabindex="-1"></a>**Para leer**</span>
+<span id="cb34-346"><a href="#cb34-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-347"><a href="#cb34-347" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Blair, Coppock y Humphreys (2023)</span><span class="co">](https://book.declaredesign.org/)</span>, *Research Design in the Social Sciences*: el libro de <span class="in">`DeclareDesign`</span>, gratis online</span>
+<span id="cb34-348"><a href="#cb34-348" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Lin (2013)</span><span class="co">](https://doi.org/10.1214/12-AOAS583)</span>: el ajuste de covariables que implementa <span class="in">`lm_lin()`</span></span>
+<span id="cb34-349"><a href="#cb34-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-350"><a href="#cb34-350" aria-hidden="true" tabindex="-1"></a>**Nuestros casos del bloque**</span>
+<span id="cb34-351"><a href="#cb34-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-352"><a href="#cb34-352" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Freire y Mignozzetti (2022)</span><span class="co">](https://github.com/danilofreire/incentives-healthcare)</span>: incentivos económicos y control del dengue</span>
+<span id="cb34-353"><a href="#cb34-353" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Freire, Galdino y Mignozzetti (2020)</span><span class="co">](https://doi.org/10.1177/2053168020914444)</span>: el resultado nulo creíble y la inferencia por aleatorización de la Figura 4</span>
+<span id="cb34-354"><a href="#cb34-354" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 <a href="https://danilofreire.github.io">Danilo Freire</a>. Contenido bajo licencia <a href="https://opensource.org/licenses/MIT">MIT</a>.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/referencia-experimentos.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Hecho con <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

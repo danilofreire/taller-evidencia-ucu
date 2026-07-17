@@ -48,7 +48,7 @@ if (!require("fontawesome", character.only = TRUE)) {
 ::: {style="font-size: 26px;"}
 `r fa('envelope')` [danilofreire@gmail.com](mailto:danilofreire@gmail.com)
 
-`r fa('globe')` <https://danilofreire.github.io/>
+`r fa('globe')` <http://danilofreire.github.io/taller-evidencia-ucu>
 
 `r fa('github')` <https://github.com/danilofreire/>
 :::
@@ -60,7 +60,7 @@ if (!require("fontawesome", character.only = TRUE)) {
 
 `r fa('graduation-cap')` MA del Graduate Institute Geneva, PhD de King's College London, postdoc en Brown University, senior lecturer en la University of Lincoln, UK
 
-`r fa('book-open')` Investigación: inferencia causal, métodos experimentales y cuasi-experimentales (RDD, dif-en-dif, control sintético), evaluación de políticas públicas
+`r fa('book-open')` Investigación: Métodos computacionales, experimentales y cuasiexperimentales, evaluación de políticas públicas
 :::
 :::
 ::::
@@ -75,7 +75,7 @@ Antes de meternos en el contenido, contanos en una o dos frases:
 - si hay alguna [política o intervención]{.alert} que te gustaría evaluar, aunque sea una idea suelta
 
 :::{style="margin-top: 16px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 24px;"}
-Si somos muchos y el tiempo aprieta, lo retomamos en el taller de la tarde, donde cada quien arma su propio diseño
+Si somos muchos y el tiempo aprieta, seguimos charlando durante el día o en los recesos. La idea es que nos conozcamos y que el taller se acerque a sus intereses
 :::
 :::
 
@@ -137,7 +137,7 @@ Si somos muchos y el tiempo aprieta, lo retomamos en el taller de la tarde, dond
 
 :::{style="margin-top: 24px; font-size: 24px;"}
 :::{.incremental}
-- Una [evaluación de impacto]{.alert} estima el efecto causal de una política: cuánto cambió un resultado [por la intervención]{.alert}, no por otra cosa ([Gertler et al., 2016](https://www.worldbank.org/en/programs/sief-trust-fund/publication/impact-evaluation-in-practice))
+- Una [evaluación de impacto]{.alert} estima el [efecto causal]{.alert} de una política: cuánto cambió un resultado [por la intervención]{.alert}, no por otra cosa ([Gertler et al., 2016](https://www.worldbank.org/en/programs/sief-trust-fund/publication/impact-evaluation-in-practice))
 
 - La pregunta es siempre [contrafactual]{.alert}: ¿qué habría pasado [sin]{.alert} la política? ([Imbens y Wooldridge, 2009](https://doi.org/10.1257/jel.47.1.5))
 
@@ -179,95 +179,28 @@ Si somos muchos y el tiempo aprieta, lo retomamos en el taller de la tarde, dond
 [![](figures/causal-04.png){width="120%"}](#){data-modal-type="image" data-modal-url="figures/causal-04.png"}
 :::
 
-
-
-## Qué es y qué no es
-
-:::{style="margin-top: 18px; font-size: 28px;"}
-:::{.columns}
-:::{.column width=50%}
-[Sí es]{.alert}
-
-- Estimar el [efecto causal]{.alert} de una intervención
-
-- Construir un [contrafactual]{.alert} y comparar contra él
-
-- Preguntar [cuánto]{.alert} cambió el resultado gracias a la política
-
-- Poder defender el número ante un [escéptico]{.alert}
-:::
-
-:::{.column width=50%}
-[No es]{.alert}
-
-- [Monitoreo]{.alert}: seguir indicadores no dice qué los causó
-
-- [Descripción]{.alert}: contar a quiénes llegó el programa
-
-- [Opinión]{.alert} de los actores sobre si funcionó
-
-- Una [correlación]{.alert} vestida de efecto
-:::
-:::
-
-Buena parte de lo que se presenta como "evaluación" se queda en la columna derecha
-:::
-
 # Por qué importa más en la región {background-color="#2d4563"}
 
 ## Tres hechos regionales
 
-:::{style="margin-top: 14px; font-size: 25px;"}
+:::{style="margin-top: 14px; font-size: 26px;"}
 1. [La evidencia importada no siempre viaja]{.alert}
     - Un programa que anduvo afuera puede rendir distinto acá: [el efecto depende del contexto]{.alert} ([Vivalt, 2020](https://doi.org/10.1093/jeea/jvaa019))
-    - Copiar la receta sin preguntarse si el contexto se parece es [apostar a ciegas]{.alert}
+    - Copiar la receta sin mirar el contexto es [apostar a ciegas]{.alert}
 
 2. [La base regional es delgada]{.alert}
     - Pocas evaluaciones propias, y [casi ninguna réplica o meta-análisis]{.alert} que las acumule
-    - Un vacío, pero también [una oportunidad]{.alert}: hay preguntas de política sin responder
+    - [Una oportunidad]{.alert}: los datos ya están recolectados y sólo falta alguien que los analice
 
 3. [Rigor sin presupuesto de experimento]{.alert}
     - Rara vez hay plata para un ensayo aleatorizado a gran escala
-    - La salida es ser [ingenioso, no rico]{.alert}: datos administrativos y cuasi-experimentos que el Estado ya corrió
+    - La salida es ser [ingenioso]{.alert}: datos administrativos y cuasi-experimentos que el Estado ya corrió
 
-:::{style="margin-top: 10px; border-left: 4px solid #b85450; padding: 6px 18px; font-size: 22px;"}
-Los dos primeros hechos son las dos preguntas del día: sin presupuesto, [¿de dónde sacás un contrafactual creíble?]{.alert} (mañana); base delgada, [¿cuándo un resultado se vuelve evidencia?]{.alert} (tarde)
-:::
 :::
 
-## Cuando el contexto manda
+## Hay mucha investigación buena en la región: educación y salud
 
-:::{style="margin-top: 14px; font-size: 25px;"}
-:::{.columns}
-:::{.column width=50%}
-[Lo que vemos en los datos]{.alert}
-
-- El mismo programa da [efectos distintos]{.alert} según el país: la magnitud no es una constante de la naturaleza ([Vivalt, 2020](https://doi.org/10.1093/jeea/jvaa019))
-
-- La dispersión es enorme: un efecto puede [duplicarse, esfumarse o cambiar de signo]{.alert} según dónde se mida
-
-- A veces la evidencia [local pero imperfecta]{.alert} predice mejor que la experimental traída de afuera ([Pritchett y Sandefur, 2015](https://doi.org/10.1257/aer.p20151016))
-:::
-
-:::{.column width=50%}
-[Por qué varía tanto]{.alert}
-
-- La [implementación]{.alert}: la misma política se ejecuta distinto según la capacidad del Estado
-
-- La [población]{.alert}: quién recibe, con qué necesidades y qué alternativas tiene, cambia el efecto
-
-- La [escala]{.alert}: lo que anda en un piloto puede diluirse en equilibrio general al llevarlo a todo el país
-:::
-:::
-
-:::{style="margin-top: 10px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 22px;"}
-Por eso "¿funciona?" es incompleta. La buena es "[¿funciona acá, para quién y por qué?]{.alert}" ([Deaton, 2010](https://doi.org/10.1257/jel.48.2.424))
-:::
-:::
-
-## La evidencia en la región · educación y salud
-
-:::{style="margin-top: 8px; font-size: 25px;"}
+:::{style="margin-top: 8px; font-size: 23px;"}
 :::{.columns}
 :::{.column width=50%}
 [Educación]{.alert}
@@ -293,14 +226,14 @@ Por eso "¿funciona?" es incompleta. La buena es "[¿funciona acá, para quién 
 :::
 :::
 
-## La evidencia en la región · seguridad y protección social
+## Seguridad y protección social
 
 :::{style="margin-top: 8px; font-size: 25px;"}
 :::{.columns}
 :::{.column width=50%}
 [Seguridad y crimen]{.alert}
 
-- Los homicidios en [São Paulo]{.alert} cayeron tras la política de prevención ([control sintético]{.alert}; [Freire, 2018](https://doi.org/10.25222/larr.334))
+- Las [cámaras vigiladas por la policía]{.alert} en Montevideo bajaron el delito callejero entre 20% y 30% ([dif-en-dif]{.alert}; [Munyo y Rossi, 2020](https://doi.org/10.1111/sjoe.12375))
 
 - El [patrullaje en puntos calientes]{.alert} en Bogotá dio efectos directos modestos que casi no sobrevivieron a la escala ([RCT]{.alert}; [Blattman et al., 2021](https://doi.org/10.1093/jeea/jvab002))
 
@@ -314,7 +247,7 @@ Por eso "¿funciona?" es incompleta. La buena es "[¿funciona acá, para quién 
 
 - En Nicaragua, una transferencia temporal dejó efectos que [persistieron 10 años]{.alert} ([RCT]{.alert}; [Molina-Millán et al., 2020](https://doi.org/10.1016/j.jdeveco.2019.102385))
 
-- Otro programa nicaragüense [confirma la persistencia]{.alert} una década después: no fue un accidente ([RCT]{.alert}; [Barham et al., 2024](https://doi.org/10.1093/jeea/jvae005))
+- El [seguro de desempleo]{.alert} en Brasil pesa menos en la economía donde la informalidad es alta ([cuasi-experimento]{.alert}; [Gerard y Gonzaga, 2021](https://doi.org/10.1257/pol.20180072))
 :::
 :::
 
@@ -356,17 +289,17 @@ La misma lógica: comparar contra un [contrafactual creíble]{.alert}
 :::{style="margin-top: 18px; font-size: 26px;"}
 | Hora | Bloque | Duración |
 |------|--------|:--------:|
-| 9:00 | [Apertura]{.alert}: el problema del contrafactual | 30 min |
-| 9:30 | [Experimentos]{.alert}: aleatorización y sesgo de selección | 75 min |
+| 9:00 | [Apertura](https://danilofreire.github.io/taller-evidencia-ucu/diapositivas/01-apertura.html): el problema del contrafactual | 30 min |
+| 9:30 | [Experimentos](https://danilofreire.github.io/taller-evidencia-ucu/diapositivas/02-experimentos.html): aleatorización y sesgo de selección | 75 min |
 | 10:45 | Café | 15 min |
-| 11:00 | [Regresión discontinua]{.alert}: el RDD de Brasil | 75 min |
+| 11:00 | [Regresión discontinua](https://danilofreire.github.io/taller-evidencia-ucu/diapositivas/03-rdd.html): el RDD de Brasil | 75 min |
 | 12:15 | Cierre de la mañana y discusión | 15 min |
-| 13:30 | [Diferencias en diferencias]{.alert} y control sintético | 45 min |
-| 14:15 | [Acumulación]{.alert}: meta-análisis y replicación | 60 min |
-| 15:15 | Cierre | 15 min |
+| 13:30 | [Diferencias en diferencias](https://danilofreire.github.io/taller-evidencia-ucu/diapositivas/04-did-sintetico.html) y control sintético | 45 min |
+| 14:15 | [Acumulación](https://danilofreire.github.io/taller-evidencia-ucu/diapositivas/05-acumulacion.html): meta-análisis y replicación | 60 min |
+| 15:15 | [Cierre](https://danilofreire.github.io/taller-evidencia-ucu/diapositivas/06-cierre.html) | 15 min |
 
-:::{style="margin-top: 12px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 20px;"}
-El [tamaño de la legislatura]{.alert} vuelve dos veces: como RDD a la mañana y dentro de un meta-análisis a la tarde
+:::{style="margin-top: 12px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 22px;"}
+Sitio web con las diapositivas, el código, los datos, las tareas y las referencias: <https://danilofreire.github.io/taller-evidencia-ucu/>
 :::
 :::
 
@@ -381,10 +314,10 @@ El [tamaño de la legislatura]{.alert} vuelve dos veces: como RDD a la mañana y
 
 - [Preguntá]{.alert} cuando algo no cierre; las pausas para pensar son parte del plan
 
-- Los materiales están en [la página del taller](https://danilofreire.github.io/taller-evidencia-ucu/), y hacemos una pausa de café a las 10:45
+- Los materiales están en [la página del taller](https://danilofreire.github.io/taller-evidencia-ucu/), y hacemos pausas para que los descargues y los tengas listos
 
 :::{style="margin-top: 14px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 24px;"}
-Menos "mirá qué técnica", más "[¿por qué le creemos a este número?]{.alert}"
+¡Las preguntas y sugerencias siempre son bienvenidas! Sentite libre de hablar cuando (y de lo que) quieras 😉
 :::
 :::
 
@@ -409,7 +342,7 @@ for (pkg in paquetes) {
 datos <- read.csv("https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/datos/dengue_incentivos.csv")
 ```
 
-:::{style="margin-top: 10px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 19px;"}
+:::{style="margin-top: 30px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 24px;"}
 No hace falta que corras el código conmigo: te lo muestro paso a paso. Pero al final de cada bloque vas a tener un rato para [probarlo vos]{.alert}
 :::
 :::
@@ -421,8 +354,6 @@ No hace falta que corras el código conmigo: te lo muestro paso a paso. Pero al 
 :::{style="font-size: 15px;"}
 :::{.columns}
 :::{.column width=50%}
-Barham, T., Macours, K. y Maluccio, J. (2024). Experimental evidence from a conditional cash transfer program: schooling, learning, fertility, and labor market outcomes after 10 years. *Journal of the European Economic Association* 22(4):1844–1883. [doi](https://doi.org/10.1093/jeea/jvae005)
-
 Barrera-Osorio, F., Gonzalez, K., Lagos, F. y Deming, D. (2020). Providing performance information in education: an experimental evaluation in Colombia. *Journal of Public Economics* 186:104185. [doi](https://doi.org/10.1016/j.jpubeco.2020.104185)
 
 Blattman, C., Green, D., Ortega, D. y Tobón, S. (2021). Place-based interventions at scale: the direct and spillover effects of policing and city services on crime. *Journal of the European Economic Association* 19(4):2022–2051. [doi](https://doi.org/10.1093/jeea/jvab002)
@@ -431,7 +362,7 @@ Conti, G. y Ginja, R. (2023). Who benefits from free health insurance? Evidence 
 
 Deaton, A. (2010). Instruments, randomization, and learning about development. *Journal of Economic Literature* 48(2):424–455. [doi](https://doi.org/10.1257/jel.48.2.424)
 
-Freire, D. (2018). Evaluating the effect of homicide prevention strategies in São Paulo, Brazil: a synthetic control approach. *Latin American Research Review* 53(2):231–249. [doi](https://doi.org/10.25222/larr.334)
+Gerard, F. y Gonzaga, G. (2021). Informal labor and the efficiency cost of social programs: evidence from unemployment insurance in Brazil. *American Economic Journal: Economic Policy* 13(3):167–206. [doi](https://doi.org/10.1257/pol.20180072)
 
 Gertler, P., Martinez, S., Premand, P., Rawlings, L. y Vermeersch, C. (2016). *Impact Evaluation in Practice*, 2nd ed. World Bank and IDB. [enlace](https://www.worldbank.org/en/programs/sief-trust-fund/publication/impact-evaluation-in-practice)
 
@@ -450,6 +381,8 @@ Londoño-Vélez, J., Rodríguez, C. y Sánchez, F. (2020). Upstream and downstre
 Mignozzetti, U., Cepaluni, G. y Freire, D. (2025). Legislature size and welfare: evidence from Brazil. *American Journal of Political Science* 69(3):831–846. [doi](https://doi.org/10.1111/ajps.12843)
 
 Molina-Millán, T., Macours, K., Maluccio, J. y Tejerina, L. (2020). Experimental long-term effects of early-childhood and school-age exposure to a conditional cash transfer program. *Journal of Development Economics* 143:102385. [doi](https://doi.org/10.1016/j.jdeveco.2019.102385)
+
+Munyo, I. y Rossi, M. (2020). Police-monitored cameras and crime. *Scandinavian Journal of Economics* 122(3):1027–1044. [doi](https://doi.org/10.1111/sjoe.12375)
 
 Parker, S. y Vogl, T. (2023). Do conditional cash transfers improve economic outcomes in the next generation? Evidence from Mexico. *The Economic Journal* 133(655):2775–2806. [doi](https://doi.org/10.1093/ej/uead049)
 

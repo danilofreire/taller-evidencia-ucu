@@ -10,7 +10,7 @@ Taller intensivo de un día sobre cómo producir y acumular evidencia creíble p
 ::: {.info-item}
 [Fecha]{.info-label}
 
-[Viernes 1 de agosto de 2026]{.info-value}
+[Sábado 1 de agosto de 2026]{.info-value}
 :::
 ::: {.info-item}
 [Lugar]{.info-label}
@@ -32,24 +32,21 @@ Taller intensivo de un día sobre cómo producir y acumular evidencia creíble p
 
 ## El taller de un vistazo
 
-::: {.bloque-card}
-[Mañana · 9:00–12:30]{.bloque-label}
+La mañana responde ¿de dónde sale tu contrafactual? y la tarde ¿cuándo un resultado se vuelve evidencia? Cada bloque enlaza a sus diapositivas.
 
-[¿De dónde sale tu contrafactual?]{.bloque-title}
+| Hora | Bloque | Duración |
+|------|--------|:--------:|
+| 9:00 | [Apertura](diapositivas/01-apertura.html): el problema del contrafactual | 30 min |
+| 9:30 | [Experimentos](diapositivas/02-experimentos.html): aleatorización y sesgo de selección | 75 min |
+| 10:45 | Café | 15 min |
+| 11:00 | [Regresión discontinua](diapositivas/03-rdd.html): el RDD de Brasil | 75 min |
+| 12:15 | Cierre de la mañana y discusión | 15 min |
+| 13:30 | [Diferencias en diferencias](diapositivas/04-did-sintetico.html) y control sintético | 45 min |
+| 14:15 | [Acumulación](diapositivas/05-acumulacion.html): meta-análisis y replicación | 60 min |
+| 15:15 | [Cierre](diapositivas/06-cierre.html) | 15 min |
 
-[Tres formas de construir el contrafactual, contadas con investigaciones aplicadas en la región: los experimentos, la regresión discontinua y el control sintético.]{.bloque-topics}
-:::
-
-::: {.bloque-card}
-[Tarde · 13:30–15:30]{.bloque-label}
-
-[¿Cuándo un resultado se vuelve evidencia?]{.bloque-title}
-
-[Cuando sobrevive a la síntesis y la crítica: sesgo de publicación, meta-análisis y la crisis de replicación contada desde adentro.]{.bloque-topics}
-:::
-
-El [programa detallado](programa.qmd) tiene los tiempos y los contenidos de cada bloque.
+El [programa detallado](programa.qmd) desarrolla los contenidos y la práctica de cada bloque.
 
 ## Qué traer
 
-Traé tu computadora con [R](https://cran.r-project.org/) instalado. Cada bloque tiene una práctica con el código ya escrito, que corremos juntos. En [Materiales](materiales.qmd) está la guía de instalación con los paquetes que vas a necesitar, y en [Recursos](recursos.qmd) están las lecturas del taller
+Traé tu computadora con [R](https://cran.r-project.org/) instalado. Cada bloque tiene una práctica con el código ya escrito, que corremos juntos. En [Materiales](materiales.qmd) está la guía de instalación con los paquetes que vas a necesitar, y en [Referencias](referencias.qmd) están las lecturas del taller

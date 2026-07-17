@@ -1,0 +1,47 @@
+---
+title: "Referencia R"
+---
+
+Estas páginas reúnen, bloque por bloque, todas las funciones de R que aparecen en las diapositivas, con código que podés correr y copiar. Cada función viene con una explicación breve, un ejemplo ejecutable que muestra su salida real, y una nota sobre cuándo conviene usarla. Los ejemplos trabajan sobre los mismos datos simulados de cada bloque, con la semilla fija, así que los números que ves coinciden con los de las diapositivas.
+
+Pensá estas páginas como la libreta a la que volver después del taller: cuando quieras recordar cómo se corría una diferencia de medias, una prueba de balance o un diagnóstico de diseño, el código está acá listo para copiar.
+
+Vamos a publicar una referencia por bloque a medida que se revisan las diapositivas, así que algunas todavía están pendientes.
+
+## Referencias por bloque
+
+::: {.resource-card}
+[Experimentos]{.resource-title}
+
+[Bloque 1 · diferencia de medias, balance, ajuste de covariables, diseño]{.resource-meta}
+
+[`difference_in_means`, `lm_robust`, `lm_lin`, interacciones, tabla de balance, errores agrupados, inferencia por aleatorización con `ri2`, comparaciones múltiples, y `DeclareDesign` / `DesignLibrary` para simular el diseño antes del campo]{.resource-meta}
+
+::: {.resource-links}
+[Abrir referencia](referencia-experimentos.html)
+:::
+:::
+
+::: {.resource-card}
+[Regresión discontinua]{.resource-title}
+
+[Bloque 2 · próximamente]{.resource-meta}
+
+[Estimación local con `rdrobust`, prueba de densidad con `rddensity` y gráficos de la discontinuidad. Se publica cuando se termine de revisar el bloque]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Diferencias en diferencias y control sintético]{.resource-title}
+
+[Bloque 3 · próximamente]{.resource-meta}
+
+[Estimadores de diferencias en diferencias y control sintético con `tidysynth`. Se publica cuando se termine de revisar el bloque]{.resource-meta}
+:::
+
+::: {.resource-card}
+[Acumulación de evidencia]{.resource-title}
+
+[Bloque 4 · próximamente]{.resource-meta}
+
+[Meta-análisis con `metafor`: tamaños de efecto, modelos de efectos aleatorios y forest plots. Se publica cuando se termine de revisar el bloque]{.resource-meta}
+:::
