@@ -306,6 +306,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./materiales.html" aria-current="page"> 
 <span class="menu-text">Materiales</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./reproducibilidad.html"> 
+<span class="menu-text">Reproducibilidad</span></a>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-referencia-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Referencia R</span>
@@ -318,6 +322,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./referencia-experimentos.html">
  <span class="dropdown-text">Experimentos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-rdd.html">
+ <span class="dropdown-text">Regresión discontinua</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-did-sintetico.html">
+ <span class="dropdown-text">DiD y control sintético</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-acumulacion.html">
+ <span class="dropdown-text">Acumulación de evidencia</span></a>
   </li>  
     </ul>
   </li>
@@ -361,6 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#antes-de-empezar" id="toc-antes-de-empezar" class="nav-link active" data-scroll-target="#antes-de-empezar">Antes de empezar</a></li>
   <li><a href="#diapositivas-por-bloque" id="toc-diapositivas-por-bloque" class="nav-link" data-scroll-target="#diapositivas-por-bloque">Diapositivas por bloque</a></li>
+  <li><a href="#para-después-del-taller" id="toc-para-después-del-taller" class="nav-link" data-scroll-target="#para-después-del-taller">Para después del taller</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/materiales.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
     </div>
@@ -387,15 +404,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Acá están las diapositivas, los datos y el código de cada bloque. Cada bloque con práctica trae el archivo de código listo para correr y los datos que usa, con una breve descripción de cada base. Las diapositivas se publican a medida que se preparan, así que algunos enlaces se activan más cerca del taller. Todos los datos son simulados: reproducen la estructura y el orden de magnitud de los estudios reales, sin exponer datos originales</p>
+<p>Acá están las diapositivas, los datos y el código de cada bloque. Cada bloque con práctica trae el archivo de código listo para correr y los datos que usa, con una breve descripción de cada base. Todos los datos son simulados: reproducen la estructura y el orden de magnitud de los estudios reales, sin exponer datos originales. Si querés el código de cada función explicado paso a paso, está en <a href="./referencia-r.html">Referencia R</a></p>
 <section id="antes-de-empezar" class="level2">
 <h2 class="anchored" data-anchor-id="antes-de-empezar">Antes de empezar</h2>
 <div class="resource-card">
 <p><span class="resource-title">Preparación: instalá R y los paquetes</span></p>
 <p><span class="resource-meta">Traé tu computadora con todo listo · unos 10 minutos</span></p>
 <p>Instalá <a href="https://cran.r-project.org/">R</a> y <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> (RStudio ya incluye lo necesario para correr el código). Después abrí RStudio y corré este bloque una vez: instala solo los paquetes que te falten.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"estimatr"</span>, <span class="st">"rdrobust"</span>,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"rddensity"</span>, <span class="st">"tidysynth"</span>, <span class="st">"metafor"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"estimatr"</span>, <span class="st">"fabricatr"</span>, <span class="st">"randomizr"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"rdrobust"</span>, <span class="st">"rddensity"</span>, <span class="st">"tidysynth"</span>, <span class="st">"metafor"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> paquetes) {</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
@@ -455,13 +472,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="resource-title">Acumulación de evidencia</span></p>
 <p><span class="resource-meta">Tarde · 14:15–15:15 · 60 min</span></p>
 <p><span class="resource-meta">Por qué un solo estudio engaña: sesgo de publicación, meta-análisis y la crisis de replicación contada desde adentro</span></p>
-<p>Una base, más una demostración de flujo reproducible:</p>
+<p>Dos bases:</p>
 <ul>
-<li><code>meta_estudios.csv</code> (20 estudios): insumo para el meta-análisis del efecto del tamaño de la legislatura. Cada fila es un estudio con su <code>efecto</code>, su error estándar <code>ee</code>, el <code>n</code> y el <code>diseno</code>, para armar el forest plot y el funnel plot</li>
-<li>La carpeta <code>demo-reproducible/</code> muestra un informe de Quarto que teje código, resultados y texto en un solo documento</li>
+<li><code>meta_estudios.csv</code> (21 estudios): la literatura publicada de la demostración, con el sesgo de publicación adentro. Cada fila es un estudio con su <code>efecto</code>, su error estándar <code>ee</code>, el <code>n</code> y el <code>diseno</code>, para armar el forest plot y el funnel plot</li>
+<li><code>transferencias.csv</code> (24 estudios): la base de la práctica, sobre el efecto de las transferencias condicionadas en la asistencia escolar. Además del <code>efecto</code> y su <code>ee</code>, trae el <code>contexto</code> (<code>rural</code> o <code>urbano</code>), que es la clave del último ejercicio</li>
 </ul>
 <div class="resource-links">
-<p><a href="diapositivas/05-acumulacion.html">Diapositivas (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/05-acumulacion.qmd">Fuente (.qmd)</a> | <a href="diapositivas/codigo/practica-05.R">Código (.R)</a> | <a href="diapositivas/datos/meta_estudios.csv">Datos (.csv)</a></p>
+<p><a href="diapositivas/05-acumulacion.html">Diapositivas (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/05-acumulacion.qmd">Fuente (.qmd)</a> | <a href="diapositivas/codigo/practica-05.R">Código (.R)</a> | <a href="diapositivas/datos/meta_estudios.csv">Datos meta (.csv)</a> | <a href="diapositivas/datos/transferencias.csv">Datos práctica (.csv)</a></p>
 </div>
 </div>
 <div class="resource-card">
@@ -470,6 +487,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="resource-meta">El mapa completo, hacia dónde va el campo y dónde enchufarse en la región</span></p>
 <div class="resource-links">
 <p><a href="diapositivas/06-cierre.html">Diapositivas (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/06-cierre.qmd">Fuente (.qmd)</a></p>
+</div>
+</div>
+</section>
+<section id="para-después-del-taller" class="level2">
+<h2 class="anchored" data-anchor-id="para-después-del-taller">Para después del taller</h2>
+<div class="resource-card">
+<p><span class="resource-title">Referencia R</span></p>
+<p><span class="resource-meta">Una página por parte, con todo el código explicado</span></p>
+<p><span class="resource-meta">Cada función que usamos en las prácticas, con un ejemplo ejecutable, su salida real y una nota sobre cuándo conviene usarla. Los números coinciden con los de las diapositivas porque las semillas están fijas</span></p>
+<div class="resource-links">
+<p><a href="./referencia-r.html">Todas las referencias</a> | <a href="./referencia-experimentos.html">Experimentos</a> | <a href="./referencia-rdd.html">RDD</a> | <a href="./referencia-did-sintetico.html">DiD y sintético</a> | <a href="./referencia-acumulacion.html">Acumulación</a></p>
+</div>
+</div>
+<div class="resource-card">
+<p><span class="resource-title">Guía de reproducibilidad</span></p>
+<p><span class="resource-meta">El kit mínimo, en seis prácticas</span></p>
+<p><span class="resource-meta">Cómo dejar tu trabajo listo para que otra persona (o vos en seis meses) lo pueda correr: estructura de carpetas, rutas relativas, control de versiones y un informe que se calcula al renderizar</span></p>
+<div class="resource-links">
+<p><a href="./reproducibilidad.html">Abrir la guía</a></p>
 </div>
 </div>
 

@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Referencia R: acumulación de evidencia – Políticas basadas en evidencia</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e68f30e75591e36100235718a786973.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Políticas basadas en evidencia</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./programa.html"> 
+<span class="menu-text">Programa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./materiales.html"> 
+<span class="menu-text">Materiales</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./reproducibilidad.html"> 
+<span class="menu-text">Reproducibilidad</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-referencia-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Referencia R</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-referencia-r">    
+        <li>
+    <a class="dropdown-item" href="./referencia-r.html">
+ <span class="dropdown-text">Todas las referencias</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-experimentos.html">
+ <span class="dropdown-text">Experimentos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-rdd.html">
+ <span class="dropdown-text">Regresión discontinua</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-did-sintetico.html">
+ <span class="dropdown-text">DiD y control sintético</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-acumulacion.html">
+ <span class="dropdown-text">Acumulación de evidencia</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./referencias.html"> 
+<span class="menu-text">Referencias</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:danilofreire@gmail.com"> <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/danilofreire/taller-evidencia-ucu"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo lector">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#paquetes-y-datos" id="toc-paquetes-y-datos" class="nav-link active" data-scroll-target="#paquetes-y-datos"><span class="header-section-number">1</span> Paquetes y datos</a></li>
+  <li><a href="#el-modelo-rma" id="toc-el-modelo-rma" class="nav-link" data-scroll-target="#el-modelo-rma"><span class="header-section-number">2</span> El modelo: rma</a></li>
+  <li><a href="#el-forest-plot" id="toc-el-forest-plot" class="nav-link" data-scroll-target="#el-forest-plot"><span class="header-section-number">3</span> El forest plot</a></li>
+  <li><a href="#el-funnel-plot" id="toc-el-funnel-plot" class="nav-link" data-scroll-target="#el-funnel-plot"><span class="header-section-number">4</span> El funnel plot</a></li>
+  <li><a href="#el-test-de-egger" id="toc-el-test-de-egger" class="nav-link" data-scroll-target="#el-test-de-egger"><span class="header-section-number">5</span> El test de Egger</a></li>
+  <li><a href="#el-chequeo-de-los-estudios-grandes" id="toc-el-chequeo-de-los-estudios-grandes" class="nav-link" data-scroll-target="#el-chequeo-de-los-estudios-grandes"><span class="header-section-number">6</span> El chequeo de los estudios grandes</a></li>
+  <li><a href="#trim-and-fill" id="toc-trim-and-fill" class="nav-link" data-scroll-target="#trim-and-fill"><span class="header-section-number">7</span> Trim-and-fill</a></li>
+  <li><a href="#efectos-fijos-o-aleatorios" id="toc-efectos-fijos-o-aleatorios" class="nav-link" data-scroll-target="#efectos-fijos-o-aleatorios"><span class="header-section-number">8</span> Efectos fijos o aleatorios</a></li>
+  <li><a href="#subgrupos-cuando-el-promedio-esconde-dos-historias" id="toc-subgrupos-cuando-el-promedio-esconde-dos-historias" class="nav-link" data-scroll-target="#subgrupos-cuando-el-promedio-esconde-dos-historias"><span class="header-section-number">9</span> Subgrupos: cuando el promedio esconde dos historias</a></li>
+  <li><a href="#meta-regresión" id="toc-meta-regresión" class="nav-link" data-scroll-target="#meta-regresión"><span class="header-section-number">10</span> Meta-regresión</a></li>
+  <li><a href="#leave-one-out-y-estudios-influyentes" id="toc-leave-one-out-y-estudios-influyentes" class="nav-link" data-scroll-target="#leave-one-out-y-estudios-influyentes"><span class="header-section-number">11</span> Leave-one-out y estudios influyentes</a></li>
+  <li><a href="#para-seguir" id="toc-para-seguir" class="nav-link" data-scroll-target="#para-seguir"><span class="header-section-number">12</span> Para seguir</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/referencia-acumulacion.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Referencia R: acumulación de evidencia</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Código</button></div></div>
+<p class="subtitle lead">Parte 5 · meta-análisis con metafor, sesgo de publicación y heterogeneidad</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Esta página reúne, con código que podés correr y copiar, todas las funciones de R del bloque de acumulación de evidencia (<a href="diapositivas/05-acumulacion.html">diapositivas</a>), más varias funciones de <code>metafor</code> que no entraron en las slides pero que vas a querer tener a mano. Cada sección explica en pocas frases qué hace el comando, muestra un bloque ejecutable con su salida real, y cierra con una nota sobre cuándo conviene usarlo.</p>
+<p>Trabajamos con dos literaturas simuladas. La primera se fabrica con el cajón adentro, para ver el sesgo de publicación por dentro: sabemos cuál es el efecto verdadero (0,15) y cuáles son los estudios que nunca se publicaron. La segunda son 24 estudios sobre transferencias condicionadas y asistencia escolar, la que se usa en la práctica. Como las semillas están fijas, los números coinciden con los de las diapositivas y con <a href="diapositivas/datos/meta_estudios.csv"><code>meta_estudios.csv</code></a> y <a href="diapositivas/datos/transferencias.csv"><code>transferencias.csv</code></a>.</p>
+<section id="paquetes-y-datos" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="paquetes-y-datos"><span class="header-section-number">1</span> Paquetes y datos</h2>
+<p>Cargá los paquetes del bloque. <code>metafor</code> es el paquete estándar para meta-análisis en R (<a href="https://doi.org/10.18637/jss.v036.i03">Viechtbauer, 2010</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"metafor"</span>, <span class="st">"fabricatr"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> paquetes) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Cada fila es un estudio entero, no una persona. Simulamos primero la literatura completa (40 estudios, efecto verdadero 0,15) y después aplicamos el cajón, que es una sola línea de <code>filter</code>: los estudios grandes se publican siempre, los chicos sólo si salieron significativos.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>apellidos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"García"</span>, <span class="st">"Souza"</span>, <span class="st">"Lima"</span>, <span class="st">"Rojas"</span>, <span class="st">"Fernández"</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Muñoz"</span>, <span class="st">"Silva"</span>, <span class="st">"Torres"</span>, <span class="st">"Vargas"</span>, <span class="st">"Herrera"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Castro"</span>, <span class="st">"Mendoza"</span>, <span class="st">"Ríos"</span>, <span class="st">"Acosta"</span>, <span class="st">"Núñez"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Ferreira"</span>, <span class="st">"Ortiz"</span>, <span class="st">"Cabrera"</span>, <span class="st">"Duarte"</span>, <span class="st">"Sosa"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>paises <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Brasil"</span>, <span class="st">"México"</span>, <span class="st">"Chile"</span>, <span class="st">"Colombia"</span>, <span class="st">"Perú"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Argentina"</span>, <span class="st">"Uruguay"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">27</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. los 40 estudios que SE HICIERON</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>literatura <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">40</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">autor   =</span> <span class="fu">sample</span>(apellidos, N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">anio    =</span> <span class="fu">sample</span>(<span class="dv">2005</span><span class="sc">:</span><span class="dv">2022</span>, N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">estudio =</span> <span class="fu">paste0</span>(autor, <span class="st">" ("</span>, anio, <span class="st">")"</span>),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">pais    =</span> <span class="fu">sample</span>(paises, N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">diseno  =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"RDD"</span>, <span class="st">"DiD"</span>, <span class="st">"OLS"</span>), N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">n       =</span> <span class="fu">round</span>(<span class="fu">exp</span>(<span class="fu">runif</span>(N, <span class="fu">log</span>(<span class="dv">60</span>), <span class="fu">log</span>(<span class="dv">600</span>)))),   <span class="co"># muestras de 60 a 600</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">ee      =</span> <span class="fu">round</span>(<span class="fl">2.2</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n), <span class="dv">3</span>),                   <span class="co"># más grande, menos error</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">efecto  =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(N, <span class="fl">0.15</span>, <span class="fu">sqrt</span>(<span class="fl">0.08</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> ee<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>)   <span class="co"># el verdadero es 0.15</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. el cajón: los grandes se publican siempre; los chicos, sólo si dieron t &gt; 1.64</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> literatura <span class="sc">|&gt;</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ee <span class="sc">&lt;=</span> <span class="fl">0.12</span> <span class="sc">|</span> efecto <span class="sc">/</span> ee <span class="sc">&gt;</span> <span class="fl">1.64</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">se_hicieron =</span> <span class="fu">nrow</span>(literatura), <span class="at">se_publicaron =</span> <span class="fu">nrow</span>(datos))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  se_hicieron se_publicaron 
+           40            21 </code></pre>
+</div>
+</div>
+<p>Diecinueve estudios quedaron en el cajón: existieron, pero nadie los va a ver. Vos tenés las dos tablas porque las fabricaste; un meta-analista de verdad sólo tiene <code>datos</code>, y no hay ningún comando que le diga cuántos faltan.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Simular una literatura con el sesgo adentro es la forma más clara de entender qué puede y qué no puede hacer un meta-análisis. Para tu propio trabajo, lo que necesitás de cada estudio es el efecto (<code>yi</code>) y su error estándar (<code>sei</code>), en una escala comparable entre estudios.</p>
+</div>
+</div>
+</section>
+<section id="el-modelo-rma" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="el-modelo-rma"><span class="header-section-number">2</span> El modelo: rma</h2>
+<p><code>rma()</code> ajusta el meta-análisis: un promedio ponderado por precisión, donde cada estudio pesa el inverso de su varianza. Por defecto usa efectos aleatorios (el efecto verdadero puede variar entre contextos) estimados por REML.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto,  <span class="co"># el efecto de cada estudio</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">sei =</span> ee,     <span class="co"># su error estándar</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> datos)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Random-Effects Model (k = 21; tau^2 estimator: REML)
+
+tau^2 (estimated amount of total heterogeneity): 0.0071 (SE = 0.0070)
+tau (square root of estimated tau^2 value):      0.0844
+I^2 (total heterogeneity / total variability):   31.88%
+H^2 (total variability / sampling variability):  1.47
+
+Test for Heterogeneity:
+Q(df = 20) = 31.3359, p-val = 0.0509
+
+Model Results:
+
+estimate      se    zval    pval   ci.lb   ci.ub      
+  0.2028  0.0334  6.0817  &lt;.0001  0.1375  0.2682  *** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Cómo leer la salida:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">En la salida</th>
+<th style="text-align: left;">Qué significa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>k = 21</code></td>
+<td style="text-align: left;">cuántos estudios entraron</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tau^2</code></td>
+<td style="text-align: left;">cuánto varía el efecto real entre estudios</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>tau</code></td>
+<td style="text-align: left;">lo mismo, en unidades del efecto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>I^2 = 31.9%</code></td>
+<td style="text-align: left;">ese desacuerdo, como porcentaje del total</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>H^2</code></td>
+<td style="text-align: left;">1,00 sería “ninguna heterogeneidad”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Q, p</code></td>
+<td style="text-align: left;">el test formal: ¿hay más desacuerdo del que explica el azar?</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>estimate</code></td>
+<td style="text-align: left;">el efecto combinado (el rombo del forest plot)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ci.lb, ci.ub</code></td>
+<td style="text-align: left;">su intervalo del 95%</td>
+</tr>
+</tbody>
+</table>
+<p>El efecto combinado da 0,203, con intervalo [0,14; 0,27]: positivo y bien medido. Pero recordá que el verdadero es 0,15, así que este promedio está inflado.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mirá siempre el <code>estimate</code> junto con el <span class="math inline">\(I^2\)</span>. Un efecto combinado con <span class="math inline">\(I^2\)</span> cerca de 0% resume bien a todos los estudios; con <span class="math inline">\(I^2\)</span> arriba de 75%, el promedio esconde más de lo que muestra y conviene buscar qué explica el desacuerdo.</p>
+</div>
+</div>
+</section>
+<section id="el-forest-plot" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="el-forest-plot"><span class="header-section-number">3</span> El forest plot</h2>
+<p><code>forest()</code> dibuja el clásico: una fila por estudio, el cuadrado es su efecto (su tamaño, el peso), la línea su intervalo, y el rombo de abajo el efecto combinado.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(m, <span class="at">slab =</span> datos<span class="sc">$</span>estudio,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Efecto estimado"</span>, <span class="at">header =</span> <span class="st">"Estudio"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-acumulacion_files/figure-html/forest-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1125"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Fijate si las filas se parecen entre sí. Si ves dos grupos separados con el rombo pasando por el medio (donde casi no hay estudios), el promedio no describe a nadie y hay una variable que explica la diferencia. <code>slab =</code> pone las etiquetas y <code>header =</code> el encabezado de la columna.</p>
+</div>
+</div>
+</section>
+<section id="el-funnel-plot" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="el-funnel-plot"><span class="header-section-number">4</span> El funnel plot</h2>
+<p>Cada punto es un estudio: su efecto en el eje x, su error estándar en el y, con el eje invertido (los grandes arriba, los chicos abajo). Si no hay sesgo, los estudios chicos se reparten a los dos lados del efecto combinado y el dibujo parece un embudo simétrico.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">funnel</span>(m, <span class="at">xlab =</span> <span class="st">"Efecto estimado"</span>, <span class="at">ylab =</span> <span class="st">"Error estándar"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-acumulacion_files/figure-html/funnel-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>La receta para leerlo: tapá la mitad de arriba (los grandes casi no se mueven), y en la banda de abajo contá los puntos a cada lado de la línea central. Acá la esquina de abajo a la izquierda quedó vacía, que es justo donde estarían los estudios chicos con efectos chicos o negativos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un embudo simétrico es lo que querés. Un lado vacío en la parte baja es la huella del cajón. Ojo: la asimetría también puede venir de heterogeneidad real (los estudios chicos se hacen en contextos distintos), así que el funnel sugiere, no prueba.</p>
+</div>
+</div>
+</section>
+<section id="el-test-de-egger" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="el-test-de-egger"><span class="header-section-number">5</span> El test de Egger</h2>
+<p>Lo que el ojo ve en el funnel, <code>regtest()</code> lo pone en números: una regresión de los efectos sobre su precisión. Si la pendiente difiere de cero, el embudo está torcido (<a href="https://doi.org/10.1136/bmj.315.7109.629">Egger et al., 1997</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">regtest</span>(m)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Regression Test for Funnel Plot Asymmetry
+
+Model:     mixed-effects meta-regression model
+Predictor: standard error
+
+Test for Funnel Plot Asymmetry: z =  2.8694, p = 0.0041
+Limit Estimate (as sei -&gt; 0):   b = -0.1323 (CI: -0.3686, 0.1040)</code></pre>
+</div>
+</div>
+<p>El valor <span class="math inline">\(p\)</span> da 0,004: la asimetría no es casualidad. Acá el sesgo lo fabricamos nosotros con el <code>filter</code>; en una literatura real no vas a saberlo, y por eso el chequeo se corre siempre.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un <span class="math inline">\(p\)</span> chico es señal de alarma. Pero un <span class="math inline">\(p\)</span> alto no prueba que no haya cajón: sólo dice que no encontramos la huella. Con pocos estudios el test tiene poca potencia, y hay sesgos (que un país entero no publique, por ejemplo) que no producen asimetría.</p>
+</div>
+</div>
+</section>
+<section id="el-chequeo-de-los-estudios-grandes" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="el-chequeo-de-los-estudios-grandes"><span class="header-section-number">6</span> El chequeo de los estudios grandes</h2>
+<p>Los estudios grandes se publican con cualquier resultado, así que no arrastran el filtro de la significancia. Si el promedio se mueve al quedarte sólo con ellos, algo pasa.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>grandes <span class="ot">&lt;-</span> <span class="fu">filter</span>(datos, ee <span class="sc">&lt;=</span> <span class="fl">0.12</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">publicados    =</span> <span class="fu">unname</span>(<span class="fu">coef</span>(m)),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">solo_grandes  =</span> <span class="fu">unname</span>(<span class="fu">coef</span>(<span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">data =</span> grandes))),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cajon_abierto =</span> <span class="fu">unname</span>(<span class="fu">coef</span>(<span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">data =</span> literatura)))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>), <span class="dv">3</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   publicados  solo_grandes cajon_abierto 
+        0.203         0.145         0.152 </code></pre>
+</div>
+</div>
+<p>Con los 21 publicados da 0,203; con los 12 grandes, 0,145; con los 40 que de verdad existieron, 0,152, que es el valor verdadero. El meta-análisis no falló: hizo su trabajo con la literatura que le dieron. El sesgo estaba en qué llegó a publicarse.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La tercera columna no existe en la vida real, porque nadie ve el cajón. Las dos primeras sí las podés calcular siempre, y su diferencia es una señal barata y honesta. Si el promedio de los grandes es bastante menor, sospechá del cajón.</p>
+</div>
+</div>
+</section>
+<section id="trim-and-fill" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="trim-and-fill"><span class="header-section-number">7</span> Trim-and-fill</h2>
+<p><code>trimfill()</code> estima cuántos estudios “faltan” para que el embudo quede simétrico, los imputa y recalcula el efecto combinado. Es una forma de preguntar cuánto cambiaría la conclusión si el cajón se abriera.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tf <span class="ot">&lt;-</span> <span class="fu">trimfill</span>(m)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>tf</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Estimated number of missing studies on the left side: 5 (SE = 3.0722)
+
+Random-Effects Model (k = 26; tau^2 estimator: REML)
+
+tau^2 (estimated amount of total heterogeneity): 0.0097 (SE = 0.0077)
+tau (square root of estimated tau^2 value):      0.0987
+I^2 (total heterogeneity / total variability):   35.98%
+H^2 (total variability / sampling variability):  1.56
+
+Test for Heterogeneity:
+Q(df = 25) = 44.4695, p-val = 0.0096
+
+Model Results:
+
+estimate      se    zval    pval   ci.lb   ci.ub      
+  0.1688  0.0334  5.0592  &lt;.0001  0.1034  0.2342  *** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">estudios_imputados =</span> tf<span class="sc">$</span>k0, <span class="at">efecto_corregido =</span> <span class="fu">round</span>(<span class="fu">unname</span>(<span class="fu">coef</span>(tf)), <span class="dv">3</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>estudios_imputados   efecto_corregido 
+             5.000              0.169 </code></pre>
+</div>
+</div>
+<p>Imputa 5 estudios y baja el efecto de 0,203 a 0,169, más cerca del verdadero 0,15. Sigue sin llegar del todo, y esa es la lección.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Tratalo como análisis de sensibilidad, no como corrección. Si el efecto corregido sigue lejos de cero, tu conclusión es más robusta; si se derrumba, el resultado dependía de los estudios que faltan. La solución de fondo no es estadística: es que los nulos se publiquen.</p>
+</div>
+</div>
+</section>
+<section id="efectos-fijos-o-aleatorios" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="efectos-fijos-o-aleatorios"><span class="header-section-number">8</span> Efectos fijos o aleatorios</h2>
+<p>Por defecto <code>rma()</code> usa efectos aleatorios: supone que el efecto verdadero varía entre contextos y suma esa varianza (<span class="math inline">\(\tau^2\)</span>) al peso de cada estudio. Con <code>method = "EE"</code> pedís efectos fijos (equal effects), que asume un único efecto verdadero para todos.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fijos <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">data =</span> datos, <span class="at">method =</span> <span class="st">"EE"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">aleatorios =</span> <span class="fu">unname</span>(<span class="fu">coef</span>(m)),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">fijos      =</span> <span class="fu">unname</span>(<span class="fu">coef</span>(fijos))), <span class="dv">3</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>aleatorios      fijos 
+     0.203      0.195 </code></pre>
+</div>
+</div>
+<p>Acá dan parecido porque la heterogeneidad es baja (<span class="math inline">\(I^2\)</span> ≈ 32%). Cuanto más alto el <span class="math inline">\(I^2\)</span>, más se separan: los efectos fijos le dan mucho más peso a los estudios grandes y producen intervalos demasiado angostos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En ciencias sociales, efectos aleatorios es casi siempre la opción correcta, porque los estudios se hacen en países, años y poblaciones distintas. Reservá los efectos fijos para cuando de verdad creas que todos los estudios estiman exactamente la misma cantidad.</p>
+</div>
+</div>
+</section>
+<section id="subgrupos-cuando-el-promedio-esconde-dos-historias" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="subgrupos-cuando-el-promedio-esconde-dos-historias"><span class="header-section-number">9</span> Subgrupos: cuando el promedio esconde dos historias</h2>
+<p>Pasemos a la segunda literatura: 24 estudios sobre transferencias condicionadas y asistencia escolar. Acá no sabés cómo se generó, así que tratala como una literatura de verdad.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">46</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>transferencias <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">24</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">autor    =</span> <span class="fu">sample</span>(apellidos, N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">anio     =</span> <span class="fu">sample</span>(<span class="dv">2008</span><span class="sc">:</span><span class="dv">2023</span>, N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">estudio  =</span> <span class="fu">paste0</span>(autor, <span class="st">" ("</span>, anio, <span class="st">")"</span>),</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pais     =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Brasil"</span>, <span class="st">"México"</span>, <span class="st">"Colombia"</span>, <span class="st">"Perú"</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Honduras"</span>, <span class="st">"Nicaragua"</span>, <span class="st">"Ecuador"</span>), N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">contexto =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"rural"</span>, <span class="st">"urbano"</span>), <span class="at">each =</span> <span class="dv">12</span>),</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">n        =</span> <span class="fu">round</span>(<span class="fu">exp</span>(<span class="fu">runif</span>(N, <span class="fu">log</span>(<span class="dv">200</span>), <span class="fu">log</span>(<span class="dv">2000</span>)))),</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ee       =</span> <span class="fu">round</span>(<span class="fl">1.5</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n), <span class="dv">3</span>),</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">efecto   =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(N, <span class="fu">ifelse</span>(contexto <span class="sc">==</span> <span class="st">"rural"</span>, <span class="fl">0.35</span>, <span class="fl">0.10</span>),</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">sqrt</span>(<span class="fl">0.04</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> ee<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>m_tr <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">data =</span> transferencias)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">efecto =</span> <span class="fu">round</span>(<span class="fu">unname</span>(<span class="fu">coef</span>(m_tr)), <span class="dv">3</span>), <span class="at">I2 =</span> <span class="fu">round</span>(m_tr<span class="sc">$</span>I2, <span class="dv">1</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>efecto     I2 
+ 0.244 84.900 </code></pre>
+</div>
+</div>
+<p>El efecto combinado da 0,244 y parece sólido, pero el <span class="math inline">\(I^2\)</span> es 84,9%: casi todo el desacuerdo es real. Si es real, algo lo explica. Probemos con el contexto, corriendo un <code>rma()</code> por subgrupo.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>rural  <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> <span class="fu">filter</span>(transferencias, contexto <span class="sc">==</span> <span class="st">"rural"</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>urbano <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> <span class="fu">filter</span>(transferencias, contexto <span class="sc">==</span> <span class="st">"urbano"</span>))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">contexto =</span> <span class="fu">c</span>(<span class="st">"rural"</span>, <span class="st">"urbano"</span>),</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">efecto   =</span> <span class="fu">round</span>(<span class="fu">c</span>(<span class="fu">coef</span>(rural), <span class="fu">coef</span>(urbano)), <span class="dv">3</span>),</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ic_bajo  =</span> <span class="fu">round</span>(<span class="fu">c</span>(rural<span class="sc">$</span>ci.lb, urbano<span class="sc">$</span>ci.lb), <span class="dv">3</span>),</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ic_alto  =</span> <span class="fu">round</span>(<span class="fu">c</span>(rural<span class="sc">$</span>ci.ub, urbano<span class="sc">$</span>ci.ub), <span class="dv">3</span>),</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">I2_porc  =</span> <span class="fu">round</span>(<span class="fu">c</span>(rural<span class="sc">$</span>I2, urbano<span class="sc">$</span>I2), <span class="dv">1</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  contexto efecto ic_bajo ic_alto I2_porc
+1    rural  0.360   0.331   0.389     0.1
+2   urbano  0.105   0.070   0.140     0.1</code></pre>
+</div>
+</div>
+<p>Rural da 0,360 y urbano 0,105: los intervalos ni se tocan. Y el <span class="math inline">\(I^2\)</span> se desploma de 84,9% a ≈ 0% dentro de cada grupo, o sea que el contexto explicaba todo el desacuerdo. El 0,244 no es el efecto de nada: es el promedio de dos programas distintos, y ninguno de los dos rinde 0,244.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un <span class="math inline">\(I^2\)</span> alto no es un defecto del meta-análisis: es una pregunta, y casi siempre la mejor de todas. Cuando parte un promedio en dos historias con intervalos que no se solapan, reportá los subgrupos, no el promedio.</p>
+</div>
+</div>
+</section>
+<section id="meta-regresión" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="meta-regresión"><span class="header-section-number">10</span> Meta-regresión</h2>
+<p>Cortar por subgrupos a mano funciona con una variable categórica. <code>rma()</code> con el argumento <code>mods =</code> generaliza la idea: una regresión donde la variable dependiente es el efecto de cada estudio y los predictores son características del estudio.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mr <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">mods =</span> <span class="sc">~</span> contexto, <span class="at">data =</span> transferencias)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mr</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Mixed-Effects Model (k = 24; tau^2 estimator: REML)
+
+tau^2 (estimated amount of residual heterogeneity):     0.0000 (SE = 0.0008)
+tau (square root of estimated tau^2 value):             0.0021
+I^2 (residual heterogeneity / unaccounted variability): 0.13%
+H^2 (unaccounted variability / sampling variability):   1.00
+R^2 (amount of heterogeneity accounted for):            99.98%
+
+Test for Residual Heterogeneity:
+QE(df = 22) = 23.2593, p-val = 0.3872
+
+Test of Moderators (coefficient 2):
+QM(df = 1) = 120.6731, p-val &lt; .0001
+
+Model Results:
+
+                estimate      se      zval    pval    ci.lb    ci.ub      
+intrcpt           0.3601  0.0149   24.1451  &lt;.0001   0.3308   0.3893  *** 
+contextourbano   -0.2553  0.0232  -10.9851  &lt;.0001  -0.3009  -0.2098  *** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>El intercepto (0,360) es el efecto en el grupo de referencia (rural) y <code>contextourbano</code> (−0,255) es cuánto menos rinde en la ciudad. El test <span class="math inline">\(Q_M\)</span> pregunta si el moderador explica algo, y acá lo rechaza con holgura. Con más de un moderador, escribís <code>mods = ~ contexto + anio + n</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># en la primera literatura: ¿cambia el efecto según el diseño del estudio?</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">mods =</span> <span class="sc">~</span> diseno, <span class="at">data =</span> datos)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Mixed-Effects Model (k = 21; tau^2 estimator: REML)
+
+tau^2 (estimated amount of residual heterogeneity):     0.0094 (SE = 0.0084)
+tau (square root of estimated tau^2 value):             0.0971
+I^2 (residual heterogeneity / unaccounted variability): 37.45%
+H^2 (unaccounted variability / sampling variability):   1.60
+R^2 (amount of heterogeneity accounted for):            0.00%
+
+Test for Residual Heterogeneity:
+QE(df = 18) = 30.3434, p-val = 0.0342
+
+Test of Moderators (coefficients 2:3):
+QM(df = 2) = 0.5291, p-val = 0.7675
+
+Model Results:
+
+           estimate      se    zval    pval    ci.lb   ci.ub      
+intrcpt      0.1809  0.0503  3.5960  0.0003   0.0823  0.2795  *** 
+disenoOLS    0.0419  0.0726  0.5777  0.5635  -0.1004  0.1842      
+disenoRDD    0.0851  0.1509  0.5636  0.5730  -0.2108  0.3809      
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es la forma de preguntar si el diseño, el país o el año explican las diferencias entre estudios. Cuidado con dos cosas: con pocos estudios te quedás sin grados de libertad enseguida (una regla práctica pide unos 10 estudios por moderador), y los moderadores no se aleatorizaron, así que las diferencias entre subgrupos son asociaciones, no efectos causales.</p>
+</div>
+</div>
+</section>
+<section id="leave-one-out-y-estudios-influyentes" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="leave-one-out-y-estudios-influyentes"><span class="header-section-number">11</span> Leave-one-out y estudios influyentes</h2>
+<p>¿El resultado depende de un solo estudio? <code>leave1out()</code> reajusta el meta-análisis sacando un estudio por vez, y muestra cómo se mueve el efecto combinado.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>l1o <span class="ot">&lt;-</span> <span class="fu">leave1out</span>(m)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">estudio =</span> datos<span class="sc">$</span>estudio,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">efecto_sin_el =</span> <span class="fu">round</span>(l1o<span class="sc">$</span>estimate, <span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(efecto_sin_el) <span class="sc">|&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         estudio efecto_sin_el
+1  García (2015)         0.193
+2    Ríos (2009)         0.195
+3   Rojas (2016)         0.196
+4 Cabrera (2009)         0.197
+5  Vargas (2008)         0.197</code></pre>
+</div>
+</div>
+<p>Si sacar cualquier estudio mueve poco el promedio, el resultado es estable. <code>influence()</code> va más lejos y calcula diagnósticos por estudio (distancia de Cook, residuos estandarizados) para detectar los que mandan.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>inf <span class="ot">&lt;-</span> <span class="fu">influence</span>(m)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(inf)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-acumulacion_files/figure-html/influencia-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1050"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Corré leave-one-out siempre que tengas pocos estudios, que es lo habitual en ciencias sociales. Si un solo estudio sostiene la conclusión, decilo en el paper. Un estudio influyente no se borra: se explica (muestra enorme, contexto raro, diseño distinto).</p>
+</div>
+</div>
+</section>
+<section id="para-seguir" class="level2" data-number="12">
+<h2 data-number="12" class="anchored" data-anchor-id="para-seguir"><span class="header-section-number">12</span> Para seguir</h2>
+<div class="callout callout-style-default callout-tip callout-titled" title="Enlaces y lecturas">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Enlaces y lecturas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>El paquete</strong></p>
+<ul>
+<li><a href="https://www.metafor-project.org/"><code>metafor</code></a>: la web del paquete, con una documentación excelente y muchos ejemplos reproducibles</li>
+<li><a href="https://doi.org/10.18637/jss.v036.i03">Viechtbauer (2010)</a>: el artículo que lo presenta, en el <em>Journal of Statistical Software</em></li>
+</ul>
+<p><strong>Para leer</strong></p>
+<ul>
+<li><a href="https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/">Harrer, Cuijpers, Furukawa y Ebert (2021)</a>, <em>Doing Meta-Analysis with R</em>: el manual práctico, gratis online</li>
+<li><a href="https://doi.org/10.1136/bmj.315.7109.629">Egger et al.&nbsp;(1997)</a>: el test de asimetría del funnel</li>
+<li><a href="https://doi.org/10.1037/0033-2909.86.3.638">Rosenthal (1979)</a>: el file-drawer problem, el artículo original</li>
+</ul>
+<p><strong>Sobre el cajón y la replicación</strong></p>
+<ul>
+<li><a href="https://doi.org/10.1126/science.1255484">Franco, Malhotra y Simonovits (2014)</a> y <a href="https://doi.org/10.1073/pnas.2426937122">Moniz, Druckman y Freese (2025)</a>: el cajón medido con TESS, diez años después</li>
+<li><a href="https://doi.org/10.1126/science.aac4716">Open Science Collaboration (2015)</a>: las 100 replicaciones en psicología</li>
+<li><a href="https://doi.org/10.1038/s41586-025-09844-9">Aczél, Szászi, Nosek et al.&nbsp;(2026)</a>: 457 analistas, 100 estudios, en <em>Nature</em></li>
+</ul>
+<p><strong>Nuestro caso del bloque</strong></p>
+<ul>
+<li><a href="https://doi.org/10.1017/S0007123422000552">Freire, Mignozzetti, Roman y Alptekin (2023)</a>: el meta-análisis del tamaño de las legislaturas y el gasto público, en el <em>British Journal of Political Science</em></li>
+</ul>
+<p><strong>Prácticas reproducibles</strong></p>
+<ul>
+<li>La <a href="reproducibilidad.html">guía de reproducibilidad</a> del taller, con el kit paso a paso</li>
+<li><a href="https://the-turing-way.netlify.app/">The Turing Way</a> y <a href="https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf">Gentzkow y Shapiro (2014)</a></li>
+</ul>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Volver arriba</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Ejecutar el código</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Referencia R: acumulación de evidencia"</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Parte 5 · meta-análisis con metafor, sesgo de publicación y heterogeneidad"</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="an">toc-depth:</span><span class="co"> 3</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> true</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="an">code-copy:</span><span class="co"> true</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> es</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="an">engine:</span><span class="co"> knitr</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">eval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.width =</span> <span class="dv">7</span>,</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.height =</span> <span class="fl">4.5</span>,</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="dv">150</span>,</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">cache =</span> <span class="cn">TRUE</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a><span class="co"># paleta de la casa (el mismo par azul/rojo de las diapositivas)</span></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>azul <span class="ot">&lt;-</span> <span class="st">"#2d4563"</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>rojo <span class="ot">&lt;-</span> <span class="st">"#b85450"</span></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>Esta página reúne, con código que podés correr y copiar, todas las funciones de R del bloque de acumulación de evidencia (<span class="co">[</span><span class="ot">diapositivas</span><span class="co">](diapositivas/05-acumulacion.html)</span>), más varias funciones de <span class="in">`metafor`</span> que no entraron en las slides pero que vas a querer tener a mano. Cada sección explica en pocas frases qué hace el comando, muestra un bloque ejecutable con su salida real, y cierra con una nota sobre cuándo conviene usarlo.</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>Trabajamos con dos literaturas simuladas. La primera se fabrica con el cajón adentro, para ver el sesgo de publicación por dentro: sabemos cuál es el efecto verdadero (0,15) y cuáles son los estudios que nunca se publicaron. La segunda son 24 estudios sobre transferencias condicionadas y asistencia escolar, la que se usa en la práctica. Como las semillas están fijas, los números coinciden con los de las diapositivas y con <span class="co">[</span><span class="ot">`meta_estudios.csv`</span><span class="co">](diapositivas/datos/meta_estudios.csv)</span> y <span class="co">[</span><span class="ot">`transferencias.csv`</span><span class="co">](diapositivas/datos/transferencias.csv)</span>.</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paquetes y datos</span></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>Cargá los paquetes del bloque. <span class="in">`metafor`</span> es el paquete estándar para meta-análisis en R (<span class="co">[</span><span class="ot">Viechtbauer, 2010</span><span class="co">](https://doi.org/10.18637/jss.v036.i03)</span>).</span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r paquetes}</span></span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"metafor"</span>, <span class="st">"fabricatr"</span>)</span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> paquetes) {</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>Cada fila es un estudio entero, no una persona. Simulamos primero la literatura completa (40 estudios, efecto verdadero 0,15) y después aplicamos el cajón, que es una sola línea de <span class="in">`filter`</span>: los estudios grandes se publican siempre, los chicos sólo si salieron significativos.</span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r generar-datos}</span></span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>apellidos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"García"</span>, <span class="st">"Souza"</span>, <span class="st">"Lima"</span>, <span class="st">"Rojas"</span>, <span class="st">"Fernández"</span>,</span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Muñoz"</span>, <span class="st">"Silva"</span>, <span class="st">"Torres"</span>, <span class="st">"Vargas"</span>, <span class="st">"Herrera"</span>,</span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Castro"</span>, <span class="st">"Mendoza"</span>, <span class="st">"Ríos"</span>, <span class="st">"Acosta"</span>, <span class="st">"Núñez"</span>,</span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Ferreira"</span>, <span class="st">"Ortiz"</span>, <span class="st">"Cabrera"</span>, <span class="st">"Duarte"</span>, <span class="st">"Sosa"</span>)</span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a>paises <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Brasil"</span>, <span class="st">"México"</span>, <span class="st">"Chile"</span>, <span class="st">"Colombia"</span>, <span class="st">"Perú"</span>,</span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Argentina"</span>, <span class="st">"Uruguay"</span>)</span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">27</span>)</span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. los 40 estudios que SE HICIERON</span></span>
+<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a>literatura <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">40</span>,</span>
+<span id="cb29-67"><a href="#cb29-67" aria-hidden="true" tabindex="-1"></a>  <span class="at">autor   =</span> <span class="fu">sample</span>(apellidos, N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb29-68"><a href="#cb29-68" aria-hidden="true" tabindex="-1"></a>  <span class="at">anio    =</span> <span class="fu">sample</span>(<span class="dv">2005</span><span class="sc">:</span><span class="dv">2022</span>, N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb29-69"><a href="#cb29-69" aria-hidden="true" tabindex="-1"></a>  <span class="at">estudio =</span> <span class="fu">paste0</span>(autor, <span class="st">" ("</span>, anio, <span class="st">")"</span>),</span>
+<span id="cb29-70"><a href="#cb29-70" aria-hidden="true" tabindex="-1"></a>  <span class="at">pais    =</span> <span class="fu">sample</span>(paises, N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb29-71"><a href="#cb29-71" aria-hidden="true" tabindex="-1"></a>  <span class="at">diseno  =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"RDD"</span>, <span class="st">"DiD"</span>, <span class="st">"OLS"</span>), N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb29-72"><a href="#cb29-72" aria-hidden="true" tabindex="-1"></a>  <span class="at">n       =</span> <span class="fu">round</span>(<span class="fu">exp</span>(<span class="fu">runif</span>(N, <span class="fu">log</span>(<span class="dv">60</span>), <span class="fu">log</span>(<span class="dv">600</span>)))),   <span class="co"># muestras de 60 a 600</span></span>
+<span id="cb29-73"><a href="#cb29-73" aria-hidden="true" tabindex="-1"></a>  <span class="at">ee      =</span> <span class="fu">round</span>(<span class="fl">2.2</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n), <span class="dv">3</span>),                   <span class="co"># más grande, menos error</span></span>
+<span id="cb29-74"><a href="#cb29-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">efecto  =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(N, <span class="fl">0.15</span>, <span class="fu">sqrt</span>(<span class="fl">0.08</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> ee<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>)   <span class="co"># el verdadero es 0.15</span></span>
+<span id="cb29-75"><a href="#cb29-75" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-76"><a href="#cb29-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-77"><a href="#cb29-77" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. el cajón: los grandes se publican siempre; los chicos, sólo si dieron t &gt; 1.64</span></span>
+<span id="cb29-78"><a href="#cb29-78" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> literatura <span class="sc">|&gt;</span></span>
+<span id="cb29-79"><a href="#cb29-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ee <span class="sc">&lt;=</span> <span class="fl">0.12</span> <span class="sc">|</span> efecto <span class="sc">/</span> ee <span class="sc">&gt;</span> <span class="fl">1.64</span>)</span>
+<span id="cb29-80"><a href="#cb29-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-81"><a href="#cb29-81" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">se_hicieron =</span> <span class="fu">nrow</span>(literatura), <span class="at">se_publicaron =</span> <span class="fu">nrow</span>(datos))</span>
+<span id="cb29-82"><a href="#cb29-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-83"><a href="#cb29-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-84"><a href="#cb29-84" aria-hidden="true" tabindex="-1"></a>Diecinueve estudios quedaron en el cajón: existieron, pero nadie los va a ver. Vos tenés las dos tablas porque las fabricaste; un meta-analista de verdad sólo tiene <span class="in">`datos`</span>, y no hay ningún comando que le diga cuántos faltan.</span>
+<span id="cb29-85"><a href="#cb29-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-86"><a href="#cb29-86" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb29-87"><a href="#cb29-87" aria-hidden="true" tabindex="-1"></a>Simular una literatura con el sesgo adentro es la forma más clara de entender qué puede y qué no puede hacer un meta-análisis. Para tu propio trabajo, lo que necesitás de cada estudio es el efecto (<span class="in">`yi`</span>) y su error estándar (<span class="in">`sei`</span>), en una escala comparable entre estudios.</span>
+<span id="cb29-88"><a href="#cb29-88" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-89"><a href="#cb29-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-90"><a href="#cb29-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## El modelo: rma</span></span>
+<span id="cb29-91"><a href="#cb29-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-92"><a href="#cb29-92" aria-hidden="true" tabindex="-1"></a><span class="in">`rma()`</span> ajusta el meta-análisis: un promedio ponderado por precisión, donde cada estudio pesa el inverso de su varianza. Por defecto usa efectos aleatorios (el efecto verdadero puede variar entre contextos) estimados por REML.</span>
+<span id="cb29-93"><a href="#cb29-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-94"><a href="#cb29-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r rma}</span></span>
+<span id="cb29-95"><a href="#cb29-95" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto,  <span class="co"># el efecto de cada estudio</span></span>
+<span id="cb29-96"><a href="#cb29-96" aria-hidden="true" tabindex="-1"></a>         <span class="at">sei =</span> ee,     <span class="co"># su error estándar</span></span>
+<span id="cb29-97"><a href="#cb29-97" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> datos)</span>
+<span id="cb29-98"><a href="#cb29-98" aria-hidden="true" tabindex="-1"></a>m</span>
+<span id="cb29-99"><a href="#cb29-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-100"><a href="#cb29-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-101"><a href="#cb29-101" aria-hidden="true" tabindex="-1"></a>Cómo leer la salida:</span>
+<span id="cb29-102"><a href="#cb29-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-103"><a href="#cb29-103" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> En la salida <span class="pp">|</span> Qué significa <span class="pp">|</span></span>
+<span id="cb29-104"><a href="#cb29-104" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span>:--<span class="pp">|</span>:--<span class="pp">|</span></span>
+<span id="cb29-105"><a href="#cb29-105" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`k = 21`</span> <span class="pp">|</span> cuántos estudios entraron <span class="pp">|</span></span>
+<span id="cb29-106"><a href="#cb29-106" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`tau^2`</span> <span class="pp">|</span> cuánto varía el efecto real entre estudios <span class="pp">|</span></span>
+<span id="cb29-107"><a href="#cb29-107" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`tau`</span> <span class="pp">|</span> lo mismo, en unidades del efecto <span class="pp">|</span></span>
+<span id="cb29-108"><a href="#cb29-108" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`I^2 = 31.9%`</span> <span class="pp">|</span> ese desacuerdo, como porcentaje del total <span class="pp">|</span></span>
+<span id="cb29-109"><a href="#cb29-109" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`H^2`</span> <span class="pp">|</span> 1,00 sería "ninguna heterogeneidad" <span class="pp">|</span></span>
+<span id="cb29-110"><a href="#cb29-110" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`Q, p`</span> <span class="pp">|</span> el test formal: ¿hay más desacuerdo del que explica el azar? <span class="pp">|</span></span>
+<span id="cb29-111"><a href="#cb29-111" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`estimate`</span> <span class="pp">|</span> el efecto combinado (el rombo del forest plot) <span class="pp">|</span></span>
+<span id="cb29-112"><a href="#cb29-112" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`ci.lb, ci.ub`</span> <span class="pp">|</span> su intervalo del 95% <span class="pp">|</span></span>
+<span id="cb29-113"><a href="#cb29-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-114"><a href="#cb29-114" aria-hidden="true" tabindex="-1"></a>El efecto combinado da 0,203, con intervalo <span class="co">[</span><span class="ot">0,14; 0,27</span><span class="co">]</span>: positivo y bien medido. Pero recordá que el verdadero es 0,15, así que este promedio está inflado.</span>
+<span id="cb29-115"><a href="#cb29-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-116"><a href="#cb29-116" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb29-117"><a href="#cb29-117" aria-hidden="true" tabindex="-1"></a>Mirá siempre el <span class="in">`estimate`</span> junto con el $I^2$. Un efecto combinado con $I^2$ cerca de 0% resume bien a todos los estudios; con $I^2$ arriba de 75%, el promedio esconde más de lo que muestra y conviene buscar qué explica el desacuerdo.</span>
+<span id="cb29-118"><a href="#cb29-118" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-119"><a href="#cb29-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-120"><a href="#cb29-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## El forest plot</span></span>
+<span id="cb29-121"><a href="#cb29-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-122"><a href="#cb29-122" aria-hidden="true" tabindex="-1"></a><span class="in">`forest()`</span> dibuja el clásico: una fila por estudio, el cuadrado es su efecto (su tamaño, el peso), la línea su intervalo, y el rombo de abajo el efecto combinado.</span>
+<span id="cb29-123"><a href="#cb29-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-124"><a href="#cb29-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r forest, fig.height=7, fig.width=7.5}</span></span>
+<span id="cb29-125"><a href="#cb29-125" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(m, <span class="at">slab =</span> datos<span class="sc">$</span>estudio,</span>
+<span id="cb29-126"><a href="#cb29-126" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Efecto estimado"</span>, <span class="at">header =</span> <span class="st">"Estudio"</span>)</span>
+<span id="cb29-127"><a href="#cb29-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-128"><a href="#cb29-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-129"><a href="#cb29-129" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb29-130"><a href="#cb29-130" aria-hidden="true" tabindex="-1"></a>Fijate si las filas se parecen entre sí. Si ves dos grupos separados con el rombo pasando por el medio (donde casi no hay estudios), el promedio no describe a nadie y hay una variable que explica la diferencia. <span class="in">`slab =`</span> pone las etiquetas y <span class="in">`header =`</span> el encabezado de la columna.</span>
+<span id="cb29-131"><a href="#cb29-131" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-132"><a href="#cb29-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-133"><a href="#cb29-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## El funnel plot</span></span>
+<span id="cb29-134"><a href="#cb29-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-135"><a href="#cb29-135" aria-hidden="true" tabindex="-1"></a>Cada punto es un estudio: su efecto en el eje x, su error estándar en el y, con el eje invertido (los grandes arriba, los chicos abajo). Si no hay sesgo, los estudios chicos se reparten a los dos lados del efecto combinado y el dibujo parece un embudo simétrico.</span>
+<span id="cb29-136"><a href="#cb29-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-137"><a href="#cb29-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r funnel}</span></span>
+<span id="cb29-138"><a href="#cb29-138" aria-hidden="true" tabindex="-1"></a><span class="fu">funnel</span>(m, <span class="at">xlab =</span> <span class="st">"Efecto estimado"</span>, <span class="at">ylab =</span> <span class="st">"Error estándar"</span>)</span>
+<span id="cb29-139"><a href="#cb29-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-140"><a href="#cb29-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-141"><a href="#cb29-141" aria-hidden="true" tabindex="-1"></a>La receta para leerlo: tapá la mitad de arriba (los grandes casi no se mueven), y en la banda de abajo contá los puntos a cada lado de la línea central. Acá la esquina de abajo a la izquierda quedó vacía, que es justo donde estarían los estudios chicos con efectos chicos o negativos.</span>
+<span id="cb29-142"><a href="#cb29-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-143"><a href="#cb29-143" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb29-144"><a href="#cb29-144" aria-hidden="true" tabindex="-1"></a>Un embudo simétrico es lo que querés. Un lado vacío en la parte baja es la huella del cajón. Ojo: la asimetría también puede venir de heterogeneidad real (los estudios chicos se hacen en contextos distintos), así que el funnel sugiere, no prueba.</span>
+<span id="cb29-145"><a href="#cb29-145" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-146"><a href="#cb29-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-147"><a href="#cb29-147" aria-hidden="true" tabindex="-1"></a><span class="fu">## El test de Egger</span></span>
+<span id="cb29-148"><a href="#cb29-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-149"><a href="#cb29-149" aria-hidden="true" tabindex="-1"></a>Lo que el ojo ve en el funnel, <span class="in">`regtest()`</span> lo pone en números: una regresión de los efectos sobre su precisión. Si la pendiente difiere de cero, el embudo está torcido (<span class="co">[</span><span class="ot">Egger et al., 1997</span><span class="co">](https://doi.org/10.1136/bmj.315.7109.629)</span>).</span>
+<span id="cb29-150"><a href="#cb29-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-151"><a href="#cb29-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r egger}</span></span>
+<span id="cb29-152"><a href="#cb29-152" aria-hidden="true" tabindex="-1"></a><span class="fu">regtest</span>(m)</span>
+<span id="cb29-153"><a href="#cb29-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-154"><a href="#cb29-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-155"><a href="#cb29-155" aria-hidden="true" tabindex="-1"></a>El valor $p$ da 0,004: la asimetría no es casualidad. Acá el sesgo lo fabricamos nosotros con el <span class="in">`filter`</span>; en una literatura real no vas a saberlo, y por eso el chequeo se corre siempre.</span>
+<span id="cb29-156"><a href="#cb29-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-157"><a href="#cb29-157" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb29-158"><a href="#cb29-158" aria-hidden="true" tabindex="-1"></a>Un $p$ chico es señal de alarma. Pero un $p$ alto no prueba que no haya cajón: sólo dice que no encontramos la huella. Con pocos estudios el test tiene poca potencia, y hay sesgos (que un país entero no publique, por ejemplo) que no producen asimetría.</span>
+<span id="cb29-159"><a href="#cb29-159" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-160"><a href="#cb29-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-161"><a href="#cb29-161" aria-hidden="true" tabindex="-1"></a><span class="fu">## El chequeo de los estudios grandes</span></span>
+<span id="cb29-162"><a href="#cb29-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-163"><a href="#cb29-163" aria-hidden="true" tabindex="-1"></a>Los estudios grandes se publican con cualquier resultado, así que no arrastran el filtro de la significancia. Si el promedio se mueve al quedarte sólo con ellos, algo pasa.</span>
+<span id="cb29-164"><a href="#cb29-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-165"><a href="#cb29-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r grandes}</span></span>
+<span id="cb29-166"><a href="#cb29-166" aria-hidden="true" tabindex="-1"></a>grandes <span class="ot">&lt;-</span> <span class="fu">filter</span>(datos, ee <span class="sc">&lt;=</span> <span class="fl">0.12</span>)</span>
+<span id="cb29-167"><a href="#cb29-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-168"><a href="#cb29-168" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(</span>
+<span id="cb29-169"><a href="#cb29-169" aria-hidden="true" tabindex="-1"></a>  <span class="at">publicados    =</span> <span class="fu">unname</span>(<span class="fu">coef</span>(m)),</span>
+<span id="cb29-170"><a href="#cb29-170" aria-hidden="true" tabindex="-1"></a>  <span class="at">solo_grandes  =</span> <span class="fu">unname</span>(<span class="fu">coef</span>(<span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">data =</span> grandes))),</span>
+<span id="cb29-171"><a href="#cb29-171" aria-hidden="true" tabindex="-1"></a>  <span class="at">cajon_abierto =</span> <span class="fu">unname</span>(<span class="fu">coef</span>(<span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">data =</span> literatura)))</span>
+<span id="cb29-172"><a href="#cb29-172" aria-hidden="true" tabindex="-1"></a>), <span class="dv">3</span>)</span>
+<span id="cb29-173"><a href="#cb29-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-174"><a href="#cb29-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-175"><a href="#cb29-175" aria-hidden="true" tabindex="-1"></a>Con los 21 publicados da 0,203; con los 12 grandes, 0,145; con los 40 que de verdad existieron, 0,152, que es el valor verdadero. El meta-análisis no falló: hizo su trabajo con la literatura que le dieron. El sesgo estaba en qué llegó a publicarse.</span>
+<span id="cb29-176"><a href="#cb29-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-177"><a href="#cb29-177" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb29-178"><a href="#cb29-178" aria-hidden="true" tabindex="-1"></a>La tercera columna no existe en la vida real, porque nadie ve el cajón. Las dos primeras sí las podés calcular siempre, y su diferencia es una señal barata y honesta. Si el promedio de los grandes es bastante menor, sospechá del cajón.</span>
+<span id="cb29-179"><a href="#cb29-179" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-180"><a href="#cb29-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-181"><a href="#cb29-181" aria-hidden="true" tabindex="-1"></a><span class="fu">## Trim-and-fill</span></span>
+<span id="cb29-182"><a href="#cb29-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-183"><a href="#cb29-183" aria-hidden="true" tabindex="-1"></a><span class="in">`trimfill()`</span> estima cuántos estudios "faltan" para que el embudo quede simétrico, los imputa y recalcula el efecto combinado. Es una forma de preguntar cuánto cambiaría la conclusión si el cajón se abriera.</span>
+<span id="cb29-184"><a href="#cb29-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-185"><a href="#cb29-185" aria-hidden="true" tabindex="-1"></a><span class="in">```{r trimfill}</span></span>
+<span id="cb29-186"><a href="#cb29-186" aria-hidden="true" tabindex="-1"></a>tf <span class="ot">&lt;-</span> <span class="fu">trimfill</span>(m)</span>
+<span id="cb29-187"><a href="#cb29-187" aria-hidden="true" tabindex="-1"></a>tf</span>
+<span id="cb29-188"><a href="#cb29-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-189"><a href="#cb29-189" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">estudios_imputados =</span> tf<span class="sc">$</span>k0, <span class="at">efecto_corregido =</span> <span class="fu">round</span>(<span class="fu">unname</span>(<span class="fu">coef</span>(tf)), <span class="dv">3</span>))</span>
+<span id="cb29-190"><a href="#cb29-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-191"><a href="#cb29-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-192"><a href="#cb29-192" aria-hidden="true" tabindex="-1"></a>Imputa 5 estudios y baja el efecto de 0,203 a 0,169, más cerca del verdadero 0,15. Sigue sin llegar del todo, y esa es la lección.</span>
+<span id="cb29-193"><a href="#cb29-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-194"><a href="#cb29-194" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb29-195"><a href="#cb29-195" aria-hidden="true" tabindex="-1"></a>Tratalo como análisis de sensibilidad, no como corrección. Si el efecto corregido sigue lejos de cero, tu conclusión es más robusta; si se derrumba, el resultado dependía de los estudios que faltan. La solución de fondo no es estadística: es que los nulos se publiquen.</span>
+<span id="cb29-196"><a href="#cb29-196" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-197"><a href="#cb29-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-198"><a href="#cb29-198" aria-hidden="true" tabindex="-1"></a><span class="fu">## Efectos fijos o aleatorios</span></span>
+<span id="cb29-199"><a href="#cb29-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-200"><a href="#cb29-200" aria-hidden="true" tabindex="-1"></a>Por defecto <span class="in">`rma()`</span> usa efectos aleatorios: supone que el efecto verdadero varía entre contextos y suma esa varianza ($\tau^2$) al peso de cada estudio. Con <span class="in">`method = "EE"`</span> pedís efectos fijos (equal effects), que asume un único efecto verdadero para todos.</span>
+<span id="cb29-201"><a href="#cb29-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-202"><a href="#cb29-202" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fijos}</span></span>
+<span id="cb29-203"><a href="#cb29-203" aria-hidden="true" tabindex="-1"></a>fijos <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">data =</span> datos, <span class="at">method =</span> <span class="st">"EE"</span>)</span>
+<span id="cb29-204"><a href="#cb29-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-205"><a href="#cb29-205" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">aleatorios =</span> <span class="fu">unname</span>(<span class="fu">coef</span>(m)),</span>
+<span id="cb29-206"><a href="#cb29-206" aria-hidden="true" tabindex="-1"></a>        <span class="at">fijos      =</span> <span class="fu">unname</span>(<span class="fu">coef</span>(fijos))), <span class="dv">3</span>)</span>
+<span id="cb29-207"><a href="#cb29-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-208"><a href="#cb29-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-209"><a href="#cb29-209" aria-hidden="true" tabindex="-1"></a>Acá dan parecido porque la heterogeneidad es baja ($I^2$ ≈ 32%). Cuanto más alto el $I^2$, más se separan: los efectos fijos le dan mucho más peso a los estudios grandes y producen intervalos demasiado angostos.</span>
+<span id="cb29-210"><a href="#cb29-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-211"><a href="#cb29-211" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb29-212"><a href="#cb29-212" aria-hidden="true" tabindex="-1"></a>En ciencias sociales, efectos aleatorios es casi siempre la opción correcta, porque los estudios se hacen en países, años y poblaciones distintas. Reservá los efectos fijos para cuando de verdad creas que todos los estudios estiman exactamente la misma cantidad.</span>
+<span id="cb29-213"><a href="#cb29-213" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-214"><a href="#cb29-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-215"><a href="#cb29-215" aria-hidden="true" tabindex="-1"></a><span class="fu">## Subgrupos: cuando el promedio esconde dos historias</span></span>
+<span id="cb29-216"><a href="#cb29-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-217"><a href="#cb29-217" aria-hidden="true" tabindex="-1"></a>Pasemos a la segunda literatura: 24 estudios sobre transferencias condicionadas y asistencia escolar. Acá no sabés cómo se generó, así que tratala como una literatura de verdad.</span>
+<span id="cb29-218"><a href="#cb29-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-219"><a href="#cb29-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{r transferencias}</span></span>
+<span id="cb29-220"><a href="#cb29-220" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">46</span>)</span>
+<span id="cb29-221"><a href="#cb29-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-222"><a href="#cb29-222" aria-hidden="true" tabindex="-1"></a>transferencias <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb29-223"><a href="#cb29-223" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">24</span>,</span>
+<span id="cb29-224"><a href="#cb29-224" aria-hidden="true" tabindex="-1"></a>  <span class="at">autor    =</span> <span class="fu">sample</span>(apellidos, N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb29-225"><a href="#cb29-225" aria-hidden="true" tabindex="-1"></a>  <span class="at">anio     =</span> <span class="fu">sample</span>(<span class="dv">2008</span><span class="sc">:</span><span class="dv">2023</span>, N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb29-226"><a href="#cb29-226" aria-hidden="true" tabindex="-1"></a>  <span class="at">estudio  =</span> <span class="fu">paste0</span>(autor, <span class="st">" ("</span>, anio, <span class="st">")"</span>),</span>
+<span id="cb29-227"><a href="#cb29-227" aria-hidden="true" tabindex="-1"></a>  <span class="at">pais     =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Brasil"</span>, <span class="st">"México"</span>, <span class="st">"Colombia"</span>, <span class="st">"Perú"</span>,</span>
+<span id="cb29-228"><a href="#cb29-228" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"Honduras"</span>, <span class="st">"Nicaragua"</span>, <span class="st">"Ecuador"</span>), N, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb29-229"><a href="#cb29-229" aria-hidden="true" tabindex="-1"></a>  <span class="at">contexto =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"rural"</span>, <span class="st">"urbano"</span>), <span class="at">each =</span> <span class="dv">12</span>),</span>
+<span id="cb29-230"><a href="#cb29-230" aria-hidden="true" tabindex="-1"></a>  <span class="at">n        =</span> <span class="fu">round</span>(<span class="fu">exp</span>(<span class="fu">runif</span>(N, <span class="fu">log</span>(<span class="dv">200</span>), <span class="fu">log</span>(<span class="dv">2000</span>)))),</span>
+<span id="cb29-231"><a href="#cb29-231" aria-hidden="true" tabindex="-1"></a>  <span class="at">ee       =</span> <span class="fu">round</span>(<span class="fl">1.5</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n), <span class="dv">3</span>),</span>
+<span id="cb29-232"><a href="#cb29-232" aria-hidden="true" tabindex="-1"></a>  <span class="at">efecto   =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(N, <span class="fu">ifelse</span>(contexto <span class="sc">==</span> <span class="st">"rural"</span>, <span class="fl">0.35</span>, <span class="fl">0.10</span>),</span>
+<span id="cb29-233"><a href="#cb29-233" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">sqrt</span>(<span class="fl">0.04</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> ee<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">3</span>)</span>
+<span id="cb29-234"><a href="#cb29-234" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-235"><a href="#cb29-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-236"><a href="#cb29-236" aria-hidden="true" tabindex="-1"></a>m_tr <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">data =</span> transferencias)</span>
+<span id="cb29-237"><a href="#cb29-237" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">efecto =</span> <span class="fu">round</span>(<span class="fu">unname</span>(<span class="fu">coef</span>(m_tr)), <span class="dv">3</span>), <span class="at">I2 =</span> <span class="fu">round</span>(m_tr<span class="sc">$</span>I2, <span class="dv">1</span>))</span>
+<span id="cb29-238"><a href="#cb29-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-239"><a href="#cb29-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-240"><a href="#cb29-240" aria-hidden="true" tabindex="-1"></a>El efecto combinado da 0,244 y parece sólido, pero el $I^2$ es 84,9%: casi todo el desacuerdo es real. Si es real, algo lo explica. Probemos con el contexto, corriendo un <span class="in">`rma()`</span> por subgrupo.</span>
+<span id="cb29-241"><a href="#cb29-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-242"><a href="#cb29-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{r subgrupos}</span></span>
+<span id="cb29-243"><a href="#cb29-243" aria-hidden="true" tabindex="-1"></a>rural  <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee,</span>
+<span id="cb29-244"><a href="#cb29-244" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> <span class="fu">filter</span>(transferencias, contexto <span class="sc">==</span> <span class="st">"rural"</span>))</span>
+<span id="cb29-245"><a href="#cb29-245" aria-hidden="true" tabindex="-1"></a>urbano <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee,</span>
+<span id="cb29-246"><a href="#cb29-246" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> <span class="fu">filter</span>(transferencias, contexto <span class="sc">==</span> <span class="st">"urbano"</span>))</span>
+<span id="cb29-247"><a href="#cb29-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-248"><a href="#cb29-248" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb29-249"><a href="#cb29-249" aria-hidden="true" tabindex="-1"></a>  <span class="at">contexto =</span> <span class="fu">c</span>(<span class="st">"rural"</span>, <span class="st">"urbano"</span>),</span>
+<span id="cb29-250"><a href="#cb29-250" aria-hidden="true" tabindex="-1"></a>  <span class="at">efecto   =</span> <span class="fu">round</span>(<span class="fu">c</span>(<span class="fu">coef</span>(rural), <span class="fu">coef</span>(urbano)), <span class="dv">3</span>),</span>
+<span id="cb29-251"><a href="#cb29-251" aria-hidden="true" tabindex="-1"></a>  <span class="at">ic_bajo  =</span> <span class="fu">round</span>(<span class="fu">c</span>(rural<span class="sc">$</span>ci.lb, urbano<span class="sc">$</span>ci.lb), <span class="dv">3</span>),</span>
+<span id="cb29-252"><a href="#cb29-252" aria-hidden="true" tabindex="-1"></a>  <span class="at">ic_alto  =</span> <span class="fu">round</span>(<span class="fu">c</span>(rural<span class="sc">$</span>ci.ub, urbano<span class="sc">$</span>ci.ub), <span class="dv">3</span>),</span>
+<span id="cb29-253"><a href="#cb29-253" aria-hidden="true" tabindex="-1"></a>  <span class="at">I2_porc  =</span> <span class="fu">round</span>(<span class="fu">c</span>(rural<span class="sc">$</span>I2, urbano<span class="sc">$</span>I2), <span class="dv">1</span>)</span>
+<span id="cb29-254"><a href="#cb29-254" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-255"><a href="#cb29-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-256"><a href="#cb29-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-257"><a href="#cb29-257" aria-hidden="true" tabindex="-1"></a>Rural da 0,360 y urbano 0,105: los intervalos ni se tocan. Y el $I^2$ se desploma de 84,9% a ≈ 0% dentro de cada grupo, o sea que el contexto explicaba todo el desacuerdo. El 0,244 no es el efecto de nada: es el promedio de dos programas distintos, y ninguno de los dos rinde 0,244.</span>
+<span id="cb29-258"><a href="#cb29-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-259"><a href="#cb29-259" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb29-260"><a href="#cb29-260" aria-hidden="true" tabindex="-1"></a>Un $I^2$ alto no es un defecto del meta-análisis: es una pregunta, y casi siempre la mejor de todas. Cuando parte un promedio en dos historias con intervalos que no se solapan, reportá los subgrupos, no el promedio.</span>
+<span id="cb29-261"><a href="#cb29-261" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-262"><a href="#cb29-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-263"><a href="#cb29-263" aria-hidden="true" tabindex="-1"></a><span class="fu">## Meta-regresión</span></span>
+<span id="cb29-264"><a href="#cb29-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-265"><a href="#cb29-265" aria-hidden="true" tabindex="-1"></a>Cortar por subgrupos a mano funciona con una variable categórica. <span class="in">`rma()`</span> con el argumento <span class="in">`mods =`</span> generaliza la idea: una regresión donde la variable dependiente es el efecto de cada estudio y los predictores son características del estudio.</span>
+<span id="cb29-266"><a href="#cb29-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-267"><a href="#cb29-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{r meta-regresion}</span></span>
+<span id="cb29-268"><a href="#cb29-268" aria-hidden="true" tabindex="-1"></a>mr <span class="ot">&lt;-</span> <span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">mods =</span> <span class="sc">~</span> contexto, <span class="at">data =</span> transferencias)</span>
+<span id="cb29-269"><a href="#cb29-269" aria-hidden="true" tabindex="-1"></a>mr</span>
+<span id="cb29-270"><a href="#cb29-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-271"><a href="#cb29-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-272"><a href="#cb29-272" aria-hidden="true" tabindex="-1"></a>El intercepto (0,360) es el efecto en el grupo de referencia (rural) y <span class="in">`contextourbano`</span> (−0,255) es cuánto menos rinde en la ciudad. El test $Q_M$ pregunta si el moderador explica algo, y acá lo rechaza con holgura. Con más de un moderador, escribís <span class="in">`mods = ~ contexto + anio + n`</span>.</span>
+<span id="cb29-273"><a href="#cb29-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-274"><a href="#cb29-274" aria-hidden="true" tabindex="-1"></a><span class="in">```{r meta-regresion-diseno}</span></span>
+<span id="cb29-275"><a href="#cb29-275" aria-hidden="true" tabindex="-1"></a><span class="co"># en la primera literatura: ¿cambia el efecto según el diseño del estudio?</span></span>
+<span id="cb29-276"><a href="#cb29-276" aria-hidden="true" tabindex="-1"></a><span class="fu">rma</span>(<span class="at">yi =</span> efecto, <span class="at">sei =</span> ee, <span class="at">mods =</span> <span class="sc">~</span> diseno, <span class="at">data =</span> datos)</span>
+<span id="cb29-277"><a href="#cb29-277" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-278"><a href="#cb29-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-279"><a href="#cb29-279" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb29-280"><a href="#cb29-280" aria-hidden="true" tabindex="-1"></a>Es la forma de preguntar si el diseño, el país o el año explican las diferencias entre estudios. Cuidado con dos cosas: con pocos estudios te quedás sin grados de libertad enseguida (una regla práctica pide unos 10 estudios por moderador), y los moderadores no se aleatorizaron, así que las diferencias entre subgrupos son asociaciones, no efectos causales.</span>
+<span id="cb29-281"><a href="#cb29-281" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-282"><a href="#cb29-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-283"><a href="#cb29-283" aria-hidden="true" tabindex="-1"></a><span class="fu">## Leave-one-out y estudios influyentes</span></span>
+<span id="cb29-284"><a href="#cb29-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-285"><a href="#cb29-285" aria-hidden="true" tabindex="-1"></a>¿El resultado depende de un solo estudio? <span class="in">`leave1out()`</span> reajusta el meta-análisis sacando un estudio por vez, y muestra cómo se mueve el efecto combinado.</span>
+<span id="cb29-286"><a href="#cb29-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-287"><a href="#cb29-287" aria-hidden="true" tabindex="-1"></a><span class="in">```{r leave1out}</span></span>
+<span id="cb29-288"><a href="#cb29-288" aria-hidden="true" tabindex="-1"></a>l1o <span class="ot">&lt;-</span> <span class="fu">leave1out</span>(m)</span>
+<span id="cb29-289"><a href="#cb29-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-290"><a href="#cb29-290" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">estudio =</span> datos<span class="sc">$</span>estudio,</span>
+<span id="cb29-291"><a href="#cb29-291" aria-hidden="true" tabindex="-1"></a>           <span class="at">efecto_sin_el =</span> <span class="fu">round</span>(l1o<span class="sc">$</span>estimate, <span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb29-292"><a href="#cb29-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(efecto_sin_el) <span class="sc">|&gt;</span></span>
+<span id="cb29-293"><a href="#cb29-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb29-294"><a href="#cb29-294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-295"><a href="#cb29-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-296"><a href="#cb29-296" aria-hidden="true" tabindex="-1"></a>Si sacar cualquier estudio mueve poco el promedio, el resultado es estable. <span class="in">`influence()`</span> va más lejos y calcula diagnósticos por estudio (distancia de Cook, residuos estandarizados) para detectar los que mandan.</span>
+<span id="cb29-297"><a href="#cb29-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-298"><a href="#cb29-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r influencia, fig.height=6.5}</span></span>
+<span id="cb29-299"><a href="#cb29-299" aria-hidden="true" tabindex="-1"></a>inf <span class="ot">&lt;-</span> <span class="fu">influence</span>(m)</span>
+<span id="cb29-300"><a href="#cb29-300" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(inf)</span>
+<span id="cb29-301"><a href="#cb29-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb29-302"><a href="#cb29-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-303"><a href="#cb29-303" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb29-304"><a href="#cb29-304" aria-hidden="true" tabindex="-1"></a>Corré leave-one-out siempre que tengas pocos estudios, que es lo habitual en ciencias sociales. Si un solo estudio sostiene la conclusión, decilo en el paper. Un estudio influyente no se borra: se explica (muestra enorme, contexto raro, diseño distinto).</span>
+<span id="cb29-305"><a href="#cb29-305" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb29-306"><a href="#cb29-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-307"><a href="#cb29-307" aria-hidden="true" tabindex="-1"></a><span class="fu">## Para seguir</span></span>
+<span id="cb29-308"><a href="#cb29-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-309"><a href="#cb29-309" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip title="Enlaces y lecturas"}</span>
+<span id="cb29-310"><a href="#cb29-310" aria-hidden="true" tabindex="-1"></a>**El paquete**</span>
+<span id="cb29-311"><a href="#cb29-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-312"><a href="#cb29-312" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`metafor`</span><span class="co">](https://www.metafor-project.org/)</span>: la web del paquete, con una documentación excelente y muchos ejemplos reproducibles</span>
+<span id="cb29-313"><a href="#cb29-313" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Viechtbauer (2010)</span><span class="co">](https://doi.org/10.18637/jss.v036.i03)</span>: el artículo que lo presenta, en el *Journal of Statistical Software*</span>
+<span id="cb29-314"><a href="#cb29-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-315"><a href="#cb29-315" aria-hidden="true" tabindex="-1"></a>**Para leer**</span>
+<span id="cb29-316"><a href="#cb29-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-317"><a href="#cb29-317" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Harrer, Cuijpers, Furukawa y Ebert (2021)</span><span class="co">](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/)</span>, *Doing Meta-Analysis with R*: el manual práctico, gratis online</span>
+<span id="cb29-318"><a href="#cb29-318" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Egger et al. (1997)</span><span class="co">](https://doi.org/10.1136/bmj.315.7109.629)</span>: el test de asimetría del funnel</span>
+<span id="cb29-319"><a href="#cb29-319" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Rosenthal (1979)</span><span class="co">](https://doi.org/10.1037/0033-2909.86.3.638)</span>: el file-drawer problem, el artículo original</span>
+<span id="cb29-320"><a href="#cb29-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-321"><a href="#cb29-321" aria-hidden="true" tabindex="-1"></a>**Sobre el cajón y la replicación**</span>
+<span id="cb29-322"><a href="#cb29-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-323"><a href="#cb29-323" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Franco, Malhotra y Simonovits (2014)</span><span class="co">](https://doi.org/10.1126/science.1255484)</span> y <span class="co">[</span><span class="ot">Moniz, Druckman y Freese (2025)</span><span class="co">](https://doi.org/10.1073/pnas.2426937122)</span>: el cajón medido con TESS, diez años después</span>
+<span id="cb29-324"><a href="#cb29-324" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Open Science Collaboration (2015)</span><span class="co">](https://doi.org/10.1126/science.aac4716)</span>: las 100 replicaciones en psicología</span>
+<span id="cb29-325"><a href="#cb29-325" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Aczél, Szászi, Nosek et al. (2026)</span><span class="co">](https://doi.org/10.1038/s41586-025-09844-9)</span>: 457 analistas, 100 estudios, en *Nature*</span>
+<span id="cb29-326"><a href="#cb29-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-327"><a href="#cb29-327" aria-hidden="true" tabindex="-1"></a>**Nuestro caso del bloque**</span>
+<span id="cb29-328"><a href="#cb29-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-329"><a href="#cb29-329" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Freire, Mignozzetti, Roman y Alptekin (2023)</span><span class="co">](https://doi.org/10.1017/S0007123422000552)</span>: el meta-análisis del tamaño de las legislaturas y el gasto público, en el *British Journal of Political Science*</span>
+<span id="cb29-330"><a href="#cb29-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-331"><a href="#cb29-331" aria-hidden="true" tabindex="-1"></a>**Prácticas reproducibles**</span>
+<span id="cb29-332"><a href="#cb29-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-333"><a href="#cb29-333" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La <span class="co">[</span><span class="ot">guía de reproducibilidad</span><span class="co">](reproducibilidad.html)</span> del taller, con el kit paso a paso</span>
+<span id="cb29-334"><a href="#cb29-334" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">The Turing Way</span><span class="co">](https://the-turing-way.netlify.app/)</span> y <span class="co">[</span><span class="ot">Gentzkow y Shapiro (2014)</span><span class="co">](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf)</span></span>
+<span id="cb29-335"><a href="#cb29-335" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 <a href="https://danilofreire.github.io">Danilo Freire</a>. Contenido bajo licencia <a href="https://opensource.org/licenses/MIT">MIT</a>.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/referencia-acumulacion.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Hecho con <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

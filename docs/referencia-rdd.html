@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Referencia R: regresión discontinua – Políticas basadas en evidencia</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e68f30e75591e36100235718a786973.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Políticas basadas en evidencia</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./programa.html"> 
+<span class="menu-text">Programa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./materiales.html"> 
+<span class="menu-text">Materiales</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./reproducibilidad.html"> 
+<span class="menu-text">Reproducibilidad</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-referencia-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Referencia R</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-referencia-r">    
+        <li>
+    <a class="dropdown-item" href="./referencia-r.html">
+ <span class="dropdown-text">Todas las referencias</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-experimentos.html">
+ <span class="dropdown-text">Experimentos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-rdd.html">
+ <span class="dropdown-text">Regresión discontinua</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-did-sintetico.html">
+ <span class="dropdown-text">DiD y control sintético</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-acumulacion.html">
+ <span class="dropdown-text">Acumulación de evidencia</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./referencias.html"> 
+<span class="menu-text">Referencias</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:danilofreire@gmail.com"> <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/danilofreire/taller-evidencia-ucu"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo lector">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#paquetes-y-datos" id="toc-paquetes-y-datos" class="nav-link active" data-scroll-target="#paquetes-y-datos"><span class="header-section-number">1</span> Paquetes y datos</a></li>
+  <li><a href="#comparabilidad-cerca-del-corte" id="toc-comparabilidad-cerca-del-corte" class="nav-link" data-scroll-target="#comparabilidad-cerca-del-corte"><span class="header-section-number">2</span> Comparabilidad cerca del corte</a></li>
+  <li><a href="#ver-el-salto-a-mano" id="toc-ver-el-salto-a-mano" class="nav-link" data-scroll-target="#ver-el-salto-a-mano"><span class="header-section-number">3</span> Ver el salto a mano</a></li>
+  <li><a href="#el-mismo-salto-con-rdplot" id="toc-el-mismo-salto-con-rdplot" class="nav-link" data-scroll-target="#el-mismo-salto-con-rdplot"><span class="header-section-number">4</span> El mismo salto con rdplot</a></li>
+  <li><a href="#comparación-ingenua-vs-local" id="toc-comparación-ingenua-vs-local" class="nav-link" data-scroll-target="#comparación-ingenua-vs-local"><span class="header-section-number">5</span> Comparación ingenua vs local</a></li>
+  <li><a href="#estimar-el-efecto-con-rdrobust" id="toc-estimar-el-efecto-con-rdrobust" class="nav-link" data-scroll-target="#estimar-el-efecto-con-rdrobust"><span class="header-section-number">6</span> Estimar el efecto con rdrobust</a></li>
+  <li><a href="#el-efecto-en-varias-dimensiones" id="toc-el-efecto-en-varias-dimensiones" class="nav-link" data-scroll-target="#el-efecto-en-varias-dimensiones"><span class="header-section-number">7</span> El efecto en varias dimensiones</a></li>
+  <li><a href="#chequeo-de-manipulación-rddensity" id="toc-chequeo-de-manipulación-rddensity" class="nav-link" data-scroll-target="#chequeo-de-manipulación-rddensity"><span class="header-section-number">8</span> Chequeo de manipulación: rddensity</a></li>
+  <li><a href="#chequeo-de-balance-en-covariables" id="toc-chequeo-de-balance-en-covariables" class="nav-link" data-scroll-target="#chequeo-de-balance-en-covariables"><span class="header-section-number">9</span> Chequeo de balance en covariables</a></li>
+  <li><a href="#chequeo-con-un-corte-placebo" id="toc-chequeo-con-un-corte-placebo" class="nav-link" data-scroll-target="#chequeo-con-un-corte-placebo"><span class="header-section-number">10</span> Chequeo con un corte placebo</a></li>
+  <li><a href="#sensibilidad-al-ancho-de-banda" id="toc-sensibilidad-al-ancho-de-banda" class="nav-link" data-scroll-target="#sensibilidad-al-ancho-de-banda"><span class="header-section-number">11</span> Sensibilidad al ancho de banda</a></li>
+  <li><a href="#romper-el-diseño-a-propósito" id="toc-romper-el-diseño-a-propósito" class="nav-link" data-scroll-target="#romper-el-diseño-a-propósito"><span class="header-section-number">12</span> Romper el diseño a propósito</a></li>
+  <li><a href="#simular-un-rdd-antes-de-correrlo" id="toc-simular-un-rdd-antes-de-correrlo" class="nav-link" data-scroll-target="#simular-un-rdd-antes-de-correrlo"><span class="header-section-number">13</span> Simular un RDD antes de correrlo</a></li>
+  <li><a href="#para-seguir" id="toc-para-seguir" class="nav-link" data-scroll-target="#para-seguir"><span class="header-section-number">14</span> Para seguir</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/referencia-rdd.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Referencia R: regresión discontinua</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Código</button></div></div>
+<p class="subtitle lead">Parte 3 · rdplot, rdrobust, rddensity y los chequeos de validez</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Esta página reúne, con código que podés correr y copiar, todas las funciones de R del bloque de regresión discontinua (<a href="diapositivas/03-rdd.html">diapositivas</a>). Cada sección explica en pocas frases qué hace el comando, muestra un bloque ejecutable con su salida real, y cierra con una nota sobre cuándo conviene usarlo y qué mirar.</p>
+<p>Los ejemplos trabajan sobre los datos simulados del caso de los concejos municipales en Brasil (<a href="https://doi.org/10.1111/ajps.12843">Mignozzetti, Cepaluni y Freire, 2025</a>). Como la semilla está fija (<code>set.seed(148)</code>), los números coinciden con los de las diapositivas y con el archivo <a href="diapositivas/datos/municipios.csv"><code>municipios.csv</code></a>. El diseño simplifica el paper a un solo umbral (47.619 habitantes, donde el concejo pasa de 9 a 10 bancas), pero con efectos calcados de la investigación real.</p>
+<section id="paquetes-y-datos" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="paquetes-y-datos"><span class="header-section-number">1</span> Paquetes y datos</h2>
+<p>Cargá los paquetes del bloque. El bucle recorre la lista <code>paquetes</code> e instala cada uno solo si te falta, así el código corre igual en cualquier máquina. <code>rdrobust</code> y <code>rddensity</code> son el estándar para RDD hoy; <code>fabricatr</code> ya lo conocés del bloque de experimentos.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"estimatr"</span>, <span class="st">"rdrobust"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"rddensity"</span>, <span class="st">"fabricatr"</span>, <span class="st">"DesignLibrary"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> paquetes) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>La variable de asignación es <code>poblacion_c</code>: la población de cada municipio centrada en el umbral (población menos 47.619). Cruzar el corte (<code>poblacion_c &gt;= 0</code>) suma una banca; ese salto está escrito en la regla, no lo sortea nadie.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">148</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">2000</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">poblacion      =</span> <span class="fu">round</span>(<span class="fu">runif</span>(N, <span class="dv">20000</span>, <span class="dv">75000</span>)),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">poblacion_c    =</span> poblacion <span class="sc">-</span> <span class="dv">47619</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x              =</span> poblacion_c <span class="sc">/</span> <span class="dv">10000</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">concejo_grande =</span> <span class="fu">as.integer</span>(poblacion_c <span class="sc">&gt;=</span> <span class="dv">0</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_concejales   =</span> <span class="dv">9</span> <span class="sc">+</span> concejo_grande,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">pib_pc         =</span> <span class="fu">round</span>(<span class="dv">12</span> <span class="sc">+</span> <span class="fl">0.8</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">2</span>), <span class="dv">1</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop_pobres    =</span> <span class="fu">round</span>(<span class="fu">pmin</span>(<span class="fu">pmax</span>(<span class="fl">0.34</span> <span class="sc">-</span> <span class="fl">0.02</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">0.05</span>), <span class="fl">0.05</span>), <span class="fl">0.75</span>), <span class="dv">3</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">bancas_2000    =</span> <span class="dv">9</span> <span class="sc">+</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.15</span>),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">mortalidad_infantil     =</span> <span class="fu">pmax</span>(<span class="dv">2</span>,   <span class="fu">round</span>(<span class="dv">20</span> <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> x <span class="sc">-</span> <span class="fl">2.01</span> <span class="sc">*</span> concejo_grande <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">2.5</span>), <span class="dv">1</span>)),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">mortalidad_postneonatal =</span> <span class="fu">pmax</span>(<span class="fl">0.5</span>, <span class="fu">round</span>(<span class="dv">7</span> <span class="sc">-</span> <span class="fl">0.2</span> <span class="sc">*</span> x <span class="sc">-</span> <span class="fl">0.9</span> <span class="sc">*</span> concejo_grande <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">1.3</span>), <span class="dv">1</span>)),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">matricula_primaria      =</span> <span class="fu">pmax</span>(<span class="dv">0</span>,   <span class="fu">round</span>(<span class="dv">24</span> <span class="sc">+</span> <span class="fl">0.4</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fl">2.58</span> <span class="sc">*</span> concejo_grande <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">3</span>), <span class="dv">1</span>)),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ideb           =</span> <span class="fu">pmin</span>(<span class="dv">10</span>, <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(<span class="fl">4.5</span> <span class="sc">+</span> <span class="fl">0.1</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dv">1</span>))),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">burocratas     =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(<span class="dv">480</span> <span class="sc">+</span> <span class="dv">12</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">104</span> <span class="sc">*</span> concejo_grande <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">45</span>))),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">proyectos_servicios =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(<span class="dv">40</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">6</span> <span class="sc">*</span> concejo_grande <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">7</span>)))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">|&gt;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(poblacion_c, concejo_grande, n_concejales, mortalidad_infantil) <span class="sc">|&gt;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  poblacion_c concejo_grande n_concejales mortalidad_infantil
+1      -24535              0            9                21.9
+2      -12697              0            9                19.9
+3      -11158              0            9                20.2
+4       -6929              0            9                15.2
+5       22805              1           10                10.5
+6       19527              1           10                17.4</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un RDD vive donde una regla asigna algo por un umbral en una variable continua (un puntaje, una población, una nota de corte). Lo primero es identificar la variable de asignación y centrarla en el corte, porque todo el análisis se escribe sobre esa distancia al umbral.</p>
+</div>
+</div>
+</section>
+<section id="comparabilidad-cerca-del-corte" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="comparabilidad-cerca-del-corte"><span class="header-section-number">2</span> Comparabilidad cerca del corte</h2>
+<p>Si la idea del RDD es cierta, arriba y abajo del corte los municipios tienen que parecerse en todo lo que se decidió antes. Mirá los que caen a menos de 4.000 habitantes del umbral y comparalos.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">abs</span>(poblacion_c) <span class="sc">&lt;</span> <span class="dv">4000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(concejo_grande) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(pib_pc, prop_pobres, bancas_2000, n_concejales), mean))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  concejo_grande pib_pc prop_pobres bancas_2000 n_concejales
+           &lt;int&gt;  &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
+1              0   11.9       0.344        9.11            9
+2              1   11.9       0.336        9.10           10</code></pre>
+</div>
+</div>
+<p>El PIB per cápita, la pobreza y las bancas previas casi no se mueven entre los dos grupos. Lo único que cambia de golpe es una banca (<code>n_concejales</code> pasa de 9 a 10): ese es el experimento que escribió la ley.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es una primera mirada informal al balance, antes de los tests formales. Fijate en que las covariables previas al tratamiento sean parecidas cerca del corte. Si una salta a simple vista, tenés que preocuparte antes de estimar cualquier efecto.</p>
+</div>
+</div>
+</section>
+<section id="ver-el-salto-a-mano" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="ver-el-salto-a-mano"><span class="header-section-number">3</span> Ver el salto a mano</h2>
+<p>Antes de estimar nada, conviene mirar los datos: promedios del resultado por tramo de población, con una recta suave a cada lado del corte. Este gráfico artesanal deja ver de dónde sale el efecto.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">30000</span>, <span class="dv">30000</span>, <span class="at">by =</span> <span class="dv">2500</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>bin <span class="ot">&lt;-</span> <span class="fu">cut</span>(datos<span class="sc">$</span>poblacion_c, <span class="at">breaks =</span> brks)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>centros <span class="ot">&lt;-</span> (<span class="fu">head</span>(brks, <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span> <span class="fu">tail</span>(brks, <span class="sc">-</span><span class="dv">1</span>)) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>agg <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">centro =</span> centros,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">as.numeric</span>(<span class="fu">tapply</span>(datos<span class="sc">$</span>mortalidad_infantil, datos<span class="sc">$</span>bin, mean))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>agg <span class="ot">&lt;-</span> agg[<span class="sc">!</span><span class="fu">is.na</span>(agg<span class="sc">$</span>y), ]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> agg, <span class="fu">aes</span>(centro, y), <span class="at">colour =</span> azul, <span class="at">size =</span> <span class="fl">2.4</span>) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">subset</span>(datos, poblacion_c <span class="sc">&lt;</span> <span class="dv">0</span>),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(poblacion_c, mortalidad_infantil),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> azul, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">subset</span>(datos, poblacion_c <span class="sc">&gt;=</span> <span class="dv">0</span>),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(poblacion_c, mortalidad_infantil),</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> azul, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> rojo, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Población centrada en el umbral (47.619 hab)"</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mortalidad infantil (por mil)"</span>) <span class="sc">+</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  tema_taller</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-rdd_files/figure-html/salto-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1200"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>El salto hacia abajo justo en el corte es el efecto; la pendiente a cada lado es la tendencia que hay que descontar (los municipios más grandes tienen algo menos de mortalidad por otras razones).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Hacé siempre el gráfico antes de estimar. Si no ves un salto claro a ojo, ningún estimador te lo va a inventar de forma creíble. Mirá también la forma de la curva a cada lado: si es muy no lineal, vas a necesitar un polinomio o una ventana más angosta.</p>
+</div>
+</div>
+</section>
+<section id="el-mismo-salto-con-rdplot" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="el-mismo-salto-con-rdplot"><span class="header-section-number">4</span> El mismo salto con rdplot</h2>
+<p>Lo que armamos a mano lo hace <code>rdplot</code> en una línea: elige los bins de forma óptima y ajusta un polinomio a cada lado del corte. Es el gráfico estándar de los papers de RDD.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rdplot</span>(datos<span class="sc">$</span>mortalidad_infantil, datos<span class="sc">$</span>poblacion_c,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">x.label =</span> <span class="st">"Población centrada en el umbral"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">y.label =</span> <span class="st">"Mortalidad infantil (por mil)"</span>, <span class="at">title =</span> <span class="st">""</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-rdd_files/figure-html/rdplot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1200"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es la forma rápida y estándar de visualizar la discontinuidad. El primer argumento es el resultado, el segundo la variable de asignación. Ajustá <code>p =</code> para el orden del polinomio y <code>nbins =</code> si querés controlar los bins. Ver que coincide con el gráfico a mano es lo que te deja confiar en el atajo.</p>
+</div>
+</div>
+</section>
+<section id="comparación-ingenua-vs-local" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="comparación-ingenua-vs-local"><span class="header-section-number">5</span> Comparación ingenua vs local</h2>
+<p>La diferencia entre todos los concejos grandes y todos los chicos exagera el efecto, porque arrastra la tendencia (los municipios grandes son distintos por muchas razones además de la banca).</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(datos, <span class="fu">mean</span>(mortalidad_infantil[concejo_grande <span class="sc">==</span> <span class="dv">1</span>]) <span class="sc">-</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mean</span>(mortalidad_infantil[concejo_grande <span class="sc">==</span> <span class="dv">0</span>]))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -3.571459</code></pre>
+</div>
+</div>
+<p>La regresión local, restringida a una ventana cerca del corte y con una pendiente a cada lado, descuenta esa tendencia. El operador <code>*</code> pide los dos efectos principales más su interacción, así la pendiente puede diferir a cada lado del umbral.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cerca <span class="ot">&lt;-</span> <span class="fu">filter</span>(datos, <span class="fu">abs</span>(poblacion_c) <span class="sc">&lt;</span> <span class="dv">8000</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(mortalidad_infantil <span class="sc">~</span> concejo_grande <span class="sc">*</span> poblacion_c, <span class="at">data =</span> cerca)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(<span class="fu">summary</span>(fit))[<span class="st">"concejo_grande"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">3</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Estimate Std. Error    t value   Pr(&gt;|t|) 
+    -1.920      0.379     -5.063      0.000 </code></pre>
+</div>
+</div>
+<p>Pasamos de −3,57 (ingenua) a ≈ −1,9 (local): buena parte de la brecha era sesgo de selección, no efecto de la banca.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La comparación ingenua sirve como contraste, para ver cuánto sesgo tenía. Reportá siempre la estimación local. Si la ingenua y la local se parecen, la variable de asignación explicaba poco; si difieren mucho, había una tendencia fuerte que el RDD descuenta.</p>
+</div>
+</div>
+</section>
+<section id="estimar-el-efecto-con-rdrobust" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="estimar-el-efecto-con-rdrobust"><span class="header-section-number">6</span> Estimar el efecto con rdrobust</h2>
+<p><code>rdrobust</code> es el estimador de referencia: elige el ancho de banda de forma óptima y corrige el sesgo de los bordes (<a href="https://doi.org/10.3982/ECTA11757">Calonico, Cattaneo y Titiunik, 2014</a>). Con <code>summary()</code> ves el efecto, su error estándar, el valor <span class="math inline">\(p\)</span> y el ancho de banda elegido.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rd <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>mortalidad_infantil, datos<span class="sc">$</span>poblacion_c)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rd)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: rdrobust
+
+Sharp RD estimates using local polynomial regression.
+
+Number of Obs.                 2000
+BW type                       mserd
+Kernel                   Triangular
+VCE method                       NN
+
+                               Left        Right
+Number of Obs.                 1021          979
+Eff. Number of Obs.             402          374
+Order est. (p)                    1            1
+Order bias (q)                    2            2
+BW est. (h)               10425.086    10425.086
+BW bias (b)               16234.585    16234.585
+rho (h/b)                     0.642        0.642
+Unique Obs.                    1004          960
+
+=====================================================================
+                   Point    Robust Inference
+                Estimate         z     P&gt;|z|      [ 95% C.I. ]       
+---------------------------------------------------------------------
+     RD Effect    -1.920    -4.603     0.000    [-2.700 , -1.087]    
+=====================================================================</code></pre>
+</div>
+</div>
+<p>El efecto local es de ≈ −1,92 muertes por mil. En el paper, con los datos reales y los 12 umbrales agrupados, da −2,01 (Tabla 4): la misma lógica, en su versión simulada. Un coeficiente negativo acá es buena noticia (menos muertes). La fila “Conventional” es el estimado puntual; la fila “Robust” trae el intervalo de confianza con la corrección de sesgo, que es el que se reporta.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es tu caballo de batalla para estimar el efecto en un RDD. Podés extraer los números con <code>rd$coef</code>, <code>rd$se</code>, <code>rd$pv</code> y <code>rd$bws</code>. Argumentos útiles: <code>c =</code> para mover el corte, <code>p =</code> para el orden del polinomio, <code>h =</code> para fijar el ancho de banda a mano, y <code>covs =</code> para sumar controles.</p>
+</div>
+</div>
+</section>
+<section id="el-efecto-en-varias-dimensiones" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="el-efecto-en-varias-dimensiones"><span class="header-section-number">7</span> El efecto en varias dimensiones</h2>
+<p>El mismo salto se puede estimar resultado por resultado. Un <code>sapply</code> sobre la lista de variables corre un <code>rdrobust</code> para cada una y arma una tabla con el efecto y su valor <span class="math inline">\(p\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>outs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">matricula_primaria =</span> <span class="st">"Matrícula primaria (chicos/aula)"</span>,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">mortalidad_infantil =</span> <span class="st">"Mortalidad infantil (por mil)"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">mortalidad_postneonatal =</span> <span class="st">"Mortalidad postneonatal (por mil)"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">ideb =</span> <span class="st">"Calidad educativa (IDEB, 0-10)"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">burocratas =</span> <span class="st">"Cargos designados"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">proyectos_servicios =</span> <span class="st">"Proyectos de servicios"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(<span class="fu">names</span>(outs), <span class="cf">function</span>(v) {</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos[[v]], datos<span class="sc">$</span>poblacion_c)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">efecto =</span> <span class="fu">round</span>(m<span class="sc">$</span>coef[<span class="dv">1</span>], <span class="dv">2</span>), <span class="at">p =</span> <span class="fu">round</span>(m<span class="sc">$</span>pv[<span class="dv">1</span>], <span class="dv">3</span>))</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla) <span class="ot">&lt;-</span> outs</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tabla)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">efecto</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Matrícula primaria (chicos/aula)</td>
+<td style="text-align: right;">2.89</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mortalidad infantil (por mil)</td>
+<td style="text-align: right;">-1.92</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mortalidad postneonatal (por mil)</td>
+<td style="text-align: right;">-0.81</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Calidad educativa (IDEB, 0-10)</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.992</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cargos designados</td>
+<td style="text-align: right;">112.52</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Proyectos de servicios</td>
+<td style="text-align: right;">7.47</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Mejor salud, más matrícula, más cargos y proyectos. La calidad educativa (IDEB) no salta: entran más chicos al aula sin que el nivel medido caiga, igual que en el paper (−0,02, no significativo). Un nulo acá es información, no un fracaso.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Correr el mismo diseño sobre varios resultados ayuda a ver el patrón completo. Con muchos resultados a la vez conviene recordar el problema de las comparaciones múltiples (ajustar los valores <span class="math inline">\(p\)</span>, como vimos en el bloque de experimentos). Ojo con leer un solo resultado significativo entre muchos como si fuera la historia entera.</p>
+</div>
+</div>
+</section>
+<section id="chequeo-de-manipulación-rddensity" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="chequeo-de-manipulación-rddensity"><span class="header-section-number">8</span> Chequeo de manipulación: rddensity</h2>
+<p>Primer supuesto: nadie manipula el umbral. Si los municipios se acomodaran para cruzar el corte, se amontonarían de un lado. <code>rddensity</code> testea ese amontonamiento comparando la densidad de la variable de asignación a cada lado (<a href="https://doi.org/10.1080/01621459.2019.1635480">Cattaneo, Jansson y Ma, 2020</a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dens <span class="ot">&lt;-</span> <span class="fu">rddensity</span>(datos<span class="sc">$</span>poblacion_c)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">T =</span> dens<span class="sc">$</span>test<span class="sc">$</span>t_jk, <span class="at">p =</span> dens<span class="sc">$</span>test<span class="sc">$</span>p_jk), <span class="dv">3</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     T      p 
+-0.373  0.709 </code></pre>
+</div>
+</div>
+<p><span class="math inline">\(p = 0{,}71\)</span>: no hay salto en la densidad. La población de 2003 no se podía manipular, tal como esperábamos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Corré este test en todo RDD. Un valor <span class="math inline">\(p\)</span> alto es lo que querés (no rechaza la hipótesis de que no hubo manipulación). Un <span class="math inline">\(p\)</span> chico es una señal de alarma: la gente pudo elegir de qué lado caer, y la comparación cerca del corte deja de ser creíble.</p>
+</div>
+</div>
+</section>
+<section id="chequeo-de-balance-en-covariables" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="chequeo-de-balance-en-covariables"><span class="header-section-number">9</span> Chequeo de balance en covariables</h2>
+<p>Segundo supuesto: las variables medidas antes del tratamiento no deberían saltar en el umbral. Corré el RDD sobre cada covariable como placebo: no debería aparecer ningún efecto.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>b_pib    <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>pib_pc, datos<span class="sc">$</span>poblacion_c)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>b_pobres <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>prop_pobres, datos<span class="sc">$</span>poblacion_c)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>balance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"pib_pc"</span>, <span class="st">"prop_pobres"</span>),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">salto    =</span> <span class="fu">round</span>(<span class="fu">c</span>(b_pib<span class="sc">$</span>coef[<span class="dv">1</span>], b_pobres<span class="sc">$</span>coef[<span class="dv">1</span>]), <span class="dv">3</span>),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_valor  =</span> <span class="fu">round</span>(<span class="fu">c</span>(b_pib<span class="sc">$</span>pv[<span class="dv">1</span>], b_pobres<span class="sc">$</span>pv[<span class="dv">1</span>]), <span class="dv">3</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>balance</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     variable  salto p_valor
+1      pib_pc -0.138   0.645
+2 prop_pobres  0.001   0.930</code></pre>
+</div>
+</div>
+<p>Los dos valores <span class="math inline">\(p\)</span> son altos: ningún salto donde no debería haberlo. Los grupos son comparables de entrada.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es el mismo <code>rdrobust</code>, pero aplicado a covariables previas en vez de al resultado. Querés valores <span class="math inline">\(p\)</span> altos y saltos cercanos a cero. Si una covariable previa salta en el corte, algo más está cambiando en el umbral y el diseño pierde credibilidad.</p>
+</div>
+</div>
+</section>
+<section id="chequeo-con-un-corte-placebo" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="chequeo-con-un-corte-placebo"><span class="header-section-number">10</span> Chequeo con un corte placebo</h2>
+<p>Tercer chequeo: si inventás un umbral falso donde la ley no cambia nada, no debería aparecer ningún efecto. Se lo pedís a <code>rdrobust</code> con el argumento <code>c =</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rdrobust</span>(datos<span class="sc">$</span>mortalidad_infantil, datos<span class="sc">$</span>poblacion_c, <span class="at">c =</span> <span class="sc">-</span><span class="dv">15000</span>)<span class="sc">$</span>pv[<span class="dv">1</span>]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8849919</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(p \approx 0{,}89\)</span>: nada en el corte inventado. El salto aparece sólo en el umbral verdadero.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un efecto que aparece en umbrales placebo es una señal de alarma: probablemente estás capturando la tendencia, no un salto real. Un placebo aislado que da significativo no voltea el diseño (con muchos cortes falsos, alguno cae por azar); lo que preocupa es un patrón de placebos significativos.</p>
+</div>
+</div>
+</section>
+<section id="sensibilidad-al-ancho-de-banda" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="sensibilidad-al-ancho-de-banda"><span class="header-section-number">11</span> Sensibilidad al ancho de banda</h2>
+<p>Un resultado creíble no cambia de signo ni de tamaño según cuán ancha sea la ventana. Estimá el efecto con varios anchos de banda fijos (<code>h =</code>) y graficá cómo se mueve.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hs <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">4000</span>, <span class="dv">16000</span>, <span class="at">by =</span> <span class="dv">2000</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">sapply</span>(hs, <span class="cf">function</span>(h) {</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>mortalidad_infantil, datos<span class="sc">$</span>poblacion_c, <span class="at">h =</span> h)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(m<span class="sc">$</span>coef[<span class="dv">1</span>], m<span class="sc">$</span>se[<span class="dv">1</span>])</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>bw <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">h =</span> hs, <span class="at">tau =</span> est[<span class="dv">1</span>, ], <span class="at">se =</span> est[<span class="dv">2</span>, ])</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bw, <span class="fu">aes</span>(h, tau)) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey70"</span>) <span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> tau <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se, <span class="at">ymax =</span> tau <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se),</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> azul, <span class="at">alpha =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> azul, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> azul, <span class="at">size =</span> <span class="fl">2.4</span>) <span class="sc">+</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ancho de banda (habitantes)"</span>, <span class="at">y =</span> <span class="st">"Efecto estimado"</span>) <span class="sc">+</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  tema_taller</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-rdd_files/figure-html/ancho-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1200"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>El efecto se queda estable en torno a −1,9, ventana tras ventana. En el paper, el ancho lo elige el método de Calonico, Cattaneo y Titiunik (2014), y los resultados aguantan variarlo.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Buscá estabilidad: la línea no debería cruzar el cero ni cambiar de signo al variar la ventana. Si el efecto sólo aparece con un ancho de banda muy particular, desconfiá. Por defecto dejá que <code>rdrobust</code> elija el ancho óptimo; esta prueba es para mostrar que la elección no fue afortunada.</p>
+</div>
+</div>
+</section>
+<section id="romper-el-diseño-a-propósito" class="level2" data-number="12">
+<h2 data-number="12" class="anchored" data-anchor-id="romper-el-diseño-a-propósito"><span class="header-section-number">12</span> Romper el diseño a propósito</h2>
+<p>Para creerle a un chequeo, hay que verlo fallar cuando debe. Empujamos a la mayoría de los municipios que estaban justo por debajo del corte a cruzarlo, como si hubieran manipulado su población, y volvemos a correr el test de densidad.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>malo <span class="ot">&lt;-</span> datos</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>borde <span class="ot">&lt;-</span> malo<span class="sc">$</span>poblacion_c <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">1500</span> <span class="sc">&amp;</span> malo<span class="sc">$</span>poblacion_c <span class="sc">&lt;</span> <span class="dv">0</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>mover <span class="ot">&lt;-</span> borde <span class="sc">&amp;</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(malo)) <span class="sc">&lt;</span> <span class="fl">0.7</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>malo<span class="sc">$</span>poblacion_c[mover] <span class="ot">&lt;-</span> <span class="fu">abs</span>(malo<span class="sc">$</span>poblacion_c[mover]) <span class="sc">+</span> <span class="dv">200</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># el test de densidad, antes limpio, ahora rechaza</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rddensity</span>(malo<span class="sc">$</span>poblacion_c)<span class="sc">$</span>test<span class="sc">$</span>p_jk, <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0018</code></pre>
+</div>
+</div>
+<p>De <span class="math inline">\(p = 0{,}71\)</span> a <span class="math inline">\(p \approx 0{,}002\)</span>. El test detecta la manipulación que fabricamos: por eso vale la pena correrlo.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sabotear los datos a propósito es una forma de convencerte de que tus chequeos sirven. Si un test no reacciona ni siquiera a una violación grande e inventada por vos, no te dice nada cuando pasa la prueba con datos reales. Es un ejercicio de diagnóstico, no algo que reportes en el paper.</p>
+</div>
+</div>
+</section>
+<section id="simular-un-rdd-antes-de-correrlo" class="level2" data-number="13">
+<h2 data-number="13" class="anchored" data-anchor-id="simular-un-rdd-antes-de-correrlo"><span class="header-section-number">13</span> Simular un RDD antes de correrlo</h2>
+<p>Igual que con los experimentos, podés declarar un RDD y diagnosticarlo antes de recoger datos. <code>regression_discontinuity_designer</code>, de <code>DesignLibrary</code>, arma un diseño completo listo para <code>diagnose_design()</code>, que devuelve sesgo, poder y cobertura.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>d_rdd <span class="ot">&lt;-</span> <span class="fu">regression_discontinuity_designer</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">2000</span>, <span class="at">tau =</span> <span class="fl">0.15</span>, <span class="at">cutoff =</span> <span class="fl">0.5</span>, <span class="at">poly_reg_order =</span> <span class="dv">1</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">148</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnose_design</span>(d_rdd, <span class="at">sims =</span> <span class="dv">300</span>, <span class="at">bootstrap_sims =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Research design diagnosis based on 300 simulations. Diagnosis completed in 1 secs.
+
+ Design Inquiry Estimator Outcome Term Mean Estimand Mean Estimate  Bias
+  d_rdd    LATE estimator       Y    Z          0.15          0.13 -0.02
+ SD Estimate RMSE Power Coverage N Sims
+        0.03 0.04  1.00     0.40    300</code></pre>
+</div>
+</div>
+<p>El diseñador trabaja en una escala estandarizada (la variable de asignación va de 0 a 1, no en habitantes), así que sirve para razonar sobre poder y sesgo, no para reproducir los números del caso. Para calcular el poder o el tamaño de muestra de un RDD concreto, el paquete <code>rdpower</code> está hecho para eso.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Usalo en la etapa de planificación, para responder “¿con esta cantidad de casos cerca del corte, detecto un salto de este tamaño?”. Mirá el poder (querés ≥ 0,8) y la cobertura (cerca de 0,95). Recordá que un RDD suele necesitar bastantes observaciones alrededor del umbral, porque el estimador usa sólo una ventana.</p>
+</div>
+</div>
+</section>
+<section id="para-seguir" class="level2" data-number="14">
+<h2 data-number="14" class="anchored" data-anchor-id="para-seguir"><span class="header-section-number">14</span> Para seguir</h2>
+<div class="callout callout-style-default callout-tip callout-titled" title="Enlaces y lecturas">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Enlaces y lecturas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Los paquetes de RDD</strong> (Cattaneo y coautores)</p>
+<ul>
+<li><a href="https://rdpackages.github.io/">rdpackages.github.io</a>: el hub con todos los paquetes</li>
+<li><a href="https://rdpackages.github.io/rdrobust/"><code>rdrobust</code></a>: estimación, inferencia y <code>rdplot</code></li>
+<li><a href="https://rdpackages.github.io/rddensity/"><code>rddensity</code></a>: tests de manipulación</li>
+<li><a href="https://rdpackages.github.io/rdmulti/"><code>rdmulti</code></a>: varios cortes a la vez, como los 12 umbrales del paper</li>
+<li><a href="https://rdpackages.github.io/rdlocrand/"><code>rdlocrand</code></a>: inferencia de aleatorización local en ventanas chicas</li>
+<li><a href="https://rdpackages.github.io/rdpower/"><code>rdpower</code></a>: poder y tamaño de muestra para RDD</li>
+</ul>
+<p><strong>Para leer</strong></p>
+<ul>
+<li><a href="https://doi.org/10.1017/9781108684606">Cattaneo, Idrobo y Titiunik (2020)</a>, <em>A Practical Introduction to RD Designs: Foundations</em>, y su segundo volumen, <a href="https://doi.org/10.1017/9781009441896"><em>Extensions</em> (2024)</a>: la guía moderna, gratis online</li>
+<li><a href="https://doi.org/10.1257/jel.48.2.281">Lee y Lemieux (2010)</a>: el survey clásico en el <em>Journal of Economic Literature</em></li>
+</ul>
+<p><strong>Nuestro caso del bloque</strong></p>
+<ul>
+<li><a href="https://doi.org/10.1111/ajps.12843">Mignozzetti, Cepaluni y Freire (2025)</a>: tamaño del concejo y bienestar en Brasil, con la regla del TSE de 2004 como experimento accidental</li>
+</ul>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Volver arriba</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Ejecutar el código</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Referencia R: regresión discontinua"</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Parte 3 · rdplot, rdrobust, rddensity y los chequeos de validez"</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="an">toc-depth:</span><span class="co"> 3</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> true</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="an">code-copy:</span><span class="co"> true</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> es</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="an">engine:</span><span class="co"> knitr</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">eval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.width =</span> <span class="dv">7</span>,</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.height =</span> <span class="dv">4</span>,</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="dv">150</span>,</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">cache =</span> <span class="cn">TRUE</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="co"># paleta de la casa (el mismo par azul/rojo de las diapositivas)</span></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>azul <span class="ot">&lt;-</span> <span class="st">"#2d4563"</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>rojo <span class="ot">&lt;-</span> <span class="st">"#b85450"</span></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>tema_taller <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>())</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>Esta página reúne, con código que podés correr y copiar, todas las funciones de R del bloque de regresión discontinua (<span class="co">[</span><span class="ot">diapositivas</span><span class="co">](diapositivas/03-rdd.html)</span>). Cada sección explica en pocas frases qué hace el comando, muestra un bloque ejecutable con su salida real, y cierra con una nota sobre cuándo conviene usarlo y qué mirar.</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>Los ejemplos trabajan sobre los datos simulados del caso de los concejos municipales en Brasil (<span class="co">[</span><span class="ot">Mignozzetti, Cepaluni y Freire, 2025</span><span class="co">](https://doi.org/10.1111/ajps.12843)</span>). Como la semilla está fija (<span class="in">`set.seed(148)`</span>), los números coinciden con los de las diapositivas y con el archivo <span class="co">[</span><span class="ot">`municipios.csv`</span><span class="co">](diapositivas/datos/municipios.csv)</span>. El diseño simplifica el paper a un solo umbral (47.619 habitantes, donde el concejo pasa de 9 a 10 bancas), pero con efectos calcados de la investigación real.</span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paquetes y datos</span></span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>Cargá los paquetes del bloque. El bucle recorre la lista <span class="in">`paquetes`</span> e instala cada uno solo si te falta, así el código corre igual en cualquier máquina. <span class="in">`rdrobust`</span> y <span class="in">`rddensity`</span> son el estándar para RDD hoy; <span class="in">`fabricatr`</span> ya lo conocés del bloque de experimentos.</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r paquetes}</span></span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"estimatr"</span>, <span class="st">"rdrobust"</span>,</span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>              <span class="st">"rddensity"</span>, <span class="st">"fabricatr"</span>, <span class="st">"DesignLibrary"</span>)</span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> paquetes) {</span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-53"><a href="#cb26-53" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-54"><a href="#cb26-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a>La variable de asignación es <span class="in">`poblacion_c`</span>: la población de cada municipio centrada en el umbral (población menos 47.619). Cruzar el corte (<span class="in">`poblacion_c &gt;= 0`</span>) suma una banca; ese salto está escrito en la regla, no lo sortea nadie.</span>
+<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{r generar-datos}</span></span>
+<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">148</span>)</span>
+<span id="cb26-60"><a href="#cb26-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-61"><a href="#cb26-61" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb26-62"><a href="#cb26-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">2000</span>,</span>
+<span id="cb26-63"><a href="#cb26-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">poblacion      =</span> <span class="fu">round</span>(<span class="fu">runif</span>(N, <span class="dv">20000</span>, <span class="dv">75000</span>)),</span>
+<span id="cb26-64"><a href="#cb26-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">poblacion_c    =</span> poblacion <span class="sc">-</span> <span class="dv">47619</span>,</span>
+<span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a>  <span class="at">x              =</span> poblacion_c <span class="sc">/</span> <span class="dv">10000</span>,</span>
+<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a>  <span class="at">concejo_grande =</span> <span class="fu">as.integer</span>(poblacion_c <span class="sc">&gt;=</span> <span class="dv">0</span>),</span>
+<span id="cb26-67"><a href="#cb26-67" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_concejales   =</span> <span class="dv">9</span> <span class="sc">+</span> concejo_grande,</span>
+<span id="cb26-68"><a href="#cb26-68" aria-hidden="true" tabindex="-1"></a>  <span class="at">pib_pc         =</span> <span class="fu">round</span>(<span class="dv">12</span> <span class="sc">+</span> <span class="fl">0.8</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">2</span>), <span class="dv">1</span>),</span>
+<span id="cb26-69"><a href="#cb26-69" aria-hidden="true" tabindex="-1"></a>  <span class="at">prop_pobres    =</span> <span class="fu">round</span>(<span class="fu">pmin</span>(<span class="fu">pmax</span>(<span class="fl">0.34</span> <span class="sc">-</span> <span class="fl">0.02</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">0.05</span>), <span class="fl">0.05</span>), <span class="fl">0.75</span>), <span class="dv">3</span>),</span>
+<span id="cb26-70"><a href="#cb26-70" aria-hidden="true" tabindex="-1"></a>  <span class="at">bancas_2000    =</span> <span class="dv">9</span> <span class="sc">+</span> <span class="fu">rbinom</span>(N, <span class="dv">1</span>, <span class="fl">0.15</span>),</span>
+<span id="cb26-71"><a href="#cb26-71" aria-hidden="true" tabindex="-1"></a>  <span class="at">mortalidad_infantil     =</span> <span class="fu">pmax</span>(<span class="dv">2</span>,   <span class="fu">round</span>(<span class="dv">20</span> <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> x <span class="sc">-</span> <span class="fl">2.01</span> <span class="sc">*</span> concejo_grande <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">2.5</span>), <span class="dv">1</span>)),</span>
+<span id="cb26-72"><a href="#cb26-72" aria-hidden="true" tabindex="-1"></a>  <span class="at">mortalidad_postneonatal =</span> <span class="fu">pmax</span>(<span class="fl">0.5</span>, <span class="fu">round</span>(<span class="dv">7</span> <span class="sc">-</span> <span class="fl">0.2</span> <span class="sc">*</span> x <span class="sc">-</span> <span class="fl">0.9</span> <span class="sc">*</span> concejo_grande <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">1.3</span>), <span class="dv">1</span>)),</span>
+<span id="cb26-73"><a href="#cb26-73" aria-hidden="true" tabindex="-1"></a>  <span class="at">matricula_primaria      =</span> <span class="fu">pmax</span>(<span class="dv">0</span>,   <span class="fu">round</span>(<span class="dv">24</span> <span class="sc">+</span> <span class="fl">0.4</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fl">2.58</span> <span class="sc">*</span> concejo_grande <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">3</span>), <span class="dv">1</span>)),</span>
+<span id="cb26-74"><a href="#cb26-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">ideb           =</span> <span class="fu">pmin</span>(<span class="dv">10</span>, <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(<span class="fl">4.5</span> <span class="sc">+</span> <span class="fl">0.1</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">0.5</span>), <span class="dv">1</span>))),</span>
+<span id="cb26-75"><a href="#cb26-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">burocratas     =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(<span class="dv">480</span> <span class="sc">+</span> <span class="dv">12</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">104</span> <span class="sc">*</span> concejo_grande <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">45</span>))),</span>
+<span id="cb26-76"><a href="#cb26-76" aria-hidden="true" tabindex="-1"></a>  <span class="at">proyectos_servicios =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(<span class="dv">40</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="dv">6</span> <span class="sc">*</span> concejo_grande <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">7</span>)))</span>
+<span id="cb26-77"><a href="#cb26-77" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-78"><a href="#cb26-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-79"><a href="#cb26-79" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">|&gt;</span></span>
+<span id="cb26-80"><a href="#cb26-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(poblacion_c, concejo_grande, n_concejales, mortalidad_infantil) <span class="sc">|&gt;</span></span>
+<span id="cb26-81"><a href="#cb26-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
+<span id="cb26-82"><a href="#cb26-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-83"><a href="#cb26-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-84"><a href="#cb26-84" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb26-85"><a href="#cb26-85" aria-hidden="true" tabindex="-1"></a>Un RDD vive donde una regla asigna algo por un umbral en una variable continua (un puntaje, una población, una nota de corte). Lo primero es identificar la variable de asignación y centrarla en el corte, porque todo el análisis se escribe sobre esa distancia al umbral.</span>
+<span id="cb26-86"><a href="#cb26-86" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-87"><a href="#cb26-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-88"><a href="#cb26-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparabilidad cerca del corte</span></span>
+<span id="cb26-89"><a href="#cb26-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-90"><a href="#cb26-90" aria-hidden="true" tabindex="-1"></a>Si la idea del RDD es cierta, arriba y abajo del corte los municipios tienen que parecerse en todo lo que se decidió antes. Mirá los que caen a menos de 4.000 habitantes del umbral y comparalos.</span>
+<span id="cb26-91"><a href="#cb26-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-92"><a href="#cb26-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gemelos}</span></span>
+<span id="cb26-93"><a href="#cb26-93" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">|&gt;</span></span>
+<span id="cb26-94"><a href="#cb26-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">abs</span>(poblacion_c) <span class="sc">&lt;</span> <span class="dv">4000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb26-95"><a href="#cb26-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(concejo_grande) <span class="sc">|&gt;</span></span>
+<span id="cb26-96"><a href="#cb26-96" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(pib_pc, prop_pobres, bancas_2000, n_concejales), mean))</span>
+<span id="cb26-97"><a href="#cb26-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-98"><a href="#cb26-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-99"><a href="#cb26-99" aria-hidden="true" tabindex="-1"></a>El PIB per cápita, la pobreza y las bancas previas casi no se mueven entre los dos grupos. Lo único que cambia de golpe es una banca (<span class="in">`n_concejales`</span> pasa de 9 a 10): ese es el experimento que escribió la ley.</span>
+<span id="cb26-100"><a href="#cb26-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-101"><a href="#cb26-101" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb26-102"><a href="#cb26-102" aria-hidden="true" tabindex="-1"></a>Es una primera mirada informal al balance, antes de los tests formales. Fijate en que las covariables previas al tratamiento sean parecidas cerca del corte. Si una salta a simple vista, tenés que preocuparte antes de estimar cualquier efecto.</span>
+<span id="cb26-103"><a href="#cb26-103" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-104"><a href="#cb26-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-105"><a href="#cb26-105" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ver el salto a mano</span></span>
+<span id="cb26-106"><a href="#cb26-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-107"><a href="#cb26-107" aria-hidden="true" tabindex="-1"></a>Antes de estimar nada, conviene mirar los datos: promedios del resultado por tramo de población, con una recta suave a cada lado del corte. Este gráfico artesanal deja ver de dónde sale el efecto.</span>
+<span id="cb26-108"><a href="#cb26-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-109"><a href="#cb26-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r salto, fig.width=8, fig.height=4}</span></span>
+<span id="cb26-110"><a href="#cb26-110" aria-hidden="true" tabindex="-1"></a>brks <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">30000</span>, <span class="dv">30000</span>, <span class="at">by =</span> <span class="dv">2500</span>)</span>
+<span id="cb26-111"><a href="#cb26-111" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>bin <span class="ot">&lt;-</span> <span class="fu">cut</span>(datos<span class="sc">$</span>poblacion_c, <span class="at">breaks =</span> brks)</span>
+<span id="cb26-112"><a href="#cb26-112" aria-hidden="true" tabindex="-1"></a>centros <span class="ot">&lt;-</span> (<span class="fu">head</span>(brks, <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span> <span class="fu">tail</span>(brks, <span class="sc">-</span><span class="dv">1</span>)) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb26-113"><a href="#cb26-113" aria-hidden="true" tabindex="-1"></a>agg <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb26-114"><a href="#cb26-114" aria-hidden="true" tabindex="-1"></a>  <span class="at">centro =</span> centros,</span>
+<span id="cb26-115"><a href="#cb26-115" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">as.numeric</span>(<span class="fu">tapply</span>(datos<span class="sc">$</span>mortalidad_infantil, datos<span class="sc">$</span>bin, mean))</span>
+<span id="cb26-116"><a href="#cb26-116" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-117"><a href="#cb26-117" aria-hidden="true" tabindex="-1"></a>agg <span class="ot">&lt;-</span> agg[<span class="sc">!</span><span class="fu">is.na</span>(agg<span class="sc">$</span>y), ]</span>
+<span id="cb26-118"><a href="#cb26-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-119"><a href="#cb26-119" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb26-120"><a href="#cb26-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> agg, <span class="fu">aes</span>(centro, y), <span class="at">colour =</span> azul, <span class="at">size =</span> <span class="fl">2.4</span>) <span class="sc">+</span></span>
+<span id="cb26-121"><a href="#cb26-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">subset</span>(datos, poblacion_c <span class="sc">&lt;</span> <span class="dv">0</span>),</span>
+<span id="cb26-122"><a href="#cb26-122" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(poblacion_c, mortalidad_infantil),</span>
+<span id="cb26-123"><a href="#cb26-123" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> azul, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-124"><a href="#cb26-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> <span class="fu">subset</span>(datos, poblacion_c <span class="sc">&gt;=</span> <span class="dv">0</span>),</span>
+<span id="cb26-125"><a href="#cb26-125" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(poblacion_c, mortalidad_infantil),</span>
+<span id="cb26-126"><a href="#cb26-126" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> azul, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-127"><a href="#cb26-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">colour =</span> rojo, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb26-128"><a href="#cb26-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Población centrada en el umbral (47.619 hab)"</span>,</span>
+<span id="cb26-129"><a href="#cb26-129" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mortalidad infantil (por mil)"</span>) <span class="sc">+</span></span>
+<span id="cb26-130"><a href="#cb26-130" aria-hidden="true" tabindex="-1"></a>  tema_taller</span>
+<span id="cb26-131"><a href="#cb26-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-132"><a href="#cb26-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-133"><a href="#cb26-133" aria-hidden="true" tabindex="-1"></a>El salto hacia abajo justo en el corte es el efecto; la pendiente a cada lado es la tendencia que hay que descontar (los municipios más grandes tienen algo menos de mortalidad por otras razones).</span>
+<span id="cb26-134"><a href="#cb26-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-135"><a href="#cb26-135" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb26-136"><a href="#cb26-136" aria-hidden="true" tabindex="-1"></a>Hacé siempre el gráfico antes de estimar. Si no ves un salto claro a ojo, ningún estimador te lo va a inventar de forma creíble. Mirá también la forma de la curva a cada lado: si es muy no lineal, vas a necesitar un polinomio o una ventana más angosta.</span>
+<span id="cb26-137"><a href="#cb26-137" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-138"><a href="#cb26-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-139"><a href="#cb26-139" aria-hidden="true" tabindex="-1"></a><span class="fu">## El mismo salto con rdplot</span></span>
+<span id="cb26-140"><a href="#cb26-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-141"><a href="#cb26-141" aria-hidden="true" tabindex="-1"></a>Lo que armamos a mano lo hace <span class="in">`rdplot`</span> en una línea: elige los bins de forma óptima y ajusta un polinomio a cada lado del corte. Es el gráfico estándar de los papers de RDD.</span>
+<span id="cb26-142"><a href="#cb26-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-143"><a href="#cb26-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r rdplot, fig.width=8, fig.height=4.2}</span></span>
+<span id="cb26-144"><a href="#cb26-144" aria-hidden="true" tabindex="-1"></a><span class="fu">rdplot</span>(datos<span class="sc">$</span>mortalidad_infantil, datos<span class="sc">$</span>poblacion_c,</span>
+<span id="cb26-145"><a href="#cb26-145" aria-hidden="true" tabindex="-1"></a>       <span class="at">x.label =</span> <span class="st">"Población centrada en el umbral"</span>,</span>
+<span id="cb26-146"><a href="#cb26-146" aria-hidden="true" tabindex="-1"></a>       <span class="at">y.label =</span> <span class="st">"Mortalidad infantil (por mil)"</span>, <span class="at">title =</span> <span class="st">""</span>)</span>
+<span id="cb26-147"><a href="#cb26-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-148"><a href="#cb26-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-149"><a href="#cb26-149" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb26-150"><a href="#cb26-150" aria-hidden="true" tabindex="-1"></a>Es la forma rápida y estándar de visualizar la discontinuidad. El primer argumento es el resultado, el segundo la variable de asignación. Ajustá <span class="in">`p =`</span> para el orden del polinomio y <span class="in">`nbins =`</span> si querés controlar los bins. Ver que coincide con el gráfico a mano es lo que te deja confiar en el atajo.</span>
+<span id="cb26-151"><a href="#cb26-151" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-152"><a href="#cb26-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-153"><a href="#cb26-153" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparación ingenua vs local</span></span>
+<span id="cb26-154"><a href="#cb26-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-155"><a href="#cb26-155" aria-hidden="true" tabindex="-1"></a>La diferencia entre todos los concejos grandes y todos los chicos exagera el efecto, porque arrastra la tendencia (los municipios grandes son distintos por muchas razones además de la banca).</span>
+<span id="cb26-156"><a href="#cb26-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-157"><a href="#cb26-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r naive}</span></span>
+<span id="cb26-158"><a href="#cb26-158" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(datos, <span class="fu">mean</span>(mortalidad_infantil[concejo_grande <span class="sc">==</span> <span class="dv">1</span>]) <span class="sc">-</span></span>
+<span id="cb26-159"><a href="#cb26-159" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mean</span>(mortalidad_infantil[concejo_grande <span class="sc">==</span> <span class="dv">0</span>]))</span>
+<span id="cb26-160"><a href="#cb26-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-161"><a href="#cb26-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-162"><a href="#cb26-162" aria-hidden="true" tabindex="-1"></a>La regresión local, restringida a una ventana cerca del corte y con una pendiente a cada lado, descuenta esa tendencia. El operador <span class="in">`*`</span> pide los dos efectos principales más su interacción, así la pendiente puede diferir a cada lado del umbral.</span>
+<span id="cb26-163"><a href="#cb26-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-164"><a href="#cb26-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{r local}</span></span>
+<span id="cb26-165"><a href="#cb26-165" aria-hidden="true" tabindex="-1"></a>cerca <span class="ot">&lt;-</span> <span class="fu">filter</span>(datos, <span class="fu">abs</span>(poblacion_c) <span class="sc">&lt;</span> <span class="dv">8000</span>)</span>
+<span id="cb26-166"><a href="#cb26-166" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(mortalidad_infantil <span class="sc">~</span> concejo_grande <span class="sc">*</span> poblacion_c, <span class="at">data =</span> cerca)</span>
+<span id="cb26-167"><a href="#cb26-167" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(<span class="fu">summary</span>(fit))[<span class="st">"concejo_grande"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">3</span>)</span>
+<span id="cb26-168"><a href="#cb26-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-169"><a href="#cb26-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-170"><a href="#cb26-170" aria-hidden="true" tabindex="-1"></a>Pasamos de −3,57 (ingenua) a ≈ −1,9 (local): buena parte de la brecha era sesgo de selección, no efecto de la banca.</span>
+<span id="cb26-171"><a href="#cb26-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-172"><a href="#cb26-172" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb26-173"><a href="#cb26-173" aria-hidden="true" tabindex="-1"></a>La comparación ingenua sirve como contraste, para ver cuánto sesgo tenía. Reportá siempre la estimación local. Si la ingenua y la local se parecen, la variable de asignación explicaba poco; si difieren mucho, había una tendencia fuerte que el RDD descuenta.</span>
+<span id="cb26-174"><a href="#cb26-174" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-175"><a href="#cb26-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-176"><a href="#cb26-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimar el efecto con rdrobust</span></span>
+<span id="cb26-177"><a href="#cb26-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-178"><a href="#cb26-178" aria-hidden="true" tabindex="-1"></a><span class="in">`rdrobust`</span> es el estimador de referencia: elige el ancho de banda de forma óptima y corrige el sesgo de los bordes (<span class="co">[</span><span class="ot">Calonico, Cattaneo y Titiunik, 2014</span><span class="co">](https://doi.org/10.3982/ECTA11757)</span>). Con <span class="in">`summary()`</span> ves el efecto, su error estándar, el valor $p$ y el ancho de banda elegido.</span>
+<span id="cb26-179"><a href="#cb26-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-180"><a href="#cb26-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r rdrobust}</span></span>
+<span id="cb26-181"><a href="#cb26-181" aria-hidden="true" tabindex="-1"></a>rd <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>mortalidad_infantil, datos<span class="sc">$</span>poblacion_c)</span>
+<span id="cb26-182"><a href="#cb26-182" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rd)</span>
+<span id="cb26-183"><a href="#cb26-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-184"><a href="#cb26-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-185"><a href="#cb26-185" aria-hidden="true" tabindex="-1"></a>El efecto local es de ≈ −1,92 muertes por mil. En el paper, con los datos reales y los 12 umbrales agrupados, da −2,01 (Tabla 4): la misma lógica, en su versión simulada. Un coeficiente negativo acá es buena noticia (menos muertes). La fila "Conventional" es el estimado puntual; la fila "Robust" trae el intervalo de confianza con la corrección de sesgo, que es el que se reporta.</span>
+<span id="cb26-186"><a href="#cb26-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-187"><a href="#cb26-187" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb26-188"><a href="#cb26-188" aria-hidden="true" tabindex="-1"></a>Es tu caballo de batalla para estimar el efecto en un RDD. Podés extraer los números con <span class="in">`rd$coef`</span>, <span class="in">`rd$se`</span>, <span class="in">`rd$pv`</span> y <span class="in">`rd$bws`</span>. Argumentos útiles: <span class="in">`c =`</span> para mover el corte, <span class="in">`p =`</span> para el orden del polinomio, <span class="in">`h =`</span> para fijar el ancho de banda a mano, y <span class="in">`covs =`</span> para sumar controles.</span>
+<span id="cb26-189"><a href="#cb26-189" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-190"><a href="#cb26-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-191"><a href="#cb26-191" aria-hidden="true" tabindex="-1"></a><span class="fu">## El efecto en varias dimensiones</span></span>
+<span id="cb26-192"><a href="#cb26-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-193"><a href="#cb26-193" aria-hidden="true" tabindex="-1"></a>El mismo salto se puede estimar resultado por resultado. Un <span class="in">`sapply`</span> sobre la lista de variables corre un <span class="in">`rdrobust`</span> para cada una y arma una tabla con el efecto y su valor $p$.</span>
+<span id="cb26-194"><a href="#cb26-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-195"><a href="#cb26-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r varias}</span></span>
+<span id="cb26-196"><a href="#cb26-196" aria-hidden="true" tabindex="-1"></a>outs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">matricula_primaria =</span> <span class="st">"Matrícula primaria (chicos/aula)"</span>,</span>
+<span id="cb26-197"><a href="#cb26-197" aria-hidden="true" tabindex="-1"></a>          <span class="at">mortalidad_infantil =</span> <span class="st">"Mortalidad infantil (por mil)"</span>,</span>
+<span id="cb26-198"><a href="#cb26-198" aria-hidden="true" tabindex="-1"></a>          <span class="at">mortalidad_postneonatal =</span> <span class="st">"Mortalidad postneonatal (por mil)"</span>,</span>
+<span id="cb26-199"><a href="#cb26-199" aria-hidden="true" tabindex="-1"></a>          <span class="at">ideb =</span> <span class="st">"Calidad educativa (IDEB, 0-10)"</span>,</span>
+<span id="cb26-200"><a href="#cb26-200" aria-hidden="true" tabindex="-1"></a>          <span class="at">burocratas =</span> <span class="st">"Cargos designados"</span>,</span>
+<span id="cb26-201"><a href="#cb26-201" aria-hidden="true" tabindex="-1"></a>          <span class="at">proyectos_servicios =</span> <span class="st">"Proyectos de servicios"</span>)</span>
+<span id="cb26-202"><a href="#cb26-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-203"><a href="#cb26-203" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(<span class="fu">names</span>(outs), <span class="cf">function</span>(v) {</span>
+<span id="cb26-204"><a href="#cb26-204" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos[[v]], datos<span class="sc">$</span>poblacion_c)</span>
+<span id="cb26-205"><a href="#cb26-205" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">efecto =</span> <span class="fu">round</span>(m<span class="sc">$</span>coef[<span class="dv">1</span>], <span class="dv">2</span>), <span class="at">p =</span> <span class="fu">round</span>(m<span class="sc">$</span>pv[<span class="dv">1</span>], <span class="dv">3</span>))</span>
+<span id="cb26-206"><a href="#cb26-206" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb26-207"><a href="#cb26-207" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tabla) <span class="ot">&lt;-</span> outs</span>
+<span id="cb26-208"><a href="#cb26-208" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tabla)</span>
+<span id="cb26-209"><a href="#cb26-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-210"><a href="#cb26-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-211"><a href="#cb26-211" aria-hidden="true" tabindex="-1"></a>Mejor salud, más matrícula, más cargos y proyectos. La calidad educativa (IDEB) no salta: entran más chicos al aula sin que el nivel medido caiga, igual que en el paper (−0,02, no significativo). Un nulo acá es información, no un fracaso.</span>
+<span id="cb26-212"><a href="#cb26-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-213"><a href="#cb26-213" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb26-214"><a href="#cb26-214" aria-hidden="true" tabindex="-1"></a>Correr el mismo diseño sobre varios resultados ayuda a ver el patrón completo. Con muchos resultados a la vez conviene recordar el problema de las comparaciones múltiples (ajustar los valores $p$, como vimos en el bloque de experimentos). Ojo con leer un solo resultado significativo entre muchos como si fuera la historia entera.</span>
+<span id="cb26-215"><a href="#cb26-215" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-216"><a href="#cb26-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-217"><a href="#cb26-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## Chequeo de manipulación: rddensity</span></span>
+<span id="cb26-218"><a href="#cb26-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-219"><a href="#cb26-219" aria-hidden="true" tabindex="-1"></a>Primer supuesto: nadie manipula el umbral. Si los municipios se acomodaran para cruzar el corte, se amontonarían de un lado. <span class="in">`rddensity`</span> testea ese amontonamiento comparando la densidad de la variable de asignación a cada lado (<span class="co">[</span><span class="ot">Cattaneo, Jansson y Ma, 2020</span><span class="co">](https://doi.org/10.1080/01621459.2019.1635480)</span>).</span>
+<span id="cb26-220"><a href="#cb26-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-221"><a href="#cb26-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r densidad}</span></span>
+<span id="cb26-222"><a href="#cb26-222" aria-hidden="true" tabindex="-1"></a>dens <span class="ot">&lt;-</span> <span class="fu">rddensity</span>(datos<span class="sc">$</span>poblacion_c)</span>
+<span id="cb26-223"><a href="#cb26-223" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">T =</span> dens<span class="sc">$</span>test<span class="sc">$</span>t_jk, <span class="at">p =</span> dens<span class="sc">$</span>test<span class="sc">$</span>p_jk), <span class="dv">3</span>)</span>
+<span id="cb26-224"><a href="#cb26-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-225"><a href="#cb26-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-226"><a href="#cb26-226" aria-hidden="true" tabindex="-1"></a>$p = 0{,}71$: no hay salto en la densidad. La población de 2003 no se podía manipular, tal como esperábamos.</span>
+<span id="cb26-227"><a href="#cb26-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-228"><a href="#cb26-228" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb26-229"><a href="#cb26-229" aria-hidden="true" tabindex="-1"></a>Corré este test en todo RDD. Un valor $p$ alto es lo que querés (no rechaza la hipótesis de que no hubo manipulación). Un $p$ chico es una señal de alarma: la gente pudo elegir de qué lado caer, y la comparación cerca del corte deja de ser creíble.</span>
+<span id="cb26-230"><a href="#cb26-230" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-231"><a href="#cb26-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-232"><a href="#cb26-232" aria-hidden="true" tabindex="-1"></a><span class="fu">## Chequeo de balance en covariables</span></span>
+<span id="cb26-233"><a href="#cb26-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-234"><a href="#cb26-234" aria-hidden="true" tabindex="-1"></a>Segundo supuesto: las variables medidas antes del tratamiento no deberían saltar en el umbral. Corré el RDD sobre cada covariable como placebo: no debería aparecer ningún efecto.</span>
+<span id="cb26-235"><a href="#cb26-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-236"><a href="#cb26-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{r balance}</span></span>
+<span id="cb26-237"><a href="#cb26-237" aria-hidden="true" tabindex="-1"></a>b_pib    <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>pib_pc, datos<span class="sc">$</span>poblacion_c)</span>
+<span id="cb26-238"><a href="#cb26-238" aria-hidden="true" tabindex="-1"></a>b_pobres <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>prop_pobres, datos<span class="sc">$</span>poblacion_c)</span>
+<span id="cb26-239"><a href="#cb26-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-240"><a href="#cb26-240" aria-hidden="true" tabindex="-1"></a>balance <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb26-241"><a href="#cb26-241" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"pib_pc"</span>, <span class="st">"prop_pobres"</span>),</span>
+<span id="cb26-242"><a href="#cb26-242" aria-hidden="true" tabindex="-1"></a>  <span class="at">salto    =</span> <span class="fu">round</span>(<span class="fu">c</span>(b_pib<span class="sc">$</span>coef[<span class="dv">1</span>], b_pobres<span class="sc">$</span>coef[<span class="dv">1</span>]), <span class="dv">3</span>),</span>
+<span id="cb26-243"><a href="#cb26-243" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_valor  =</span> <span class="fu">round</span>(<span class="fu">c</span>(b_pib<span class="sc">$</span>pv[<span class="dv">1</span>], b_pobres<span class="sc">$</span>pv[<span class="dv">1</span>]), <span class="dv">3</span>)</span>
+<span id="cb26-244"><a href="#cb26-244" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-245"><a href="#cb26-245" aria-hidden="true" tabindex="-1"></a>balance</span>
+<span id="cb26-246"><a href="#cb26-246" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-247"><a href="#cb26-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-248"><a href="#cb26-248" aria-hidden="true" tabindex="-1"></a>Los dos valores $p$ son altos: ningún salto donde no debería haberlo. Los grupos son comparables de entrada.</span>
+<span id="cb26-249"><a href="#cb26-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-250"><a href="#cb26-250" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb26-251"><a href="#cb26-251" aria-hidden="true" tabindex="-1"></a>Es el mismo <span class="in">`rdrobust`</span>, pero aplicado a covariables previas en vez de al resultado. Querés valores $p$ altos y saltos cercanos a cero. Si una covariable previa salta en el corte, algo más está cambiando en el umbral y el diseño pierde credibilidad.</span>
+<span id="cb26-252"><a href="#cb26-252" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-253"><a href="#cb26-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-254"><a href="#cb26-254" aria-hidden="true" tabindex="-1"></a><span class="fu">## Chequeo con un corte placebo</span></span>
+<span id="cb26-255"><a href="#cb26-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-256"><a href="#cb26-256" aria-hidden="true" tabindex="-1"></a>Tercer chequeo: si inventás un umbral falso donde la ley no cambia nada, no debería aparecer ningún efecto. Se lo pedís a <span class="in">`rdrobust`</span> con el argumento <span class="in">`c =`</span>.</span>
+<span id="cb26-257"><a href="#cb26-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-258"><a href="#cb26-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{r placebo}</span></span>
+<span id="cb26-259"><a href="#cb26-259" aria-hidden="true" tabindex="-1"></a><span class="fu">rdrobust</span>(datos<span class="sc">$</span>mortalidad_infantil, datos<span class="sc">$</span>poblacion_c, <span class="at">c =</span> <span class="sc">-</span><span class="dv">15000</span>)<span class="sc">$</span>pv[<span class="dv">1</span>]</span>
+<span id="cb26-260"><a href="#cb26-260" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-261"><a href="#cb26-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-262"><a href="#cb26-262" aria-hidden="true" tabindex="-1"></a>$p \approx 0{,}89$: nada en el corte inventado. El salto aparece sólo en el umbral verdadero.</span>
+<span id="cb26-263"><a href="#cb26-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-264"><a href="#cb26-264" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb26-265"><a href="#cb26-265" aria-hidden="true" tabindex="-1"></a>Un efecto que aparece en umbrales placebo es una señal de alarma: probablemente estás capturando la tendencia, no un salto real. Un placebo aislado que da significativo no voltea el diseño (con muchos cortes falsos, alguno cae por azar); lo que preocupa es un patrón de placebos significativos.</span>
+<span id="cb26-266"><a href="#cb26-266" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-267"><a href="#cb26-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-268"><a href="#cb26-268" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sensibilidad al ancho de banda</span></span>
+<span id="cb26-269"><a href="#cb26-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-270"><a href="#cb26-270" aria-hidden="true" tabindex="-1"></a>Un resultado creíble no cambia de signo ni de tamaño según cuán ancha sea la ventana. Estimá el efecto con varios anchos de banda fijos (<span class="in">`h =`</span>) y graficá cómo se mueve.</span>
+<span id="cb26-271"><a href="#cb26-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-272"><a href="#cb26-272" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ancho, fig.width=8, fig.height=4}</span></span>
+<span id="cb26-273"><a href="#cb26-273" aria-hidden="true" tabindex="-1"></a>hs <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">4000</span>, <span class="dv">16000</span>, <span class="at">by =</span> <span class="dv">2000</span>)</span>
+<span id="cb26-274"><a href="#cb26-274" aria-hidden="true" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">sapply</span>(hs, <span class="cf">function</span>(h) {</span>
+<span id="cb26-275"><a href="#cb26-275" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>mortalidad_infantil, datos<span class="sc">$</span>poblacion_c, <span class="at">h =</span> h)</span>
+<span id="cb26-276"><a href="#cb26-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(m<span class="sc">$</span>coef[<span class="dv">1</span>], m<span class="sc">$</span>se[<span class="dv">1</span>])</span>
+<span id="cb26-277"><a href="#cb26-277" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb26-278"><a href="#cb26-278" aria-hidden="true" tabindex="-1"></a>bw <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">h =</span> hs, <span class="at">tau =</span> est[<span class="dv">1</span>, ], <span class="at">se =</span> est[<span class="dv">2</span>, ])</span>
+<span id="cb26-279"><a href="#cb26-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-280"><a href="#cb26-280" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bw, <span class="fu">aes</span>(h, tau)) <span class="sc">+</span></span>
+<span id="cb26-281"><a href="#cb26-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey70"</span>) <span class="sc">+</span></span>
+<span id="cb26-282"><a href="#cb26-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> tau <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se, <span class="at">ymax =</span> tau <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se),</span>
+<span id="cb26-283"><a href="#cb26-283" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> azul, <span class="at">alpha =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb26-284"><a href="#cb26-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> azul, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-285"><a href="#cb26-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> azul, <span class="at">size =</span> <span class="fl">2.4</span>) <span class="sc">+</span></span>
+<span id="cb26-286"><a href="#cb26-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Ancho de banda (habitantes)"</span>, <span class="at">y =</span> <span class="st">"Efecto estimado"</span>) <span class="sc">+</span></span>
+<span id="cb26-287"><a href="#cb26-287" aria-hidden="true" tabindex="-1"></a>  tema_taller</span>
+<span id="cb26-288"><a href="#cb26-288" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-289"><a href="#cb26-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-290"><a href="#cb26-290" aria-hidden="true" tabindex="-1"></a>El efecto se queda estable en torno a −1,9, ventana tras ventana. En el paper, el ancho lo elige el método de Calonico, Cattaneo y Titiunik (2014), y los resultados aguantan variarlo.</span>
+<span id="cb26-291"><a href="#cb26-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-292"><a href="#cb26-292" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb26-293"><a href="#cb26-293" aria-hidden="true" tabindex="-1"></a>Buscá estabilidad: la línea no debería cruzar el cero ni cambiar de signo al variar la ventana. Si el efecto sólo aparece con un ancho de banda muy particular, desconfiá. Por defecto dejá que <span class="in">`rdrobust`</span> elija el ancho óptimo; esta prueba es para mostrar que la elección no fue afortunada.</span>
+<span id="cb26-294"><a href="#cb26-294" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-295"><a href="#cb26-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-296"><a href="#cb26-296" aria-hidden="true" tabindex="-1"></a><span class="fu">## Romper el diseño a propósito</span></span>
+<span id="cb26-297"><a href="#cb26-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-298"><a href="#cb26-298" aria-hidden="true" tabindex="-1"></a>Para creerle a un chequeo, hay que verlo fallar cuando debe. Empujamos a la mayoría de los municipios que estaban justo por debajo del corte a cruzarlo, como si hubieran manipulado su población, y volvemos a correr el test de densidad.</span>
+<span id="cb26-299"><a href="#cb26-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-300"><a href="#cb26-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r sabotaje}</span></span>
+<span id="cb26-301"><a href="#cb26-301" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb26-302"><a href="#cb26-302" aria-hidden="true" tabindex="-1"></a>malo <span class="ot">&lt;-</span> datos</span>
+<span id="cb26-303"><a href="#cb26-303" aria-hidden="true" tabindex="-1"></a>borde <span class="ot">&lt;-</span> malo<span class="sc">$</span>poblacion_c <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">1500</span> <span class="sc">&amp;</span> malo<span class="sc">$</span>poblacion_c <span class="sc">&lt;</span> <span class="dv">0</span></span>
+<span id="cb26-304"><a href="#cb26-304" aria-hidden="true" tabindex="-1"></a>mover <span class="ot">&lt;-</span> borde <span class="sc">&amp;</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(malo)) <span class="sc">&lt;</span> <span class="fl">0.7</span></span>
+<span id="cb26-305"><a href="#cb26-305" aria-hidden="true" tabindex="-1"></a>malo<span class="sc">$</span>poblacion_c[mover] <span class="ot">&lt;-</span> <span class="fu">abs</span>(malo<span class="sc">$</span>poblacion_c[mover]) <span class="sc">+</span> <span class="dv">200</span></span>
+<span id="cb26-306"><a href="#cb26-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-307"><a href="#cb26-307" aria-hidden="true" tabindex="-1"></a><span class="co"># el test de densidad, antes limpio, ahora rechaza</span></span>
+<span id="cb26-308"><a href="#cb26-308" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">rddensity</span>(malo<span class="sc">$</span>poblacion_c)<span class="sc">$</span>test<span class="sc">$</span>p_jk, <span class="dv">4</span>)</span>
+<span id="cb26-309"><a href="#cb26-309" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-310"><a href="#cb26-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-311"><a href="#cb26-311" aria-hidden="true" tabindex="-1"></a>De $p = 0{,}71$ a $p \approx 0{,}002$. El test detecta la manipulación que fabricamos: por eso vale la pena correrlo.</span>
+<span id="cb26-312"><a href="#cb26-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-313"><a href="#cb26-313" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb26-314"><a href="#cb26-314" aria-hidden="true" tabindex="-1"></a>Sabotear los datos a propósito es una forma de convencerte de que tus chequeos sirven. Si un test no reacciona ni siquiera a una violación grande e inventada por vos, no te dice nada cuando pasa la prueba con datos reales. Es un ejercicio de diagnóstico, no algo que reportes en el paper.</span>
+<span id="cb26-315"><a href="#cb26-315" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-316"><a href="#cb26-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-317"><a href="#cb26-317" aria-hidden="true" tabindex="-1"></a><span class="fu">## Simular un RDD antes de correrlo</span></span>
+<span id="cb26-318"><a href="#cb26-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-319"><a href="#cb26-319" aria-hidden="true" tabindex="-1"></a>Igual que con los experimentos, podés declarar un RDD y diagnosticarlo antes de recoger datos. <span class="in">`regression_discontinuity_designer`</span>, de <span class="in">`DesignLibrary`</span>, arma un diseño completo listo para <span class="in">`diagnose_design()`</span>, que devuelve sesgo, poder y cobertura.</span>
+<span id="cb26-320"><a href="#cb26-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-321"><a href="#cb26-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r designlibrary}</span></span>
+<span id="cb26-322"><a href="#cb26-322" aria-hidden="true" tabindex="-1"></a>d_rdd <span class="ot">&lt;-</span> <span class="fu">regression_discontinuity_designer</span>(</span>
+<span id="cb26-323"><a href="#cb26-323" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="dv">2000</span>, <span class="at">tau =</span> <span class="fl">0.15</span>, <span class="at">cutoff =</span> <span class="fl">0.5</span>, <span class="at">poly_reg_order =</span> <span class="dv">1</span></span>
+<span id="cb26-324"><a href="#cb26-324" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-325"><a href="#cb26-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-326"><a href="#cb26-326" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">148</span>)</span>
+<span id="cb26-327"><a href="#cb26-327" aria-hidden="true" tabindex="-1"></a><span class="fu">diagnose_design</span>(d_rdd, <span class="at">sims =</span> <span class="dv">300</span>, <span class="at">bootstrap_sims =</span> <span class="dv">0</span>)</span>
+<span id="cb26-328"><a href="#cb26-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb26-329"><a href="#cb26-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-330"><a href="#cb26-330" aria-hidden="true" tabindex="-1"></a>El diseñador trabaja en una escala estandarizada (la variable de asignación va de 0 a 1, no en habitantes), así que sirve para razonar sobre poder y sesgo, no para reproducir los números del caso. Para calcular el poder o el tamaño de muestra de un RDD concreto, el paquete <span class="in">`rdpower`</span> está hecho para eso.</span>
+<span id="cb26-331"><a href="#cb26-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-332"><a href="#cb26-332" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb26-333"><a href="#cb26-333" aria-hidden="true" tabindex="-1"></a>Usalo en la etapa de planificación, para responder "¿con esta cantidad de casos cerca del corte, detecto un salto de este tamaño?". Mirá el poder (querés ≥ 0,8) y la cobertura (cerca de 0,95). Recordá que un RDD suele necesitar bastantes observaciones alrededor del umbral, porque el estimador usa sólo una ventana.</span>
+<span id="cb26-334"><a href="#cb26-334" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb26-335"><a href="#cb26-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-336"><a href="#cb26-336" aria-hidden="true" tabindex="-1"></a><span class="fu">## Para seguir</span></span>
+<span id="cb26-337"><a href="#cb26-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-338"><a href="#cb26-338" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip title="Enlaces y lecturas"}</span>
+<span id="cb26-339"><a href="#cb26-339" aria-hidden="true" tabindex="-1"></a>**Los paquetes de RDD** (Cattaneo y coautores)</span>
+<span id="cb26-340"><a href="#cb26-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-341"><a href="#cb26-341" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">rdpackages.github.io</span><span class="co">](https://rdpackages.github.io/)</span>: el hub con todos los paquetes</span>
+<span id="cb26-342"><a href="#cb26-342" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`rdrobust`</span><span class="co">](https://rdpackages.github.io/rdrobust/)</span>: estimación, inferencia y <span class="in">`rdplot`</span></span>
+<span id="cb26-343"><a href="#cb26-343" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`rddensity`</span><span class="co">](https://rdpackages.github.io/rddensity/)</span>: tests de manipulación</span>
+<span id="cb26-344"><a href="#cb26-344" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`rdmulti`</span><span class="co">](https://rdpackages.github.io/rdmulti/)</span>: varios cortes a la vez, como los 12 umbrales del paper</span>
+<span id="cb26-345"><a href="#cb26-345" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`rdlocrand`</span><span class="co">](https://rdpackages.github.io/rdlocrand/)</span>: inferencia de aleatorización local en ventanas chicas</span>
+<span id="cb26-346"><a href="#cb26-346" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`rdpower`</span><span class="co">](https://rdpackages.github.io/rdpower/)</span>: poder y tamaño de muestra para RDD</span>
+<span id="cb26-347"><a href="#cb26-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-348"><a href="#cb26-348" aria-hidden="true" tabindex="-1"></a>**Para leer**</span>
+<span id="cb26-349"><a href="#cb26-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-350"><a href="#cb26-350" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Cattaneo, Idrobo y Titiunik (2020)</span><span class="co">](https://doi.org/10.1017/9781108684606)</span>, *A Practical Introduction to RD Designs: Foundations*, y su segundo volumen, [*Extensions* (2024)](https://doi.org/10.1017/9781009441896): la guía moderna, gratis online</span>
+<span id="cb26-351"><a href="#cb26-351" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Lee y Lemieux (2010)</span><span class="co">](https://doi.org/10.1257/jel.48.2.281)</span>: el survey clásico en el *Journal of Economic Literature*</span>
+<span id="cb26-352"><a href="#cb26-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-353"><a href="#cb26-353" aria-hidden="true" tabindex="-1"></a>**Nuestro caso del bloque**</span>
+<span id="cb26-354"><a href="#cb26-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-355"><a href="#cb26-355" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Mignozzetti, Cepaluni y Freire (2025)</span><span class="co">](https://doi.org/10.1111/ajps.12843)</span>: tamaño del concejo y bienestar en Brasil, con la regla del TSE de 2004 como experimento accidental</span>
+<span id="cb26-356"><a href="#cb26-356" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 <a href="https://danilofreire.github.io">Danilo Freire</a>. Contenido bajo licencia <a href="https://opensource.org/licenses/MIT">MIT</a>.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/referencia-rdd.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Hecho con <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

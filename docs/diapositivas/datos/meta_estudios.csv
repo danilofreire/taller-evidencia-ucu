@@ -1,21 +1,22 @@
 "estudio","pais","diseno","n","ee","efecto"
-"García (2014)","Uruguay","RDD",1537,0.056,0.11
-"Souza (2006)","Perú","RDD",843,0.076,0.069
-"Lima y Ortiz (2008)","Argentina","RDD",145,0.183,0.419
-"Rojas y Mendoza (2009)","Chile","RDD",268,0.134,0.246
-"Fernández (2019)","Chile","OLS",838,0.076,0.174
-"Muñoz y Torres (2005)","Uruguay","OLS",89,0.233,0.511
-"Silva (2021)","Perú","DiD",575,0.092,0.156
-"Torres (2013)","México","RDD",3055,0.04,0.321
-"Vargas y Lima (2017)","Argentina","OLS",233,0.144,0.435
-"Herrera y Castro (2016)","Chile","DiD",934,0.072,0.156
-"Castro y Sosa (2022)","Uruguay","DiD",82,0.243,0.591
-"Mendoza (2016)","Chile","RDD",1494,0.057,0.098
-"Ríos (2013)","Colombia","OLS",213,0.151,0.349
-"Acosta (2007)","México","RDD",2898,0.041,0.203
-"Núñez y García (2006)","México","DiD",153,0.178,0.302
-"Ferreira (2021)","Colombia","OLS",362,0.116,-0.02
-"Ortiz (2006)","Argentina","OLS",803,0.078,0.184
-"Cabrera (2014)","Chile","DiD",80,0.246,0.517
-"Duarte y Silva (2017)","Argentina","OLS",307,0.126,0.256
-"Sosa (2014)","Colombia","RDD",86,0.237,0.438
+"Torres (2018)","Uruguay","OLS",361,0.116,0.164
+"Ferreira (2007)","Chile","OLS",146,0.182,0.337
+"García (2015)","México","DiD",76,0.252,0.722
+"García (2008)","Brasil","DiD",267,0.135,0.23
+"Castro (2011)","Uruguay","DiD",240,0.142,0.295
+"Acosta (2008)","Perú","DiD",364,0.115,-0.114
+"Ortiz (2015)","Brasil","DiD",435,0.105,0.199
+"Acosta (2014)","Chile","OLS",400,0.11,-0.037
+"Núñez (2006)","México","DiD",593,0.09,0.245
+"Duarte (2014)","Colombia","RDD",450,0.104,0.266
+"García (2012)","Uruguay","DiD",410,0.109,0.238
+"García (2017)","Uruguay","OLS",120,0.201,0.342
+"Fernández (2018)","Brasil","OLS",500,0.098,0.23
+"Cabrera (2009)","Brasil","OLS",552,0.094,0.286
+"Rojas (2022)","México","DiD",346,0.118,0.104
+"Sosa (2019)","Chile","OLS",251,0.139,0.294
+"Vargas (2008)","Colombia","DiD",147,0.181,0.396
+"Ferreira (2010)","Uruguay","OLS",410,0.109,0.067
+"Ríos (2009)","México","OLS",103,0.217,0.538
+"Torres (2007)","Brasil","DiD",424,0.107,-0.008
+"Rojas (2016)","Uruguay","OLS",156,0.176,0.425

@@ -271,6 +271,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./materiales.html"> 
 <span class="menu-text">Materiales</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./reproducibilidad.html"> 
+<span class="menu-text">Reproducibilidad</span></a>
+  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-referencia-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Referencia R</span>
@@ -283,6 +287,18 @@ ul.task-list li input[type="checkbox"] {
         <li>
     <a class="dropdown-item" href="./referencia-experimentos.html">
  <span class="dropdown-text">Experimentos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-rdd.html">
+ <span class="dropdown-text">Regresión discontinua</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-did-sintetico.html">
+ <span class="dropdown-text">DiD y control sintético</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-acumulacion.html">
+ <span class="dropdown-text">Acumulación de evidencia</span></a>
   </li>  
     </ul>
   </li>
@@ -358,7 +374,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="referencias-por-bloque">Referencias por bloque</h2>
 <div class="resource-card">
 <p><span class="resource-title">Experimentos</span></p>
-<p><span class="resource-meta">Bloque 1 · diferencia de medias, balance, ajuste de covariables, diseño</span></p>
+<p><span class="resource-meta">Parte 2 · diferencia de medias, balance, ajuste de covariables, diseño</span></p>
 <p><span class="resource-meta"><code>difference_in_means</code>, <code>lm_robust</code>, <code>lm_lin</code>, interacciones, tabla de balance, errores agrupados, inferencia por aleatorización con <code>ri2</code>, comparaciones múltiples, y <code>DeclareDesign</code> / <code>DesignLibrary</code> para simular el diseño antes del campo</span></p>
 <div class="resource-links">
 <p><a href="referencia-experimentos.html">Abrir referencia</a></p>
@@ -366,18 +382,27 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="resource-card">
 <p><span class="resource-title">Regresión discontinua</span></p>
-<p><span class="resource-meta">Bloque 2 · próximamente</span></p>
-<p><span class="resource-meta">Estimación local con <code>rdrobust</code>, prueba de densidad con <code>rddensity</code> y gráficos de la discontinuidad. Se publica cuando se termine de revisar el bloque</span></p>
+<p><span class="resource-meta">Parte 3 · rdplot, rdrobust, rddensity y chequeos de validez</span></p>
+<p><span class="resource-meta">Ver el salto con <code>rdplot</code>, estimar el efecto local con <code>rdrobust</code>, testear manipulación con <code>rddensity</code>, y correr los chequeos de validez (densidad, balance, corte placebo, ancho de banda) como rutina</span></p>
+<div class="resource-links">
+<p><a href="referencia-rdd.html">Abrir referencia</a></p>
+</div>
 </div>
 <div class="resource-card">
 <p><span class="resource-title">Diferencias en diferencias y control sintético</span></p>
-<p><span class="resource-meta">Bloque 3 · próximamente</span></p>
-<p><span class="resource-meta">Estimadores de diferencias en diferencias y control sintético con <code>tidysynth</code>. Se publica cuando se termine de revisar el bloque</span></p>
+<p><span class="resource-meta">Parte 4 · el 2×2, tidysynth de punta a punta y gsynth</span></p>
+<p><span class="resource-meta">El 2×2 de DiD con <code>dplyr</code>, el control sintético en un pipe con <code>tidysynth</code> (pesos, balance, placebos, inferencia por MSPE), y <code>gsynth</code> para varios tratados y fechas escalonadas, con factores interactivos y matrix completion</span></p>
+<div class="resource-links">
+<p><a href="referencia-did-sintetico.html">Abrir referencia</a></p>
+</div>
 </div>
 <div class="resource-card">
 <p><span class="resource-title">Acumulación de evidencia</span></p>
-<p><span class="resource-meta">Bloque 4 · próximamente</span></p>
-<p><span class="resource-meta">Meta-análisis con <code>metafor</code>: tamaños de efecto, modelos de efectos aleatorios y forest plots. Se publica cuando se termine de revisar el bloque</span></p>
+<p><span class="resource-meta">Parte 5 · meta-análisis con metafor y sesgo de publicación</span></p>
+<p><span class="resource-meta">Meta-análisis con <code>rma()</code>, forest y funnel plots, el test de Egger, trim-and-fill, efectos fijos frente a aleatorios, subgrupos y meta-regresión, y diagnósticos de estudios influyentes</span></p>
+<div class="resource-links">
+<p><a href="referencia-acumulacion.html">Abrir referencia</a></p>
+</div>
 </div>
 
 

@@ -1,6 +1,6 @@
 ---
 title: "Políticas públicas basadas en evidencia"
-subtitle: "Bloque 1: experimentos"
+subtitle: "Parte 2: experimentos"
 author:
   - name: Danilo Freire
     orcid: 0000-0002-4712-6810
@@ -9,7 +9,7 @@ author:
 format:
   clean-revealjs:
     self-contained: true
-    footer: "[Bloque 1](https://danilofreire.github.io/taller-evidencia-ucu/diapositivas/02-experimentos.html)"
+    footer: "[Experimentos](https://danilofreire.github.io/taller-evidencia-ucu/diapositivas/02-experimentos.html)"
     transition: slide
     transition-speed: default
     scrollable: true
@@ -120,13 +120,13 @@ Un tratamiento $T$ y un resultado $Y$. Para cada unidad $i$ hay [dos resultados 
 
 El efecto causal sobre esa unidad es la diferencia entre sus dos mundos:
 
-:::{style="text-align: center; font-size: 22px;"}
+:::{style="text-align: center; font-size: 24px;"}
 $\tau_i = Y_{1,i} - Y_{0,i}$
 :::
 
 Lo que sí observamos es un solo potencial, el del tratamiento recibido:
 
-:::{style="text-align: center; font-size: 18px;"}
+:::{style="text-align: center; font-size: 24px;"}
 $Y_i = Y_{0,i} + (Y_{1,i} - Y_{0,i})\,T_i$
 :::
 :::
@@ -161,7 +161,7 @@ $Y_i = Y_{0,i} + (Y_{1,i} - Y_{0,i})\,T_i$
 :::{style="margin-top: 6px; font-size: 24px;"}
 :::{.columns}
 :::{.column width=46%}
-Lo más fácil es restar el promedio de los tratados menos el de los no tratados.
+Lo más fácil es restar el promedio de los tratados menos el de los no tratados
 
 Sumando y restando un mismo término (el $Y_0$ de los tratados) esa resta se parte en [dos]{.alert}:
 
@@ -187,24 +187,12 @@ El sesgo compara el $Y_0$ de los dos grupos: cómo se [habrían visto sin tratam
 
 ## La solución: sortear
 
-:::{style="margin-top: 6px; font-size: 24px;"}
+:::{style="margin-top: 6px; font-size: 21px;"}
+Si el tratamiento se asigna [al azar]{.alert}, recibirlo deja de depender de los resultados potenciales: $E[Y_{0,i}\mid T_i=1] = E[Y_{0,i}\mid T_i=0]$. El sesgo se anula [en expectativa]{.alert} y la diferencia de medias ya es el efecto causal promedio
+
 :::{.columns}
-:::{.column width=54%}
-Si el tratamiento se asigna [al azar]{.alert}, recibirlo deja de depender de los resultados potenciales
-
-En promedio, los grupos quedan [balanceados]{.alert}
-
-- La condición que lo hace funcionar: $E[Y_{0,i}\mid T_i=1] = E[Y_{0,i}\mid T_i=0]$
-
-- Con eso el sesgo se anula [en expectativa]{.alert}, y la diferencia de medias ya es el efecto causal promedio
-
-- El sorteo equilibra lo que medís [y también lo que no podés medir]{.alert}, que es lo más difícil de cualquier otro método ([Duflo, Glennerster y Kremer, 2007](https://doi.org/10.1016/S1573-4471(07)04061-2))
-
-- Las pruebas de balance no demuestran que el sorteo fue válido: sólo son [consistentes]{.alert} con la hipótesis ([Mutz et al., 2019](https://doi.org/10.1080/00031305.2017.1322143))
-:::
-
-:::{.column width=46%}
-```{r sortear-fig, fig.width=4.6, fig.height=3.1}
+:::{.column width=50%}
+```{r sortear-fig, fig.width=4.6, fig.height=2.9}
 set.seed(2026)
 n_demo <- 400
 x_demo <- rnorm(n_demo, 40, 8)
@@ -218,34 +206,10 @@ ggplot(df_demo, aes(x, fill = g)) +
   tema_taller +
   theme(legend.position = "top", legend.text = element_text(size = 10))
 ```
-
-:::{style="font-size: 20px; text-align: center; color: #555;"}
-Bajo sorteo, las dos distribuciones se superponen: no hay brecha previa que confundir con el efecto
-:::
-:::
-:::
-:::
-
-## Por qué nos gustan los experimentos
-
-:::{style="margin-top: 6px; font-size: 24px;"}
-:::{.columns}
-:::{.column width=50%}
-Más allá de quitar el sesgo, el sorteo trae ventajas [poco evidentes]{.alert}:
-
-- [Estimación simple]{.alert}: el efecto es una resta de medias, idéntica al coeficiente de una regresión
-
-- [Transparencia]{.alert}: el análisis se promete de antemano, sin margen para elegir el resultado que gusta
-
-- [Credibilidad]{.alert}: "sorteamos quién recibía" lo entiende un ministro o un juez, sin ecuaciones
-
-- [Equidad]{.alert}: ante recursos escasos, todos tienen la misma chance de entrar
-
-- Equilibra hasta las variables [que no se te ocurrió medir]{.alert}
 :::
 
 :::{.column width=50%}
-```{r prepost-fig, fig.width=4.7, fig.height=3.3}
+```{r prepost-fig, fig.width=4.7, fig.height=2.9}
 pp <- data.frame(
   momento = factor(rep(c("Antes", "Después"), 2),
                    levels = c("Antes", "Después")),
@@ -266,11 +230,13 @@ ggplot(pp, aes(momento, y, color = grupo, group = grupo)) +
   tema_taller +
   theme(legend.position = "top")
 ```
+:::
+:::
 
-:::{style="font-size: 20px; margin-top: 0px;"}
-El antes-después del tratado sugiere $+6$. Pero el control [también sube]{.alert} ($+3$ por pura tendencia). El efecto es la brecha final, $16-13$: el control sorteado separa el efecto de la tendencia
-:::
-:::
+:::{style="margin-top: 8px; font-size: 20px;"}
+- El sorteo equilibra lo que medís [y también lo que no podés medir]{.alert}, que es lo más difícil de cualquier otro método ([Duflo, Glennerster y Kremer, 2007](https://doi.org/10.1016/S1573-4471(07)04061-2))
+
+- Las pruebas de balance no demuestran que el sorteo fue válido: sólo son [consistentes]{.alert} con la hipótesis ([Mutz et al., 2019](https://doi.org/10.1080/00031305.2017.1322143))
 :::
 :::
 
@@ -372,54 +338,27 @@ Rio Verde (Goiás): 229 mil habitantes, 1.156 casos de dengue en 2017 y 3.411 en
 :::
 :::
 
-## El diseño
+## El diseño y los tres brazos
 
-:::{style="margin-top: 6px; font-size: 23px;"}
+:::{style="margin-top: 30px; font-size: 21px;"}
 :::{.columns}
 :::{.column width=56%}
-Un [experimento de campo]{.alert} aleatorizado, 196 agentes que trabajan de a pares sobre 139 sectores censales, todo en [un solo día]{.alert} (5 de mayo de 2018).
+- [Reclutamiento]{.alert} por Facebook → formulario → capacitación. Quien no fue a la capacitación quedó afuera
 
-- [Reclutamiento]{.alert} por Facebook → formulario → capacitación (biología del vector y protocolo). Quien no fue a la capacitación quedó afuera
+- [Sorteo simple]{.alert} a tres grupos, verificado con pruebas de balance sobre siete variables previas (edad, altruismo, religiosidad, ingreso, compromiso político y social, popularidad en Facebook)
 
-- [Sorteo simple]{.alert} a tres grupos, verificado con pruebas de balance sobre siete variables previas 
-  - Edad, altruismo, religiosidad, ingreso, compromiso político y social, popularidad en Facebook
+- La productividad se [verifica con evidencia]{.alert}: foto del criadero, video de las larvas, foto de la casa. No con lo que el agente dice
 
-- Cada par recibía un mapa con una ruta de unas [120 casas]{.alert} en dos o tres barrios
-
-- La productividad se [verifica con evidencia]{.alert}: foto del criadero eliminado, video de las larvas, foto de la casa. No con lo que el agente dice
+- [Control]{.alert} ($n=58$): pago fijo de R\$ 110 (US\$ 25), sin bono
+- [Bono individual]{.alert} ($n=64$): se [duplica]{.alert} el pago (R\$ 220) a quien queda por encima de la mediana
+- [Bono colectivo]{.alert} ($n=74$): se duplica si [el par]{.alert} queda por encima de la mediana. El premio es compartido: conviene cooperar y controlarse
 :::
 
 :::{.column width=44%}
 [![](figures/dengue-reclutamiento.png){width="100%"}](#){data-modal-type="image" data-modal-url="figures/dengue-reclutamiento.png"}
 
-:::{style="font-size: 20px; text-align: center; color: #555;"}
+:::{style="font-size: 18px; text-align: center; color: #555;"}
 Reclutamiento por Facebook, la red más usada en Brasil
-:::
-:::
-:::
-:::
-
-## Tres brazos
-
-:::{style="margin-top: 6px; font-size: 24px;"}
-:::{.columns}
-:::{.column width=56%}
-Los agentes se sortearon a [tres grupos]{.alert}, citados en sedes distintas para evitar contagios:
-
-- [Control]{.alert} ($n=58$): pago fijo de R\$ 110 (US\$ 25), sin bono
-
-- [Bono individual]{.alert} ($n=64$): se [duplica]{.alert} el pago (R\$ 220) a quien queda por encima de la mediana
-
-- [Bono colectivo]{.alert} ($n=74$): se duplica si [el par]{.alert} queda por encima de la mediana. El premio es compartido: conviene cooperar y controlarse
-:::
-
-:::{.column width=44%}
-:::{style="text-align: center; margin-top: 6px;"}
-[![](figures/dengue-uniforme.jpeg){width="75%"}](#){data-modal-type="image" data-modal-url="figures/dengue-uniforme.jpeg"}
-:::
-
-:::{style="font-size: 20px; text-align: center; color: #555;"}
-Equipos de campo, con uniforme e identificación
 :::
 :::
 :::
@@ -480,11 +419,11 @@ El paper tiene tablas prolijas. El trabajo de campo fue [otra cosa]{.alert}:
 
 - El contagio entre grupos casi voltea el diseño: los del brazo tratado le [contaron]{.alert} a los del control que a ellos les pagaban más
 
-- Un coordinador movió pares cerca de su base, y desbalanceó la asignación territorial
-
 - El control empezó a [exigir plata]{.alert} a los asistentes de investigación y a [amenazarlos]{.alert}
 
 - Hubo que [cortar]{.alert} el operativo a mitad de camino y tuvimos que meter a la [policía]{.alert} en el caso 😅
+
+- Elegí bien el resultado, hacé un piloto, calculá el poder y registrá un [plan de análisis previo]{.alert} ([Olken, 2015](https://doi.org/10.1257/jep.29.3.61))
 :::
 
 :::{.column width=44%}
@@ -494,38 +433,6 @@ El paper tiene tablas prolijas. El trabajo de campo fue [otra cosa]{.alert}:
 
 :::{style="font-size: 20px; text-align: center; color: #555;"}
 Sectores de trabajo: intervención y control
-:::
-:::
-:::
-:::
-
-## Antes de correr al campo
-
-:::{style="margin-top: 6px; font-size: 23px;"}
-:::{.columns}
-:::{.column width=56%}
-Lo que dirían Duflo, Banerjee, Gerber o Green antes de arrancar:
-
-- [Elegí bien el resultado]{.alert}: productividad y enfermedad no son lo mismo, y deciden qué vas a poder concluir
-
-- [Hacé un piloto]{.alert}: probá el protocolo con pocos casos antes de escalar
-
-- Calculá el [poder]{.alert} de antemano: acá se estimó asumiendo un efecto de 0,15 desvíos estándar
-
-- Escribí un [plan de análisis previo]{.alert} y registralo antes de ver los datos ([Olken, 2015](https://doi.org/10.1257/jep.29.3.61))
-
-- [Medí de forma objetiva]{.alert} y anticipá la atrición y los contagios
- 
-- Un experimento en zonas pobres es caro, lento y frágil. La mitad del rigor se juega [antes]{.alert} de recoger los datos
-:::
-
-:::{.column width=44%}
-:::{style="text-align: center;"}
-[![](figures/dengue-campo.jpeg){width="70%"}](#){data-modal-type="image" data-modal-url="figures/dengue-campo.jpeg"}
-:::
-
-:::{style="font-size: 20px; text-align: center; color: #555;"}
-Trabajo de campo, casa por casa
 :::
 :::
 :::
@@ -607,7 +514,7 @@ diagnose_design(d1)
 :::
 :::
 
-## Generá los datos de la práctica
+## Generá los datos de la práctica {#sec:ej-datos}
 
 :::{style="margin-top: 4px; font-size: 24px;"}
 Con `fabricatr` y `randomizr` (la cocina de `DeclareDesign`) armamos los datos [simulados]{.alert} del dengue. Te dimos la muestra (`N = 400`) y el efecto del incentivo (`4.5`); completá los dos [huecos]{.alert} y corré:
@@ -650,6 +557,10 @@ datos |>
 [(a)]{.alert} `zona`: sorteá `"urbana"` o `"rural"` con `sample` sobre `N`, con reemplazo. [(b)]{.alert} `visitas_previas`: un `rnorm` de media 35 y desvío 6, redondeado (igual que `experiencia`)
 :::
 :::
+:::
+
+:::{style="margin-top: 6px;"}
+[[Ver solución](#sec:sol-datos)]{.button}
 :::
 :::
 
@@ -1025,6 +936,42 @@ Cuando no podés sortear, el resto del día es sobre cómo [encontrar]{.alert} o
 :::
 
 # Apéndice: soluciones {background-color="#2d4563"}
+
+## Solución: generá los datos {#sec:sol-datos}
+
+:::{style="margin-top: 6px; font-size: 21px;"}
+Los dos huecos, completos y en contexto:
+
+:::{style="margin-top: 6px; font-size: 17px;"}
+```{r sol-datos, echo=TRUE, eval=FALSE}
+library(fabricatr); library(randomizr)
+set.seed(3043)
+
+datos <- fabricate(
+  N = 400,
+  edad            = round(rnorm(N, 38, 7.5)),
+  mujer           = rbinom(N, 1, 0.7),
+  experiencia     = round(rnorm(N, 7, 2.6)),
+  zona            = sample(c("urbana", "rural"), N, replace = TRUE),  # (a)
+  visitas_previas = round(rnorm(N, 35, 6)),                           # (b)
+  tratamiento     = complete_ra(N, m = N / 2),
+  visitas = round(20 + 4.5 * tratamiento
+                  + 3 * tratamiento * (zona == "urbana")
+                  + 0.4 * visitas_previas + rnorm(N, 0, 9)),
+  indice_larvario = round(pmax(0, 12 - 2.8 * tratamiento
+                               + rnorm(N, 0, 4)), 1)
+)
+```
+:::
+
+[(a)]{.alert} `sample()` sortea una zona para cada uno de los `N` agentes; `replace = TRUE` porque la misma zona se repite muchas veces. [(b)]{.alert} `round(rnorm(N, 35, 6))`: visitas previas con media 35 y desvío 6, redondeadas a enteros
+
+:::{style="margin-top: 6px; font-size: 19px; color: #555;"}
+Con la semilla 3043, esto reproduce [exactamente]{.alert} el `datos` que venimos usando y el CSV del repo
+:::
+
+[[Volver al ejercicio](#sec:ej-datos)]{.button}
+:::
 
 ## Solución: la interacción {#sec:sol-interaccion}
 

@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Referencia R: diferencias en diferencias y control sintético – Políticas basadas en evidencia</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e68f30e75591e36100235718a786973.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Políticas basadas en evidencia</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./programa.html"> 
+<span class="menu-text">Programa</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./materiales.html"> 
+<span class="menu-text">Materiales</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./reproducibilidad.html"> 
+<span class="menu-text">Reproducibilidad</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-referencia-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Referencia R</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-referencia-r">    
+        <li>
+    <a class="dropdown-item" href="./referencia-r.html">
+ <span class="dropdown-text">Todas las referencias</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-experimentos.html">
+ <span class="dropdown-text">Experimentos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-rdd.html">
+ <span class="dropdown-text">Regresión discontinua</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-did-sintetico.html">
+ <span class="dropdown-text">DiD y control sintético</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./referencia-acumulacion.html">
+ <span class="dropdown-text">Acumulación de evidencia</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./referencias.html"> 
+<span class="menu-text">Referencias</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:danilofreire@gmail.com"> <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/danilofreire/taller-evidencia-ucu"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Alternar modo lector">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#paquetes-y-datos" id="toc-paquetes-y-datos" class="nav-link active" data-scroll-target="#paquetes-y-datos"><span class="header-section-number">1</span> Paquetes y datos</a></li>
+  <li><a href="#diferencias-en-diferencias-el-22-a-mano" id="toc-diferencias-en-diferencias-el-22-a-mano" class="nav-link" data-scroll-target="#diferencias-en-diferencias-el-22-a-mano"><span class="header-section-number">2</span> Diferencias en diferencias: el 2×2 a mano</a></li>
+  <li><a href="#la-misma-cuenta-en-un-gráfico" id="toc-la-misma-cuenta-en-un-gráfico" class="nav-link" data-scroll-target="#la-misma-cuenta-en-un-gráfico"><span class="header-section-number">3</span> La misma cuenta, en un gráfico</a></li>
+  <li><a href="#el-did-como-regresión-lm_robust" id="toc-el-did-como-regresión-lm_robust" class="nav-link" data-scroll-target="#el-did-como-regresión-lm_robust"><span class="header-section-number">4</span> El DiD como regresión: lm_robust</a></li>
+  <li><a href="#el-control-sintético-en-un-pipe" id="toc-el-control-sintético-en-un-pipe" class="nav-link" data-scroll-target="#el-control-sintético-en-un-pipe"><span class="header-section-number">5</span> El control sintético en un pipe</a></li>
+  <li><a href="#ver-el-ajuste-plot_trends-y-plot_differences" id="toc-ver-el-ajuste-plot_trends-y-plot_differences" class="nav-link" data-scroll-target="#ver-el-ajuste-plot_trends-y-plot_differences"><span class="header-section-number">6</span> Ver el ajuste: plot_trends y plot_differences</a></li>
+  <li><a href="#los-pesos-y-el-balance" id="toc-los-pesos-y-el-balance" class="nav-link" data-scroll-target="#los-pesos-y-el-balance"><span class="header-section-number">7</span> Los pesos y el balance</a></li>
+  <li><a href="#inferencia-por-placebos" id="toc-inferencia-por-placebos" class="nav-link" data-scroll-target="#inferencia-por-placebos"><span class="header-section-number">8</span> Inferencia por placebos</a></li>
+  <li><a href="#extraer-las-series" id="toc-extraer-las-series" class="nav-link" data-scroll-target="#extraer-las-series"><span class="header-section-number">9</span> Extraer las series</a></li>
+  <li><a href="#un-placebo-cambiando-la-unidad-tratada" id="toc-un-placebo-cambiando-la-unidad-tratada" class="nav-link" data-scroll-target="#un-placebo-cambiando-la-unidad-tratada"><span class="header-section-number">10</span> Un placebo cambiando la unidad tratada</a></li>
+  <li><a href="#varios-tratados-y-fechas-escalonadas-gsynth" id="toc-varios-tratados-y-fechas-escalonadas-gsynth" class="nav-link" data-scroll-target="#varios-tratados-y-fechas-escalonadas-gsynth"><span class="header-section-number">11</span> Varios tratados y fechas escalonadas: gsynth</a></li>
+  <li><a href="#gsynth-con-matrix-completion" id="toc-gsynth-con-matrix-completion" class="nav-link" data-scroll-target="#gsynth-con-matrix-completion"><span class="header-section-number">12</span> gsynth con matrix completion</a></li>
+  <li><a href="#para-seguir" id="toc-para-seguir" class="nav-link" data-scroll-target="#para-seguir"><span class="header-section-number">13</span> Para seguir</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/referencia-did-sintetico.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Referencia R: diferencias en diferencias y control sintético</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Código</button></div></div>
+<p class="subtitle lead">Parte 4 · el 2×2, el DiD como regresión, tidysynth de punta a punta y gsynth</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Esta página reúne, con código que podés correr y copiar, todas las funciones de R del bloque de diferencias en diferencias y control sintético (<a href="diapositivas/04-did-sintetico.html">diapositivas</a>), más varias funciones extra de <code>tidysynth</code> y <code>gsynth</code> que no entraron en las slides pero que vas a querer tener a mano. Cada sección explica en pocas frases qué hace el comando, muestra un bloque ejecutable con su salida real, y cierra con una nota sobre cuándo conviene usarlo.</p>
+<p>Los ejemplos trabajan sobre los datos simulados del caso de los homicidios en São Paulo (<a href="https://doi.org/10.25222/larr.334">Freire, 2018</a>). Como la semilla está fija (<code>set.seed(1)</code>), los números coinciden con los de las diapositivas y con el archivo <a href="diapositivas/datos/homicidios.csv"><code>homicidios.csv</code></a>. Es una versión más chica y más corta que el paper (16 estados, 1990-2005), pensada para que corra rápido.</p>
+<section id="paquetes-y-datos" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="paquetes-y-datos"><span class="header-section-number">1</span> Paquetes y datos</h2>
+<p>Cargá los paquetes del bloque. El bucle instala cada uno solo si te falta. La novedad frente a los datos de la mañana es <code>add_level</code>: <code>fabricatr</code> arma un panel con un nivel para los estados y otro para los años, así cada estado aparece repetido a lo largo del tiempo.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"estimatr"</span>, <span class="st">"tidysynth"</span>, <span class="st">"gsynth"</span>, <span class="st">"fabricatr"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> paquetes) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Las dos columnas que mandan son <code>tratado</code> (1 sólo para São Paulo) y <code>post</code> (1 desde el año 2000): su producto enciende el <code>efecto</code>. El resto son covariables que después ayudan a elegir los pesos del control sintético.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">unidad =</span> <span class="fu">add_level</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">16</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">estado  =</span> <span class="fu">c</span>(<span class="st">"São Paulo"</span>, <span class="st">"Rio de Janeiro"</span>, <span class="st">"Minas Gerais"</span>, <span class="st">"Bahia"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Paraná"</span>, <span class="st">"Rio Grande do Sul"</span>, <span class="st">"Pernambuco"</span>, <span class="st">"Ceará"</span>, <span class="st">"Pará"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Santa Catarina"</span>, <span class="st">"Goiás"</span>, <span class="st">"Maranhão"</span>, <span class="st">"Espírito Santo"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Paraíba"</span>, <span class="st">"Amazonas"</span>, <span class="st">"Mato Grosso"</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">tratado =</span> <span class="fu">as.integer</span>(estado <span class="sc">==</span> <span class="st">"São Paulo"</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">base    =</span> <span class="fu">ifelse</span>(tratado <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">30</span>, <span class="fu">runif</span>(N, <span class="dv">15</span>, <span class="dv">45</span>)),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">pib_pc  =</span> <span class="fu">round</span>(<span class="fu">rlnorm</span>(N, <span class="fu">log</span>(<span class="dv">12000</span>), <span class="fl">0.25</span>)),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">gini    =</span> <span class="fu">round</span>(<span class="fu">runif</span>(N, <span class="fl">0.48</span>, <span class="fl">0.62</span>), <span class="dv">3</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">poblacion_urbana =</span> <span class="fu">round</span>(<span class="fu">runif</span>(N, <span class="fl">0.55</span>, <span class="fl">0.95</span>), <span class="dv">3</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">jovenes_pct      =</span> <span class="fu">round</span>(<span class="fu">runif</span>(N, <span class="fl">0.16</span>, <span class="fl">0.24</span>), <span class="dv">3</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">periodo =</span> <span class="fu">add_level</span>(</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">16</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">anio   =</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">2005</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">post   =</span> <span class="fu">as.integer</span>(anio <span class="sc">&gt;=</span> <span class="dv">2000</span>),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">efecto =</span> <span class="sc">-</span><span class="fl">14.5</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>(anio <span class="sc">-</span> <span class="dv">1999</span>))) <span class="sc">*</span> tratado <span class="sc">*</span> post,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">tasa_homicidios =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(base <span class="sc">+</span> <span class="fl">0.8</span> <span class="sc">*</span> (anio <span class="sc">-</span> <span class="dv">1990</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                                    <span class="sc">+</span> efecto <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">1.5</span>), <span class="dv">1</span>))</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos[, <span class="fu">c</span>(<span class="st">"estado"</span>, <span class="st">"anio"</span>, <span class="st">"tasa_homicidios"</span>, <span class="st">"pib_pc"</span>, <span class="st">"gini"</span>,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"poblacion_urbana"</span>, <span class="st">"jovenes_pct"</span>, <span class="st">"tratado"</span>, <span class="st">"post"</span>)]</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos, <span class="dv">4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     estado anio tasa_homicidios pib_pc  gini poblacion_urbana jovenes_pct
+1 São Paulo 1990            29.8  13858 0.583             0.81       0.195
+2 São Paulo 1991            32.1  13858 0.583             0.81       0.195
+3 São Paulo 1992            32.2  13858 0.583             0.81       0.195
+4 São Paulo 1993            31.5  13858 0.583             0.81       0.195
+  tratado post
+1       1    0
+2       1    0
+3       1    0
+4       1    0</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este bloque es para cuando tenés una o pocas unidades tratadas (un estado, un país), la política ya ocurrió, y no hay ni sorteo ni umbral. Lo que sí tenés es tiempo: varios años de datos para el caso tratado y para otras unidades que le sirvan de espejo. <code>add_level</code> es la forma de simular ese panel.</p>
+</div>
+</div>
+</section>
+<section id="diferencias-en-diferencias-el-22-a-mano" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="diferencias-en-diferencias-el-22-a-mano"><span class="header-section-number">2</span> Diferencias en diferencias: el 2×2 a mano</h2>
+<p>El estimador más simple sale de cuatro promedios: São Paulo y los donantes, antes y después de 2000. <code>group_by(tratado, post)</code> los arma en una tabla de dos por dos.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>medias <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tratado, post) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tasa =</span> <span class="fu">round</span>(<span class="fu">mean</span>(tasa_homicidios), <span class="dv">2</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>medias</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  tratado  post  tasa
+    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+1       0     0  34.5
+2       0     1  41.0
+3       1     0  33.8
+4       1     1  27.8</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># la doble resta: (São Paulo después - antes) - (donantes después - antes)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>(<span class="fl">27.78</span> <span class="sc">-</span> <span class="fl">33.85</span>) <span class="sc">-</span> (<span class="fl">40.99</span> <span class="sc">-</span> <span class="fl">34.54</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -12.52</code></pre>
+</div>
+</div>
+<p>São Paulo baja de 33,8 a 27,8 (cae 6,1); los donantes suben de 34,5 a 41,0 (ganan 6,4). La diferencia de las diferencias da ≈ −12,5 por 100.000. La primera resta saca lo fijo de São Paulo; la segunda saca la tendencia común a todos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El 2×2 es el DiD en su forma más pura y sirve para entender la lógica. Vale sólo si, sin la política, São Paulo hubiera seguido la misma tendencia que los donantes (tendencias paralelas). Para muchos grupos y fechas, en vez de la resta a mano se usa una regresión con efectos fijos (paquete <code>fixest</code>).</p>
+</div>
+</div>
+</section>
+<section id="la-misma-cuenta-en-un-gráfico" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="la-misma-cuenta-en-un-gráfico"><span class="header-section-number">3</span> La misma cuenta, en un gráfico</h2>
+<p>La doble resta se ve mejor dibujada: São Paulo contra el promedio de sus 15 donantes, con el contrafactual DiD (São Paulo movido según la tendencia de los donantes desde 1999).</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tratado <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(anio, <span class="at">tasa =</span> tasa_homicidios, <span class="at">grupo =</span> <span class="st">"São Paulo"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>donantes <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tratado <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(anio) <span class="sc">|&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tasa =</span> <span class="fu">mean</span>(tasa_homicidios), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grupo =</span> <span class="st">"Promedio de los 15 donantes"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>serie <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(sp, donantes)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># contrafactual DiD: São Paulo desde 1999, movido con la tendencia de los donantes</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>sp_99  <span class="ot">&lt;-</span> sp<span class="sc">$</span>tasa[sp<span class="sc">$</span>anio <span class="sc">==</span> <span class="dv">1999</span>]</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>don_99 <span class="ot">&lt;-</span> donantes<span class="sc">$</span>tasa[donantes<span class="sc">$</span>anio <span class="sc">==</span> <span class="dv">1999</span>]</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>contraf <span class="ot">&lt;-</span> donantes <span class="sc">|&gt;</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">&gt;=</span> <span class="dv">1999</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(anio, <span class="at">tasa =</span> sp_99 <span class="sc">+</span> (tasa <span class="sc">-</span> don_99), <span class="at">grupo =</span> <span class="st">"Contrafactual DiD"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(serie, <span class="fu">aes</span>(anio, tasa, <span class="at">color =</span> grupo)) <span class="sc">+</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> contraf, <span class="fu">aes</span>(anio, tasa), <span class="at">color =</span> <span class="st">"grey45"</span>,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype =</span> <span class="st">"dotted"</span>, <span class="at">linewidth =</span> <span class="fl">0.9</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1999.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> rojo, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"São Paulo"</span> <span class="ot">=</span> azul,</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Promedio de los 15 donantes"</span> <span class="ot">=</span> <span class="st">"grey55"</span>)) <span class="sc">+</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Homicidios por 100.000"</span>, <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  tema_taller <span class="sc">+</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-did-sintetico_files/figure-html/did-grafico-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1350"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>La distancia vertical entre São Paulo y la línea punteada (el contrafactual) es el estimado DiD.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Antes de creerle al DiD, mirá las pre-tendencias: filtrá <code>anio &lt;= 1999</code> y fijate si las dos líneas ya iban parejas antes de la política. Pre-tendencias parecidas hacen el supuesto más creíble, pero no lo prueban. El paralelismo se rompe con anticipación, cambios de composición, o un Ashenfelter dip (la política llega justo cuando el resultado se estaba desviando).</p>
+</div>
+</div>
+</section>
+<section id="el-did-como-regresión-lm_robust" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="el-did-como-regresión-lm_robust"><span class="header-section-number">4</span> El DiD como regresión: lm_robust</h2>
+<p>La doble resta que hicimos a mano es exactamente el coeficiente de una interacción. Con dos dummies alcanza: <code>tratado</code> (1 para São Paulo, no cambia en el tiempo) y <code>post</code> (1 desde 2000, igual para todas las unidades). El operador <code>*</code> pide las dos más su producto.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>did <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(tasa_homicidios <span class="sc">~</span> tratado <span class="sc">*</span> post, <span class="at">data =</span> datos)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(<span class="fu">summary</span>(did))[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)     34.54       0.71   48.34     0.00
+tratado         -0.69       1.13   -0.61     0.54
+post             6.45       1.16    5.58     0.00
+tratado:post   -12.52       1.58   -7.91     0.00</code></pre>
+</div>
+</div>
+<p>Cada coeficiente es una celda del 2×2: el intercepto es el donante típico antes de la política (34,5); <code>tratado</code> es la brecha que ya existía entre São Paulo y los donantes (−0,7); <code>post</code> es la tendencia común que subió a todos (+6,5); y la interacción <code>tratado:post</code> es lo que le pasó sólo a São Paulo y sólo después: −12,5, el mismo número de la resta a mano.</p>
+<p>Escribir <code>tratado * post</code> equivale a <code>tratado + post + tratado:post</code>, igual que el <code>tratamiento * zona</code> del bloque de experimentos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar (y una advertencia)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar (y una advertencia)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La ventaja de la regresión es que escala: le sumás covariables, efectos fijos o errores agrupados sin cambiar de herramienta. Pero cuidado con leer ese valor <span class="math inline">\(p\)</span> como una garantía: hay una sola unidad tratada, así que el error estándar descansa en la variación año a año, no en muchos São Paulos. Por eso el control sintético hace inferencia con placebos.</p>
+</div>
+</div>
+</section>
+<section id="el-control-sintético-en-un-pipe" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="el-control-sintético-en-un-pipe"><span class="header-section-number">5</span> El control sintético en un pipe</h2>
+<p>El DiD pesa a todos los donantes por igual. El control sintético elige pesos para que un promedio ponderado de los donantes calque la trayectoria de São Paulo antes de la política. <code>tidysynth</code> arma todo en un pipe de <code>dplyr</code>: cada paso hace una cosa.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">synthetic_control</span>(<span class="at">outcome =</span> tasa_homicidios,   <span class="co"># el resultado</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">unit =</span> estado,               <span class="co"># la unidad</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">time =</span> anio,                 <span class="co"># el tiempo</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">i_unit =</span> <span class="st">"São Paulo"</span>,        <span class="co"># la unidad tratada</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">i_time =</span> <span class="dv">1999</span>,               <span class="co"># último año sin política</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">generate_placebos =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="co"># placebos para inferencia</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">1999</span>,    <span class="co"># promedios pre-política</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pib =</span> <span class="fu">mean</span>(pib_pc), <span class="at">gini_m =</span> <span class="fu">mean</span>(gini),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">urb =</span> <span class="fu">mean</span>(poblacion_urbana), <span class="at">jov =</span> <span class="fu">mean</span>(jovenes_pct)) <span class="sc">|&gt;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">1999</span>, <span class="at">tasa_pre =</span> <span class="fu">mean</span>(tasa_homicidios)) <span class="sc">|&gt;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_weights</span>() <span class="sc">|&gt;</span>                          <span class="co"># elige los pesos</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_control</span>()                             <span class="co"># arma el sintético</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Definís el problema con <code>synthetic_control()</code>, elegís los predictores pre-política con <code>generate_predictor()</code>, dejás que el método elija los pesos con <code>generate_weights()</code> y armás el clon con <code>generate_control()</code>. El objeto <code>sc</code> guarda todo: las series, los pesos y los placebos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es el método para una unidad tratada y muchos donantes, cuando querés un contrafactual a medida en vez de un promedio tosco. <code>i_time</code> es el último período sin tratamiento. <code>generate_placebos = TRUE</code> corre el método sobre cada donante también, que es lo que después permite hacer inferencia.</p>
+</div>
+</div>
+</section>
+<section id="ver-el-ajuste-plot_trends-y-plot_differences" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="ver-el-ajuste-plot_trends-y-plot_differences"><span class="header-section-number">6</span> Ver el ajuste: plot_trends y plot_differences</h2>
+<p>Con el objeto armado, los diagnósticos son una línea cada uno. <code>plot_trends()</code> muestra São Paulo real contra su sintético; <code>plot_differences()</code>, la brecha entre los dos año a año.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">plot_trends</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-did-sintetico_files/figure-html/plot-trends-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1200"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">plot_differences</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-did-sintetico_files/figure-html/plot-differences-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1200"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Buen ajuste antes de 2000 y una brecha que se abre después: el São Paulo real cae por debajo de su clon. En el paper, con datos reales, 27 donantes y la serie hasta 2009, la brecha llega a unos 20 puntos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Lo primero es el ajuste pre-tratamiento: si el sintético no calca al tratado antes de la política, no hay contrafactual creíble. La brecha post es el efecto estimado. <code>plot_trends()</code> acepta <code>time_window =</code> si querés recortar los años del gráfico.</p>
+</div>
+</div>
+</section>
+<section id="los-pesos-y-el-balance" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="los-pesos-y-el-balance"><span class="header-section-number">7</span> Los pesos y el balance</h2>
+<p>Los pesos son la comparación, y son transparentes: cualquiera puede leerlos y discutir si tienen sentido. <code>grab_unit_weights()</code> da el peso de cada donante; <code>grab_predictor_weights()</code>, cuánto pesó cada predictor al elegirlos.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_unit_weights</span>() <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(weight)) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  unit              weight
+  &lt;chr&gt;              &lt;dbl&gt;
+1 Goiás             0.332 
+2 Espírito Santo    0.314 
+3 Bahia             0.0683
+4 Rio Grande do Sul 0.0384
+5 Minas Gerais      0.0328</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_predictor_weights</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  variable   weight
+  &lt;chr&gt;       &lt;dbl&gt;
+1 gini_m   0.000377
+2 jov      0.0507  
+3 pib      0.787   
+4 urb      0.146   
+5 tasa_pre 0.0158  </code></pre>
+</div>
+</div>
+<p><code>grab_balance_table()</code> compara los predictores entre São Paulo, su sintético y el promedio del pool de donantes. Querés que las dos primeras columnas se parezcan (buen ajuste) y que difieran de la tercera (el sintético hace algo mejor que el promedio).</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_balance_table</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  variable `São Paulo` `synthetic_São Paulo` donor_sample
+  &lt;chr&gt;          &lt;dbl&gt;                 &lt;dbl&gt;        &lt;dbl&gt;
+1 gini_m         0.583                 0.574        0.543
+2 jov            0.195                 0.195        0.197
+3 pib        13858                 13858.       12787.   
+4 urb            0.81                  0.810        0.782
+5 tasa_pre      33.8                  33.9         34.5  </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pocos donantes con peso, y que tengan sentido sustantivo, es buena señal; donantes de otro mundo con peso alto son motivo de sospecha. En la tabla de balance, el sintético (columna 2) debería quedar mucho más cerca de São Paulo (columna 1) que el promedio del pool (columna 3).</p>
+</div>
+</div>
+</section>
+<section id="inferencia-por-placebos" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="inferencia-por-placebos"><span class="header-section-number">8</span> Inferencia por placebos</h2>
+<p>El control sintético no usa errores estándar: hace inferencia con placebos. Corre el mismo método sobre cada donante, como si él hubiera sido el tratado. Si São Paulo es un efecto real, su brecha tiene que ser la más extrema. <code>plot_placebos()</code> dibuja todas las brechas juntas.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">plot_placebos</span>(<span class="at">prune =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-did-sintetico_files/figure-html/placebos-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1200"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Un problema: un donante con mal ajuste pre-tratamiento puede tener una brecha post enorme sólo por ruido. Por eso se compara la razón entre el error post y el error pre (MSPE): São Paulo debería tener la razón más alta. <code>plot_mspe_ratio()</code> la ordena, y <code>grab_significance()</code> la pone en números, con un valor <span class="math inline">\(p\)</span> estilo Fisher.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">plot_mspe_ratio</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-did-sintetico_files/figure-html/mspe-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1200"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_significance</span>() <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(unit_name, type, pre_mspe, post_mspe, mspe_ratio, rank, fishers_exact_pvalue)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 7
+   unit_name      type  pre_mspe post_mspe mspe_ratio  rank fishers_exact_pvalue
+   &lt;chr&gt;          &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;                &lt;dbl&gt;
+ 1 São Paulo      Trea…     1.38   162.       117.        1               0.0625
+ 2 Bahia          Donor    27.4     37.1        1.36      2               0.125 
+ 3 Paraíba        Donor    84.6    102.         1.21      3               0.188 
+ 4 Rio Grande do… Donor   112.     121.         1.08      4               0.25  
+ 5 Mato Grosso    Donor   108.     115.         1.07      5               0.312 
+ 6 Pernambuco     Donor   188.     189.         1.01      6               0.375 
+ 7 Maranhão       Donor   190.     180.         0.952     7               0.438 
+ 8 Espírito Santo Donor    16.6     14.2        0.851     8               0.5   
+ 9 Minas Gerais   Donor    36.7     29.5        0.803     9               0.562 
+10 Pará           Donor    64.5     50.6        0.784    10               0.625 
+11 Santa Catarina Donor    42.1     31.5        0.747    11               0.688 
+12 Paraná         Donor    37.0     27.1        0.733    12               0.75  
+13 Ceará          Donor     8.42     6.03       0.716    13               0.812 
+14 Amazonas       Donor    13.7      8.20       0.598    14               0.875 
+15 Goiás          Donor     3.88     1.70       0.437    15               0.938 
+16 Rio de Janeiro Donor     4.48     0.873      0.195    16               1     </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El <code>rank</code> de São Paulo es lo que importa: rank 1 sobre 16 unidades da un valor <span class="math inline">\(p\)</span> de 1/16 ≈ 0,06. Con pocos donantes no vas a bajar de ahí, así que el tamaño del pool limita cuán chico puede ser el <span class="math inline">\(p\)</span>. La razón MSPE corrige por la calidad del ajuste pre, que es más honesto que mirar la brecha cruda.</p>
+</div>
+</div>
+</section>
+<section id="extraer-las-series" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="extraer-las-series"><span class="header-section-number">9</span> Extraer las series</h2>
+<p>Para hacer tus propios gráficos o cuentas, <code>grab_synthetic_control()</code> devuelve la serie real y la sintética del tratado en una tabla ordenada. Con <code>placebo = TRUE</code> trae también las de los donantes.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_synthetic_control</span>() <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">6</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  time_unit real_y synth_y
+      &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1      1990   29.8    30.4
+2      1991   32.1    32.0
+3      1992   32.2    31.8
+4      1993   31.5    32.5
+5      1994   33.7    33.7
+6      1995   32.3    32.7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># la brecha acumulada post-2000, a mano</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_synthetic_control</span>() <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time_unit <span class="sc">&gt;=</span> <span class="dv">2000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">brecha_total =</span> <span class="fu">sum</span>(real_y <span class="sc">-</span> synth_y))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  brecha_total
+         &lt;dbl&gt;
+1        -75.1</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Usalo cuando quieras salir de los gráficos que trae el paquete y armar los tuyos, o calcular efectos acumulados (vidas salvadas, casos evitados). La familia <code>grab_*</code> (<code>grab_synthetic_control</code>, <code>grab_unit_weights</code>, <code>grab_predictor_weights</code>, <code>grab_balance_table</code>, <code>grab_significance</code>) te da todos los componentes del objeto por separado.</p>
+</div>
+</div>
+</section>
+<section id="un-placebo-cambiando-la-unidad-tratada" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="un-placebo-cambiando-la-unidad-tratada"><span class="header-section-number">10</span> Un placebo cambiando la unidad tratada</h2>
+<p>Una prueba directa: hacé como si un donante cualquiera (por ejemplo, Paraná) hubiera recibido la política. Si el método es creíble, no debería aparecer una brecha grande donde no hubo tratamiento.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>placebo <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estado <span class="sc">!=</span> <span class="st">"São Paulo"</span>) <span class="sc">|&gt;</span>            <span class="co"># sacá al tratado real del pool</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">synthetic_control</span>(<span class="at">outcome =</span> tasa_homicidios, <span class="at">unit =</span> estado, <span class="at">time =</span> anio,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">i_unit =</span> <span class="st">"Paraná"</span>, <span class="at">i_time =</span> <span class="dv">1999</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">generate_placebos =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">1999</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pib =</span> <span class="fu">mean</span>(pib_pc), <span class="at">gini_m =</span> <span class="fu">mean</span>(gini),</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">urb =</span> <span class="fu">mean</span>(poblacion_urbana), <span class="at">jov =</span> <span class="fu">mean</span>(jovenes_pct)) <span class="sc">|&gt;</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">1999</span>, <span class="at">tasa_pre =</span> <span class="fu">mean</span>(tasa_homicidios)) <span class="sc">|&gt;</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_weights</span>() <span class="sc">|&gt;</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_control</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>placebo <span class="sc">|&gt;</span> <span class="fu">plot_trends</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-did-sintetico_files/figure-html/placebo-unidad-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1200"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Para Paraná el sintético lo sigue también después de 2000: la brecha queda cerca de cero. Eso valida el método, porque la brecha grande aparece sólo donde de verdad hubo política. Es la misma lógica del corte placebo del RDD.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es un chequeo rápido para convencerte (y convencer a un lector escéptico) de que el efecto no es un artefacto del método. Sacá siempre al tratado real del pool con <code>filter()</code> antes de correr el placebo, para que no contamine la comparación.</p>
+</div>
+</div>
+</section>
+<section id="varios-tratados-y-fechas-escalonadas-gsynth" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="varios-tratados-y-fechas-escalonadas-gsynth"><span class="header-section-number">11</span> Varios tratados y fechas escalonadas: gsynth</h2>
+<p>El control sintético clásico pide una unidad tratada y una sola fecha. Cuando tenés varios tratados, o distintos años de adopción, <code>gsynth</code> (<a href="https://doi.org/10.1017/pan.2016.2">Xu, 2017</a>) generaliza el método con efectos fijos interactivos: arma el contrafactual con factores latentes y estima un solo efecto promedio (ATT).</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>panel <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">estado =</span> <span class="fu">add_level</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">20</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">inicio =</span> <span class="fu">c</span>(<span class="dv">2004</span>, <span class="dv">2007</span>, <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">18</span>)),   <span class="co"># año de la política; NA = nunca tratado</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">nivel  =</span> <span class="fu">runif</span>(N, <span class="dv">15</span>, <span class="dv">45</span>)),            <span class="co"># nivel base de homicidios</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">periodo =</span> <span class="fu">add_level</span>(</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">16</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ano     =</span> <span class="dv">1998</span><span class="sc">:</span><span class="dv">2013</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">tratado =</span> <span class="fu">as.integer</span>(<span class="sc">!</span><span class="fu">is.na</span>(inicio) <span class="sc">&amp;</span> ano <span class="sc">&gt;=</span> inicio),   <span class="co"># 1 si ya está tratado</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(nivel <span class="sc">+</span> <span class="fl">0.6</span> <span class="sc">*</span> (ano <span class="sc">-</span> <span class="dv">1998</span>)            <span class="co"># baja 12 puntos mientras dura</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">-</span> <span class="dv">12</span> <span class="sc">*</span> tratado <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">1.5</span>), <span class="dv">1</span>)))</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>gsynth()</code> elige el número de factores por validación cruzada (<code>CV = TRUE</code>, probando de 0 a 3 factores con el argumento <code>r</code>) y estima la incertidumbre por bootstrap. <code>force = "two-way"</code> incluye efectos fijos de unidad y de tiempo.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">gsynth</span>(y <span class="sc">~</span> tratado, <span class="at">data =</span> panel,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"estado"</span>, <span class="st">"ano"</span>),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">force =</span> <span class="st">"two-way"</span>, <span class="at">CV =</span> <span class="cn">TRUE</span>, <span class="at">r =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">nboots =</span> <span class="dv">200</span>, <span class="at">inference =</span> <span class="st">"parametric"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>out<span class="sc">$</span>est.avg          <span class="co"># ATT promedio con su intervalo de confianza</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       ATT.avg      S.E. CI.lower  CI.upper p.value
+[1,] -11.77836 0.5869689 -12.9288 -10.62792       0</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="at">type =</span> <span class="st">"gap"</span>)   <span class="co"># la brecha promedio en el tiempo, alineada por adopción</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="referencia-did-sintetico_files/figure-html/gsynth-gap-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1200"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>El ATT promedio da ≈ −11,8, cerca del efecto verdadero (−12). La pre-tendencia es plana y la brecha aparece tras la adopción, alineando los dos tratados aunque empezaron en años distintos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Cuándo usarlo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Cuándo usarlo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es tu herramienta cuando el método clásico no alcanza: varios tratados, fechas escalonadas, o las dos cosas. <code>plot(out, type = "counterfactual")</code> muestra el tratado observado contra su contrafactual; <code>type = "ct"</code> los grafica juntos. El paquete <code>fect</code>, del mismo autor, agrega tests de pre-tendencias y de efectos dinámicos.</p>
+</div>
+</div>
+</section>
+<section id="gsynth-con-matrix-completion" class="level2" data-number="12">
+<h2 data-number="12" class="anchored" data-anchor-id="gsynth-con-matrix-completion"><span class="header-section-number">12</span> gsynth con matrix completion</h2>
+<p><code>gsynth</code> trae un segundo estimador, <code>estimator = "mc"</code>: completa la matriz de resultados no observados con técnicas de matrix completion (<a href="https://doi.org/10.1080/01621459.2021.1891924">Athey et al., 2021</a>). Suele ser más robusto cuando los efectos fijos interactivos no capturan bien la estructura del panel. Se corre igual, cambiando un argumento.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>out_mc <span class="ot">&lt;-</span> <span class="fu">gsynth</span>(y <span class="sc">~</span> tratado, <span class="at">data =</span> panel,</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"estado"</span>, <span class="st">"ano"</span>),</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">estimator =</span> <span class="st">"mc"</span>, <span class="at">force =</span> <span class="st">"two-way"</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">CV =</span> <span class="cn">TRUE</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">nboots =</span> <span class="dv">200</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">inference =</span> <span class="st">"nonparametric"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>out_mc<span class="sc">$</span>est.avg</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       ATT.avg      S.E.  CI.lower CI.upper p.value
+[1,] -11.80871 0.3597046 -12.51372 -11.1037       0</code></pre>
+</div>
+</div>
+<p>El ATT queda en ≈ −11,8, igual que con los factores interactivos: cuando los dos estimadores coinciden, ganás confianza en el resultado.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Qué mirar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Qué mirar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Correr los dos estimadores (<code>ife</code> y <code>mc</code>) y ver que dan lo mismo es una prueba de robustez barata. <code>mc</code> no necesita que elijas el número de factores. Con la inferencia no paramétrica (<code>inference = "nonparametric"</code>) el bootstrap remuestrea unidades, apropiado cuando hay pocos tratados.</p>
+</div>
+</div>
+</section>
+<section id="para-seguir" class="level2" data-number="13">
+<h2 data-number="13" class="anchored" data-anchor-id="para-seguir"><span class="header-section-number">13</span> Para seguir</h2>
+<div class="callout callout-style-default callout-tip callout-titled" title="Enlaces y lecturas">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Enlaces y lecturas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Los paquetes</strong></p>
+<ul>
+<li><a href="https://github.com/edunford/tidysynth"><code>tidysynth</code></a>: control sintético clásico en un pipe (el que usamos hoy)</li>
+<li><a href="https://yiqingxu.org/packages/gsynth/"><code>gsynth</code></a> y <a href="https://yiqingxu.org/packages/fect/"><code>fect</code></a>: varios tratados y adopción escalonada, con factores interactivos o matrix completion</li>
+<li><a href="https://synth-inference.github.io/synthdid/"><code>synthdid</code></a>: el synthetic DiD de Arkhangelsky et al.&nbsp;(2021), que combina lo mejor de los dos métodos</li>
+<li><a href="https://bcallaway11.github.io/did/"><code>did</code></a> (Callaway y Sant’Anna) y <a href="https://lrberge.github.io/fixest/"><code>fixest</code></a>: DiD escalonado con muchos grupos y efectos fijos a escala</li>
+</ul>
+<p><strong>Para leer</strong></p>
+<ul>
+<li><a href="https://doi.org/10.1257/jel.20191450">Abadie (2021)</a>: el survey del <em>Journal of Economic Literature</em></li>
+<li><a href="https://doi.org/10.1198/jasa.2009.ap08746">Abadie, Diamond y Hainmueller (2010)</a>: el paper canónico (el programa antitabaco de California)</li>
+<li>Los capítulos de DiD y control sintético de <a href="https://mixtape.scunning.com/"><em>The Mixtape</em></a> y <a href="https://theeffectbook.net/"><em>The Effect</em></a>, gratis online</li>
+</ul>
+<p><strong>Nuestro caso del bloque</strong></p>
+<ul>
+<li><a href="https://doi.org/10.25222/larr.334">Freire (2018)</a>: los homicidios en São Paulo con control sintético</li>
+<li><a href="https://doi.org/10.1017/S0003055425101354">Pantaleão (2025)</a>: otra hipótesis para la caída, la gobernanza criminal del PCC</li>
+</ul>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Volver arriba</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Ejecutar el código</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Referencia R: diferencias en diferencias y control sintético"</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Parte 4 · el 2×2, el DiD como regresión, tidysynth de punta a punta y gsynth"</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="an">toc-depth:</span><span class="co"> 3</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> true</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="an">code-copy:</span><span class="co"> true</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> es</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="an">engine:</span><span class="co"> knitr</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">eval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.align =</span> <span class="st">"center"</span>,</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.width =</span> <span class="dv">7</span>,</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.height =</span> <span class="dv">4</span>,</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="dv">150</span>,</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">cache =</span> <span class="cn">TRUE</span></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a><span class="co"># paleta de la casa (el mismo par azul/rojo de las diapositivas)</span></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>azul <span class="ot">&lt;-</span> <span class="st">"#2d4563"</span></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>rojo <span class="ot">&lt;-</span> <span class="st">"#b85450"</span></span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>tema_taller <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>())</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>Esta página reúne, con código que podés correr y copiar, todas las funciones de R del bloque de diferencias en diferencias y control sintético (<span class="co">[</span><span class="ot">diapositivas</span><span class="co">](diapositivas/04-did-sintetico.html)</span>), más varias funciones extra de <span class="in">`tidysynth`</span> y <span class="in">`gsynth`</span> que no entraron en las slides pero que vas a querer tener a mano. Cada sección explica en pocas frases qué hace el comando, muestra un bloque ejecutable con su salida real, y cierra con una nota sobre cuándo conviene usarlo.</span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>Los ejemplos trabajan sobre los datos simulados del caso de los homicidios en São Paulo (<span class="co">[</span><span class="ot">Freire, 2018</span><span class="co">](https://doi.org/10.25222/larr.334)</span>). Como la semilla está fija (<span class="in">`set.seed(1)`</span>), los números coinciden con los de las diapositivas y con el archivo <span class="co">[</span><span class="ot">`homicidios.csv`</span><span class="co">](diapositivas/datos/homicidios.csv)</span>. Es una versión más chica y más corta que el paper (16 estados, 1990-2005), pensada para que corra rápido.</span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paquetes y datos</span></span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a>Cargá los paquetes del bloque. El bucle instala cada uno solo si te falta. La novedad frente a los datos de la mañana es <span class="in">`add_level`</span>: <span class="in">`fabricatr`</span> arma un panel con un nivel para los estados y otro para los años, así cada estado aparece repetido a lo largo del tiempo.</span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r paquetes}</span></span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"estimatr"</span>, <span class="st">"tidysynth"</span>, <span class="st">"gsynth"</span>, <span class="st">"fabricatr"</span>)</span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> paquetes) {</span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-55"><a href="#cb38-55" aria-hidden="true" tabindex="-1"></a>Las dos columnas que mandan son <span class="in">`tratado`</span> (1 sólo para São Paulo) y <span class="in">`post`</span> (1 desde el año 2000): su producto enciende el <span class="in">`efecto`</span>. El resto son covariables que después ayudan a elegir los pesos del control sintético.</span>
+<span id="cb38-56"><a href="#cb38-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-57"><a href="#cb38-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r generar-datos}</span></span>
+<span id="cb38-58"><a href="#cb38-58" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb38-59"><a href="#cb38-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-60"><a href="#cb38-60" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb38-61"><a href="#cb38-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">unidad =</span> <span class="fu">add_level</span>(</span>
+<span id="cb38-62"><a href="#cb38-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">16</span>,</span>
+<span id="cb38-63"><a href="#cb38-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">estado  =</span> <span class="fu">c</span>(<span class="st">"São Paulo"</span>, <span class="st">"Rio de Janeiro"</span>, <span class="st">"Minas Gerais"</span>, <span class="st">"Bahia"</span>,</span>
+<span id="cb38-64"><a href="#cb38-64" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Paraná"</span>, <span class="st">"Rio Grande do Sul"</span>, <span class="st">"Pernambuco"</span>, <span class="st">"Ceará"</span>, <span class="st">"Pará"</span>,</span>
+<span id="cb38-65"><a href="#cb38-65" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Santa Catarina"</span>, <span class="st">"Goiás"</span>, <span class="st">"Maranhão"</span>, <span class="st">"Espírito Santo"</span>,</span>
+<span id="cb38-66"><a href="#cb38-66" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Paraíba"</span>, <span class="st">"Amazonas"</span>, <span class="st">"Mato Grosso"</span>),</span>
+<span id="cb38-67"><a href="#cb38-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">tratado =</span> <span class="fu">as.integer</span>(estado <span class="sc">==</span> <span class="st">"São Paulo"</span>),</span>
+<span id="cb38-68"><a href="#cb38-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">base    =</span> <span class="fu">ifelse</span>(tratado <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">30</span>, <span class="fu">runif</span>(N, <span class="dv">15</span>, <span class="dv">45</span>)),</span>
+<span id="cb38-69"><a href="#cb38-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">pib_pc  =</span> <span class="fu">round</span>(<span class="fu">rlnorm</span>(N, <span class="fu">log</span>(<span class="dv">12000</span>), <span class="fl">0.25</span>)),</span>
+<span id="cb38-70"><a href="#cb38-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">gini    =</span> <span class="fu">round</span>(<span class="fu">runif</span>(N, <span class="fl">0.48</span>, <span class="fl">0.62</span>), <span class="dv">3</span>),</span>
+<span id="cb38-71"><a href="#cb38-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">poblacion_urbana =</span> <span class="fu">round</span>(<span class="fu">runif</span>(N, <span class="fl">0.55</span>, <span class="fl">0.95</span>), <span class="dv">3</span>),</span>
+<span id="cb38-72"><a href="#cb38-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">jovenes_pct      =</span> <span class="fu">round</span>(<span class="fu">runif</span>(N, <span class="fl">0.16</span>, <span class="fl">0.24</span>), <span class="dv">3</span>)</span>
+<span id="cb38-73"><a href="#cb38-73" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb38-74"><a href="#cb38-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">periodo =</span> <span class="fu">add_level</span>(</span>
+<span id="cb38-75"><a href="#cb38-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">16</span>,</span>
+<span id="cb38-76"><a href="#cb38-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">anio   =</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">2005</span>,</span>
+<span id="cb38-77"><a href="#cb38-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">post   =</span> <span class="fu">as.integer</span>(anio <span class="sc">&gt;=</span> <span class="dv">2000</span>),</span>
+<span id="cb38-78"><a href="#cb38-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">efecto =</span> <span class="sc">-</span><span class="fl">14.5</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>(anio <span class="sc">-</span> <span class="dv">1999</span>))) <span class="sc">*</span> tratado <span class="sc">*</span> post,</span>
+<span id="cb38-79"><a href="#cb38-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">tasa_homicidios =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(base <span class="sc">+</span> <span class="fl">0.8</span> <span class="sc">*</span> (anio <span class="sc">-</span> <span class="dv">1990</span>)</span>
+<span id="cb38-80"><a href="#cb38-80" aria-hidden="true" tabindex="-1"></a>                                    <span class="sc">+</span> efecto <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">1.5</span>), <span class="dv">1</span>))</span>
+<span id="cb38-81"><a href="#cb38-81" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-82"><a href="#cb38-82" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-83"><a href="#cb38-83" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos[, <span class="fu">c</span>(<span class="st">"estado"</span>, <span class="st">"anio"</span>, <span class="st">"tasa_homicidios"</span>, <span class="st">"pib_pc"</span>, <span class="st">"gini"</span>,</span>
+<span id="cb38-84"><a href="#cb38-84" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"poblacion_urbana"</span>, <span class="st">"jovenes_pct"</span>, <span class="st">"tratado"</span>, <span class="st">"post"</span>)]</span>
+<span id="cb38-85"><a href="#cb38-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-86"><a href="#cb38-86" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datos, <span class="dv">4</span>)</span>
+<span id="cb38-87"><a href="#cb38-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-88"><a href="#cb38-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-89"><a href="#cb38-89" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb38-90"><a href="#cb38-90" aria-hidden="true" tabindex="-1"></a>Este bloque es para cuando tenés una o pocas unidades tratadas (un estado, un país), la política ya ocurrió, y no hay ni sorteo ni umbral. Lo que sí tenés es tiempo: varios años de datos para el caso tratado y para otras unidades que le sirvan de espejo. <span class="in">`add_level`</span> es la forma de simular ese panel.</span>
+<span id="cb38-91"><a href="#cb38-91" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-92"><a href="#cb38-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-93"><a href="#cb38-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## Diferencias en diferencias: el 2×2 a mano</span></span>
+<span id="cb38-94"><a href="#cb38-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-95"><a href="#cb38-95" aria-hidden="true" tabindex="-1"></a>El estimador más simple sale de cuatro promedios: São Paulo y los donantes, antes y después de 2000. <span class="in">`group_by(tratado, post)`</span> los arma en una tabla de dos por dos.</span>
+<span id="cb38-96"><a href="#cb38-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-97"><a href="#cb38-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r did-2x2}</span></span>
+<span id="cb38-98"><a href="#cb38-98" aria-hidden="true" tabindex="-1"></a>medias <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb38-99"><a href="#cb38-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tratado, post) <span class="sc">|&gt;</span></span>
+<span id="cb38-100"><a href="#cb38-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tasa =</span> <span class="fu">round</span>(<span class="fu">mean</span>(tasa_homicidios), <span class="dv">2</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb38-101"><a href="#cb38-101" aria-hidden="true" tabindex="-1"></a>medias</span>
+<span id="cb38-102"><a href="#cb38-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-103"><a href="#cb38-103" aria-hidden="true" tabindex="-1"></a><span class="co"># la doble resta: (São Paulo después - antes) - (donantes después - antes)</span></span>
+<span id="cb38-104"><a href="#cb38-104" aria-hidden="true" tabindex="-1"></a>(<span class="fl">27.78</span> <span class="sc">-</span> <span class="fl">33.85</span>) <span class="sc">-</span> (<span class="fl">40.99</span> <span class="sc">-</span> <span class="fl">34.54</span>)</span>
+<span id="cb38-105"><a href="#cb38-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-106"><a href="#cb38-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-107"><a href="#cb38-107" aria-hidden="true" tabindex="-1"></a>São Paulo baja de 33,8 a 27,8 (cae 6,1); los donantes suben de 34,5 a 41,0 (ganan 6,4). La diferencia de las diferencias da ≈ −12,5 por 100.000. La primera resta saca lo fijo de São Paulo; la segunda saca la tendencia común a todos.</span>
+<span id="cb38-108"><a href="#cb38-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-109"><a href="#cb38-109" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb38-110"><a href="#cb38-110" aria-hidden="true" tabindex="-1"></a>El 2×2 es el DiD en su forma más pura y sirve para entender la lógica. Vale sólo si, sin la política, São Paulo hubiera seguido la misma tendencia que los donantes (tendencias paralelas). Para muchos grupos y fechas, en vez de la resta a mano se usa una regresión con efectos fijos (paquete <span class="in">`fixest`</span>).</span>
+<span id="cb38-111"><a href="#cb38-111" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-112"><a href="#cb38-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-113"><a href="#cb38-113" aria-hidden="true" tabindex="-1"></a><span class="fu">## La misma cuenta, en un gráfico</span></span>
+<span id="cb38-114"><a href="#cb38-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-115"><a href="#cb38-115" aria-hidden="true" tabindex="-1"></a>La doble resta se ve mejor dibujada: São Paulo contra el promedio de sus 15 donantes, con el contrafactual DiD (São Paulo movido según la tendencia de los donantes desde 1999).</span>
+<span id="cb38-116"><a href="#cb38-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-117"><a href="#cb38-117" aria-hidden="true" tabindex="-1"></a><span class="in">```{r did-grafico, fig.width=9, fig.height=4.2}</span></span>
+<span id="cb38-118"><a href="#cb38-118" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb38-119"><a href="#cb38-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tratado <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-120"><a href="#cb38-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(anio, <span class="at">tasa =</span> tasa_homicidios, <span class="at">grupo =</span> <span class="st">"São Paulo"</span>)</span>
+<span id="cb38-121"><a href="#cb38-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-122"><a href="#cb38-122" aria-hidden="true" tabindex="-1"></a>donantes <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb38-123"><a href="#cb38-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tratado <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-124"><a href="#cb38-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(anio) <span class="sc">|&gt;</span></span>
+<span id="cb38-125"><a href="#cb38-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tasa =</span> <span class="fu">mean</span>(tasa_homicidios), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-126"><a href="#cb38-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grupo =</span> <span class="st">"Promedio de los 15 donantes"</span>)</span>
+<span id="cb38-127"><a href="#cb38-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-128"><a href="#cb38-128" aria-hidden="true" tabindex="-1"></a>serie <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(sp, donantes)</span>
+<span id="cb38-129"><a href="#cb38-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-130"><a href="#cb38-130" aria-hidden="true" tabindex="-1"></a><span class="co"># contrafactual DiD: São Paulo desde 1999, movido con la tendencia de los donantes</span></span>
+<span id="cb38-131"><a href="#cb38-131" aria-hidden="true" tabindex="-1"></a>sp_99  <span class="ot">&lt;-</span> sp<span class="sc">$</span>tasa[sp<span class="sc">$</span>anio <span class="sc">==</span> <span class="dv">1999</span>]</span>
+<span id="cb38-132"><a href="#cb38-132" aria-hidden="true" tabindex="-1"></a>don_99 <span class="ot">&lt;-</span> donantes<span class="sc">$</span>tasa[donantes<span class="sc">$</span>anio <span class="sc">==</span> <span class="dv">1999</span>]</span>
+<span id="cb38-133"><a href="#cb38-133" aria-hidden="true" tabindex="-1"></a>contraf <span class="ot">&lt;-</span> donantes <span class="sc">|&gt;</span></span>
+<span id="cb38-134"><a href="#cb38-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(anio <span class="sc">&gt;=</span> <span class="dv">1999</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-135"><a href="#cb38-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(anio, <span class="at">tasa =</span> sp_99 <span class="sc">+</span> (tasa <span class="sc">-</span> don_99), <span class="at">grupo =</span> <span class="st">"Contrafactual DiD"</span>)</span>
+<span id="cb38-136"><a href="#cb38-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-137"><a href="#cb38-137" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(serie, <span class="fu">aes</span>(anio, tasa, <span class="at">color =</span> grupo)) <span class="sc">+</span></span>
+<span id="cb38-138"><a href="#cb38-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb38-139"><a href="#cb38-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
+<span id="cb38-140"><a href="#cb38-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> contraf, <span class="fu">aes</span>(anio, tasa), <span class="at">color =</span> <span class="st">"grey45"</span>,</span>
+<span id="cb38-141"><a href="#cb38-141" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype =</span> <span class="st">"dotted"</span>, <span class="at">linewidth =</span> <span class="fl">0.9</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb38-142"><a href="#cb38-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1999.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> rojo, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb38-143"><a href="#cb38-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"São Paulo"</span> <span class="ot">=</span> azul,</span>
+<span id="cb38-144"><a href="#cb38-144" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Promedio de los 15 donantes"</span> <span class="ot">=</span> <span class="st">"grey55"</span>)) <span class="sc">+</span></span>
+<span id="cb38-145"><a href="#cb38-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Homicidios por 100.000"</span>, <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb38-146"><a href="#cb38-146" aria-hidden="true" tabindex="-1"></a>  tema_taller <span class="sc">+</span></span>
+<span id="cb38-147"><a href="#cb38-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb38-148"><a href="#cb38-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-149"><a href="#cb38-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-150"><a href="#cb38-150" aria-hidden="true" tabindex="-1"></a>La distancia vertical entre São Paulo y la línea punteada (el contrafactual) es el estimado DiD.</span>
+<span id="cb38-151"><a href="#cb38-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-152"><a href="#cb38-152" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb38-153"><a href="#cb38-153" aria-hidden="true" tabindex="-1"></a>Antes de creerle al DiD, mirá las pre-tendencias: filtrá <span class="in">`anio &lt;= 1999`</span> y fijate si las dos líneas ya iban parejas antes de la política. Pre-tendencias parecidas hacen el supuesto más creíble, pero no lo prueban. El paralelismo se rompe con anticipación, cambios de composición, o un Ashenfelter dip (la política llega justo cuando el resultado se estaba desviando).</span>
+<span id="cb38-154"><a href="#cb38-154" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-155"><a href="#cb38-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-156"><a href="#cb38-156" aria-hidden="true" tabindex="-1"></a><span class="fu">## El DiD como regresión: lm_robust</span></span>
+<span id="cb38-157"><a href="#cb38-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-158"><a href="#cb38-158" aria-hidden="true" tabindex="-1"></a>La doble resta que hicimos a mano es exactamente el coeficiente de una interacción. Con dos dummies alcanza: <span class="in">`tratado`</span> (1 para São Paulo, no cambia en el tiempo) y <span class="in">`post`</span> (1 desde 2000, igual para todas las unidades). El operador <span class="in">`*`</span> pide las dos más su producto.</span>
+<span id="cb38-159"><a href="#cb38-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-160"><a href="#cb38-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r did-lm}</span></span>
+<span id="cb38-161"><a href="#cb38-161" aria-hidden="true" tabindex="-1"></a>did <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(tasa_homicidios <span class="sc">~</span> tratado <span class="sc">*</span> post, <span class="at">data =</span> datos)</span>
+<span id="cb38-162"><a href="#cb38-162" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(<span class="fu">summary</span>(did))[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">2</span>)</span>
+<span id="cb38-163"><a href="#cb38-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-164"><a href="#cb38-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-165"><a href="#cb38-165" aria-hidden="true" tabindex="-1"></a>Cada coeficiente es una celda del 2×2: el intercepto es el donante típico antes de la política (34,5); <span class="in">`tratado`</span> es la brecha que ya existía entre São Paulo y los donantes (−0,7); <span class="in">`post`</span> es la tendencia común que subió a todos (+6,5); y la interacción <span class="in">`tratado:post`</span> es lo que le pasó sólo a São Paulo y sólo después: −12,5, el mismo número de la resta a mano.</span>
+<span id="cb38-166"><a href="#cb38-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-167"><a href="#cb38-167" aria-hidden="true" tabindex="-1"></a>Escribir <span class="in">`tratado * post`</span> equivale a <span class="in">`tratado + post + tratado:post`</span>, igual que el <span class="in">`tratamiento * zona`</span> del bloque de experimentos.</span>
+<span id="cb38-168"><a href="#cb38-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-169"><a href="#cb38-169" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar (y una advertencia)"}</span>
+<span id="cb38-170"><a href="#cb38-170" aria-hidden="true" tabindex="-1"></a>La ventaja de la regresión es que escala: le sumás covariables, efectos fijos o errores agrupados sin cambiar de herramienta. Pero cuidado con leer ese valor $p$ como una garantía: hay una sola unidad tratada, así que el error estándar descansa en la variación año a año, no en muchos São Paulos. Por eso el control sintético hace inferencia con placebos.</span>
+<span id="cb38-171"><a href="#cb38-171" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-172"><a href="#cb38-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-173"><a href="#cb38-173" aria-hidden="true" tabindex="-1"></a><span class="fu">## El control sintético en un pipe</span></span>
+<span id="cb38-174"><a href="#cb38-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-175"><a href="#cb38-175" aria-hidden="true" tabindex="-1"></a>El DiD pesa a todos los donantes por igual. El control sintético elige pesos para que un promedio ponderado de los donantes calque la trayectoria de São Paulo antes de la política. <span class="in">`tidysynth`</span> arma todo en un pipe de <span class="in">`dplyr`</span>: cada paso hace una cosa.</span>
+<span id="cb38-176"><a href="#cb38-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-177"><a href="#cb38-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r sc-pipe}</span></span>
+<span id="cb38-178"><a href="#cb38-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb38-179"><a href="#cb38-179" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb38-180"><a href="#cb38-180" aria-hidden="true" tabindex="-1"></a>  <span class="fu">synthetic_control</span>(<span class="at">outcome =</span> tasa_homicidios,   <span class="co"># el resultado</span></span>
+<span id="cb38-181"><a href="#cb38-181" aria-hidden="true" tabindex="-1"></a>                    <span class="at">unit =</span> estado,               <span class="co"># la unidad</span></span>
+<span id="cb38-182"><a href="#cb38-182" aria-hidden="true" tabindex="-1"></a>                    <span class="at">time =</span> anio,                 <span class="co"># el tiempo</span></span>
+<span id="cb38-183"><a href="#cb38-183" aria-hidden="true" tabindex="-1"></a>                    <span class="at">i_unit =</span> <span class="st">"São Paulo"</span>,        <span class="co"># la unidad tratada</span></span>
+<span id="cb38-184"><a href="#cb38-184" aria-hidden="true" tabindex="-1"></a>                    <span class="at">i_time =</span> <span class="dv">1999</span>,               <span class="co"># último año sin política</span></span>
+<span id="cb38-185"><a href="#cb38-185" aria-hidden="true" tabindex="-1"></a>                    <span class="at">generate_placebos =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="co"># placebos para inferencia</span></span>
+<span id="cb38-186"><a href="#cb38-186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">1999</span>,    <span class="co"># promedios pre-política</span></span>
+<span id="cb38-187"><a href="#cb38-187" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pib =</span> <span class="fu">mean</span>(pib_pc), <span class="at">gini_m =</span> <span class="fu">mean</span>(gini),</span>
+<span id="cb38-188"><a href="#cb38-188" aria-hidden="true" tabindex="-1"></a>                     <span class="at">urb =</span> <span class="fu">mean</span>(poblacion_urbana), <span class="at">jov =</span> <span class="fu">mean</span>(jovenes_pct)) <span class="sc">|&gt;</span></span>
+<span id="cb38-189"><a href="#cb38-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">1999</span>, <span class="at">tasa_pre =</span> <span class="fu">mean</span>(tasa_homicidios)) <span class="sc">|&gt;</span></span>
+<span id="cb38-190"><a href="#cb38-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_weights</span>() <span class="sc">|&gt;</span>                          <span class="co"># elige los pesos</span></span>
+<span id="cb38-191"><a href="#cb38-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_control</span>()                             <span class="co"># arma el sintético</span></span>
+<span id="cb38-192"><a href="#cb38-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-193"><a href="#cb38-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-194"><a href="#cb38-194" aria-hidden="true" tabindex="-1"></a>Definís el problema con <span class="in">`synthetic_control()`</span>, elegís los predictores pre-política con <span class="in">`generate_predictor()`</span>, dejás que el método elija los pesos con <span class="in">`generate_weights()`</span> y armás el clon con <span class="in">`generate_control()`</span>. El objeto <span class="in">`sc`</span> guarda todo: las series, los pesos y los placebos.</span>
+<span id="cb38-195"><a href="#cb38-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-196"><a href="#cb38-196" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb38-197"><a href="#cb38-197" aria-hidden="true" tabindex="-1"></a>Es el método para una unidad tratada y muchos donantes, cuando querés un contrafactual a medida en vez de un promedio tosco. <span class="in">`i_time`</span> es el último período sin tratamiento. <span class="in">`generate_placebos = TRUE`</span> corre el método sobre cada donante también, que es lo que después permite hacer inferencia.</span>
+<span id="cb38-198"><a href="#cb38-198" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-199"><a href="#cb38-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-200"><a href="#cb38-200" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ver el ajuste: plot_trends y plot_differences</span></span>
+<span id="cb38-201"><a href="#cb38-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-202"><a href="#cb38-202" aria-hidden="true" tabindex="-1"></a>Con el objeto armado, los diagnósticos son una línea cada uno. <span class="in">`plot_trends()`</span> muestra São Paulo real contra su sintético; <span class="in">`plot_differences()`</span>, la brecha entre los dos año a año.</span>
+<span id="cb38-203"><a href="#cb38-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-204"><a href="#cb38-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot-trends, fig.width=8, fig.height=4}</span></span>
+<span id="cb38-205"><a href="#cb38-205" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">plot_trends</span>()</span>
+<span id="cb38-206"><a href="#cb38-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-207"><a href="#cb38-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-208"><a href="#cb38-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{r plot-differences, fig.width=8, fig.height=4}</span></span>
+<span id="cb38-209"><a href="#cb38-209" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">plot_differences</span>()</span>
+<span id="cb38-210"><a href="#cb38-210" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-211"><a href="#cb38-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-212"><a href="#cb38-212" aria-hidden="true" tabindex="-1"></a>Buen ajuste antes de 2000 y una brecha que se abre después: el São Paulo real cae por debajo de su clon. En el paper, con datos reales, 27 donantes y la serie hasta 2009, la brecha llega a unos 20 puntos.</span>
+<span id="cb38-213"><a href="#cb38-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-214"><a href="#cb38-214" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb38-215"><a href="#cb38-215" aria-hidden="true" tabindex="-1"></a>Lo primero es el ajuste pre-tratamiento: si el sintético no calca al tratado antes de la política, no hay contrafactual creíble. La brecha post es el efecto estimado. <span class="in">`plot_trends()`</span> acepta <span class="in">`time_window =`</span> si querés recortar los años del gráfico.</span>
+<span id="cb38-216"><a href="#cb38-216" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-217"><a href="#cb38-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-218"><a href="#cb38-218" aria-hidden="true" tabindex="-1"></a><span class="fu">## Los pesos y el balance</span></span>
+<span id="cb38-219"><a href="#cb38-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-220"><a href="#cb38-220" aria-hidden="true" tabindex="-1"></a>Los pesos son la comparación, y son transparentes: cualquiera puede leerlos y discutir si tienen sentido. <span class="in">`grab_unit_weights()`</span> da el peso de cada donante; <span class="in">`grab_predictor_weights()`</span>, cuánto pesó cada predictor al elegirlos.</span>
+<span id="cb38-221"><a href="#cb38-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-222"><a href="#cb38-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r pesos}</span></span>
+<span id="cb38-223"><a href="#cb38-223" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_unit_weights</span>() <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(weight)) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb38-224"><a href="#cb38-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-225"><a href="#cb38-225" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_predictor_weights</span>()</span>
+<span id="cb38-226"><a href="#cb38-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-227"><a href="#cb38-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-228"><a href="#cb38-228" aria-hidden="true" tabindex="-1"></a><span class="in">`grab_balance_table()`</span> compara los predictores entre São Paulo, su sintético y el promedio del pool de donantes. Querés que las dos primeras columnas se parezcan (buen ajuste) y que difieran de la tercera (el sintético hace algo mejor que el promedio).</span>
+<span id="cb38-229"><a href="#cb38-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-230"><a href="#cb38-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r balance}</span></span>
+<span id="cb38-231"><a href="#cb38-231" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_balance_table</span>()</span>
+<span id="cb38-232"><a href="#cb38-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-233"><a href="#cb38-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-234"><a href="#cb38-234" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb38-235"><a href="#cb38-235" aria-hidden="true" tabindex="-1"></a>Pocos donantes con peso, y que tengan sentido sustantivo, es buena señal; donantes de otro mundo con peso alto son motivo de sospecha. En la tabla de balance, el sintético (columna 2) debería quedar mucho más cerca de São Paulo (columna 1) que el promedio del pool (columna 3).</span>
+<span id="cb38-236"><a href="#cb38-236" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-237"><a href="#cb38-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-238"><a href="#cb38-238" aria-hidden="true" tabindex="-1"></a><span class="fu">## Inferencia por placebos</span></span>
+<span id="cb38-239"><a href="#cb38-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-240"><a href="#cb38-240" aria-hidden="true" tabindex="-1"></a>El control sintético no usa errores estándar: hace inferencia con placebos. Corre el mismo método sobre cada donante, como si él hubiera sido el tratado. Si São Paulo es un efecto real, su brecha tiene que ser la más extrema. <span class="in">`plot_placebos()`</span> dibuja todas las brechas juntas.</span>
+<span id="cb38-241"><a href="#cb38-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-242"><a href="#cb38-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{r placebos, fig.width=8, fig.height=4}</span></span>
+<span id="cb38-243"><a href="#cb38-243" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">plot_placebos</span>(<span class="at">prune =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-244"><a href="#cb38-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-245"><a href="#cb38-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-246"><a href="#cb38-246" aria-hidden="true" tabindex="-1"></a>Un problema: un donante con mal ajuste pre-tratamiento puede tener una brecha post enorme sólo por ruido. Por eso se compara la razón entre el error post y el error pre (MSPE): São Paulo debería tener la razón más alta. <span class="in">`plot_mspe_ratio()`</span> la ordena, y <span class="in">`grab_significance()`</span> la pone en números, con un valor $p$ estilo Fisher.</span>
+<span id="cb38-247"><a href="#cb38-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-248"><a href="#cb38-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r mspe, fig.width=8, fig.height=4}</span></span>
+<span id="cb38-249"><a href="#cb38-249" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">plot_mspe_ratio</span>()</span>
+<span id="cb38-250"><a href="#cb38-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-251"><a href="#cb38-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-252"><a href="#cb38-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r significancia}</span></span>
+<span id="cb38-253"><a href="#cb38-253" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_significance</span>() <span class="sc">|&gt;</span></span>
+<span id="cb38-254"><a href="#cb38-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(unit_name, type, pre_mspe, post_mspe, mspe_ratio, rank, fishers_exact_pvalue)</span>
+<span id="cb38-255"><a href="#cb38-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-256"><a href="#cb38-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-257"><a href="#cb38-257" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb38-258"><a href="#cb38-258" aria-hidden="true" tabindex="-1"></a>El <span class="in">`rank`</span> de São Paulo es lo que importa: rank 1 sobre 16 unidades da un valor $p$ de 1/16 ≈ 0,06. Con pocos donantes no vas a bajar de ahí, así que el tamaño del pool limita cuán chico puede ser el $p$. La razón MSPE corrige por la calidad del ajuste pre, que es más honesto que mirar la brecha cruda.</span>
+<span id="cb38-259"><a href="#cb38-259" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-260"><a href="#cb38-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-261"><a href="#cb38-261" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extraer las series</span></span>
+<span id="cb38-262"><a href="#cb38-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-263"><a href="#cb38-263" aria-hidden="true" tabindex="-1"></a>Para hacer tus propios gráficos o cuentas, <span class="in">`grab_synthetic_control()`</span> devuelve la serie real y la sintética del tratado en una tabla ordenada. Con <span class="in">`placebo = TRUE`</span> trae también las de los donantes.</span>
+<span id="cb38-264"><a href="#cb38-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-265"><a href="#cb38-265" aria-hidden="true" tabindex="-1"></a><span class="in">```{r extraer}</span></span>
+<span id="cb38-266"><a href="#cb38-266" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_synthetic_control</span>() <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">6</span>)</span>
+<span id="cb38-267"><a href="#cb38-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-268"><a href="#cb38-268" aria-hidden="true" tabindex="-1"></a><span class="co"># la brecha acumulada post-2000, a mano</span></span>
+<span id="cb38-269"><a href="#cb38-269" aria-hidden="true" tabindex="-1"></a>sc <span class="sc">|&gt;</span> <span class="fu">grab_synthetic_control</span>() <span class="sc">|&gt;</span></span>
+<span id="cb38-270"><a href="#cb38-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time_unit <span class="sc">&gt;=</span> <span class="dv">2000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-271"><a href="#cb38-271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">brecha_total =</span> <span class="fu">sum</span>(real_y <span class="sc">-</span> synth_y))</span>
+<span id="cb38-272"><a href="#cb38-272" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-273"><a href="#cb38-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-274"><a href="#cb38-274" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb38-275"><a href="#cb38-275" aria-hidden="true" tabindex="-1"></a>Usalo cuando quieras salir de los gráficos que trae el paquete y armar los tuyos, o calcular efectos acumulados (vidas salvadas, casos evitados). La familia <span class="in">`grab_*`</span> (<span class="in">`grab_synthetic_control`</span>, <span class="in">`grab_unit_weights`</span>, <span class="in">`grab_predictor_weights`</span>, <span class="in">`grab_balance_table`</span>, <span class="in">`grab_significance`</span>) te da todos los componentes del objeto por separado.</span>
+<span id="cb38-276"><a href="#cb38-276" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-277"><a href="#cb38-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-278"><a href="#cb38-278" aria-hidden="true" tabindex="-1"></a><span class="fu">## Un placebo cambiando la unidad tratada</span></span>
+<span id="cb38-279"><a href="#cb38-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-280"><a href="#cb38-280" aria-hidden="true" tabindex="-1"></a>Una prueba directa: hacé como si un donante cualquiera (por ejemplo, Paraná) hubiera recibido la política. Si el método es creíble, no debería aparecer una brecha grande donde no hubo tratamiento.</span>
+<span id="cb38-281"><a href="#cb38-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-282"><a href="#cb38-282" aria-hidden="true" tabindex="-1"></a><span class="in">```{r placebo-unidad, fig.width=8, fig.height=4}</span></span>
+<span id="cb38-283"><a href="#cb38-283" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb38-284"><a href="#cb38-284" aria-hidden="true" tabindex="-1"></a>placebo <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb38-285"><a href="#cb38-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(estado <span class="sc">!=</span> <span class="st">"São Paulo"</span>) <span class="sc">|&gt;</span>            <span class="co"># sacá al tratado real del pool</span></span>
+<span id="cb38-286"><a href="#cb38-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">synthetic_control</span>(<span class="at">outcome =</span> tasa_homicidios, <span class="at">unit =</span> estado, <span class="at">time =</span> anio,</span>
+<span id="cb38-287"><a href="#cb38-287" aria-hidden="true" tabindex="-1"></a>                    <span class="at">i_unit =</span> <span class="st">"Paraná"</span>, <span class="at">i_time =</span> <span class="dv">1999</span>,</span>
+<span id="cb38-288"><a href="#cb38-288" aria-hidden="true" tabindex="-1"></a>                    <span class="at">generate_placebos =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-289"><a href="#cb38-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">1999</span>,</span>
+<span id="cb38-290"><a href="#cb38-290" aria-hidden="true" tabindex="-1"></a>                     <span class="at">pib =</span> <span class="fu">mean</span>(pib_pc), <span class="at">gini_m =</span> <span class="fu">mean</span>(gini),</span>
+<span id="cb38-291"><a href="#cb38-291" aria-hidden="true" tabindex="-1"></a>                     <span class="at">urb =</span> <span class="fu">mean</span>(poblacion_urbana), <span class="at">jov =</span> <span class="fu">mean</span>(jovenes_pct)) <span class="sc">|&gt;</span></span>
+<span id="cb38-292"><a href="#cb38-292" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_predictor</span>(<span class="at">time_window =</span> <span class="dv">1990</span><span class="sc">:</span><span class="dv">1999</span>, <span class="at">tasa_pre =</span> <span class="fu">mean</span>(tasa_homicidios)) <span class="sc">|&gt;</span></span>
+<span id="cb38-293"><a href="#cb38-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_weights</span>() <span class="sc">|&gt;</span></span>
+<span id="cb38-294"><a href="#cb38-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate_control</span>()</span>
+<span id="cb38-295"><a href="#cb38-295" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-296"><a href="#cb38-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-297"><a href="#cb38-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r placebo-unidad-plot, fig.width=8, fig.height=4}</span></span>
+<span id="cb38-298"><a href="#cb38-298" aria-hidden="true" tabindex="-1"></a>placebo <span class="sc">|&gt;</span> <span class="fu">plot_trends</span>()</span>
+<span id="cb38-299"><a href="#cb38-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-300"><a href="#cb38-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-301"><a href="#cb38-301" aria-hidden="true" tabindex="-1"></a>Para Paraná el sintético lo sigue también después de 2000: la brecha queda cerca de cero. Eso valida el método, porque la brecha grande aparece sólo donde de verdad hubo política. Es la misma lógica del corte placebo del RDD.</span>
+<span id="cb38-302"><a href="#cb38-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-303"><a href="#cb38-303" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb38-304"><a href="#cb38-304" aria-hidden="true" tabindex="-1"></a>Es un chequeo rápido para convencerte (y convencer a un lector escéptico) de que el efecto no es un artefacto del método. Sacá siempre al tratado real del pool con <span class="in">`filter()`</span> antes de correr el placebo, para que no contamine la comparación.</span>
+<span id="cb38-305"><a href="#cb38-305" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-306"><a href="#cb38-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-307"><a href="#cb38-307" aria-hidden="true" tabindex="-1"></a><span class="fu">## Varios tratados y fechas escalonadas: gsynth</span></span>
+<span id="cb38-308"><a href="#cb38-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-309"><a href="#cb38-309" aria-hidden="true" tabindex="-1"></a>El control sintético clásico pide una unidad tratada y una sola fecha. Cuando tenés varios tratados, o distintos años de adopción, <span class="in">`gsynth`</span> (<span class="co">[</span><span class="ot">Xu, 2017</span><span class="co">](https://doi.org/10.1017/pan.2016.2)</span>) generaliza el método con efectos fijos interactivos: arma el contrafactual con factores latentes y estima un solo efecto promedio (ATT).</span>
+<span id="cb38-310"><a href="#cb38-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-311"><a href="#cb38-311" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gsynth-datos}</span></span>
+<span id="cb38-312"><a href="#cb38-312" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20</span>)</span>
+<span id="cb38-313"><a href="#cb38-313" aria-hidden="true" tabindex="-1"></a>panel <span class="ot">&lt;-</span> <span class="fu">fabricate</span>(</span>
+<span id="cb38-314"><a href="#cb38-314" aria-hidden="true" tabindex="-1"></a>  <span class="at">estado =</span> <span class="fu">add_level</span>(</span>
+<span id="cb38-315"><a href="#cb38-315" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">20</span>,</span>
+<span id="cb38-316"><a href="#cb38-316" aria-hidden="true" tabindex="-1"></a>    <span class="at">inicio =</span> <span class="fu">c</span>(<span class="dv">2004</span>, <span class="dv">2007</span>, <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">18</span>)),   <span class="co"># año de la política; NA = nunca tratado</span></span>
+<span id="cb38-317"><a href="#cb38-317" aria-hidden="true" tabindex="-1"></a>    <span class="at">nivel  =</span> <span class="fu">runif</span>(N, <span class="dv">15</span>, <span class="dv">45</span>)),            <span class="co"># nivel base de homicidios</span></span>
+<span id="cb38-318"><a href="#cb38-318" aria-hidden="true" tabindex="-1"></a>  <span class="at">periodo =</span> <span class="fu">add_level</span>(</span>
+<span id="cb38-319"><a href="#cb38-319" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">16</span>,</span>
+<span id="cb38-320"><a href="#cb38-320" aria-hidden="true" tabindex="-1"></a>    <span class="at">ano     =</span> <span class="dv">1998</span><span class="sc">:</span><span class="dv">2013</span>,</span>
+<span id="cb38-321"><a href="#cb38-321" aria-hidden="true" tabindex="-1"></a>    <span class="at">tratado =</span> <span class="fu">as.integer</span>(<span class="sc">!</span><span class="fu">is.na</span>(inicio) <span class="sc">&amp;</span> ano <span class="sc">&gt;=</span> inicio),   <span class="co"># 1 si ya está tratado</span></span>
+<span id="cb38-322"><a href="#cb38-322" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, <span class="fu">round</span>(nivel <span class="sc">+</span> <span class="fl">0.6</span> <span class="sc">*</span> (ano <span class="sc">-</span> <span class="dv">1998</span>)            <span class="co"># baja 12 puntos mientras dura</span></span>
+<span id="cb38-323"><a href="#cb38-323" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">-</span> <span class="dv">12</span> <span class="sc">*</span> tratado <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="fl">1.5</span>), <span class="dv">1</span>)))</span>
+<span id="cb38-324"><a href="#cb38-324" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-325"><a href="#cb38-325" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-326"><a href="#cb38-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-327"><a href="#cb38-327" aria-hidden="true" tabindex="-1"></a><span class="in">`gsynth()`</span> elige el número de factores por validación cruzada (<span class="in">`CV = TRUE`</span>, probando de 0 a 3 factores con el argumento <span class="in">`r`</span>) y estima la incertidumbre por bootstrap. <span class="in">`force = "two-way"`</span> incluye efectos fijos de unidad y de tiempo.</span>
+<span id="cb38-328"><a href="#cb38-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-329"><a href="#cb38-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gsynth-fit}</span></span>
+<span id="cb38-330"><a href="#cb38-330" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb38-331"><a href="#cb38-331" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">gsynth</span>(y <span class="sc">~</span> tratado, <span class="at">data =</span> panel,</span>
+<span id="cb38-332"><a href="#cb38-332" aria-hidden="true" tabindex="-1"></a>              <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"estado"</span>, <span class="st">"ano"</span>),</span>
+<span id="cb38-333"><a href="#cb38-333" aria-hidden="true" tabindex="-1"></a>              <span class="at">force =</span> <span class="st">"two-way"</span>, <span class="at">CV =</span> <span class="cn">TRUE</span>, <span class="at">r =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">3</span>),</span>
+<span id="cb38-334"><a href="#cb38-334" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">nboots =</span> <span class="dv">200</span>, <span class="at">inference =</span> <span class="st">"parametric"</span>)</span>
+<span id="cb38-335"><a href="#cb38-335" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-336"><a href="#cb38-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-337"><a href="#cb38-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gsynth-att}</span></span>
+<span id="cb38-338"><a href="#cb38-338" aria-hidden="true" tabindex="-1"></a>out<span class="sc">$</span>est.avg          <span class="co"># ATT promedio con su intervalo de confianza</span></span>
+<span id="cb38-339"><a href="#cb38-339" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-340"><a href="#cb38-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-341"><a href="#cb38-341" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gsynth-gap, fig.width=8, fig.height=4}</span></span>
+<span id="cb38-342"><a href="#cb38-342" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="at">type =</span> <span class="st">"gap"</span>)   <span class="co"># la brecha promedio en el tiempo, alineada por adopción</span></span>
+<span id="cb38-343"><a href="#cb38-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-344"><a href="#cb38-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-345"><a href="#cb38-345" aria-hidden="true" tabindex="-1"></a>El ATT promedio da ≈ −11,8, cerca del efecto verdadero (−12). La pre-tendencia es plana y la brecha aparece tras la adopción, alineando los dos tratados aunque empezaron en años distintos.</span>
+<span id="cb38-346"><a href="#cb38-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-347"><a href="#cb38-347" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Cuándo usarlo"}</span>
+<span id="cb38-348"><a href="#cb38-348" aria-hidden="true" tabindex="-1"></a>Es tu herramienta cuando el método clásico no alcanza: varios tratados, fechas escalonadas, o las dos cosas. <span class="in">`plot(out, type = "counterfactual")`</span> muestra el tratado observado contra su contrafactual; <span class="in">`type = "ct"`</span> los grafica juntos. El paquete <span class="in">`fect`</span>, del mismo autor, agrega tests de pre-tendencias y de efectos dinámicos.</span>
+<span id="cb38-349"><a href="#cb38-349" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-350"><a href="#cb38-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-351"><a href="#cb38-351" aria-hidden="true" tabindex="-1"></a><span class="fu">## gsynth con matrix completion</span></span>
+<span id="cb38-352"><a href="#cb38-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-353"><a href="#cb38-353" aria-hidden="true" tabindex="-1"></a><span class="in">`gsynth`</span> trae un segundo estimador, <span class="in">`estimator = "mc"`</span>: completa la matriz de resultados no observados con técnicas de matrix completion (<span class="co">[</span><span class="ot">Athey et al., 2021</span><span class="co">](https://doi.org/10.1080/01621459.2021.1891924)</span>). Suele ser más robusto cuando los efectos fijos interactivos no capturan bien la estructura del panel. Se corre igual, cambiando un argumento.</span>
+<span id="cb38-354"><a href="#cb38-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-355"><a href="#cb38-355" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gsynth-mc}</span></span>
+<span id="cb38-356"><a href="#cb38-356" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb38-357"><a href="#cb38-357" aria-hidden="true" tabindex="-1"></a>out_mc <span class="ot">&lt;-</span> <span class="fu">gsynth</span>(y <span class="sc">~</span> tratado, <span class="at">data =</span> panel,</span>
+<span id="cb38-358"><a href="#cb38-358" aria-hidden="true" tabindex="-1"></a>                 <span class="at">index =</span> <span class="fu">c</span>(<span class="st">"estado"</span>, <span class="st">"ano"</span>),</span>
+<span id="cb38-359"><a href="#cb38-359" aria-hidden="true" tabindex="-1"></a>                 <span class="at">estimator =</span> <span class="st">"mc"</span>, <span class="at">force =</span> <span class="st">"two-way"</span>,</span>
+<span id="cb38-360"><a href="#cb38-360" aria-hidden="true" tabindex="-1"></a>                 <span class="at">CV =</span> <span class="cn">TRUE</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">nboots =</span> <span class="dv">200</span>,</span>
+<span id="cb38-361"><a href="#cb38-361" aria-hidden="true" tabindex="-1"></a>                 <span class="at">inference =</span> <span class="st">"nonparametric"</span>)</span>
+<span id="cb38-362"><a href="#cb38-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-363"><a href="#cb38-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-364"><a href="#cb38-364" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gsynth-mc-att}</span></span>
+<span id="cb38-365"><a href="#cb38-365" aria-hidden="true" tabindex="-1"></a>out_mc<span class="sc">$</span>est.avg</span>
+<span id="cb38-366"><a href="#cb38-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-367"><a href="#cb38-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-368"><a href="#cb38-368" aria-hidden="true" tabindex="-1"></a>El ATT queda en ≈ −11,8, igual que con los factores interactivos: cuando los dos estimadores coinciden, ganás confianza en el resultado.</span>
+<span id="cb38-369"><a href="#cb38-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-370"><a href="#cb38-370" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Qué mirar"}</span>
+<span id="cb38-371"><a href="#cb38-371" aria-hidden="true" tabindex="-1"></a>Correr los dos estimadores (<span class="in">`ife`</span> y <span class="in">`mc`</span>) y ver que dan lo mismo es una prueba de robustez barata. <span class="in">`mc`</span> no necesita que elijas el número de factores. Con la inferencia no paramétrica (<span class="in">`inference = "nonparametric"`</span>) el bootstrap remuestrea unidades, apropiado cuando hay pocos tratados.</span>
+<span id="cb38-372"><a href="#cb38-372" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-373"><a href="#cb38-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-374"><a href="#cb38-374" aria-hidden="true" tabindex="-1"></a><span class="fu">## Para seguir</span></span>
+<span id="cb38-375"><a href="#cb38-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-376"><a href="#cb38-376" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip title="Enlaces y lecturas"}</span>
+<span id="cb38-377"><a href="#cb38-377" aria-hidden="true" tabindex="-1"></a>**Los paquetes**</span>
+<span id="cb38-378"><a href="#cb38-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-379"><a href="#cb38-379" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`tidysynth`</span><span class="co">](https://github.com/edunford/tidysynth)</span>: control sintético clásico en un pipe (el que usamos hoy)</span>
+<span id="cb38-380"><a href="#cb38-380" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`gsynth`</span><span class="co">](https://yiqingxu.org/packages/gsynth/)</span> y <span class="co">[</span><span class="ot">`fect`</span><span class="co">](https://yiqingxu.org/packages/fect/)</span>: varios tratados y adopción escalonada, con factores interactivos o matrix completion</span>
+<span id="cb38-381"><a href="#cb38-381" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`synthdid`</span><span class="co">](https://synth-inference.github.io/synthdid/)</span>: el synthetic DiD de Arkhangelsky et al. (2021), que combina lo mejor de los dos métodos</span>
+<span id="cb38-382"><a href="#cb38-382" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">`did`</span><span class="co">](https://bcallaway11.github.io/did/)</span> (Callaway y Sant'Anna) y <span class="co">[</span><span class="ot">`fixest`</span><span class="co">](https://lrberge.github.io/fixest/)</span>: DiD escalonado con muchos grupos y efectos fijos a escala</span>
+<span id="cb38-383"><a href="#cb38-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-384"><a href="#cb38-384" aria-hidden="true" tabindex="-1"></a>**Para leer**</span>
+<span id="cb38-385"><a href="#cb38-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-386"><a href="#cb38-386" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Abadie (2021)</span><span class="co">](https://doi.org/10.1257/jel.20191450)</span>: el survey del *Journal of Economic Literature*</span>
+<span id="cb38-387"><a href="#cb38-387" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Abadie, Diamond y Hainmueller (2010)</span><span class="co">](https://doi.org/10.1198/jasa.2009.ap08746)</span>: el paper canónico (el programa antitabaco de California)</span>
+<span id="cb38-388"><a href="#cb38-388" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Los capítulos de DiD y control sintético de <span class="co">[</span><span class="ot">*The Mixtape*</span><span class="co">](https://mixtape.scunning.com/)</span> y <span class="co">[</span><span class="ot">*The Effect*</span><span class="co">](https://theeffectbook.net/)</span>, gratis online</span>
+<span id="cb38-389"><a href="#cb38-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-390"><a href="#cb38-390" aria-hidden="true" tabindex="-1"></a>**Nuestro caso del bloque**</span>
+<span id="cb38-391"><a href="#cb38-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-392"><a href="#cb38-392" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Freire (2018)</span><span class="co">](https://doi.org/10.25222/larr.334)</span>: los homicidios en São Paulo con control sintético</span>
+<span id="cb38-393"><a href="#cb38-393" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Pantaleão (2025)</span><span class="co">](https://doi.org/10.1017/S0003055425101354)</span>: otra hipótesis para la caída, la gobernanza criminal del PCC</span>
+<span id="cb38-394"><a href="#cb38-394" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 <a href="https://danilofreire.github.io">Danilo Freire</a>. Contenido bajo licencia <a href="https://opensource.org/licenses/MIT">MIT</a>.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/referencia-did-sintetico.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Hecho con <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
