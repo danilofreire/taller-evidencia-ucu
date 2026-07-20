@@ -2,7 +2,7 @@
 title: "Materiales"
 ---
 
-Acá están las diapositivas, los datos y el código de cada bloque. Cada bloque con práctica trae el archivo de código listo para correr y los datos que usa, con una breve descripción de cada base. Todos los datos son simulados: reproducen la estructura y el orden de magnitud de los estudios reales, sin exponer datos originales. Si querés el código de cada función explicado paso a paso, está en [Referencia R](referencia-r.qmd)
+Acá están las diapositivas, los datos y el código de cada bloque. Cada bloque con práctica trae el archivo de código listo para correr y los datos que usa, con una breve descripción de cada base. Todos los datos son simulados: reproducen la estructura y el orden de magnitud de los estudios reales, sin exponer datos originales. Si querés el código de cada función explicado paso a paso, está en [Referencia R](referencia-r.qmd).
 
 ## Antes de empezar
 
@@ -45,7 +45,7 @@ Los cuatro últimos (`gsynth`, `DeclareDesign`, `DesignLibrary` y `ri2`) no apar
 
 [Mañana · 9:00–9:30 · 30 min]{.resource-meta}
 
-[El problema del contrafactual, el sesgo de selección y por qué la evaluación de impacto importa más en la región]{.resource-meta}
+[El problema del contrafactual, el sesgo de selección y por qué la evaluación de impacto importa más en la región.]{.resource-meta}
 
 ::: {.resource-links}
 [Diapositivas (.html)](diapositivas/01-apertura.html) |
@@ -58,11 +58,11 @@ Los cuatro últimos (`gsynth`, `DeclareDesign`, `DesignLibrary` y `ri2`) no apar
 
 [Mañana · 9:30–10:45 · 75 min]{.resource-meta}
 
-[El contrafactual que construís. Un experimento de campo sobre incentivos y dengue en Brasil, un resultado nulo que también enseña, y una introducción a DeclareDesign para simular diseños antes del campo]{.resource-meta}
+[El contrafactual que construís. Un experimento de campo sobre incentivos y dengue en Brasil, un resultado nulo que también enseña, y una introducción a DeclareDesign para simular diseños antes del campo.]{.resource-meta}
 
 Usa una base:
 
-- `dengue_incentivos.csv` (400 agentes de salud): experimento de campo sobre incentivos económicos. Cada fila es un agente; `tratamiento` marca quién recibió el incentivo y los resultados son `visitas` (visitas domiciliarias) e `indice_larvario`
+- `dengue_incentivos.csv` (400 agentes de salud): experimento de campo sobre incentivos económicos. Cada fila es un agente; `tratamiento` marca quién recibió el incentivo y los resultados son `visitas` (visitas domiciliarias) e `indice_larvario`.
 
 ::: {.resource-links}
 [Diapositivas (.html)](diapositivas/02-experimentos.html) |
@@ -77,11 +77,11 @@ Usa una base:
 
 [Mañana · 11:00–12:15 · 75 min]{.resource-meta}
 
-[El contrafactual que encontrás en un umbral. El tamaño de las legislaturas y el bienestar en Brasil]{.resource-meta}
+[El contrafactual que encontrás en un umbral. El tamaño de las legislaturas y el bienestar en Brasil.]{.resource-meta}
 
 Una base:
 
-- `municipios.csv` (2000 municipios): diseño de regresión discontinua sobre el tamaño del concejo. La variable de asignación es `poblacion_c` (población centrada en el umbral), `concejo_grande` marca el tratamiento y los resultados incluyen `matricula_primaria`, `mortalidad_infantil` e `ideb`
+- `municipios.csv` (2000 municipios): diseño de regresión discontinua sobre el tamaño del concejo. La variable de asignación es `poblacion_c` (población centrada en el umbral), `concejo_grande` marca el tratamiento y los resultados incluyen `matricula_primaria`, `mortalidad_infantil` e `ideb`.
 
 ::: {.resource-links}
 [Diapositivas (.html)](diapositivas/03-rdd.html) |
@@ -96,11 +96,11 @@ Una base:
 
 [Tarde · 13:30–14:15 · 45 min]{.resource-meta}
 
-[El contrafactual que armás con otras unidades. La prevención de homicidios en São Paulo]{.resource-meta}
+[El contrafactual que armás con otras unidades. La prevención de homicidios en São Paulo.]{.resource-meta}
 
 Una base:
 
-- `homicidios.csv` (256 filas, panel estado-año 1990–2005): un control sintético para São Paulo. `tasa_homicidios` es el resultado, `tratado` y `post` marcan la unidad y el período de la política, y `pib_pc`, `gini`, `poblacion_urbana` y `jovenes_pct` son los predictores
+- `homicidios.csv` (256 filas, panel estado-año 1990–2005): un control sintético para São Paulo. `tasa_homicidios` es el resultado, `tratado` y `post` marcan la unidad y el período de la política, y `pib_pc`, `gini`, `poblacion_urbana` y `jovenes_pct` son los predictores.
 
 ::: {.resource-links}
 [Diapositivas (.html)](diapositivas/04-did-sintetico.html) |
@@ -115,12 +115,12 @@ Una base:
 
 [Tarde · 14:15–15:15 · 60 min]{.resource-meta}
 
-[Por qué un solo estudio engaña: sesgo de publicación, meta-análisis y la crisis de replicación contada desde adentro]{.resource-meta}
+[Por qué un solo estudio engaña: sesgo de publicación, meta-análisis y la crisis de replicación contada desde adentro.]{.resource-meta}
 
 Dos bases:
 
-- `meta_estudios.csv` (21 estudios): la literatura publicada de la demostración, con el sesgo de publicación adentro. Cada fila es un estudio con su `efecto`, su error estándar `ee`, el `n` y el `diseno`, para armar el forest plot y el funnel plot
-- `transferencias.csv` (24 estudios): la base de la práctica, sobre el efecto de las transferencias condicionadas en la asistencia escolar. Además del `efecto` y su `ee`, trae el `contexto` (`rural` o `urbano`), que es la clave del último ejercicio
+- `meta_estudios.csv` (21 estudios): la literatura publicada de la demostración, con el sesgo de publicación adentro. Cada fila es un estudio con su `efecto`, su error estándar `ee`, el `n` y el `diseno`, para armar el forest plot y el funnel plot.
+- `transferencias.csv` (24 estudios): la base de la práctica, sobre el efecto de las transferencias condicionadas en la asistencia escolar. Además del `efecto` y su `ee`, trae el `contexto` (`rural` o `urbano`), que es la clave del último ejercicio.
 
 ::: {.resource-links}
 [Diapositivas (.html)](diapositivas/05-acumulacion.html) |
@@ -136,7 +136,7 @@ Dos bases:
 
 [Tarde · 15:15–15:30 · 15 min]{.resource-meta}
 
-[El mapa completo, hacia dónde va el campo y dónde enchufarse en la región]{.resource-meta}
+[El mapa completo, hacia dónde va el campo y dónde enchufarse en la región.]{.resource-meta}
 
 ::: {.resource-links}
 [Diapositivas (.html)](diapositivas/06-cierre.html) |
@@ -149,9 +149,9 @@ Dos bases:
 ::: {.resource-card}
 [Referencia R]{.resource-title}
 
-[Una página por parte, con todo el código explicado]{.resource-meta}
+[Una página por parte, con todo el código explicado.]{.resource-meta}
 
-[Cada función que usamos en las prácticas, con un ejemplo ejecutable, su salida real y una nota sobre cuándo conviene usarla. Los números coinciden con los de las diapositivas porque las semillas están fijas]{.resource-meta}
+[Cada función que usamos en las prácticas, con un ejemplo ejecutable, su salida real y una nota sobre cuándo conviene usarla. Los números coinciden con los de las diapositivas porque las semillas están fijas.]{.resource-meta}
 
 ::: {.resource-links}
 [Todas las referencias](referencia-r.qmd) |
@@ -165,9 +165,9 @@ Dos bases:
 ::: {.resource-card}
 [Guía de reproducibilidad]{.resource-title}
 
-[El kit mínimo, en seis prácticas]{.resource-meta}
+[El kit mínimo, en once prácticas.]{.resource-meta}
 
-[Cómo dejar tu trabajo listo para que otra persona (o vos en seis meses) lo pueda correr: estructura de carpetas, rutas relativas, control de versiones y un informe que se calcula al renderizar]{.resource-meta}
+[Cómo dejar tu trabajo listo para que otra persona (o vos en seis meses) lo pueda correr: estructura de carpetas, rutas relativas, control de versiones y un informe que se calcula al renderizar.]{.resource-meta}
 
 ::: {.resource-links}
 [Abrir la guía](reproducibilidad.qmd)

@@ -49,6 +49,6 @@ El [programa detallado](programa.qmd) desarrolla los contenidos y la práctica d
 
 ## Qué traer
 
-Traé tu computadora con [R](https://cran.r-project.org/) instalado. Cada bloque tiene una práctica con el código ya escrito, que corremos juntos. En [Materiales](materiales.qmd) está la guía de instalación con los paquetes que vas a necesitar, y en [Referencias](referencias.qmd) están las lecturas del taller
+Traé tu computadora con [R](https://cran.r-project.org/) instalado. Cada bloque tiene una práctica con el código ya escrito, que corremos juntos. En [Materiales](materiales.qmd) está la guía de instalación con los paquetes que vas a necesitar, y en [Referencias](referencias.qmd) están las lecturas del taller.
 
-Para después: en [Referencia R](referencia-r.qmd) queda todo el código de las prácticas explicado función por función, y la [guía de reproducibilidad](reproducibilidad.qmd) resume el kit mínimo para que tu trabajo lo pueda correr otra persona
+Para después: en [Referencia R](referencia-r.qmd) queda todo el código de las prácticas explicado función por función, y la [guía de reproducibilidad](reproducibilidad.qmd) resume el kit mínimo para que tu trabajo lo pueda correr otra persona.

@@ -262,20 +262,20 @@ Una entrada por método, ordenada de lo más aplicado a lo más técnico. Las qu
 
 ## Casos y referencias de la región
 
-- Progresa/Oportunidades (México): el experimento aleatorizado que impulsó las transferencias monetarias condicionadas
-- PANES (Uruguay): Manacorda, Miguel y Vigorito (2011), un diseño de regresión discontinua sobre el puntaje de elegibilidad
-- Auditorías municipales (Brasil): Ferraz y Finan, auditorías al azar y rendición de cuentas electoral
+- Progresa/Oportunidades (México): el experimento aleatorizado que impulsó las transferencias monetarias condicionadas.
+- PANES (Uruguay): Manacorda, Miguel y Vigorito (2011), un diseño de regresión discontinua sobre el puntaje de elegibilidad.
+- Auditorías municipales (Brasil): Ferraz y Finan, auditorías al azar y rendición de cuentas electoral.
 
 ## Bibliografía complementaria
 
 Textos generales de inferencia causal que cruzan todos los métodos del taller.
 
-- Angrist, J. y Pischke, J.-S. (2015). *Mastering 'Metrics: The Path from Cause to Effect*. Princeton University Press. Accesible y con ejemplos. [Enlace](https://press.princeton.edu/books/paperback/9780691152844/mastering-metrics)
-- Angrist, J. y Pischke, J.-S. (2009). *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton University Press
-- Cunningham, S. (2021). *Causal Inference: The Mixtape*. Yale University Press. Disponible gratis en [mixtape.scunning.com](https://mixtape.scunning.com/)
-- Huntington-Klein, N. (2022). *The Effect: An Introduction to Research Design and Causality*. Chapman & Hall/CRC. Disponible gratis en [theeffectbook.net](https://theeffectbook.net/)
-- Imbens, G. y Rubin, D. (2015). *Causal Inference for Statistics, Social, and Biomedical Sciences*. Cambridge University Press
-- Morgan, S. y Winship, C. (2015). *Counterfactuals and Causal Inference*, 2ª ed. Cambridge University Press
+- Angrist, J. y Pischke, J.-S. (2015). *Mastering 'Metrics: The Path from Cause to Effect*. Princeton University Press. Accesible y con ejemplos. [Enlace](https://press.princeton.edu/books/paperback/9780691152844/mastering-metrics).
+- Angrist, J. y Pischke, J.-S. (2009). *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton University Press.
+- Cunningham, S. (2021). *Causal Inference: The Mixtape*. Yale University Press. Disponible gratis en [mixtape.scunning.com](https://mixtape.scunning.com/).
+- Huntington-Klein, N. (2022). *The Effect: An Introduction to Research Design and Causality*. Chapman & Hall/CRC. Disponible gratis en [theeffectbook.net](https://theeffectbook.net/).
+- Imbens, G. y Rubin, D. (2015). *Causal Inference for Statistics, Social, and Biomedical Sciences*. Cambridge University Press.
+- Morgan, S. y Winship, C. (2015). *Counterfactuals and Causal Inference*, 2ª ed. Cambridge University Press.
 
 ## Organizaciones
 
@@ -286,4 +286,4 @@ Textos generales de inferencia causal que cruzan todos los métodos del taller.
 
 ## Instalación de software
 
-La práctica de cada bloque corre en R. En [Materiales](materiales.qmd#antes-de-empezar) está la guía paso a paso: instalá [R](https://cran.r-project.org/) y [RStudio](https://posit.co/download/rstudio-desktop/), y después corré el bloque que instala los seis paquetes del taller (tidyverse, estimatr, rdrobust, rddensity, tidysynth, metafor)
+La práctica de cada bloque corre en R. En [Materiales](materiales.qmd#antes-de-empezar) está la guía paso a paso: instalá [R](https://cran.r-project.org/) y [RStudio](https://posit.co/download/rstudio-desktop/), y después corré el bloque que instala los seis paquetes del taller (tidyverse, estimatr, rdrobust, rddensity, tidysynth, metafor).

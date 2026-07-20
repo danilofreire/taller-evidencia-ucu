@@ -376,19 +376,19 @@ Correr los dos estimadores (`ife` y `mc`) y ver que dan lo mismo es una prueba d
 ::: {.callout-tip title="Enlaces y lecturas"}
 **Los paquetes**
 
-- [`tidysynth`](https://github.com/edunford/tidysynth): control sintético clásico en un pipe (el que usamos hoy)
-- [`gsynth`](https://yiqingxu.org/packages/gsynth/) y [`fect`](https://yiqingxu.org/packages/fect/): varios tratados y adopción escalonada, con factores interactivos o matrix completion
-- [`synthdid`](https://synth-inference.github.io/synthdid/): el synthetic DiD de Arkhangelsky et al. (2021), que combina lo mejor de los dos métodos
-- [`did`](https://bcallaway11.github.io/did/) (Callaway y Sant'Anna) y [`fixest`](https://lrberge.github.io/fixest/): DiD escalonado con muchos grupos y efectos fijos a escala
+- [`tidysynth`](https://github.com/edunford/tidysynth): control sintético clásico en un pipe (el que usamos hoy).
+- [`gsynth`](https://yiqingxu.org/packages/gsynth/) y [`fect`](https://yiqingxu.org/packages/fect/): varios tratados y adopción escalonada, con factores interactivos o matrix completion.
+- [`synthdid`](https://synth-inference.github.io/synthdid/): el synthetic DiD de Arkhangelsky et al. (2021), que combina lo mejor de los dos métodos.
+- [`did`](https://bcallaway11.github.io/did/) (Callaway y Sant'Anna) y [`fixest`](https://lrberge.github.io/fixest/): DiD escalonado con muchos grupos y efectos fijos a escala.
 
 **Para leer**
 
-- [Abadie (2021)](https://doi.org/10.1257/jel.20191450): el survey del *Journal of Economic Literature*
-- [Abadie, Diamond y Hainmueller (2010)](https://doi.org/10.1198/jasa.2009.ap08746): el paper canónico (el programa antitabaco de California)
-- Los capítulos de DiD y control sintético de [*The Mixtape*](https://mixtape.scunning.com/) y [*The Effect*](https://theeffectbook.net/), gratis online
+- [Abadie (2021)](https://doi.org/10.1257/jel.20191450): el survey del *Journal of Economic Literature*.
+- [Abadie, Diamond y Hainmueller (2010)](https://doi.org/10.1198/jasa.2009.ap08746): el paper canónico (el programa antitabaco de California).
+- Los capítulos de DiD y control sintético de [*The Mixtape*](https://mixtape.scunning.com/) y [*The Effect*](https://theeffectbook.net/), gratis online.
 
 **Nuestro caso del bloque**
 
-- [Freire (2018)](https://doi.org/10.25222/larr.334): los homicidios en São Paulo con control sintético
-- [Pantaleão (2025)](https://doi.org/10.1017/S0003055425101354): otra hipótesis para la caída, la gobernanza criminal del PCC
+- [Freire (2018)](https://doi.org/10.25222/larr.334): los homicidios en São Paulo con control sintético.
+- [Pantaleão (2025)](https://doi.org/10.1017/S0003055425101354): otra hipótesis para la caída, la gobernanza criminal del PCC.
 :::

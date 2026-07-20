@@ -337,18 +337,18 @@ Empezá por un diseñador de la librería cuando tu diseño encaje en un molde c
 ::: {.callout-tip title="Enlaces y lecturas"}
 **Documentación de los paquetes**
 
-- [`estimatr`](https://declaredesign.org/r/estimatr/): `lm_robust`, `lm_lin`, `difference_in_means`
-- [`DeclareDesign`](https://declaredesign.org/): declarar, diagnosticar y simular diseños
-- [`fabricatr`](https://declaredesign.org/r/fabricatr/) y [`randomizr`](https://declaredesign.org/r/randomizr/): simular datos y sortear
-- [`ri2`](https://cran.r-project.org/package=ri2): inferencia por aleatorización
+- [`estimatr`](https://declaredesign.org/r/estimatr/): `lm_robust`, `lm_lin`, `difference_in_means`.
+- [`DeclareDesign`](https://declaredesign.org/): declarar, diagnosticar y simular diseños.
+- [`fabricatr`](https://declaredesign.org/r/fabricatr/) y [`randomizr`](https://declaredesign.org/r/randomizr/): simular datos y sortear.
+- [`ri2`](https://cran.r-project.org/package=ri2): inferencia por aleatorización.
 
 **Para leer**
 
-- [Blair, Coppock y Humphreys (2023)](https://book.declaredesign.org/), *Research Design in the Social Sciences*: el libro de `DeclareDesign`, gratis online
-- [Lin (2013)](https://doi.org/10.1214/12-AOAS583): el ajuste de covariables que implementa `lm_lin()`
+- [Blair, Coppock y Humphreys (2023)](https://book.declaredesign.org/), *Research Design in the Social Sciences*: el libro de `DeclareDesign`, gratis online.
+- [Lin (2013)](https://doi.org/10.1214/12-AOAS583): el ajuste de covariables que implementa `lm_lin()`.
 
 **Nuestros casos del bloque**
 
-- [Freire y Mignozzetti (2022)](https://github.com/danilofreire/incentives-healthcare): incentivos económicos y control del dengue
-- [Freire, Galdino y Mignozzetti (2020)](https://doi.org/10.1177/2053168020914444): el resultado nulo creíble y la inferencia por aleatorización de la Figura 4
+- [Freire y Mignozzetti (2022)](https://github.com/danilofreire/incentives-healthcare): incentivos económicos y control del dengue.
+- [Freire, Galdino y Mignozzetti (2020)](https://doi.org/10.1177/2053168020914444): el resultado nulo creíble y la inferencia por aleatorización de la Figura 4.
 :::

@@ -1,5 +1,7 @@
 ---
 title: "Guía de reproducibilidad"
+subtitle: "El kit mínimo, y qué agregar cuando el proyecto lo pide"
+toc-depth: 3
 # todo el código de esta página es ilustrativo: no se ejecuta nada
 engine: markdown
 ---
@@ -8,17 +10,77 @@ En la Parte 5 del taller vimos los números de la crisis: el 74% de más de 9.00
 
 Casi nada de eso es fraude. Es flujo de trabajo: rutas que apuntan al escritorio de otra persona, un paso que se hizo a mano en Excel y nadie anotó, una versión de un paquete que ya no existe. Son problemas baratos de arreglar, siempre que uno los arregle antes y no después.
 
-Esta guía es el kit mínimo. Son seis prácticas, ordenadas de la más fácil a la que más cuesta adoptar. Cada una vale por sí sola: no hace falta hacer las seis el lunes.
-
 ::: {.callout-note title="La prueba que hay que pasar"}
 Alguien que no sos vos, en otra computadora, dentro de dos años, con tu carpeta y nada más: ¿puede llegar a tus mismos números? Si la respuesta es sí, tu trabajo es reproducible. Todo lo que sigue existe para que esa respuesta sea sí.
 :::
 
-## 1. Una carpeta que se explica sola
+## Cómo usar esta guía
+
+Son once prácticas, agrupadas en los tres momentos de un proyecto: lo que se decide **antes** de mirar los datos, lo que se cuida **mientras** trabajás, y lo que se prepara **cuando lo compartís**.
+
+Ninguna depende de las otras y no hace falta adoptarlas todas. Si sólo vas a hacer una cosa esta semana, hacé la práctica 5 (reiniciar R y correr todo de cero): es gratis, tarda dos minutos y casi siempre encuentra algo. Las prácticas 1 y 2 son las únicas que hay que decidir temprano, porque pierden casi todo su valor si las dejás para el final.
+
+# Antes de empezar
+
+## 1. Pre-registro y plan de pre-análisis
+
+Entre los datos y un resultado hay cientos de decisiones chicas: qué casos excluir, cómo tratar los valores extremos, qué controles entran, dónde se corta una variable continua. Cada una es defendible por separado. El problema aparece cuando se eligen **después** de ver los resultados, porque entonces el análisis se acomoda al hallazgo sin que nadie lo note, ni siquiera vos.
+
+Es lo que Gelman llamó el jardín de senderos que se bifurcan, y lo que hace que 73 equipos con los mismos datos y la misma hipótesis lleguen a conclusiones opuestas ([Breznau et al., 2022](https://doi.org/10.1073/pnas.2203150119)). Con suficientes grados de libertad se puede obtener casi cualquier resultado sin cometer una sola falta ([Simmons, Nelson y Simonsohn, 2011](https://doi.org/10.1177/0956797611417632)).
+
+El pre-registro corta el nudo: escribís qué vas a hacer, lo depositás con fecha en un registro público, y recién después mirás los datos.
+
+### Qué lleva un plan de pre-análisis
+
+Un PAP útil entra en tres o cuatro páginas. Lo esencial:
+
+- La **pregunta** y las hipótesis, escritas de forma que se puedan contradecir.
+- La **muestra**: de dónde sale, cuántos casos, y el cálculo de poder que justifica ese número.
+- Las **variables**: cómo se define exactamente el tratamiento y cada resultado, incluida la escala.
+- La **especificación principal**: la ecuación que vas a reportar en la tabla 1, con sus controles y sus errores estándar.
+- Los **subgrupos** que vas a mirar, declarados de antemano (los que se descubren después son exploración, y se reportan como tal).
+- Las **reglas operativas**: qué hacés con los faltantes, la atrición, los valores extremos, y cómo corregís por comparaciones múltiples.
+
+Lo que más disciplina impone es fijar la especificación principal. Todo lo demás puede reportarse como robustez.
+
+### Dónde se deposita
+
+| Registro | Para qué |
+|:--|:--|
+| [OSF Registries](https://osf.io/registries) | Uso general, cualquier disciplina. El más flexible |
+| [AEA RCT Registry](https://www.socialscienceregistry.org/) | Experimentos de campo en economía y políticas públicas |
+| [AsPredicted](https://aspredicted.org/) | Formulario corto, nueve preguntas. Bueno para empezar |
+| [PROSPERO](https://www.crd.york.ac.uk/prospero/) | Revisiones sistemáticas y meta-análisis |
+
+Un escalón más arriba están los **registered reports**: la revista evalúa el diseño y se compromete a publicar antes de conocer los resultados ([Nosek et al., 2018](https://doi.org/10.1073/pnas.1708274114)). Es el formato que más directamente ataca el sesgo de publicación que vimos en la Parte 5, porque la decisión editorial deja de depender de si el efecto salió.
+
+::: {.callout-important title="Un PAP no es una camisa de fuerza"}
+Podés desviarte del plan, y a veces hay que hacerlo: el trabajo de campo sale distinto de lo previsto. Lo que no podés es desviarte en silencio. Se reporta qué estaba planeado, qué se cambió y por qué, y se muestran las dos versiones. Y la exploración sigue siendo legítima y valiosa: sólo hay que llamarla por su nombre, en vez de disfrazarla de confirmación ([Olken, 2015](https://doi.org/10.1257/jep.29.3.61)).
+:::
+
+## 2. Si hacés una revisión sistemática: PRISMA
+
+Cuando el objeto de estudio es la literatura, la reproducibilidad se juega en cómo armaste la muestra de estudios. Una revisión narrativa arma una lista de favoritos; una revisión sistemática documenta el procedimiento para que otra persona lo repita y llegue al mismo conjunto.
+
+[PRISMA](https://www.prisma-statement.org/) es el estándar ([Page et al., 2021](https://doi.org/10.1136/bmj.n71)). Son dos piezas: un checklist de lo que hay que reportar y un diagrama de flujo que muestra cuántos registros entraron y cuántos quedaron en cada etapa.
+
+Lo que se documenta antes de empezar a buscar:
+
+- Las **bases** consultadas (Scopus, Web of Science, Google Scholar) y la **fecha** de la búsqueda, porque los resultados cambian con el tiempo.
+- La **cadena de búsqueda** exacta, con sus operadores, para que se pueda pegar y repetir.
+- Los **criterios de inclusión y exclusión**, fijados antes de ver los títulos.
+- Quién hizo el **tamizaje**: idealmente dos codificadores independientes, con una medida de acuerdo entre ellos.
+- Cómo se extrajo el tamaño de efecto de cada estudio cuando los papers lo reportan en escalas distintas.
+
+El diagrama de flujo cuenta la historia en números. En nuestro meta-análisis del tamaño de las legislaturas fueron 2.664 registros iniciales que quedaron en 30 estudios comparables ([Freire et al., 2023](https://doi.org/10.1017/S0007123422000552)). Con ese diagrama a la vista, cualquiera puede discutir un criterio concreto en vez de sospechar del conjunto.
+
+# Mientras trabajás
+
+## 3. Una carpeta que se explica sola
 
 Todo el proyecto vive en una carpeta, y esa carpeta se puede comprimir y mandar por correo sin que nada se rompa. Nada de archivos sueltos en Descargas.
 
-```
+```text
 mi-proyecto/
 ├── datos/
 │   ├── crudos/          # los datos como llegaron. NUNCA se tocan
@@ -41,7 +103,9 @@ Tres reglas que hacen casi todo el trabajo:
 
 Todo lo que está en `datos/procesados/` y en `figuras/` tiene que poder borrarse y volver a aparecer corriendo el código. Si algo no puede regenerarse, entonces es un dato crudo y va en `datos/crudos/`.
 
-## 2. Rutas relativas, nunca absolutas
+Para los nombres de archivo, tres costumbres que evitan dolores: sin espacios ni acentos (usá guiones), fechas en formato `2026-08-01` (así ordenan solas), y nada de `final`, `final2` o `FINAL_definitivo`, que es trabajo que Git hace mejor.
+
+## 4. Rutas relativas, nunca absolutas
 
 Esta es la causa número uno de que un script no corra en otra computadora:
 
@@ -67,7 +131,7 @@ datos <- read.csv(here("datos", "crudos", "encuesta.csv"))
 
 Regla simple: si en tu código aparece tu nombre de usuario, algo hay que cambiar.
 
-## 3. Un script que corre de arriba a abajo
+## 5. Un script que corre de arriba a abajo
 
 El enemigo silencioso es la sesión de R que lleva tres horas abierta. Ahí adentro hay objetos que creaste probando cosas, paquetes que cargaste y olvidaste, y un `datos` que ya no es el que produce tu código. Todo anda perfecto hasta que cerrás RStudio.
 
@@ -82,7 +146,20 @@ Dos hábitos que ayudan:
 - Todos los `library()` van juntos, arriba de todo. Si un paquete aparece en la línea 200, alguien lo va a extrañar.
 - Nada de pasos manuales. Si abriste el CSV en Excel para arreglar una fecha, ese arreglo no existe para nadie más. Escribilo como código.
 
-## 4. Semillas: que el azar también se reproduzca
+Un detalle que confunde a mucha gente: `rm(list = ls())` **no** reemplaza reiniciar R. Borra los objetos, pero deja los paquetes cargados, las opciones cambiadas y todo lo que se pegó a la sesión. La única prueba honesta es arrancar de cero.
+
+Cuando el proyecto tiene varios scripts, conviene un archivo que los corra en orden:
+
+```r
+# correr-todo.R
+source("codigo/01-limpiar.R")
+source("codigo/02-analizar.R")
+source("codigo/03-figuras.R")
+```
+
+Ese archivo es, en la práctica, la documentación ejecutable del proyecto.
+
+## 6. Semillas: que el azar también se reproduzca
 
 Todo lo que usa números aleatorios (simulaciones, bootstrap, asignación a tratamiento, muestreo) da un resultado distinto en cada corrida, salvo que fijes la semilla:
 
@@ -93,15 +170,76 @@ muestra <- sample(1:1000, 100)
 
 Con la semilla fija, la misma computadora y la misma versión de R producen exactamente los mismos números, siempre. Todos los datos de este taller se generan así: por eso el CSV del repositorio y el que producís vos en tu máquina son idénticos.
 
-La semilla va **una vez, al principio del script**, no antes de cada comando. Y conviene anotar con qué versión de R y de los paquetes corriste todo:
+La semilla va **una vez, al principio del script**, no antes de cada comando. Si la ponés antes de cada línea estás forzando coincidencias, y si la cambiás hasta que el resultado guste, volvés al jardín de senderos de la práctica 1.
+
+## 7. Versiones: R, los paquetes y el entorno
+
+La semilla fija el azar, pero no fija el software. Un paquete cambia un valor por defecto, otro se retira de CRAN, y el script que corría perfecto en 2021 devuelve otra cosa (o nada) en 2026. Es la causa más frecuente de los fallos que midieron Trisovic et al.
+
+Hay tres niveles de protección, y podés quedarte en el primero.
+
+### Nivel 1: dejar constancia
+
+Lo mínimo, y cuesta una línea. Guardá junto a los resultados con qué corriste todo:
 
 ```r
 sessionInfo()
+
+# más legible, si tenés el paquete sessioninfo
+sessioninfo::session_info()
 ```
 
-Si el proyecto es importante o va a durar años, [`renv`](https://rstudio.github.io/renv/) guarda las versiones exactas de todos los paquetes y las restaura después. Es un paso más avanzado, pero `renv::init()` y `renv::snapshot()` es casi todo lo que hace falta saber.
+No arregla nada por sí solo, pero convierte un misterio futuro en un diagnóstico de cinco minutos.
 
-## 5. Los números calculados, no pegados
+### Nivel 2: renv
+
+[`renv`](https://rstudio.github.io/renv/) le da a cada proyecto su propia biblioteca de paquetes y anota las versiones exactas en un archivo `renv.lock`:
+
+```r
+renv::init()       # una vez, al crear el proyecto
+renv::snapshot()   # cada vez que agregás o actualizás un paquete
+renv::restore()    # lo que corre otra persona para reproducir tu entorno
+```
+
+El `renv.lock` se commitea junto con el código; la carpeta `renv/library/` no. Con eso, quien reciba tu proyecto instala exactamente las versiones que usaste, sin tocar las suyas.
+
+Lo que `renv` **no** cubre: la versión de R en sí, ni las bibliotecas del sistema operativo de las que dependen algunos paquetes.
+
+### Nivel 3: contenedores
+
+Para proyectos que tienen que sobrevivir años, o que dependen de bibliotecas del sistema, un contenedor congela el entorno entero (sistema operativo incluido). Las imágenes de [Rocker](https://rocker-project.org/) traen R y RStudio listos, y se fija la versión en una línea del `Dockerfile`.
+
+Es claramente el paso más caro de esta guía y la mayoría de los proyectos no lo necesita. Una alternativa intermedia: [Posit Public Package Manager](https://packagemanager.posit.co/) permite instalar paquetes tal como estaban en una fecha dada, lo que resuelve buena parte del problema sin aprender Docker.
+
+::: {.callout-tip title="Cuánto es suficiente"}
+Tesis o informe con vida de meses: `sessionInfo()` alcanza. Paper que vas a mandar a una revista o proyecto que sigue otro equipo: `renv`. Sistema que un organismo va a re-correr cada año: contenedor.
+:::
+
+## 8. Documentar los datos: el codebook
+
+Un CSV sin documentación es un acertijo. `p3_rec` puede ser una recodificación de la pregunta 3, o un puntaje, o una tercera cosa que su autor recordaba en marzo. El codebook (o diccionario de variables) es la pieza que más rápido piden quienes reutilizan datos, y la que más seguido falta.
+
+Para cada variable: qué es, en qué unidad, qué valores admite, cómo se codifican los faltantes y de dónde salió.
+
+| Variable | Qué es | Tipo | Unidad o niveles | Faltantes | Origen |
+|:--|:--|:--|:--|:--|:--|
+| `id_agente` | Identificador del agente | entero | 1 a 400 | ninguno | asignado en el diseño |
+| `tratamiento` | Recibió el incentivo | binaria | 0 = no, 1 = sí | ninguno | sorteo con `complete_ra` |
+| `zona` | Zona del sector asignado | categórica | urbana, rural | ninguno | catastro municipal |
+| `visitas` | Criaderos tratados | conteo | criaderos por jornada | ninguno | planilla de campo |
+| `indice_larvario` | Larvas por casa | continua | larvas/casa, 0 a 20 | `NA` si no se midió | verificación en terreno |
+
+Además del cuadro, el archivo de datos necesita una **procedencia**: de dónde bajaste el archivo original, en qué fecha, con qué consulta o filtros, y bajo qué condiciones de uso. Las bases administrativas se corrigen hacia atrás sin avisar, así que "descargado de DataSUS el 3 de marzo de 2026" es información, no burocracia.
+
+Para no escribirlo todo a mano, un par de atajos:
+
+- `skimr::skim(datos)` da un perfil rápido (tipos, faltantes, distribuciones) que sirve de borrador.
+- `labelled` y `codebook` permiten pegar etiquetas a las variables dentro del propio objeto de R.
+- `datawizard::data_codebook(datos)` arma la tabla de una.
+
+Si publicás los datos, este cuadro y la procedencia son la mitad de lo que hace que alguien pueda usarlos. Es lo que sintetizan los principios [FAIR](https://doi.org/10.1038/sdata.2016.18): datos que se puedan encontrar, acceder, interoperar y reutilizar.
+
+## 9. Los números calculados, no pegados
 
 El flujo habitual copia un número del análisis al documento. Cada copia es un lugar donde el texto y el análisis se pueden desincronizar en silencio, y con el tiempo siempre se desincronizan: cambia un filtro, se agregan datos, y el párrafo sigue diciendo lo de la semana pasada.
 
@@ -130,7 +268,7 @@ Esos `` `r ` `` son código R en el medio de la frase. Si mañana llegan datos n
 
 El mismo archivo produce HTML, PDF o Word sin tocar el contenido. Estas diapositivas, la página que estás leyendo y los informes se hacen todos así.
 
-## 6. Git y GitHub: el historial y la copia pública
+## 10. Git y GitHub: el historial y la copia pública
 
 Git guarda la historia de tu proyecto: cada versión queda registrada, con fecha y con una nota tuya explicando qué cambiaste. Se acabaron el `tesis_final_v3_ESTA_SI.docx` y la pregunta de qué cambió entre el martes y el jueves.
 
@@ -151,7 +289,50 @@ Algunas recomendaciones:
 
 Si nunca usaste la terminal, RStudio trae una pestaña Git con botones para todo esto, y [Happy Git with R](https://happygitwithr.com/) es la guía más amable que hay para arrancar.
 
-## El repaso antes de mandar
+# Cuando lo compartís
+
+## 11. Archivar con DOI, licenciar y proteger lo sensible
+
+### GitHub no es un archivo
+
+GitHub es excelente para trabajar, pero no es una garantía de permanencia: un repositorio se puede renombrar, volver privado o borrar, y el enlace de tu paper muere con él. Para citar algo hace falta un identificador persistente.
+
+[Zenodo](https://zenodo.org/) resuelve esto en unos minutos: conectás el repositorio, publicás una *release* en GitHub y Zenodo archiva esa versión exacta y le asigna un DOI. Cada versión nueva recibe el suyo, y además hay un DOI que siempre apunta a la última.
+
+| Dónde | Para qué |
+|:--|:--|
+| [Zenodo](https://zenodo.org/) | Código y datos, integrado con GitHub. DOI inmediato |
+| [OSF](https://osf.io/) | Proyectos completos: materiales, pre-registro y datos en un lugar |
+| [Harvard Dataverse](https://dataverse.harvard.edu/) | El estándar de facto en ciencia política para datos de replicación |
+
+### Qué pide una revista
+
+Si el trabajo va a una revista, conviene saber de antemano que hoy varias verifican el paquete de replicación **antes** de publicar: alguien baja tu carpeta y corre tu código. La [política de verificación de AJPS](https://ajps.org/ajps-verification-policy/) y el trabajo del [Data Editor de la AEA](https://www.aeaweb.org/journals/data/data-code-policy) son los ejemplos más conocidos.
+
+Lo que suelen exigir: los datos (o instrucciones precisas para conseguirlos), todo el código, un README con el orden de ejecución y el entorno, y que las tablas y figuras del paper se generen desde ese código. Es exactamente lo que produce esta guía, así que si venís trabajando así, el paquete ya está hecho.
+
+### Poner una licencia
+
+Sin licencia, "público" no quiere decir "reutilizable": por defecto todos los derechos quedan reservados y nadie sabe qué puede hacer. Dos líneas alcanzan:
+
+- Para el **código**, una licencia de software permisiva como MIT, o GPL si querés que las obras derivadas sigan abiertas.
+- Para los **datos y el texto**, [Creative Commons](https://creativecommons.org/): CC BY (citando la fuente) o CC0 (sin condiciones).
+
+Se declara en un archivo `LICENSE` en la raíz del repositorio. Es el archivo más barato de escribir y el que más veces evita que alguien no use tu trabajo por las dudas.
+
+### Datos que no se pueden publicar
+
+Muchos proyectos de política pública trabajan con datos personales, registros médicos o encuestas con identificadores. Que no se puedan publicar tal cual no cancela la reproducibilidad:
+
+- Publicá **siempre el código**, aunque los datos vayan aparte. Es la mitad del trabajo y no tiene restricciones.
+- Publicá una versión **anonimizada o agregada** que permita correr el análisis, aunque los números no coincidan al decimal.
+- Depositá los datos completos bajo **acceso controlado** (Dataverse y OSF lo permiten), con un procedimiento para solicitarlos.
+- Generá **datos sintéticos** con la misma estructura, para que el código se pueda ejecutar de punta a punta. Es lo que hacemos en este taller: todas las bases son simuladas.
+- Documentá en el README **qué no se comparte y por qué**, con la referencia al comité de ética o a la norma que aplica.
+
+Un proyecto con código público, un codebook y datos sintéticos es más reproducible que la mayoría de lo que se publica hoy, aunque los datos originales nunca salgan de la institución.
+
+# El repaso antes de mandar
 
 Cinco preguntas, dos minutos:
 
@@ -161,23 +342,51 @@ Cinco preguntas, dos minutos:
 - ¿Cada número del informe sale del código, o hay alguno tipeado a mano?
 - ¿Un colega con esta carpeta y el `README` podría llegar a mis resultados?
 
-::: {.callout-tip title="Por dónde empezar si sólo vas a hacer una cosa"}
-Empezá por el punto 3: reiniciá R y corré tu script actual de arriba a abajo. Es gratis, tarda dos minutos y casi siempre encuentra algo. Lo demás viene después.
+Y si además lo vas a publicar o depositar:
+
+- ¿El análisis que reporto es el que estaba planeado, y las desviaciones están dichas?
+- ¿Está el codebook, con la procedencia y la fecha de descarga de los datos?
+- ¿Anoté las versiones (`sessionInfo()` o `renv.lock`)?
+- ¿Tiene licencia, y un DOI si hay que citarlo?
+- ¿Revisé que no se filtre ningún dato personal, ni en los archivos ni en el historial de Git?
+
+::: {.callout-tip title="La prueba definitiva"}
+Pedile a un colega que baje tu carpeta y corra todo, sin que vos le expliques nada por WhatsApp. Lo que tenga que preguntarte es exactamente lo que falta documentar. Media hora de alguien más te ahorra el problema que después encuentra un revisor, o un periodista.
 :::
 
-## Qué no hace falta
+# Qué no hace falta
 
 La reproducibilidad tiene fama de exigente, y esa fama espanta gente. Aclaremos:
 
 - No hace falta usar la terminal si no querés. RStudio hace casi todo con botones.
 - No hace falta publicar datos sensibles. Publicás el código, y los datos van con las protecciones que correspondan.
 - No hace falta que tu código sea elegante. Que corra y que se entienda alcanza.
+- No hace falta Docker, ni `renv`, ni un DOI para un trabajo de curso. Escalá las herramientas al tamaño de lo que está en juego.
 - No hace falta adoptar todo junto. Una carpeta ordenada y rutas relativas ya te ponen adelante de buena parte de la literatura publicada.
 
-## Para seguir
+# Para seguir
 
-- [The Turing Way](https://the-turing-way.netlify.app/), manual abierto y colaborativo de ciencia reproducible, con capítulos cortos y ejemplos
-- [Gentzkow y Shapiro (2014)](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf), *Code and Data for the Social Sciences*, treinta páginas escritas por dos economistas para su propio equipo
-- [Happy Git with R](https://happygitwithr.com/), de Jenny Bryan, para Git y GitHub desde cero
-- [Guía de Quarto](https://quarto.org/docs/guide/), la documentación oficial, con ejemplos para copiar
-- [The Practice of Reproducible Research](https://www.practicereproducibleresearch.org/), treinta casos reales contados por quienes los hicieron
+**Manuales generales**
+
+- [The Turing Way](https://the-turing-way.netlify.app/), manual abierto y colaborativo de ciencia reproducible, con capítulos cortos y ejemplos.
+- [Gentzkow y Shapiro (2014)](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf), *Code and Data for the Social Sciences*, treinta páginas escritas por dos economistas para su propio equipo.
+- [The Practice of Reproducible Research](https://www.practicereproducibleresearch.org/), treinta casos reales contados por quienes los hicieron.
+
+**Herramientas**
+
+- [Happy Git with R](https://happygitwithr.com/), de Jenny Bryan, para Git y GitHub desde cero.
+- [Guía de Quarto](https://quarto.org/docs/guide/), la documentación oficial, con ejemplos para copiar.
+- [Documentación de `renv`](https://rstudio.github.io/renv/articles/renv.html), para congelar las versiones de los paquetes.
+- [Rocker](https://rocker-project.org/), imágenes de Docker con R y RStudio listas para usar.
+
+**Diseño y pre-registro**
+
+- [Olken (2015)](https://doi.org/10.1257/jep.29.3.61), sobre las promesas y los límites de los planes de pre-análisis.
+- [Nosek et al. (2018)](https://doi.org/10.1073/pnas.1708274114), la revolución del pre-registro y los registered reports.
+- [Declaración PRISMA 2020](https://doi.org/10.1136/bmj.n71), el checklist y el diagrama de flujo para revisiones sistemáticas.
+
+**Compartir y archivar**
+
+- [Principios FAIR](https://doi.org/10.1038/sdata.2016.18), qué hace que unos datos sean reutilizables.
+- [Política de verificación de AJPS](https://ajps.org/ajps-verification-policy/), un ejemplo concreto de qué revisa una revista.
+- [Guía de Zenodo para GitHub](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content), cómo conseguir un DOI para tu repositorio.

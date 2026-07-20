@@ -15,7 +15,7 @@ Vamos a publicar una referencia por bloque a medida que se revisan las diapositi
 
 [Parte 2 · diferencia de medias, balance, ajuste de covariables, diseño]{.resource-meta}
 
-[`difference_in_means`, `lm_robust`, `lm_lin`, interacciones, tabla de balance, errores agrupados, inferencia por aleatorización con `ri2`, comparaciones múltiples, y `DeclareDesign` / `DesignLibrary` para simular el diseño antes del campo]{.resource-meta}
+[`difference_in_means`, `lm_robust`, `lm_lin`, interacciones, tabla de balance, errores agrupados, inferencia por aleatorización con `ri2`, comparaciones múltiples, y `DeclareDesign` / `DesignLibrary` para simular el diseño antes del campo.]{.resource-meta}
 
 ::: {.resource-links}
 [Abrir referencia](referencia-experimentos.html)
@@ -27,7 +27,7 @@ Vamos a publicar una referencia por bloque a medida que se revisan las diapositi
 
 [Parte 3 · rdplot, rdrobust, rddensity y chequeos de validez]{.resource-meta}
 
-[Ver el salto con `rdplot`, estimar el efecto local con `rdrobust`, testear manipulación con `rddensity`, y correr los chequeos de validez (densidad, balance, corte placebo, ancho de banda) como rutina]{.resource-meta}
+[Ver el salto con `rdplot`, estimar el efecto local con `rdrobust`, testear manipulación con `rddensity`, y correr los chequeos de validez (densidad, balance, corte placebo, ancho de banda) como rutina.]{.resource-meta}
 
 ::: {.resource-links}
 [Abrir referencia](referencia-rdd.html)
@@ -39,7 +39,7 @@ Vamos a publicar una referencia por bloque a medida que se revisan las diapositi
 
 [Parte 4 · el 2×2, tidysynth de punta a punta y gsynth]{.resource-meta}
 
-[El 2×2 de DiD con `dplyr`, el control sintético en un pipe con `tidysynth` (pesos, balance, placebos, inferencia por MSPE), y `gsynth` para varios tratados y fechas escalonadas, con factores interactivos y matrix completion]{.resource-meta}
+[El 2×2 de DiD con `dplyr`, el control sintético en un pipe con `tidysynth` (pesos, balance, placebos, inferencia por MSPE), y `gsynth` para varios tratados y fechas escalonadas, con factores interactivos y matrix completion.]{.resource-meta}
 
 ::: {.resource-links}
 [Abrir referencia](referencia-did-sintetico.html)
@@ -51,7 +51,7 @@ Vamos a publicar una referencia por bloque a medida que se revisan las diapositi
 
 [Parte 5 · meta-análisis con metafor y sesgo de publicación]{.resource-meta}
 
-[Meta-análisis con `rma()`, forest y funnel plots, el test de Egger, trim-and-fill, efectos fijos frente a aleatorios, subgrupos y meta-regresión, y diagnósticos de estudios influyentes]{.resource-meta}
+[Meta-análisis con `rma()`, forest y funnel plots, el test de Egger, trim-and-fill, efectos fijos frente a aleatorios, subgrupos y meta-regresión, y diagnósticos de estudios influyentes.]{.resource-meta}
 
 ::: {.resource-links}
 [Abrir referencia](referencia-acumulacion.html)

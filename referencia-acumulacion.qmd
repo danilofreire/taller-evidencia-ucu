@@ -309,27 +309,27 @@ Corré leave-one-out siempre que tengas pocos estudios, que es lo habitual en ci
 ::: {.callout-tip title="Enlaces y lecturas"}
 **El paquete**
 
-- [`metafor`](https://www.metafor-project.org/): la web del paquete, con una documentación excelente y muchos ejemplos reproducibles
-- [Viechtbauer (2010)](https://doi.org/10.18637/jss.v036.i03): el artículo que lo presenta, en el *Journal of Statistical Software*
+- [`metafor`](https://www.metafor-project.org/): la web del paquete, con una documentación excelente y muchos ejemplos reproducibles.
+- [Viechtbauer (2010)](https://doi.org/10.18637/jss.v036.i03): el artículo que lo presenta, en el *Journal of Statistical Software*.
 
 **Para leer**
 
-- [Harrer, Cuijpers, Furukawa y Ebert (2021)](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/), *Doing Meta-Analysis with R*: el manual práctico, gratis online
-- [Egger et al. (1997)](https://doi.org/10.1136/bmj.315.7109.629): el test de asimetría del funnel
-- [Rosenthal (1979)](https://doi.org/10.1037/0033-2909.86.3.638): el file-drawer problem, el artículo original
+- [Harrer, Cuijpers, Furukawa y Ebert (2021)](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/), *Doing Meta-Analysis with R*: el manual práctico, gratis online.
+- [Egger et al. (1997)](https://doi.org/10.1136/bmj.315.7109.629): el test de asimetría del funnel.
+- [Rosenthal (1979)](https://doi.org/10.1037/0033-2909.86.3.638): el file-drawer problem, el artículo original.
 
 **Sobre el cajón y la replicación**
 
-- [Franco, Malhotra y Simonovits (2014)](https://doi.org/10.1126/science.1255484) y [Moniz, Druckman y Freese (2025)](https://doi.org/10.1073/pnas.2426937122): el cajón medido con TESS, diez años después
-- [Open Science Collaboration (2015)](https://doi.org/10.1126/science.aac4716): las 100 replicaciones en psicología
-- [Aczél, Szászi, Nosek et al. (2026)](https://doi.org/10.1038/s41586-025-09844-9): 457 analistas, 100 estudios, en *Nature*
+- [Franco, Malhotra y Simonovits (2014)](https://doi.org/10.1126/science.1255484) y [Moniz, Druckman y Freese (2025)](https://doi.org/10.1073/pnas.2426937122): el cajón medido con TESS, diez años después.
+- [Open Science Collaboration (2015)](https://doi.org/10.1126/science.aac4716): las 100 replicaciones en psicología.
+- [Aczél, Szászi, Nosek et al. (2026)](https://doi.org/10.1038/s41586-025-09844-9): 457 analistas, 100 estudios, en *Nature*.
 
 **Nuestro caso del bloque**
 
-- [Freire, Mignozzetti, Roman y Alptekin (2023)](https://doi.org/10.1017/S0007123422000552): el meta-análisis del tamaño de las legislaturas y el gasto público, en el *British Journal of Political Science*
+- [Freire, Mignozzetti, Roman y Alptekin (2023)](https://doi.org/10.1017/S0007123422000552): el meta-análisis del tamaño de las legislaturas y el gasto público, en el *British Journal of Political Science*.
 
 **Prácticas reproducibles**
 
-- La [guía de reproducibilidad](reproducibilidad.html) del taller, con el kit paso a paso
-- [The Turing Way](https://the-turing-way.netlify.app/) y [Gentzkow y Shapiro (2014)](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf)
+- La [guía de reproducibilidad](reproducibilidad.html) del taller, con el kit paso a paso.
+- [The Turing Way](https://the-turing-way.netlify.app/) y [Gentzkow y Shapiro (2014)](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf).
 :::

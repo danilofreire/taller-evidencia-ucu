@@ -338,19 +338,19 @@ Usalo en la etapa de planificación, para responder "¿con esta cantidad de caso
 ::: {.callout-tip title="Enlaces y lecturas"}
 **Los paquetes de RDD** (Cattaneo y coautores)
 
-- [rdpackages.github.io](https://rdpackages.github.io/): el hub con todos los paquetes
-- [`rdrobust`](https://rdpackages.github.io/rdrobust/): estimación, inferencia y `rdplot`
-- [`rddensity`](https://rdpackages.github.io/rddensity/): tests de manipulación
-- [`rdmulti`](https://rdpackages.github.io/rdmulti/): varios cortes a la vez, como los 12 umbrales del paper
-- [`rdlocrand`](https://rdpackages.github.io/rdlocrand/): inferencia de aleatorización local en ventanas chicas
-- [`rdpower`](https://rdpackages.github.io/rdpower/): poder y tamaño de muestra para RDD
+- [rdpackages.github.io](https://rdpackages.github.io/): el hub con todos los paquetes.
+- [`rdrobust`](https://rdpackages.github.io/rdrobust/): estimación, inferencia y `rdplot`.
+- [`rddensity`](https://rdpackages.github.io/rddensity/): tests de manipulación.
+- [`rdmulti`](https://rdpackages.github.io/rdmulti/): varios cortes a la vez, como los 12 umbrales del paper.
+- [`rdlocrand`](https://rdpackages.github.io/rdlocrand/): inferencia de aleatorización local en ventanas chicas.
+- [`rdpower`](https://rdpackages.github.io/rdpower/): poder y tamaño de muestra para RDD.
 
 **Para leer**
 
-- [Cattaneo, Idrobo y Titiunik (2020)](https://doi.org/10.1017/9781108684606), *A Practical Introduction to RD Designs: Foundations*, y su segundo volumen, [*Extensions* (2024)](https://doi.org/10.1017/9781009441896): la guía moderna, gratis online
-- [Lee y Lemieux (2010)](https://doi.org/10.1257/jel.48.2.281): el survey clásico en el *Journal of Economic Literature*
+- [Cattaneo, Idrobo y Titiunik (2020)](https://doi.org/10.1017/9781108684606), *A Practical Introduction to RD Designs: Foundations*, y su segundo volumen, [*Extensions* (2024)](https://doi.org/10.1017/9781009441896): la guía moderna, gratis online.
+- [Lee y Lemieux (2010)](https://doi.org/10.1257/jel.48.2.281): el survey clásico en el *Journal of Economic Literature*.
 
 **Nuestro caso del bloque**
 
-- [Mignozzetti, Cepaluni y Freire (2025)](https://doi.org/10.1111/ajps.12843): tamaño del concejo y bienestar en Brasil, con la regla del TSE de 2004 como experimento accidental
+- [Mignozzetti, Cepaluni y Freire (2025)](https://doi.org/10.1111/ajps.12843): tamaño del concejo y bienestar en Brasil, con la regla del TSE de 2004 como experimento accidental.
 :::
