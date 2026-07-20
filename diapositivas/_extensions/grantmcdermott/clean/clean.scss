@@ -235,6 +235,13 @@ $selection-bg: #2d4563 !default;
   border-color: #c3ddfc;
 }
 
+// El texto del botón es un enlace: forzamos blanco para que se lea
+// sobre el fondo azul (si no, hereda el color de link y queda ilegible).
+.button a,
+.button a:hover {
+  color: #fff !important;
+}
+
 .button::before {
   content: "▶";
   margin-right: 5px;

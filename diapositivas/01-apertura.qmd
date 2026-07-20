@@ -1,6 +1,6 @@
 ---
 title: "Políticas públicas basadas en evidencia"
-subtitle: "Apertura: el problema del contrafactual"
+subtitle: "Parte 1: el problema del contrafactual"
 author:
   - name: Danilo Freire
     orcid: 0000-0002-4712-6810
@@ -198,61 +198,33 @@ Si somos muchos y el tiempo aprieta, seguimos charlando durante el día o en los
 
 :::
 
-## Hay mucha investigación buena en la región: educación y salud
+## Hay mucha investigación buena en la región
 
-:::{style="margin-top: 8px; font-size: 23px;"}
+:::{style="margin-top: 10px; font-size: 22px;"}
 :::{.columns}
 :::{.column width=50%}
-[Educación]{.alert}
+[Sorteos y umbrales]{.alert}
 
 - [Ser Pilo Paga]{.alert} en Colombia casi cerró la brecha de acceso universitario entre los mejores estudiantes pobres ([RDD]{.alert}; [Londoño-Vélez et al., 2020](https://doi.org/10.1257/pol.20180131))
 
-- El [aprendizaje remoto]{.alert} en la pandemia (Brasil) subió la deserción y hundió los aprendizajes ~0,3 DE ([dif-en-dif]{.alert}; [Lichand et al., 2022](https://doi.org/10.1038/s41562-022-01350-6))
+- El [patrullaje en puntos calientes]{.alert} en Bogotá dio efectos modestos que casi no sobrevivieron a la escala ([RCT]{.alert}; [Blattman et al., 2021](https://doi.org/10.1093/jeea/jvab002))
 
-- Darles [información]{.alert} a las familias sobre el rendimiento de sus hijos mejoró los aprendizajes en Colombia ([RCT]{.alert}; [Barrera-Osorio et al., 2020](https://doi.org/10.1016/j.jpubeco.2020.104185))
-
-- El [Plan Ceibal]{.alert}, una laptop por alumno en Uruguay, es hoy un caso muy estudiado
+- En Nicaragua, una transferencia temporal dejó efectos que [persistieron 10 años]{.alert} ([RCT]{.alert}; [Molina-Millán et al., 2020](https://doi.org/10.1016/j.jdeveco.2019.102385))
 :::
 
 :::{.column width=50%}
-[Salud]{.alert}
-
-- El [Seguro Popular]{.alert} en México no movió la mortalidad adulta, pero bajó ~10% la infantil en municipios pobres ([dif-en-dif]{.alert}; [Conti y Ginja, 2023](https://doi.org/10.3368/jhr.58.3.1117-9157R2))
-
-- [CoronaVac]{.alert} en Chile: 66% de efectividad contra el COVID sintomático y ~86% contra UCI y muerte ([cohorte nacional]{.alert}; [Jara et al., 2021](https://doi.org/10.1056/NEJMoa2107715))
-
-- [Bolsa Família]{.alert} en Brasil se asocia a menor mortalidad, sobre todo entre los más pobres ([experimento natural]{.alert}; [Pescarini et al., 2022](https://doi.org/10.1093/ije/dyac188))
-:::
-:::
-:::
-
-## Seguridad y protección social
-
-:::{style="margin-top: 8px; font-size: 25px;"}
-:::{.columns}
-:::{.column width=50%}
-[Seguridad y crimen]{.alert}
+[Trayectorias en el tiempo]{.alert}
 
 - Las [cámaras vigiladas por la policía]{.alert} en Montevideo bajaron el delito callejero entre 20% y 30% ([dif-en-dif]{.alert}; [Munyo y Rossi, 2020](https://doi.org/10.1111/sjoe.12375))
 
-- El [patrullaje en puntos calientes]{.alert} en Bogotá dio efectos directos modestos que casi no sobrevivieron a la escala ([RCT]{.alert}; [Blattman et al., 2021](https://doi.org/10.1093/jeea/jvab002))
+- El [Seguro Popular]{.alert} en México no movió la mortalidad adulta, pero bajó ~10% la infantil en municipios pobres ([dif-en-dif]{.alert}; [Conti y Ginja, 2023](https://doi.org/10.3368/jhr.58.3.1117-9157R2))
 
-- Deportar pandilleros desde EE.UU. [exportó la violencia]{.alert} a El Salvador ([dif-en-dif]{.alert}; [Sviatschi, 2022](https://doi.org/10.1257/aer.20201540))
-:::
-
-:::{.column width=50%}
-[Protección social]{.alert}
-
-- [Oportunidades]{.alert} en México: la exposición en la niñez elevó la escolaridad de la próxima generación, sobre todo de las mujeres ([largo plazo]{.alert}; [Parker y Vogl, 2023](https://doi.org/10.1093/ej/uead049))
-
-- En Nicaragua, una transferencia temporal dejó efectos que [persistieron 10 años]{.alert} ([RCT]{.alert}; [Molina-Millán et al., 2020](https://doi.org/10.1016/j.jdeveco.2019.102385))
-
-- El [seguro de desempleo]{.alert} en Brasil pesa menos en la economía donde la informalidad es alta ([cuasi-experimento]{.alert}; [Gerard y Gonzaga, 2021](https://doi.org/10.1257/pol.20180072))
+- El [aprendizaje remoto]{.alert} en la pandemia (Brasil) subió la deserción y hundió los aprendizajes ~0,3 DE ([dif-en-dif]{.alert}; [Lichand et al., 2022](https://doi.org/10.1038/s41562-022-01350-6))
 :::
 :::
 
-:::{style="text-align: center;"}
-La misma lógica: comparar contra un [contrafactual creíble]{.alert}
+:::{style="margin-top: 6px; text-align: center; font-size: 23px; color: #555;"}
+Hay varios más en las [referencias](#sec:referencias) del final
 :::
 :::
 
@@ -298,7 +270,7 @@ La misma lógica: comparar contra un [contrafactual creíble]{.alert}
 | 14:15 | [Acumulación](https://danilofreire.github.io/taller-evidencia-ucu/diapositivas/05-acumulacion.html): meta-análisis y replicación | 60 min |
 | 15:15 | [Cierre](https://danilofreire.github.io/taller-evidencia-ucu/diapositivas/06-cierre.html) | 15 min |
 
-:::{style="margin-top: 12px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 22px;"}
+:::{style="margin-top: 30px; border-left: 4px solid #2d4563; padding: 6px 18px; font-size: 22px;"}
 Sitio web con las diapositivas, el código, los datos, las tareas y las referencias: <https://danilofreire.github.io/taller-evidencia-ucu/>
 :::
 :::
@@ -328,8 +300,8 @@ Vamos a correr código en R. Abrí RStudio y dejá esto listo mientras arrancamo
 
 ```r
 # 1. Instalar si es necesario (solo la primera vez)
-paquetes <- c("tidyverse", "estimatr", "rdrobust",
-              "rddensity", "tidysynth", "metafor")
+paquetes <- c("tidyverse", "estimatr", "DeclareDesign", "fabricatr",
+              "rdrobust", "rddensity", "tidysynth", "metafor")
 
 for (pkg in paquetes) {
   if (!require(pkg, character.only = TRUE)) {
@@ -349,7 +321,7 @@ No hace falta que corras el código conmigo: te lo muestro paso a paso. Pero al 
 
 # ¡Empecemos! 😎 {background-color="#2d4563"}
 
-## Referencias
+## Referencias {#sec:referencias}
 
 :::{style="font-size: 15px;"}
 :::{.columns}

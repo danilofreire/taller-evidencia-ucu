@@ -3,64 +3,58 @@
 # legislatura y gasto público, para enseñar meta-análisis y sesgo de
 # publicación en el taller de la UCU.
 #
-# Unidad: estudio. 20 estudios (autores y años ficticios, con sabor regional).
-# Cada uno reporta un efecto estandarizado (efecto) y su error estándar (ee).
-# El efecto verdadero es 0.15 con heterogeneidad entre estudios (tau = 0.08).
+# La simulación arma primero la LITERATURA COMPLETA: 40 estudios (autores y
+# años ficticios, con sabor regional), cada uno con un efecto estandarizado
+# (efecto) y su error estándar (ee). El efecto verdadero es 0.15 con
+# heterogeneidad entre estudios (tau = 0.08).
 #
-# Truco pedagógico (sesgo de publicación): a los estudios chicos (ee > 0.12)
-# les imponemos que sólo "se publican" si son significativos y positivos
-# (efecto / ee > 1.64). Eso infla los efectos chicos y hace que:
-#   - el estimador combinado suba por encima del 0.15 verdadero (~0.20 a 0.24)
-#   - el funnel plot quede asimétrico y el test de Egger dé significativo
-#   - al quedarnos sólo con los estudios grandes (ee <= 0.12), baje hacia 0.15
+# Después aplica el FILTRO DE PUBLICACIÓN: los estudios grandes (ee <= 0.12)
+# se publican con cualquier resultado; los chicos, sólo si salieron
+# significativos y positivos (efecto / ee > 1.64). El CSV guarda únicamente
+# los publicados. Eso hace que (semilla 27):
+#   - se publiquen 21 de los 40 (12 grandes + 9 chicos inflados)
+#   - el estimador combinado suba a 0.20 (arriba del 0.15 verdadero)
+#   - el funnel quede asimétrico y el test de Egger dé p = 0.004
+#   - al quedarse sólo con los grandes, baje a 0.15
+#   - la literatura completa (con el cajón abierto) dé 0.15
+#
+# El generador usa fabricatr y es EXACTAMENTE el mismo que aparece en
+# 05-acumulacion.qmd (slide "Generá los datos", con los huecos completos)
+# y en codigo/practica-05.R. La semilla fija garantiza datos idénticos.
 
-set.seed(2026)
+library(fabricatr)
+suppressPackageStartupMessages(library(dplyr))
 
-n_est <- 20
+set.seed(27)
 
-# --- Tamaño muestral y error estándar ------------------------------------
-# (Se simulan primero las columnas numéricas para fijar el flujo aleatorio.)
-n  <- round(exp(runif(n_est, log(80), log(5500))))     # log-uniforme 80 a 5500
-ee <- round(pmin(pmax(2.2 / sqrt(n), 0.03), 0.25), 3)  # ~ 1/sqrt(n), rango 0.03 a 0.25
+apellidos <- c("García", "Souza", "Lima", "Rojas", "Fernández",
+               "Muñoz", "Silva", "Torres", "Vargas", "Herrera",
+               "Castro", "Mendoza", "Ríos", "Acosta", "Núñez",
+               "Ferreira", "Ortiz", "Cabrera", "Duarte", "Sosa")
+paises <- c("Brasil", "México", "Chile", "Colombia", "Perú",
+            "Argentina", "Uruguay")
 
-# --- Efecto con heterogeneidad y selección por publicación ---------------
-tau  <- 0.08
-mu   <- 0.15
-efecto <- numeric(n_est)
-for (i in seq_len(n_est)) {
-  sdi <- sqrt(tau^2 + ee[i]^2)
-  e   <- rnorm(1, mu, sdi)
-  if (ee[i] > 0.12) {                                  # estudio chico: se publica sólo si significativo
-    while (e / ee[i] <= 1.64) e <- rnorm(1, mu, sdi)
-  }
-  efecto[i] <- round(e, 3)
-}
-
-# --- Etiquetas de estudio ficticias (no usar nombres reales) -------------
-apellidos <- c("García", "Souza", "Lima", "Rojas", "Fernández", "Muñoz",
-               "Silva", "Torres", "Vargas", "Herrera", "Castro", "Mendoza",
-               "Ríos", "Acosta", "Núñez", "Ferreira", "Ortiz", "Cabrera",
-               "Duarte", "Sosa")
-anios <- sample(2005:2022, n_est, replace = TRUE)
-dobles <- rbinom(n_est, 1, 0.35)                       # algunos con dos autores
-segundo <- sample(apellidos)
-estudio <- ifelse(dobles == 1,
-                  sprintf("%s y %s (%d)", apellidos, segundo, anios),
-                  sprintf("%s (%d)", apellidos, anios))
-
-pais <- sample(c("Brasil", "México", "Chile", "Colombia", "Perú",
-                 "Argentina", "Uruguay"), n_est, replace = TRUE)
-diseno <- sample(rep(c("RDD", "DiD", "OLS"), c(8, 5, 7)))
-
-datos <- data.frame(
-  estudio          = estudio,
-  pais             = pais,
-  diseno           = diseno,
-  n                = n,
-  ee               = ee,
-  efecto           = efecto,
-  stringsAsFactors = FALSE
+literatura <- fabricate(
+  N = 40,
+  autor   = sample(apellidos, N, replace = TRUE),
+  anio    = sample(2005:2022, N, replace = TRUE),
+  estudio = paste0(autor, " (", anio, ")"),
+  pais    = sample(paises, N, replace = TRUE),
+  diseno  = sample(c("RDD", "DiD", "OLS"), N, replace = TRUE),
+  # muestras de 60 a 600 personas
+  n       = round(exp(runif(N, log(60), log(600)))),
+  # cuanto más grande el estudio, más chico su error
+  ee      = round(2.2 / sqrt(n), 3),
+  # el efecto verdadero es 0.15 para todos; lo demás es ruido
+  efecto  = round(rnorm(N, 0.15, sqrt(0.08^2 + ee^2)), 3)
 )
+
+# el filtro de publicación: los grandes entran siempre;
+# los chicos, sólo si salieron significativos
+datos <- literatura |>
+  filter(ee <= 0.12 | efecto / ee > 1.64)
+
+datos <- datos[, c("estudio", "pais", "diseno", "n", "ee", "efecto")]
 
 # --- Guardar junto al script, sin importar el directorio de trabajo ---
 args       <- commandArgs(trailingOnly = FALSE)
@@ -69,13 +63,13 @@ dir_salida <- if (length(file_arg)) dirname(normalizePath(file_arg)) else getwd(
 salida     <- file.path(dir_salida, "meta_estudios.csv")
 write.csv(datos, salida, row.names = FALSE)
 
-cat("Escrito:", salida, "con", nrow(datos), "filas\n")
+cat("Escrito:", salida, "con", nrow(datos), "filas (de",
+    nrow(literatura), "estudios simulados)\n")
 
-# --- Verificación (descomentar para volver a chequear) --------------------
-# library(metafor)
-# m <- rma(yi = efecto, sei = ee, data = datos)
-# summary(m)                       # estimador combinado ~ 0.20 a 0.24 (sesgado)
-# regtest(m)                       # test de Egger, p < ~0.10 (asimetría)
-# funnel(m); forest(m)             # el funnel se ve asimétrico
-# # Modificación de clase: sólo estudios grandes -> baja hacia 0.15
-# rma(yi = efecto, sei = ee, data = subset(datos, ee <= 0.12))
+# --- Chequeo rápido -------------------------------------------------------
+suppressPackageStartupMessages(library(metafor))
+m <- rma(yi = efecto, sei = ee, data = datos)
+cat(sprintf("combinado publicados = %.3f | Egger p = %.3f | grandes = %.3f\n",
+            m$beta[1], regtest(m)$pval,
+            rma(yi = efecto, sei = ee,
+                data = subset(datos, ee <= 0.12))$beta[1]))
