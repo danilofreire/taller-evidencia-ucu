@@ -36,12 +36,20 @@ website:
         text: Programa
       - href: materiales.qmd
         text: Materiales
+      - href: reproducibilidad.qmd
+        text: Reproducibilidad
       - text: Referencia R
         menu:
           - href: referencia-r.qmd
             text: Todas las referencias
           - href: referencia-experimentos.qmd
             text: Experimentos
+          - href: referencia-rdd.qmd
+            text: Regresión discontinua
+          - href: referencia-did-sintetico.qmd
+            text: DiD y control sintético
+          - href: referencia-acumulacion.qmd
+            text: Acumulación de evidencia
       - href: referencias.qmd
         text: Referencias
     right:

@@ -1,0 +1,356 @@
+---
+title: "Referencia R: regresión discontinua"
+subtitle: "Parte 3 · rdplot, rdrobust, rddensity y los chequeos de validez"
+toc: true
+toc-depth: 3
+number-sections: true
+code-copy: true
+code-tools: true
+code-fold: false
+lang: es
+engine: knitr
+---
+
+```{r setup}
+#| include: false
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  fig.width = 7,
+  fig.height = 4,
+  dpi = 150,
+  cache = TRUE
+)
+
+# paleta de la casa (el mismo par azul/rojo de las diapositivas)
+azul <- "#2d4563"
+rojo <- "#b85450"
+
+tema_taller <- ggplot2::theme_minimal(base_size = 13) +
+  ggplot2::theme(panel.grid.minor = ggplot2::element_blank())
+```
+
+Esta página reúne, con código que podés correr y copiar, todas las funciones de R del bloque de regresión discontinua ([diapositivas](diapositivas/03-rdd.html)). Cada sección explica en pocas frases qué hace el comando, muestra un bloque ejecutable con su salida real, y cierra con una nota sobre cuándo conviene usarlo y qué mirar.
+
+Los ejemplos trabajan sobre los datos simulados del caso de los concejos municipales en Brasil ([Mignozzetti, Cepaluni y Freire, 2025](https://doi.org/10.1111/ajps.12843)). Como la semilla está fija (`set.seed(148)`), los números coinciden con los de las diapositivas y con el archivo [`municipios.csv`](diapositivas/datos/municipios.csv). El diseño simplifica el paper a un solo umbral (47.619 habitantes, donde el concejo pasa de 9 a 10 bancas), pero con efectos calcados de la investigación real.
+
+## Paquetes y datos
+
+Cargá los paquetes del bloque. El bucle recorre la lista `paquetes` e instala cada uno solo si te falta, así el código corre igual en cualquier máquina. `rdrobust` y `rddensity` son el estándar para RDD hoy; `fabricatr` ya lo conocés del bloque de experimentos.
+
+```{r paquetes}
+paquetes <- c("tidyverse", "estimatr", "rdrobust",
+              "rddensity", "fabricatr", "DesignLibrary")
+
+for (pkg in paquetes) {
+  if (!require(pkg, character.only = TRUE)) {
+    install.packages(pkg, dependencies = TRUE)
+    library(pkg, character.only = TRUE)
+  }
+}
+```
+
+La variable de asignación es `poblacion_c`: la población de cada municipio centrada en el umbral (población menos 47.619). Cruzar el corte (`poblacion_c >= 0`) suma una banca; ese salto está escrito en la regla, no lo sortea nadie.
+
+```{r generar-datos}
+set.seed(148)
+
+datos <- fabricate(
+  N = 2000,
+  poblacion      = round(runif(N, 20000, 75000)),
+  poblacion_c    = poblacion - 47619,
+  x              = poblacion_c / 10000,
+  concejo_grande = as.integer(poblacion_c >= 0),
+  n_concejales   = 9 + concejo_grande,
+  pib_pc         = round(12 + 0.8 * x + rnorm(N, 0, 2), 1),
+  prop_pobres    = round(pmin(pmax(0.34 - 0.02 * x + rnorm(N, 0, 0.05), 0.05), 0.75), 3),
+  bancas_2000    = 9 + rbinom(N, 1, 0.15),
+  mortalidad_infantil     = pmax(2,   round(20 - 0.5 * x - 2.01 * concejo_grande + rnorm(N, 0, 2.5), 1)),
+  mortalidad_postneonatal = pmax(0.5, round(7 - 0.2 * x - 0.9 * concejo_grande + rnorm(N, 0, 1.3), 1)),
+  matricula_primaria      = pmax(0,   round(24 + 0.4 * x + 2.58 * concejo_grande + rnorm(N, 0, 3), 1)),
+  ideb           = pmin(10, pmax(0, round(4.5 + 0.1 * x + rnorm(N, 0, 0.5), 1))),
+  burocratas     = pmax(0, round(480 + 12 * x + 104 * concejo_grande + rnorm(N, 0, 45))),
+  proyectos_servicios = pmax(0, round(40 + 2 * x + 6 * concejo_grande + rnorm(N, 0, 7)))
+)
+
+datos |>
+  select(poblacion_c, concejo_grande, n_concejales, mortalidad_infantil) |>
+  head()
+```
+
+::: {.callout-note title="Cuándo usarlo"}
+Un RDD vive donde una regla asigna algo por un umbral en una variable continua (un puntaje, una población, una nota de corte). Lo primero es identificar la variable de asignación y centrarla en el corte, porque todo el análisis se escribe sobre esa distancia al umbral.
+:::
+
+## Comparabilidad cerca del corte
+
+Si la idea del RDD es cierta, arriba y abajo del corte los municipios tienen que parecerse en todo lo que se decidió antes. Mirá los que caen a menos de 4.000 habitantes del umbral y comparalos.
+
+```{r gemelos}
+datos |>
+  filter(abs(poblacion_c) < 4000) |>
+  group_by(concejo_grande) |>
+  summarise(across(c(pib_pc, prop_pobres, bancas_2000, n_concejales), mean))
+```
+
+El PIB per cápita, la pobreza y las bancas previas casi no se mueven entre los dos grupos. Lo único que cambia de golpe es una banca (`n_concejales` pasa de 9 a 10): ese es el experimento que escribió la ley.
+
+::: {.callout-note title="Qué mirar"}
+Es una primera mirada informal al balance, antes de los tests formales. Fijate en que las covariables previas al tratamiento sean parecidas cerca del corte. Si una salta a simple vista, tenés que preocuparte antes de estimar cualquier efecto.
+:::
+
+## Ver el salto a mano
+
+Antes de estimar nada, conviene mirar los datos: promedios del resultado por tramo de población, con una recta suave a cada lado del corte. Este gráfico artesanal deja ver de dónde sale el efecto.
+
+```{r salto, fig.width=8, fig.height=4}
+brks <- seq(-30000, 30000, by = 2500)
+datos$bin <- cut(datos$poblacion_c, breaks = brks)
+centros <- (head(brks, -1) + tail(brks, -1)) / 2
+agg <- data.frame(
+  centro = centros,
+  y = as.numeric(tapply(datos$mortalidad_infantil, datos$bin, mean))
+)
+agg <- agg[!is.na(agg$y), ]
+
+ggplot() +
+  geom_point(data = agg, aes(centro, y), colour = azul, size = 2.4) +
+  geom_smooth(data = subset(datos, poblacion_c < 0),
+              aes(poblacion_c, mortalidad_infantil),
+              method = "lm", se = FALSE, colour = azul, linewidth = 1) +
+  geom_smooth(data = subset(datos, poblacion_c >= 0),
+              aes(poblacion_c, mortalidad_infantil),
+              method = "lm", se = FALSE, colour = azul, linewidth = 1) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = rojo, linewidth = 0.8) +
+  labs(x = "Población centrada en el umbral (47.619 hab)",
+       y = "Mortalidad infantil (por mil)") +
+  tema_taller
+```
+
+El salto hacia abajo justo en el corte es el efecto; la pendiente a cada lado es la tendencia que hay que descontar (los municipios más grandes tienen algo menos de mortalidad por otras razones).
+
+::: {.callout-note title="Cuándo usarlo"}
+Hacé siempre el gráfico antes de estimar. Si no ves un salto claro a ojo, ningún estimador te lo va a inventar de forma creíble. Mirá también la forma de la curva a cada lado: si es muy no lineal, vas a necesitar un polinomio o una ventana más angosta.
+:::
+
+## El mismo salto con rdplot
+
+Lo que armamos a mano lo hace `rdplot` en una línea: elige los bins de forma óptima y ajusta un polinomio a cada lado del corte. Es el gráfico estándar de los papers de RDD.
+
+```{r rdplot, fig.width=8, fig.height=4.2}
+rdplot(datos$mortalidad_infantil, datos$poblacion_c,
+       x.label = "Población centrada en el umbral",
+       y.label = "Mortalidad infantil (por mil)", title = "")
+```
+
+::: {.callout-note title="Cuándo usarlo"}
+Es la forma rápida y estándar de visualizar la discontinuidad. El primer argumento es el resultado, el segundo la variable de asignación. Ajustá `p =` para el orden del polinomio y `nbins =` si querés controlar los bins. Ver que coincide con el gráfico a mano es lo que te deja confiar en el atajo.
+:::
+
+## Comparación ingenua vs local
+
+La diferencia entre todos los concejos grandes y todos los chicos exagera el efecto, porque arrastra la tendencia (los municipios grandes son distintos por muchas razones además de la banca).
+
+```{r naive}
+with(datos, mean(mortalidad_infantil[concejo_grande == 1]) -
+            mean(mortalidad_infantil[concejo_grande == 0]))
+```
+
+La regresión local, restringida a una ventana cerca del corte y con una pendiente a cada lado, descuenta esa tendencia. El operador `*` pide los dos efectos principales más su interacción, así la pendiente puede diferir a cada lado del umbral.
+
+```{r local}
+cerca <- filter(datos, abs(poblacion_c) < 8000)
+fit <- lm_robust(mortalidad_infantil ~ concejo_grande * poblacion_c, data = cerca)
+round(coef(summary(fit))["concejo_grande", 1:4], 3)
+```
+
+Pasamos de −3,57 (ingenua) a ≈ −1,9 (local): buena parte de la brecha era sesgo de selección, no efecto de la banca.
+
+::: {.callout-note title="Qué mirar"}
+La comparación ingenua sirve como contraste, para ver cuánto sesgo tenía. Reportá siempre la estimación local. Si la ingenua y la local se parecen, la variable de asignación explicaba poco; si difieren mucho, había una tendencia fuerte que el RDD descuenta.
+:::
+
+## Estimar el efecto con rdrobust
+
+`rdrobust` es el estimador de referencia: elige el ancho de banda de forma óptima y corrige el sesgo de los bordes ([Calonico, Cattaneo y Titiunik, 2014](https://doi.org/10.3982/ECTA11757)). Con `summary()` ves el efecto, su error estándar, el valor $p$ y el ancho de banda elegido.
+
+```{r rdrobust}
+rd <- rdrobust(datos$mortalidad_infantil, datos$poblacion_c)
+summary(rd)
+```
+
+El efecto local es de ≈ −1,92 muertes por mil. En el paper, con los datos reales y los 12 umbrales agrupados, da −2,01 (Tabla 4): la misma lógica, en su versión simulada. Un coeficiente negativo acá es buena noticia (menos muertes). La fila "Conventional" es el estimado puntual; la fila "Robust" trae el intervalo de confianza con la corrección de sesgo, que es el que se reporta.
+
+::: {.callout-note title="Cuándo usarlo"}
+Es tu caballo de batalla para estimar el efecto en un RDD. Podés extraer los números con `rd$coef`, `rd$se`, `rd$pv` y `rd$bws`. Argumentos útiles: `c =` para mover el corte, `p =` para el orden del polinomio, `h =` para fijar el ancho de banda a mano, y `covs =` para sumar controles.
+:::
+
+## El efecto en varias dimensiones
+
+El mismo salto se puede estimar resultado por resultado. Un `sapply` sobre la lista de variables corre un `rdrobust` para cada una y arma una tabla con el efecto y su valor $p$.
+
+```{r varias}
+outs <- c(matricula_primaria = "Matrícula primaria (chicos/aula)",
+          mortalidad_infantil = "Mortalidad infantil (por mil)",
+          mortalidad_postneonatal = "Mortalidad postneonatal (por mil)",
+          ideb = "Calidad educativa (IDEB, 0-10)",
+          burocratas = "Cargos designados",
+          proyectos_servicios = "Proyectos de servicios")
+
+tabla <- t(sapply(names(outs), function(v) {
+  m <- rdrobust(datos[[v]], datos$poblacion_c)
+  c(efecto = round(m$coef[1], 2), p = round(m$pv[1], 3))
+}))
+rownames(tabla) <- outs
+knitr::kable(tabla)
+```
+
+Mejor salud, más matrícula, más cargos y proyectos. La calidad educativa (IDEB) no salta: entran más chicos al aula sin que el nivel medido caiga, igual que en el paper (−0,02, no significativo). Un nulo acá es información, no un fracaso.
+
+::: {.callout-note title="Qué mirar"}
+Correr el mismo diseño sobre varios resultados ayuda a ver el patrón completo. Con muchos resultados a la vez conviene recordar el problema de las comparaciones múltiples (ajustar los valores $p$, como vimos en el bloque de experimentos). Ojo con leer un solo resultado significativo entre muchos como si fuera la historia entera.
+:::
+
+## Chequeo de manipulación: rddensity
+
+Primer supuesto: nadie manipula el umbral. Si los municipios se acomodaran para cruzar el corte, se amontonarían de un lado. `rddensity` testea ese amontonamiento comparando la densidad de la variable de asignación a cada lado ([Cattaneo, Jansson y Ma, 2020](https://doi.org/10.1080/01621459.2019.1635480)).
+
+```{r densidad}
+dens <- rddensity(datos$poblacion_c)
+round(c(T = dens$test$t_jk, p = dens$test$p_jk), 3)
+```
+
+$p = 0{,}71$: no hay salto en la densidad. La población de 2003 no se podía manipular, tal como esperábamos.
+
+::: {.callout-note title="Qué mirar"}
+Corré este test en todo RDD. Un valor $p$ alto es lo que querés (no rechaza la hipótesis de que no hubo manipulación). Un $p$ chico es una señal de alarma: la gente pudo elegir de qué lado caer, y la comparación cerca del corte deja de ser creíble.
+:::
+
+## Chequeo de balance en covariables
+
+Segundo supuesto: las variables medidas antes del tratamiento no deberían saltar en el umbral. Corré el RDD sobre cada covariable como placebo: no debería aparecer ningún efecto.
+
+```{r balance}
+b_pib    <- rdrobust(datos$pib_pc, datos$poblacion_c)
+b_pobres <- rdrobust(datos$prop_pobres, datos$poblacion_c)
+
+balance <- data.frame(
+  variable = c("pib_pc", "prop_pobres"),
+  salto    = round(c(b_pib$coef[1], b_pobres$coef[1]), 3),
+  p_valor  = round(c(b_pib$pv[1], b_pobres$pv[1]), 3)
+)
+balance
+```
+
+Los dos valores $p$ son altos: ningún salto donde no debería haberlo. Los grupos son comparables de entrada.
+
+::: {.callout-note title="Qué mirar"}
+Es el mismo `rdrobust`, pero aplicado a covariables previas en vez de al resultado. Querés valores $p$ altos y saltos cercanos a cero. Si una covariable previa salta en el corte, algo más está cambiando en el umbral y el diseño pierde credibilidad.
+:::
+
+## Chequeo con un corte placebo
+
+Tercer chequeo: si inventás un umbral falso donde la ley no cambia nada, no debería aparecer ningún efecto. Se lo pedís a `rdrobust` con el argumento `c =`.
+
+```{r placebo}
+rdrobust(datos$mortalidad_infantil, datos$poblacion_c, c = -15000)$pv[1]
+```
+
+$p \approx 0{,}89$: nada en el corte inventado. El salto aparece sólo en el umbral verdadero.
+
+::: {.callout-note title="Qué mirar"}
+Un efecto que aparece en umbrales placebo es una señal de alarma: probablemente estás capturando la tendencia, no un salto real. Un placebo aislado que da significativo no voltea el diseño (con muchos cortes falsos, alguno cae por azar); lo que preocupa es un patrón de placebos significativos.
+:::
+
+## Sensibilidad al ancho de banda
+
+Un resultado creíble no cambia de signo ni de tamaño según cuán ancha sea la ventana. Estimá el efecto con varios anchos de banda fijos (`h =`) y graficá cómo se mueve.
+
+```{r ancho, fig.width=8, fig.height=4}
+hs <- seq(4000, 16000, by = 2000)
+est <- sapply(hs, function(h) {
+  m <- rdrobust(datos$mortalidad_infantil, datos$poblacion_c, h = h)
+  c(m$coef[1], m$se[1])
+})
+bw <- data.frame(h = hs, tau = est[1, ], se = est[2, ])
+
+ggplot(bw, aes(h, tau)) +
+  geom_hline(yintercept = 0, colour = "grey70") +
+  geom_ribbon(aes(ymin = tau - 1.96 * se, ymax = tau + 1.96 * se),
+              fill = azul, alpha = 0.15) +
+  geom_line(colour = azul, linewidth = 1) +
+  geom_point(colour = azul, size = 2.4) +
+  labs(x = "Ancho de banda (habitantes)", y = "Efecto estimado") +
+  tema_taller
+```
+
+El efecto se queda estable en torno a −1,9, ventana tras ventana. En el paper, el ancho lo elige el método de Calonico, Cattaneo y Titiunik (2014), y los resultados aguantan variarlo.
+
+::: {.callout-note title="Qué mirar"}
+Buscá estabilidad: la línea no debería cruzar el cero ni cambiar de signo al variar la ventana. Si el efecto sólo aparece con un ancho de banda muy particular, desconfiá. Por defecto dejá que `rdrobust` elija el ancho óptimo; esta prueba es para mostrar que la elección no fue afortunada.
+:::
+
+## Romper el diseño a propósito
+
+Para creerle a un chequeo, hay que verlo fallar cuando debe. Empujamos a la mayoría de los municipios que estaban justo por debajo del corte a cruzarlo, como si hubieran manipulado su población, y volvemos a correr el test de densidad.
+
+```{r sabotaje}
+set.seed(1)
+malo <- datos
+borde <- malo$poblacion_c > -1500 & malo$poblacion_c < 0
+mover <- borde & runif(nrow(malo)) < 0.7
+malo$poblacion_c[mover] <- abs(malo$poblacion_c[mover]) + 200
+
+# el test de densidad, antes limpio, ahora rechaza
+round(rddensity(malo$poblacion_c)$test$p_jk, 4)
+```
+
+De $p = 0{,}71$ a $p \approx 0{,}002$. El test detecta la manipulación que fabricamos: por eso vale la pena correrlo.
+
+::: {.callout-note title="Cuándo usarlo"}
+Sabotear los datos a propósito es una forma de convencerte de que tus chequeos sirven. Si un test no reacciona ni siquiera a una violación grande e inventada por vos, no te dice nada cuando pasa la prueba con datos reales. Es un ejercicio de diagnóstico, no algo que reportes en el paper.
+:::
+
+## Simular un RDD antes de correrlo
+
+Igual que con los experimentos, podés declarar un RDD y diagnosticarlo antes de recoger datos. `regression_discontinuity_designer`, de `DesignLibrary`, arma un diseño completo listo para `diagnose_design()`, que devuelve sesgo, poder y cobertura.
+
+```{r designlibrary}
+d_rdd <- regression_discontinuity_designer(
+  N = 2000, tau = 0.15, cutoff = 0.5, poly_reg_order = 1
+)
+
+set.seed(148)
+diagnose_design(d_rdd, sims = 300, bootstrap_sims = 0)
+```
+
+El diseñador trabaja en una escala estandarizada (la variable de asignación va de 0 a 1, no en habitantes), así que sirve para razonar sobre poder y sesgo, no para reproducir los números del caso. Para calcular el poder o el tamaño de muestra de un RDD concreto, el paquete `rdpower` está hecho para eso.
+
+::: {.callout-note title="Cuándo usarlo"}
+Usalo en la etapa de planificación, para responder "¿con esta cantidad de casos cerca del corte, detecto un salto de este tamaño?". Mirá el poder (querés ≥ 0,8) y la cobertura (cerca de 0,95). Recordá que un RDD suele necesitar bastantes observaciones alrededor del umbral, porque el estimador usa sólo una ventana.
+:::
+
+## Para seguir
+
+::: {.callout-tip title="Enlaces y lecturas"}
+**Los paquetes de RDD** (Cattaneo y coautores)
+
+- [rdpackages.github.io](https://rdpackages.github.io/): el hub con todos los paquetes
+- [`rdrobust`](https://rdpackages.github.io/rdrobust/): estimación, inferencia y `rdplot`
+- [`rddensity`](https://rdpackages.github.io/rddensity/): tests de manipulación
+- [`rdmulti`](https://rdpackages.github.io/rdmulti/): varios cortes a la vez, como los 12 umbrales del paper
+- [`rdlocrand`](https://rdpackages.github.io/rdlocrand/): inferencia de aleatorización local en ventanas chicas
+- [`rdpower`](https://rdpackages.github.io/rdpower/): poder y tamaño de muestra para RDD
+
+**Para leer**
+
+- [Cattaneo, Idrobo y Titiunik (2020)](https://doi.org/10.1017/9781108684606), *A Practical Introduction to RD Designs: Foundations*, y su segundo volumen, [*Extensions* (2024)](https://doi.org/10.1017/9781009441896): la guía moderna, gratis online
+- [Lee y Lemieux (2010)](https://doi.org/10.1257/jel.48.2.281): el survey clásico en el *Journal of Economic Literature*
+
+**Nuestro caso del bloque**
+
+- [Mignozzetti, Cepaluni y Freire (2025)](https://doi.org/10.1111/ajps.12843): tamaño del concejo y bienestar en Brasil, con la regla del TSE de 2004 como experimento accidental
+:::

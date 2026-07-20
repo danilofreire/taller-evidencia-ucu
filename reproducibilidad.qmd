@@ -1,0 +1,183 @@
+---
+title: "Guía de reproducibilidad"
+# todo el código de esta página es ilustrativo: no se ejecuta nada
+engine: markdown
+---
+
+En la Parte 5 del taller vimos los números de la crisis: el 74% de más de 9.000 scripts de R publicados junto a papers falló apenas alguien intentó correrlos ([Trisovic et al., 2022](https://doi.org/10.1038/s41597-022-01143-6)), y una cuarta parte de los artículos revisados en economía y ciencia política tenía errores de código ([Brodeur et al., 2024](https://doi.org/10.2139/ssrn.4790780)).
+
+Casi nada de eso es fraude. Es flujo de trabajo: rutas que apuntan al escritorio de otra persona, un paso que se hizo a mano en Excel y nadie anotó, una versión de un paquete que ya no existe. Son problemas baratos de arreglar, siempre que uno los arregle antes y no después.
+
+Esta guía es el kit mínimo. Son seis prácticas, ordenadas de la más fácil a la que más cuesta adoptar. Cada una vale por sí sola: no hace falta hacer las seis el lunes.
+
+::: {.callout-note title="La prueba que hay que pasar"}
+Alguien que no sos vos, en otra computadora, dentro de dos años, con tu carpeta y nada más: ¿puede llegar a tus mismos números? Si la respuesta es sí, tu trabajo es reproducible. Todo lo que sigue existe para que esa respuesta sea sí.
+:::
+
+## 1. Una carpeta que se explica sola
+
+Todo el proyecto vive en una carpeta, y esa carpeta se puede comprimir y mandar por correo sin que nada se rompa. Nada de archivos sueltos en Descargas.
+
+```
+mi-proyecto/
+├── datos/
+│   ├── crudos/          # los datos como llegaron. NUNCA se tocan
+│   └── procesados/      # lo que produce tu código
+├── codigo/
+│   ├── 01-limpiar.R
+│   ├── 02-analizar.R
+│   └── 03-figuras.R
+├── figuras/
+├── informe.qmd
+├── README.md
+└── mi-proyecto.Rproj
+```
+
+Tres reglas que hacen casi todo el trabajo:
+
+- Los datos crudos son de **solo lectura**. Si necesitás corregir un valor, lo corregís con código en `01-limpiar.R`, no abriendo el archivo. Así queda registrado qué cambiaste y por qué.
+- Los números en los nombres (`01-`, `02-`) dicen el orden en que se corre todo. Es la documentación más barata que existe.
+- El `README.md` explica en cinco líneas qué hay adentro y en qué orden se corre. Escribilo pensando en vos dentro de dos años, que es la persona que más lo va a agradecer.
+
+Todo lo que está en `datos/procesados/` y en `figuras/` tiene que poder borrarse y volver a aparecer corriendo el código. Si algo no puede regenerarse, entonces es un dato crudo y va en `datos/crudos/`.
+
+## 2. Rutas relativas, nunca absolutas
+
+Esta es la causa número uno de que un script no corra en otra computadora:
+
+```r
+# Esto funciona sólo en tu máquina, y sólo hasta que muevas la carpeta
+setwd("/Users/danilo/Documents/proyectos/tesis/datos")
+datos <- read.csv("encuesta.csv")
+```
+
+La solución es abrir el proyecto como proyecto. En RStudio: *File → New Project → Existing Directory*. Eso crea el archivo `.Rproj`, y a partir de ahí la carpeta del proyecto es siempre el punto de partida:
+
+```r
+# Esto funciona en cualquier computadora que tenga la carpeta
+datos <- read.csv("datos/crudos/encuesta.csv")
+```
+
+Si el proyecto crece y tenés scripts en subcarpetas, el paquete [`here`](https://here.r-lib.org/) resuelve las rutas desde la raíz sin importar dónde estés parado:
+
+```r
+library(here)
+datos <- read.csv(here("datos", "crudos", "encuesta.csv"))
+```
+
+Regla simple: si en tu código aparece tu nombre de usuario, algo hay que cambiar.
+
+## 3. Un script que corre de arriba a abajo
+
+El enemigo silencioso es la sesión de R que lleva tres horas abierta. Ahí adentro hay objetos que creaste probando cosas, paquetes que cargaste y olvidaste, y un `datos` que ya no es el que produce tu código. Todo anda perfecto hasta que cerrás RStudio.
+
+La rutina que lo previene:
+
+1. En RStudio, andá a *Tools → Global Options* y desactivá "Restore .RData into workspace at startup". Poné "Save workspace to .RData on exit" en *Never*. Que cada sesión arranque vacía.
+2. Antes de dar algo por terminado, reiniciá R (*Session → Restart R*, o `Ctrl+Shift+F10`) y corré el script entero desde la primera línea.
+3. Si falla, encontraste un problema real, y lo encontraste vos en vez de un revisor.
+
+Dos hábitos que ayudan:
+
+- Todos los `library()` van juntos, arriba de todo. Si un paquete aparece en la línea 200, alguien lo va a extrañar.
+- Nada de pasos manuales. Si abriste el CSV en Excel para arreglar una fecha, ese arreglo no existe para nadie más. Escribilo como código.
+
+## 4. Semillas: que el azar también se reproduzca
+
+Todo lo que usa números aleatorios (simulaciones, bootstrap, asignación a tratamiento, muestreo) da un resultado distinto en cada corrida, salvo que fijes la semilla:
+
+```r
+set.seed(2026)
+muestra <- sample(1:1000, 100)
+```
+
+Con la semilla fija, la misma computadora y la misma versión de R producen exactamente los mismos números, siempre. Todos los datos de este taller se generan así: por eso el CSV del repositorio y el que producís vos en tu máquina son idénticos.
+
+La semilla va **una vez, al principio del script**, no antes de cada comando. Y conviene anotar con qué versión de R y de los paquetes corriste todo:
+
+```r
+sessionInfo()
+```
+
+Si el proyecto es importante o va a durar años, [`renv`](https://rstudio.github.io/renv/) guarda las versiones exactas de todos los paquetes y las restaura después. Es un paso más avanzado, pero `renv::init()` y `renv::snapshot()` es casi todo lo que hace falta saber.
+
+## 5. Los números calculados, no pegados
+
+El flujo habitual copia un número del análisis al documento. Cada copia es un lugar donde el texto y el análisis se pueden desincronizar en silencio, y con el tiempo siempre se desincronizan: cambia un filtro, se agregan datos, y el párrafo sigue diciendo lo de la semana pasada.
+
+`statcheck` encontró que cerca de la mitad de los artículos de psicología revisados tenía una inconsistencia entre un estadístico y su p-valor, y un 12,5% tenía una lo bastante grave como para dar vuelta la conclusión ([Nuijten et al., 2016](https://doi.org/10.3758/s13428-015-0664-2)).
+
+La alternativa se llama programación literaria ([Knuth, 1984](https://doi.org/10.1093/comjnl/27.2.97)) y [Quarto](https://quarto.org) la implementa: prosa, código y resultados en un solo archivo. Los números del texto se calculan cuando renderizás.
+
+````markdown
+---
+title: "Informe de reclamos viales"
+format: html
+---
+
+```{r}
+#| include: false
+library(dplyr)
+datos <- read.csv("datos/crudos/reclamos.csv")
+a_tiempo <- mean(datos$respondido_a_tiempo)
+```
+
+Durante 2025 se registraron `r nrow(datos)` reclamos.
+El `r round(100 * a_tiempo)`% se respondió dentro del plazo.
+````
+
+Esos `` `r ` `` son código R en el medio de la frase. Si mañana llegan datos nuevos, corregís el CSV, renderizás, y el texto, la tabla y el gráfico se actualizan solos. Ningún número quedó escrito a mano, así que ninguno puede contradecir a la tabla de al lado.
+
+El mismo archivo produce HTML, PDF o Word sin tocar el contenido. Estas diapositivas, la página que estás leyendo y los informes se hacen todos así.
+
+## 6. Git y GitHub: el historial y la copia pública
+
+Git guarda la historia de tu proyecto: cada versión queda registrada, con fecha y con una nota tuya explicando qué cambiaste. Se acabaron el `tesis_final_v3_ESTA_SI.docx` y la pregunta de qué cambió entre el martes y el jueves.
+
+Con cuatro comandos alcanza para empezar:
+
+```bash
+git init                              # una sola vez, al crear el proyecto
+git add .                             # marcá lo que querés guardar
+git commit -m "Agrego el análisis de balance"
+git push                              # subilo a GitHub
+```
+
+Algunas recomendaciones:
+
+- Commits chicos y frecuentes, con mensajes que digan qué cambió. "Cambios" no le sirve a nadie; "Corrijo el filtro de edad en 01-limpiar.R" sí.
+- Los datos con información personal **no** van a GitHub. Ponelos en `.gitignore` y compartilos por otra vía, o publicá una versión anonimizada.
+- Un repositorio público con el código y los datos de un paper es hoy lo que más rápido levanta la credibilidad de un trabajo. Y cuesta una tarde.
+
+Si nunca usaste la terminal, RStudio trae una pestaña Git con botones para todo esto, y [Happy Git with R](https://happygitwithr.com/) es la guía más amable que hay para arrancar.
+
+## El repaso antes de mandar
+
+Cinco preguntas, dos minutos:
+
+- ¿Reinicié R y corrí todo de cero, sin errores?
+- ¿Hay alguna ruta que empiece con `/Users/` o `C:\`?
+- ¿Los datos crudos están intactos, y todo lo demás se puede regenerar?
+- ¿Cada número del informe sale del código, o hay alguno tipeado a mano?
+- ¿Un colega con esta carpeta y el `README` podría llegar a mis resultados?
+
+::: {.callout-tip title="Por dónde empezar si sólo vas a hacer una cosa"}
+Empezá por el punto 3: reiniciá R y corré tu script actual de arriba a abajo. Es gratis, tarda dos minutos y casi siempre encuentra algo. Lo demás viene después.
+:::
+
+## Qué no hace falta
+
+La reproducibilidad tiene fama de exigente, y esa fama espanta gente. Aclaremos:
+
+- No hace falta usar la terminal si no querés. RStudio hace casi todo con botones.
+- No hace falta publicar datos sensibles. Publicás el código, y los datos van con las protecciones que correspondan.
+- No hace falta que tu código sea elegante. Que corra y que se entienda alcanza.
+- No hace falta adoptar todo junto. Una carpeta ordenada y rutas relativas ya te ponen adelante de buena parte de la literatura publicada.
+
+## Para seguir
+
+- [The Turing Way](https://the-turing-way.netlify.app/), manual abierto y colaborativo de ciencia reproducible, con capítulos cortos y ejemplos
+- [Gentzkow y Shapiro (2014)](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf), *Code and Data for the Social Sciences*, treinta páginas escritas por dos economistas para su propio equipo
+- [Happy Git with R](https://happygitwithr.com/), de Jenny Bryan, para Git y GitHub desde cero
+- [Guía de Quarto](https://quarto.org/docs/guide/), la documentación oficial, con ejemplos para copiar
+- [The Practice of Reproducible Research](https://www.practicereproducibleresearch.org/), treinta casos reales contados por quienes los hicieron

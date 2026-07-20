@@ -1,0 +1,335 @@
+---
+title: "Referencia R: acumulación de evidencia"
+subtitle: "Parte 5 · meta-análisis con metafor, sesgo de publicación y heterogeneidad"
+toc: true
+toc-depth: 3
+number-sections: true
+code-copy: true
+code-tools: true
+code-fold: false
+lang: es
+engine: knitr
+---
+
+```{r setup}
+#| include: false
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  fig.width = 7,
+  fig.height = 4.5,
+  dpi = 150,
+  cache = TRUE
+)
+
+# paleta de la casa (el mismo par azul/rojo de las diapositivas)
+azul <- "#2d4563"
+rojo <- "#b85450"
+```
+
+Esta página reúne, con código que podés correr y copiar, todas las funciones de R del bloque de acumulación de evidencia ([diapositivas](diapositivas/05-acumulacion.html)), más varias funciones de `metafor` que no entraron en las slides pero que vas a querer tener a mano. Cada sección explica en pocas frases qué hace el comando, muestra un bloque ejecutable con su salida real, y cierra con una nota sobre cuándo conviene usarlo.
+
+Trabajamos con dos literaturas simuladas. La primera se fabrica con el cajón adentro, para ver el sesgo de publicación por dentro: sabemos cuál es el efecto verdadero (0,15) y cuáles son los estudios que nunca se publicaron. La segunda son 24 estudios sobre transferencias condicionadas y asistencia escolar, la que se usa en la práctica. Como las semillas están fijas, los números coinciden con los de las diapositivas y con [`meta_estudios.csv`](diapositivas/datos/meta_estudios.csv) y [`transferencias.csv`](diapositivas/datos/transferencias.csv).
+
+## Paquetes y datos
+
+Cargá los paquetes del bloque. `metafor` es el paquete estándar para meta-análisis en R ([Viechtbauer, 2010](https://doi.org/10.18637/jss.v036.i03)).
+
+```{r paquetes}
+paquetes <- c("dplyr", "ggplot2", "metafor", "fabricatr")
+
+for (pkg in paquetes) {
+  if (!require(pkg, character.only = TRUE)) {
+    install.packages(pkg, dependencies = TRUE)
+    library(pkg, character.only = TRUE)
+  }
+}
+```
+
+Cada fila es un estudio entero, no una persona. Simulamos primero la literatura completa (40 estudios, efecto verdadero 0,15) y después aplicamos el cajón, que es una sola línea de `filter`: los estudios grandes se publican siempre, los chicos sólo si salieron significativos.
+
+```{r generar-datos}
+apellidos <- c("García", "Souza", "Lima", "Rojas", "Fernández",
+               "Muñoz", "Silva", "Torres", "Vargas", "Herrera",
+               "Castro", "Mendoza", "Ríos", "Acosta", "Núñez",
+               "Ferreira", "Ortiz", "Cabrera", "Duarte", "Sosa")
+paises <- c("Brasil", "México", "Chile", "Colombia", "Perú",
+            "Argentina", "Uruguay")
+
+set.seed(27)
+
+# 1. los 40 estudios que SE HICIERON
+literatura <- fabricate(
+  N = 40,
+  autor   = sample(apellidos, N, replace = TRUE),
+  anio    = sample(2005:2022, N, replace = TRUE),
+  estudio = paste0(autor, " (", anio, ")"),
+  pais    = sample(paises, N, replace = TRUE),
+  diseno  = sample(c("RDD", "DiD", "OLS"), N, replace = TRUE),
+  n       = round(exp(runif(N, log(60), log(600)))),   # muestras de 60 a 600
+  ee      = round(2.2 / sqrt(n), 3),                   # más grande, menos error
+  efecto  = round(rnorm(N, 0.15, sqrt(0.08^2 + ee^2)), 3)   # el verdadero es 0.15
+)
+
+# 2. el cajón: los grandes se publican siempre; los chicos, sólo si dieron t > 1.64
+datos <- literatura |>
+  filter(ee <= 0.12 | efecto / ee > 1.64)
+
+c(se_hicieron = nrow(literatura), se_publicaron = nrow(datos))
+```
+
+Diecinueve estudios quedaron en el cajón: existieron, pero nadie los va a ver. Vos tenés las dos tablas porque las fabricaste; un meta-analista de verdad sólo tiene `datos`, y no hay ningún comando que le diga cuántos faltan.
+
+::: {.callout-note title="Cuándo usarlo"}
+Simular una literatura con el sesgo adentro es la forma más clara de entender qué puede y qué no puede hacer un meta-análisis. Para tu propio trabajo, lo que necesitás de cada estudio es el efecto (`yi`) y su error estándar (`sei`), en una escala comparable entre estudios.
+:::
+
+## El modelo: rma
+
+`rma()` ajusta el meta-análisis: un promedio ponderado por precisión, donde cada estudio pesa el inverso de su varianza. Por defecto usa efectos aleatorios (el efecto verdadero puede variar entre contextos) estimados por REML.
+
+```{r rma}
+m <- rma(yi = efecto,  # el efecto de cada estudio
+         sei = ee,     # su error estándar
+         data = datos)
+m
+```
+
+Cómo leer la salida:
+
+| En la salida | Qué significa |
+|:--|:--|
+| `k = 21` | cuántos estudios entraron |
+| `tau^2` | cuánto varía el efecto real entre estudios |
+| `tau` | lo mismo, en unidades del efecto |
+| `I^2 = 31.9%` | ese desacuerdo, como porcentaje del total |
+| `H^2` | 1,00 sería "ninguna heterogeneidad" |
+| `Q, p` | el test formal: ¿hay más desacuerdo del que explica el azar? |
+| `estimate` | el efecto combinado (el rombo del forest plot) |
+| `ci.lb, ci.ub` | su intervalo del 95% |
+
+El efecto combinado da 0,203, con intervalo [0,14; 0,27]: positivo y bien medido. Pero recordá que el verdadero es 0,15, así que este promedio está inflado.
+
+::: {.callout-note title="Qué mirar"}
+Mirá siempre el `estimate` junto con el $I^2$. Un efecto combinado con $I^2$ cerca de 0% resume bien a todos los estudios; con $I^2$ arriba de 75%, el promedio esconde más de lo que muestra y conviene buscar qué explica el desacuerdo.
+:::
+
+## El forest plot
+
+`forest()` dibuja el clásico: una fila por estudio, el cuadrado es su efecto (su tamaño, el peso), la línea su intervalo, y el rombo de abajo el efecto combinado.
+
+```{r forest, fig.height=7, fig.width=7.5}
+forest(m, slab = datos$estudio,
+       xlab = "Efecto estimado", header = "Estudio")
+```
+
+::: {.callout-note title="Qué mirar"}
+Fijate si las filas se parecen entre sí. Si ves dos grupos separados con el rombo pasando por el medio (donde casi no hay estudios), el promedio no describe a nadie y hay una variable que explica la diferencia. `slab =` pone las etiquetas y `header =` el encabezado de la columna.
+:::
+
+## El funnel plot
+
+Cada punto es un estudio: su efecto en el eje x, su error estándar en el y, con el eje invertido (los grandes arriba, los chicos abajo). Si no hay sesgo, los estudios chicos se reparten a los dos lados del efecto combinado y el dibujo parece un embudo simétrico.
+
+```{r funnel}
+funnel(m, xlab = "Efecto estimado", ylab = "Error estándar")
+```
+
+La receta para leerlo: tapá la mitad de arriba (los grandes casi no se mueven), y en la banda de abajo contá los puntos a cada lado de la línea central. Acá la esquina de abajo a la izquierda quedó vacía, que es justo donde estarían los estudios chicos con efectos chicos o negativos.
+
+::: {.callout-note title="Qué mirar"}
+Un embudo simétrico es lo que querés. Un lado vacío en la parte baja es la huella del cajón. Ojo: la asimetría también puede venir de heterogeneidad real (los estudios chicos se hacen en contextos distintos), así que el funnel sugiere, no prueba.
+:::
+
+## El test de Egger
+
+Lo que el ojo ve en el funnel, `regtest()` lo pone en números: una regresión de los efectos sobre su precisión. Si la pendiente difiere de cero, el embudo está torcido ([Egger et al., 1997](https://doi.org/10.1136/bmj.315.7109.629)).
+
+```{r egger}
+regtest(m)
+```
+
+El valor $p$ da 0,004: la asimetría no es casualidad. Acá el sesgo lo fabricamos nosotros con el `filter`; en una literatura real no vas a saberlo, y por eso el chequeo se corre siempre.
+
+::: {.callout-note title="Qué mirar"}
+Un $p$ chico es señal de alarma. Pero un $p$ alto no prueba que no haya cajón: sólo dice que no encontramos la huella. Con pocos estudios el test tiene poca potencia, y hay sesgos (que un país entero no publique, por ejemplo) que no producen asimetría.
+:::
+
+## El chequeo de los estudios grandes
+
+Los estudios grandes se publican con cualquier resultado, así que no arrastran el filtro de la significancia. Si el promedio se mueve al quedarte sólo con ellos, algo pasa.
+
+```{r grandes}
+grandes <- filter(datos, ee <= 0.12)
+
+round(c(
+  publicados    = unname(coef(m)),
+  solo_grandes  = unname(coef(rma(yi = efecto, sei = ee, data = grandes))),
+  cajon_abierto = unname(coef(rma(yi = efecto, sei = ee, data = literatura)))
+), 3)
+```
+
+Con los 21 publicados da 0,203; con los 12 grandes, 0,145; con los 40 que de verdad existieron, 0,152, que es el valor verdadero. El meta-análisis no falló: hizo su trabajo con la literatura que le dieron. El sesgo estaba en qué llegó a publicarse.
+
+::: {.callout-note title="Qué mirar"}
+La tercera columna no existe en la vida real, porque nadie ve el cajón. Las dos primeras sí las podés calcular siempre, y su diferencia es una señal barata y honesta. Si el promedio de los grandes es bastante menor, sospechá del cajón.
+:::
+
+## Trim-and-fill
+
+`trimfill()` estima cuántos estudios "faltan" para que el embudo quede simétrico, los imputa y recalcula el efecto combinado. Es una forma de preguntar cuánto cambiaría la conclusión si el cajón se abriera.
+
+```{r trimfill}
+tf <- trimfill(m)
+tf
+
+c(estudios_imputados = tf$k0, efecto_corregido = round(unname(coef(tf)), 3))
+```
+
+Imputa 5 estudios y baja el efecto de 0,203 a 0,169, más cerca del verdadero 0,15. Sigue sin llegar del todo, y esa es la lección.
+
+::: {.callout-note title="Qué mirar"}
+Tratalo como análisis de sensibilidad, no como corrección. Si el efecto corregido sigue lejos de cero, tu conclusión es más robusta; si se derrumba, el resultado dependía de los estudios que faltan. La solución de fondo no es estadística: es que los nulos se publiquen.
+:::
+
+## Efectos fijos o aleatorios
+
+Por defecto `rma()` usa efectos aleatorios: supone que el efecto verdadero varía entre contextos y suma esa varianza ($\tau^2$) al peso de cada estudio. Con `method = "EE"` pedís efectos fijos (equal effects), que asume un único efecto verdadero para todos.
+
+```{r fijos}
+fijos <- rma(yi = efecto, sei = ee, data = datos, method = "EE")
+
+round(c(aleatorios = unname(coef(m)),
+        fijos      = unname(coef(fijos))), 3)
+```
+
+Acá dan parecido porque la heterogeneidad es baja ($I^2$ ≈ 32%). Cuanto más alto el $I^2$, más se separan: los efectos fijos le dan mucho más peso a los estudios grandes y producen intervalos demasiado angostos.
+
+::: {.callout-note title="Cuándo usarlo"}
+En ciencias sociales, efectos aleatorios es casi siempre la opción correcta, porque los estudios se hacen en países, años y poblaciones distintas. Reservá los efectos fijos para cuando de verdad creas que todos los estudios estiman exactamente la misma cantidad.
+:::
+
+## Subgrupos: cuando el promedio esconde dos historias
+
+Pasemos a la segunda literatura: 24 estudios sobre transferencias condicionadas y asistencia escolar. Acá no sabés cómo se generó, así que tratala como una literatura de verdad.
+
+```{r transferencias}
+set.seed(46)
+
+transferencias <- fabricate(
+  N = 24,
+  autor    = sample(apellidos, N, replace = TRUE),
+  anio     = sample(2008:2023, N, replace = TRUE),
+  estudio  = paste0(autor, " (", anio, ")"),
+  pais     = sample(c("Brasil", "México", "Colombia", "Perú",
+                      "Honduras", "Nicaragua", "Ecuador"), N, replace = TRUE),
+  contexto = rep(c("rural", "urbano"), each = 12),
+  n        = round(exp(runif(N, log(200), log(2000)))),
+  ee       = round(1.5 / sqrt(n), 3),
+  efecto   = round(rnorm(N, ifelse(contexto == "rural", 0.35, 0.10),
+                         sqrt(0.04^2 + ee^2)), 3)
+)
+
+m_tr <- rma(yi = efecto, sei = ee, data = transferencias)
+c(efecto = round(unname(coef(m_tr)), 3), I2 = round(m_tr$I2, 1))
+```
+
+El efecto combinado da 0,244 y parece sólido, pero el $I^2$ es 84,9%: casi todo el desacuerdo es real. Si es real, algo lo explica. Probemos con el contexto, corriendo un `rma()` por subgrupo.
+
+```{r subgrupos}
+rural  <- rma(yi = efecto, sei = ee,
+              data = filter(transferencias, contexto == "rural"))
+urbano <- rma(yi = efecto, sei = ee,
+              data = filter(transferencias, contexto == "urbano"))
+
+data.frame(
+  contexto = c("rural", "urbano"),
+  efecto   = round(c(coef(rural), coef(urbano)), 3),
+  ic_bajo  = round(c(rural$ci.lb, urbano$ci.lb), 3),
+  ic_alto  = round(c(rural$ci.ub, urbano$ci.ub), 3),
+  I2_porc  = round(c(rural$I2, urbano$I2), 1)
+)
+```
+
+Rural da 0,360 y urbano 0,105: los intervalos ni se tocan. Y el $I^2$ se desploma de 84,9% a ≈ 0% dentro de cada grupo, o sea que el contexto explicaba todo el desacuerdo. El 0,244 no es el efecto de nada: es el promedio de dos programas distintos, y ninguno de los dos rinde 0,244.
+
+::: {.callout-note title="Qué mirar"}
+Un $I^2$ alto no es un defecto del meta-análisis: es una pregunta, y casi siempre la mejor de todas. Cuando parte un promedio en dos historias con intervalos que no se solapan, reportá los subgrupos, no el promedio.
+:::
+
+## Meta-regresión
+
+Cortar por subgrupos a mano funciona con una variable categórica. `rma()` con el argumento `mods =` generaliza la idea: una regresión donde la variable dependiente es el efecto de cada estudio y los predictores son características del estudio.
+
+```{r meta-regresion}
+mr <- rma(yi = efecto, sei = ee, mods = ~ contexto, data = transferencias)
+mr
+```
+
+El intercepto (0,360) es el efecto en el grupo de referencia (rural) y `contextourbano` (−0,255) es cuánto menos rinde en la ciudad. El test $Q_M$ pregunta si el moderador explica algo, y acá lo rechaza con holgura. Con más de un moderador, escribís `mods = ~ contexto + anio + n`.
+
+```{r meta-regresion-diseno}
+# en la primera literatura: ¿cambia el efecto según el diseño del estudio?
+rma(yi = efecto, sei = ee, mods = ~ diseno, data = datos)
+```
+
+::: {.callout-note title="Qué mirar"}
+Es la forma de preguntar si el diseño, el país o el año explican las diferencias entre estudios. Cuidado con dos cosas: con pocos estudios te quedás sin grados de libertad enseguida (una regla práctica pide unos 10 estudios por moderador), y los moderadores no se aleatorizaron, así que las diferencias entre subgrupos son asociaciones, no efectos causales.
+:::
+
+## Leave-one-out y estudios influyentes
+
+¿El resultado depende de un solo estudio? `leave1out()` reajusta el meta-análisis sacando un estudio por vez, y muestra cómo se mueve el efecto combinado.
+
+```{r leave1out}
+l1o <- leave1out(m)
+
+data.frame(estudio = datos$estudio,
+           efecto_sin_el = round(l1o$estimate, 3)) |>
+  arrange(efecto_sin_el) |>
+  head(5)
+```
+
+Si sacar cualquier estudio mueve poco el promedio, el resultado es estable. `influence()` va más lejos y calcula diagnósticos por estudio (distancia de Cook, residuos estandarizados) para detectar los que mandan.
+
+```{r influencia, fig.height=6.5}
+inf <- influence(m)
+plot(inf)
+```
+
+::: {.callout-note title="Cuándo usarlo"}
+Corré leave-one-out siempre que tengas pocos estudios, que es lo habitual en ciencias sociales. Si un solo estudio sostiene la conclusión, decilo en el paper. Un estudio influyente no se borra: se explica (muestra enorme, contexto raro, diseño distinto).
+:::
+
+## Para seguir
+
+::: {.callout-tip title="Enlaces y lecturas"}
+**El paquete**
+
+- [`metafor`](https://www.metafor-project.org/): la web del paquete, con una documentación excelente y muchos ejemplos reproducibles
+- [Viechtbauer (2010)](https://doi.org/10.18637/jss.v036.i03): el artículo que lo presenta, en el *Journal of Statistical Software*
+
+**Para leer**
+
+- [Harrer, Cuijpers, Furukawa y Ebert (2021)](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/), *Doing Meta-Analysis with R*: el manual práctico, gratis online
+- [Egger et al. (1997)](https://doi.org/10.1136/bmj.315.7109.629): el test de asimetría del funnel
+- [Rosenthal (1979)](https://doi.org/10.1037/0033-2909.86.3.638): el file-drawer problem, el artículo original
+
+**Sobre el cajón y la replicación**
+
+- [Franco, Malhotra y Simonovits (2014)](https://doi.org/10.1126/science.1255484) y [Moniz, Druckman y Freese (2025)](https://doi.org/10.1073/pnas.2426937122): el cajón medido con TESS, diez años después
+- [Open Science Collaboration (2015)](https://doi.org/10.1126/science.aac4716): las 100 replicaciones en psicología
+- [Aczél, Szászi, Nosek et al. (2026)](https://doi.org/10.1038/s41586-025-09844-9): 457 analistas, 100 estudios, en *Nature*
+
+**Nuestro caso del bloque**
+
+- [Freire, Mignozzetti, Roman y Alptekin (2023)](https://doi.org/10.1017/S0007123422000552): el meta-análisis del tamaño de las legislaturas y el gasto público, en el *British Journal of Political Science*
+
+**Prácticas reproducibles**
+
+- La [guía de reproducibilidad](reproducibilidad.html) del taller, con el kit paso a paso
+- [The Turing Way](https://the-turing-way.netlify.app/) y [Gentzkow y Shapiro (2014)](https://web.stanford.edu/~gentzkow/research/CodeAndData.pdf)
+:::

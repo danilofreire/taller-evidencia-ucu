@@ -1,6 +1,6 @@
 ---
 title: "Referencia R: experimentos"
-subtitle: "Bloque 1 · diferencia de medias, balance, ajuste de covariables y diseño"
+subtitle: "Parte 2 · diferencia de medias, balance, ajuste de covariables y diseño"
 toc: true
 toc-depth: 3
 number-sections: true

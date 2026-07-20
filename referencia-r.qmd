@@ -13,7 +13,7 @@ Vamos a publicar una referencia por bloque a medida que se revisan las diapositi
 ::: {.resource-card}
 [Experimentos]{.resource-title}
 
-[Bloque 1 · diferencia de medias, balance, ajuste de covariables, diseño]{.resource-meta}
+[Parte 2 · diferencia de medias, balance, ajuste de covariables, diseño]{.resource-meta}
 
 [`difference_in_means`, `lm_robust`, `lm_lin`, interacciones, tabla de balance, errores agrupados, inferencia por aleatorización con `ri2`, comparaciones múltiples, y `DeclareDesign` / `DesignLibrary` para simular el diseño antes del campo]{.resource-meta}
 
@@ -25,23 +25,35 @@ Vamos a publicar una referencia por bloque a medida que se revisan las diapositi
 ::: {.resource-card}
 [Regresión discontinua]{.resource-title}
 
-[Bloque 2 · próximamente]{.resource-meta}
+[Parte 3 · rdplot, rdrobust, rddensity y chequeos de validez]{.resource-meta}
 
-[Estimación local con `rdrobust`, prueba de densidad con `rddensity` y gráficos de la discontinuidad. Se publica cuando se termine de revisar el bloque]{.resource-meta}
+[Ver el salto con `rdplot`, estimar el efecto local con `rdrobust`, testear manipulación con `rddensity`, y correr los chequeos de validez (densidad, balance, corte placebo, ancho de banda) como rutina]{.resource-meta}
+
+::: {.resource-links}
+[Abrir referencia](referencia-rdd.html)
+:::
 :::
 
 ::: {.resource-card}
 [Diferencias en diferencias y control sintético]{.resource-title}
 
-[Bloque 3 · próximamente]{.resource-meta}
+[Parte 4 · el 2×2, tidysynth de punta a punta y gsynth]{.resource-meta}
 
-[Estimadores de diferencias en diferencias y control sintético con `tidysynth`. Se publica cuando se termine de revisar el bloque]{.resource-meta}
+[El 2×2 de DiD con `dplyr`, el control sintético en un pipe con `tidysynth` (pesos, balance, placebos, inferencia por MSPE), y `gsynth` para varios tratados y fechas escalonadas, con factores interactivos y matrix completion]{.resource-meta}
+
+::: {.resource-links}
+[Abrir referencia](referencia-did-sintetico.html)
+:::
 :::
 
 ::: {.resource-card}
 [Acumulación de evidencia]{.resource-title}
 
-[Bloque 4 · próximamente]{.resource-meta}
+[Parte 5 · meta-análisis con metafor y sesgo de publicación]{.resource-meta}
 
-[Meta-análisis con `metafor`: tamaños de efecto, modelos de efectos aleatorios y forest plots. Se publica cuando se termine de revisar el bloque]{.resource-meta}
+[Meta-análisis con `rma()`, forest y funnel plots, el test de Egger, trim-and-fill, efectos fijos frente a aleatorios, subgrupos y meta-regresión, y diagnósticos de estudios influyentes]{.resource-meta}
+
+::: {.resource-links}
+[Abrir referencia](referencia-acumulacion.html)
+:::
 :::
