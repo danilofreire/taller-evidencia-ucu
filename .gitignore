@@ -2,7 +2,10 @@
 *_cache/
 # Cache de Quarto (se regenera al renderizar); docs/ SÍ se versiona (sitio publicado)
 /_freeze/
+# Artefactos de render en las carpetas fuente, pero NO los de docs/:
+# las páginas de referencia enlazan sus figuras desde docs/*_files/
 **/*_files/
+!docs/**/*_files/
 /.Rproj.user/
 .Rhistory
 .RData
