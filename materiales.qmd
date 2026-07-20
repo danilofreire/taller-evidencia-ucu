@@ -9,13 +9,23 @@ Acá están las diapositivas, los datos y el código de cada bloque. Cada bloque
 ::: {.resource-card}
 [Preparación: instalá R y los paquetes]{.resource-title}
 
-[Traé tu computadora con todo listo · unos 10 minutos]{.resource-meta}
+[Traé tu computadora con todo listo · unos 15 minutos]{.resource-meta}
 
-Instalá [R](https://cran.r-project.org/) y [RStudio](https://posit.co/download/rstudio-desktop/) (RStudio ya incluye lo necesario para correr el código). Después abrí RStudio y corré este bloque una vez: instala solo los paquetes que te falten.
+Instalá [R](https://cran.r-project.org/) y [RStudio](https://posit.co/download/rstudio-desktop/) (RStudio ya incluye lo necesario para correr el código). Después abrí RStudio y corré este bloque una vez: instala solo los paquetes que te falten. Son todos los que aparecen en el taller, parte por parte.
 
 ```r
-paquetes <- c("tidyverse", "estimatr", "fabricatr", "randomizr",
-              "rdrobust", "rddensity", "tidysynth", "metafor")
+paquetes <- c(
+  # base de todas las prácticas
+  "tidyverse", "estimatr", "fabricatr", "randomizr",
+  # regresión discontinua
+  "rdrobust", "rddensity",
+  # diferencias en diferencias y control sintético
+  "tidysynth", "gsynth",
+  # meta-análisis
+  "metafor",
+  # simular diseños e inferencia por aleatorización
+  "DeclareDesign", "DesignLibrary", "ri2"
+)
 
 for (pkg in paquetes) {
   if (!require(pkg, character.only = TRUE)) {
@@ -24,6 +34,8 @@ for (pkg in paquetes) {
   }
 }
 ```
+
+Los cuatro últimos (`gsynth`, `DeclareDesign`, `DesignLibrary` y `ri2`) no aparecen en las prácticas que corremos juntos, sino en las diapositivas y en la [referencia en R](referencia-r.qmd). Si andás corto de tiempo o de conexión, dejalos para después: el taller funciona igual sin ellos.
 :::
 
 ## Diapositivas por bloque

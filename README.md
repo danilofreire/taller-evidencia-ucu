@@ -69,11 +69,21 @@ Todos los datos son **simulados**. Reproducen la estructura y el orden de magnit
 
 ## Reproducir el sitio
 
-Hace falta [R](https://cran.r-project.org/) y [Quarto](https://quarto.org). Los paquetes de R que usan las prácticas:
+Hace falta [R](https://cran.r-project.org/) y [Quarto](https://quarto.org). Los paquetes de R que aparecen en el taller:
 
 ```r
-paquetes <- c("tidyverse", "estimatr", "fabricatr", "randomizr",
-              "rdrobust", "rddensity", "tidysynth", "metafor")
+paquetes <- c(
+  # base de todas las prácticas
+  "tidyverse", "estimatr", "fabricatr", "randomizr",
+  # regresión discontinua
+  "rdrobust", "rddensity",
+  # diferencias en diferencias y control sintético
+  "tidysynth", "gsynth",
+  # meta-análisis
+  "metafor",
+  # simular diseños e inferencia por aleatorización
+  "DeclareDesign", "DesignLibrary", "ri2"
+)
 
 for (pkg in paquetes) {
   if (!require(pkg, character.only = TRUE)) {
@@ -83,7 +93,7 @@ for (pkg in paquetes) {
 }
 ```
 
-Las páginas de referencia usan además `DeclareDesign`, `DesignLibrary`, `ri2` y `gsynth`.
+Los últimos cuatro se usan en las diapositivas y en las páginas de referencia, no en las prácticas que se corren en el taller.
 
 Para previsualizar con recarga automática:
 
