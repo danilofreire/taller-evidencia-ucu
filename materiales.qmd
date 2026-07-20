@@ -2,7 +2,7 @@
 title: "Materiales"
 ---
 
-Acá están las diapositivas, los datos y el código de cada bloque. Cada bloque con práctica trae el archivo de código listo para correr y los datos que usa, con una breve descripción de cada base. Las diapositivas se publican a medida que se preparan, así que algunos enlaces se activan más cerca del taller. Todos los datos son simulados: reproducen la estructura y el orden de magnitud de los estudios reales, sin exponer datos originales
+Acá están las diapositivas, los datos y el código de cada bloque. Cada bloque con práctica trae el archivo de código listo para correr y los datos que usa, con una breve descripción de cada base. Todos los datos son simulados: reproducen la estructura y el orden de magnitud de los estudios reales, sin exponer datos originales. Si querés el código de cada función explicado paso a paso, está en [Referencia R](referencia-r.qmd)
 
 ## Antes de empezar
 
@@ -14,8 +14,8 @@ Acá están las diapositivas, los datos y el código de cada bloque. Cada bloque
 Instalá [R](https://cran.r-project.org/) y [RStudio](https://posit.co/download/rstudio-desktop/) (RStudio ya incluye lo necesario para correr el código). Después abrí RStudio y corré este bloque una vez: instala solo los paquetes que te falten.
 
 ```r
-paquetes <- c("tidyverse", "estimatr", "rdrobust",
-              "rddensity", "tidysynth", "metafor")
+paquetes <- c("tidyverse", "estimatr", "fabricatr", "randomizr",
+              "rdrobust", "rddensity", "tidysynth", "metafor")
 
 for (pkg in paquetes) {
   if (!require(pkg, character.only = TRUE)) {
@@ -105,16 +105,17 @@ Una base:
 
 [Por qué un solo estudio engaña: sesgo de publicación, meta-análisis y la crisis de replicación contada desde adentro]{.resource-meta}
 
-Una base, más una demostración de flujo reproducible:
+Dos bases:
 
-- `meta_estudios.csv` (20 estudios): insumo para el meta-análisis del efecto del tamaño de la legislatura. Cada fila es un estudio con su `efecto`, su error estándar `ee`, el `n` y el `diseno`, para armar el forest plot y el funnel plot
-- La carpeta `demo-reproducible/` muestra un informe de Quarto que teje código, resultados y texto en un solo documento
+- `meta_estudios.csv` (21 estudios): la literatura publicada de la demostración, con el sesgo de publicación adentro. Cada fila es un estudio con su `efecto`, su error estándar `ee`, el `n` y el `diseno`, para armar el forest plot y el funnel plot
+- `transferencias.csv` (24 estudios): la base de la práctica, sobre el efecto de las transferencias condicionadas en la asistencia escolar. Además del `efecto` y su `ee`, trae el `contexto` (`rural` o `urbano`), que es la clave del último ejercicio
 
 ::: {.resource-links}
 [Diapositivas (.html)](diapositivas/05-acumulacion.html) |
 [Fuente (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/05-acumulacion.qmd) |
 [Código (.R)](diapositivas/codigo/practica-05.R) |
-[Datos (.csv)](diapositivas/datos/meta_estudios.csv)
+[Datos meta (.csv)](diapositivas/datos/meta_estudios.csv) |
+[Datos práctica (.csv)](diapositivas/datos/transferencias.csv)
 :::
 :::
 
@@ -128,5 +129,35 @@ Una base, más una demostración de flujo reproducible:
 ::: {.resource-links}
 [Diapositivas (.html)](diapositivas/06-cierre.html) |
 [Fuente (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/06-cierre.qmd)
+:::
+:::
+
+## Para después del taller
+
+::: {.resource-card}
+[Referencia R]{.resource-title}
+
+[Una página por parte, con todo el código explicado]{.resource-meta}
+
+[Cada función que usamos en las prácticas, con un ejemplo ejecutable, su salida real y una nota sobre cuándo conviene usarla. Los números coinciden con los de las diapositivas porque las semillas están fijas]{.resource-meta}
+
+::: {.resource-links}
+[Todas las referencias](referencia-r.qmd) |
+[Experimentos](referencia-experimentos.qmd) |
+[RDD](referencia-rdd.qmd) |
+[DiD y sintético](referencia-did-sintetico.qmd) |
+[Acumulación](referencia-acumulacion.qmd)
+:::
+:::
+
+::: {.resource-card}
+[Guía de reproducibilidad]{.resource-title}
+
+[El kit mínimo, en seis prácticas]{.resource-meta}
+
+[Cómo dejar tu trabajo listo para que otra persona (o vos en seis meses) lo pueda correr: estructura de carpetas, rutas relativas, control de versiones y un informe que se calcula al renderizar]{.resource-meta}
+
+::: {.resource-links}
+[Abrir la guía](reproducibilidad.qmd)
 :::
 :::
