@@ -1,0 +1,132 @@
+---
+title: "Tarea 4: Acumulación de evidencia"
+subtitle: "Práctica · salario mínimo y empleo"
+author: "Danilo Freire"
+toc: true
+toc-depth: 3
+number-sections: true
+code-copy: true
+code-fold: false
+lang: es
+engine: knitr
+---
+
+## De qué se trata
+
+¿Subir el salario mínimo destruye empleo? Es una de las preguntas más estudiadas y más peleadas de la economía. Tenés una base con 45 estudios publicados, cada uno con su estimación del efecto del salario mínimo sobre el empleo (una elasticidad: un número negativo significa que el empleo baja cuando sube el salario mínimo). Tu trabajo no es correr un estudio más, sino leer la literatura entera: combinar los estudios, ver si esconden un sesgo y entender por qué no todos coinciden.
+
+Trabajás con `meta_salario.csv`. Cada fila es un estudio, no una persona:
+
+| Variable | Qué es |
+|:--|:--|
+| `efecto` | la elasticidad empleo-salario estimada (negativa = el empleo baja) |
+| `ee` | el error estándar de esa estimación |
+| `n` | el tamaño de muestra del estudio |
+| `metodo` | el diseño usado: `OLS`, `panel` o `experimento` |
+| `estudio`, `pais` | autor, año y país del estudio |
+
+La [Referencia R de acumulación de evidencia](../referencia-acumulacion.qmd) tiene cada comando de `metafor` explicado sobre datos con la misma estructura.
+
+## Cómo trabajar
+
+Respondé cada pregunta escribiendo código R en el bloque de abajo. Cuando se pida una respuesta escrita, usá texto normal debajo del bloque.
+
+1. Descargá este archivo `.qmd` y el dataset `meta_salario.csv` desde la [página de Tareas](../tareas.qmd), o cloná el repositorio con `git clone https://github.com/danilofreire/taller-evidencia-ucu.git`
+2. Necesitás [R](https://cran.r-project.org/), [RStudio](https://posit.co/download/rstudio-desktop/) y el paquete `metafor`
+3. Abrí el `.qmd` en RStudio y corré los bloques con Ctrl+Enter (Cmd+Enter en Mac)
+4. Cuando termines, apretá "Render"
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(metafor)
+
+datos <- read_csv("datos/meta_salario.csv", show_col_types = FALSE)
+# datos <- read_csv("https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/datos/meta_salario.csv", show_col_types = FALSE)
+```
+
+## Combinar
+
+### Pregunta 1: el efecto combinado
+
+Ajustá el meta-análisis con `rma()`, pasando `efecto` como `yi` y `ee` como `sei`. Reportá el efecto combinado con su intervalo de confianza y el $I^2$. ¿Qué dice el efecto combinado sobre el salario mínimo? ¿Qué te dice el $I^2$ sobre si ese promedio resume bien a todos los estudios?
+
+```{r p1}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 2: el forest plot
+
+Dibujá el forest plot con `forest()`, usando los nombres de los estudios como etiquetas. Mirá las filas: ¿los estudios se parecen entre sí, o ves grupos separados? ¿El rombo del efecto combinado pasa por una zona donde hay muchos estudios, o por un hueco?
+
+```{r p2}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+## Buscar el sesgo
+
+### Pregunta 3: el funnel plot y el test de Egger
+
+Dibujá el funnel plot con `funnel()` y después corré el test de Egger con `regtest()`. ¿El embudo es simétrico? ¿Qué esquina está vacía? ¿El test confirma lo que ves? ¿Qué historia sugiere esa asimetría sobre qué estudios llegaron a publicarse?
+
+```{r p3}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 4: dos chequeos del cajón
+
+Hacé dos cosas. Primero, quedate sólo con los estudios grandes (`ee <= 0.03`, los que se publican con cualquier resultado) y estimá su efecto combinado; comparalo con el de todos los publicados. Segundo, corré `trimfill()` sobre el modelo de la pregunta 1: estima cuántos estudios "faltan" y recalcula el efecto. ¿Los dos chequeos apuntan en la misma dirección?
+
+*Pista:* las secciones "El chequeo de los estudios grandes" y "Trim-and-fill" de la Referencia R hacen exactamente esto. Tratá `trimfill()` como análisis de sensibilidad, no como corrección definitiva.
+
+```{r p4}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+## Explicar el desacuerdo
+
+### Pregunta 5: subgrupos por método
+
+El $I^2$ alto de la pregunta 1 dice que hay desacuerdo real entre estudios. Si es real, algo lo explica. Corré un `rma()` por separado para cada valor de `metodo` (`OLS`, `panel`, `experimento`) y compará los tres efectos combinados con sus intervalos. ¿El método del estudio explica parte del desacuerdo? ¿Qué diseños encuentran efectos más negativos?
+
+```{r p5}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 6: la meta-regresión
+
+Cortar a mano por subgrupos funciona con una variable. `rma()` con `mods = ~ metodo` generaliza la idea en una sola regresión: la variable dependiente es el efecto de cada estudio y el predictor es el método. Corré la meta-regresión e interpretá los coeficientes y el test $Q_M$. ¿Coincide con lo que viste en los subgrupos?
+
+```{r p6}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+## Concluir
+
+### Pregunta 7: ¿qué dice esta literatura?
+
+Juntá todo. Un periodista te pregunta: "Entonces, ¿el salario mínimo destruye empleo o no?". Con lo que encontraste (el efecto combinado, el sesgo de publicación y las diferencias por método), ¿qué le contestás? En particular: ¿el promedio simple de la pregunta 1 es una buena respuesta? ¿Qué estudios le creerías más y por qué?
+
+```{r p7}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**

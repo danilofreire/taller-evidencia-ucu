@@ -147,6 +147,18 @@ Dos bases:
 ## Para después del taller
 
 ::: {.resource-card}
+[Tareas]{.resource-title}
+
+[Una por bloque de métodos, con datos nuevos.]{.resource-meta}
+
+[Cuatro tareas para practicar con calma: un experimento de tutorías, un RDD de becas, el control del tabaco en Uruguay y un meta-análisis sobre salario mínimo. Cada una trae una base distinta de las que usamos juntos, así que no se resuelven copiando el código de la práctica. Las respuestas están publicadas.]{.resource-meta}
+
+::: {.resource-links}
+[Ver las tareas](tareas.qmd)
+:::
+:::
+
+::: {.resource-card}
 [Referencia R]{.resource-title}
 
 [Una página por parte, con todo el código explicado.]{.resource-meta}

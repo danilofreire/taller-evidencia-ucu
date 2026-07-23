@@ -1,0 +1,133 @@
+---
+title: "Tarea 3: Diferencias en diferencias y control sintético"
+subtitle: "Práctica · el control del tabaco en Uruguay"
+author: "Danilo Freire"
+toc: true
+toc-depth: 3
+number-sections: true
+code-copy: true
+code-fold: false
+lang: es
+engine: knitr
+---
+
+## De qué se trata
+
+Desde 2006, Uruguay aplicó una de las políticas de control del tabaco más fuertes de la región: ambientes libres de humo, advertencias gráficas en los paquetes e impuestos altos. ¿Bajó eso la prevalencia de tabaquismo más de lo que habría bajado igual? No hay sorteo ni umbral: hay una sola unidad tratada (Uruguay), una política que ya ocurrió, y varios años de datos para Uruguay y para otros países que le sirven de espejo. Ese es el terreno de las diferencias en diferencias y el control sintético.
+
+Trabajás con `tabaco_panel.csv`, un panel país-año de 12 países entre 1996 y 2013. Cada fila es un país en un año:
+
+| Variable | Qué es |
+|:--|:--|
+| `pais`, `anio` | identifican cada fila |
+| `prevalencia` | % de adultos que fuma, el resultado |
+| `tratado` | 1 sólo para Uruguay |
+| `post` | 1 desde 2006, el año de la política |
+| `pib_pc`, `urbanizacion`, `gasto_salud`, `precio_cigarrillos` | covariables |
+
+La [Referencia R de DiD y control sintético](../referencia-did-sintetico.qmd) tiene cada comando explicado sobre un panel con la misma estructura (el caso de los homicidios en São Paulo).
+
+## Cómo trabajar
+
+Respondé cada pregunta escribiendo código R en el bloque de abajo. Cuando se pida una respuesta escrita, usá texto normal debajo del bloque.
+
+1. Descargá este archivo `.qmd` y el dataset `tabaco_panel.csv` desde la [página de Tareas](../tareas.qmd), o cloná el repositorio con `git clone https://github.com/danilofreire/taller-evidencia-ucu.git`
+2. Necesitás [R](https://cran.r-project.org/), [RStudio](https://posit.co/download/rstudio-desktop/) y los paquetes `estimatr` y `tidysynth`
+3. Abrí el `.qmd` en RStudio y corré los bloques con Ctrl+Enter (Cmd+Enter en Mac)
+4. Cuando termines, apretá "Render"
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(estimatr)
+library(tidysynth)
+
+datos <- read_csv("datos/tabaco_panel.csv", show_col_types = FALSE)
+# datos <- read_csv("https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/datos/tabaco_panel.csv", show_col_types = FALSE)
+```
+
+## Diferencias en diferencias
+
+### Pregunta 1: el 2×2 a mano
+
+Armá la tabla de cuatro promedios de `prevalencia`: Uruguay y los donantes, antes y después de 2006 (agrupá por `tratado` y `post`). Con esos cuatro números, calculá la doble resta: (Uruguay después − antes) − (donantes después − antes). ¿Cuánto da el efecto DiD? ¿Qué saca cada una de las dos restas?
+
+```{r p1}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 2: el mismo número como regresión
+
+La doble resta es exactamente el coeficiente de una interacción. Estimá `lm_robust(prevalencia ~ tratado * post)` y leé los cuatro coeficientes: ¿qué representa cada uno (el intercepto, `tratado`, `post` y la interacción)? ¿La interacción coincide con tu cuenta de la pregunta 1?
+
+```{r p2}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 3: ¿son creíbles las tendencias paralelas?
+
+El DiD sólo vale si, sin la política, Uruguay hubiera seguido la misma tendencia que los donantes. Eso no se puede probar, pero sí se puede mirar el pasado. Graficá la prevalencia de Uruguay y el promedio de los donantes año a año, con una línea vertical en 2006. Mirá los años **antes** de la política: ¿las dos series iban parejas? ¿Qué te dice eso sobre el supuesto?
+
+*Pista:* armá dos series (Uruguay, y el promedio de los donantes por año) y unilas con `bind_rows()` para graficarlas juntas. La sección "La misma cuenta, en un gráfico" de la Referencia R hace justo esto.
+
+```{r p3}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+## Control sintético
+
+### Pregunta 4: construir el Uruguay sintético
+
+El DiD pesa a todos los donantes por igual. El control sintético elige pesos para que un promedio ponderado de los donantes calque la trayectoria de Uruguay antes de 2006. Armá el objeto con `tidysynth`: definí el problema con `synthetic_control()` (unidad tratada Uruguay, último año sin política 2005, `generate_placebos = TRUE`), agregá las covariables como predictores pre-política con `generate_predictor()`, y cerrá con `generate_weights()` y `generate_control()`.
+
+*Pista:* la sección "El control sintético en un pipe" de la Referencia R tiene el esqueleto completo. Cambiá los nombres de la unidad, el año y las covariables por los de estos datos.
+
+```{r p4}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 5: ver el ajuste y leer los pesos
+
+Con el objeto armado, mostrá dos cosas: el gráfico de `plot_trends()` (Uruguay real contra su sintético) y los pesos de cada donante con `grab_unit_weights()`. ¿El sintético calca bien a Uruguay antes de 2006? ¿Qué países arman el Uruguay sintético? ¿Tiene sentido que sean esos?
+
+```{r p5}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 6: ¿es real el efecto? Inferencia por placebos
+
+El control sintético no usa errores estándar: hace inferencia corriendo el mismo método sobre cada donante, como si él hubiera sido el tratado. Si el efecto de Uruguay es real, su brecha tiene que destacarse. Mostrá `plot_placebos()` y sacá el valor $p$ estilo Fisher con `grab_significance()` (mirá el `rank` de Uruguay y el `fishers_exact_pvalue`). ¿Qué tan extremo es Uruguay entre los 12 países?
+
+```{r p6}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+## Interpretar
+
+### Pregunta 7: los dos métodos y la advertencia
+
+Compará lo que te dieron los dos métodos: el efecto DiD (pregunta 1-2) y la brecha del control sintético hacia 2013. ¿Coinciden en el signo y el orden de magnitud? Después pensá en la inferencia: hay una sola unidad tratada. ¿Por qué el valor $p$ del control sintético no puede ser muy chico con sólo 12 países? ¿Qué le dirías a alguien que te muestra el valor $p$ de la regresión DiD como si fuera una garantía?
+
+```{r p7}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**

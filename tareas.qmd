@@ -1,0 +1,87 @@
+---
+title: "Tareas"
+---
+
+El taller dura un día, y un día alcanza para ver los métodos funcionando, pero no para que se te queden en los dedos. Estas cuatro tareas son para eso: una por cada bloque de métodos, para hacer con calma cuando vuelvas a tu computadora.
+
+Cada tarea trae una base de datos nueva, distinta de la que usamos juntos. La idea es que no puedas resolverla copiando el código de la práctica: los nombres de las variables cambian, el caso es otro y en algún punto la respuesta correcta también. Son siete preguntas por tarea, con espacio para escribir código y para escribir en palabras qué encontraste, que suele ser la parte difícil.
+
+Todas las bases son simuladas: reproducen la estructura y el orden de magnitud de estudios reales, sin exponer datos originales. Cada una viene con su script generador, así que podés ver exactamente cómo se armaron y con qué semilla.
+
+::: {.callout-tip title="Cómo usarlas"}
+Descargá el `.qmd` de la tarea y su `.csv`, poné los dos en una carpeta con los datos en un subdirectorio `datos/`, y abrí el `.qmd` en RStudio. Si preferís no descargar nada, cada tarea trae comentada la línea que lee los datos directo de internet.
+
+Las respuestas están publicadas. Resistí la tentación de abrirlas antes de intentar cada pregunta: el valor está en pelearse un rato con el código y con la interpretación. Después compará, sobre todo las respuestas escritas.
+:::
+
+## Las cuatro tareas
+
+::: {.resource-card}
+[Tarea 1: Experimentos]{.resource-title}
+
+[Parte 2 · un programa de tutorías escolares]{.resource-meta}
+
+[Un municipio sortea tutorías de refuerzo entre 500 estudiantes. Diferencia de medias, tabla de balance, controles para ganar precisión, ajuste a la Lin y efectos heterogéneos: ¿el programa rinde igual para todos?]{.resource-meta}
+
+::: {.resource-links}
+[Datos (.csv)](tareas/datos/tutorias_rct.csv) |
+[Tarea (.html)](tareas/tarea-01-experimentos.html) |
+[Tarea (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/tarea-01-experimentos.qmd) |
+[Respuestas (.html)](tareas/tarea-01-experimentos-respuestas.html) |
+[Generador (.R)](tareas/datos/generar-tutorias.R)
+:::
+:::
+
+::: {.resource-card}
+[Tarea 2: Regresión discontinua]{.resource-title}
+
+[Parte 3 · un programa de becas de estudio]{.resource-meta}
+
+[Una beca que se otorga por encima de un puntaje de vulnerabilidad. `rdplot` y `rdrobust`, el test de manipulación, el balance en covariables, el corte placebo y la sensibilidad al ancho de banda. Con una sorpresa: acá la comparación ingenua esconde el efecto en vez de exagerarlo.]{.resource-meta}
+
+::: {.resource-links}
+[Datos (.csv)](tareas/datos/beca_puntaje.csv) |
+[Tarea (.html)](tareas/tarea-02-rdd.html) |
+[Tarea (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/tarea-02-rdd.qmd) |
+[Respuestas (.html)](tareas/tarea-02-rdd-respuestas.html) |
+[Generador (.R)](tareas/datos/generar-beca.R)
+:::
+:::
+
+::: {.resource-card}
+[Tarea 3: Diferencias en diferencias y control sintético]{.resource-title}
+
+[Parte 4 · el control del tabaco en Uruguay]{.resource-meta}
+
+[Uruguay endurece su política antitabaco en 2006 y hay que medir cuánto bajó el tabaquismo por esa razón. El 2×2 a mano y como regresión, las pre-tendencias, el Uruguay sintético con `tidysynth`, los pesos de los donantes y la inferencia por placebos.]{.resource-meta}
+
+::: {.resource-links}
+[Datos (.csv)](tareas/datos/tabaco_panel.csv) |
+[Tarea (.html)](tareas/tarea-03-did-sintetico.html) |
+[Tarea (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/tarea-03-did-sintetico.qmd) |
+[Respuestas (.html)](tareas/tarea-03-did-sintetico-respuestas.html) |
+[Generador (.R)](tareas/datos/generar-tabaco.R)
+:::
+:::
+
+::: {.resource-card}
+[Tarea 4: Acumulación de evidencia]{.resource-title}
+
+[Parte 5 · salario mínimo y empleo]{.resource-meta}
+
+[Cuarenta y cinco estudios sobre una de las preguntas más peleadas de la economía. Efecto combinado, forest y funnel, el test de Egger, trim-and-fill, subgrupos y meta-regresión, para terminar contestando qué dice de verdad esta literatura.]{.resource-meta}
+
+::: {.resource-links}
+[Datos (.csv)](tareas/datos/meta_salario.csv) |
+[Tarea (.html)](tareas/tarea-04-acumulacion.html) |
+[Tarea (.qmd)](https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/tarea-04-acumulacion.qmd) |
+[Respuestas (.html)](tareas/tarea-04-acumulacion-respuestas.html) |
+[Generador (.R)](tareas/datos/generar-meta-salario.R)
+:::
+:::
+
+## Si te trabás
+
+Cada tarea usa las funciones de su bloque, y las pistas apuntan a la sección correspondiente de la [Referencia R](referencia-r.qmd), donde está cada comando explicado con un ejemplo ejecutable. Si el problema es de instalación, la lista completa de paquetes está en [Materiales](materiales.qmd).
+
+Si algo no corre, o si encontrás un error en una respuesta, escribime o abrí un issue en el [repositorio](https://github.com/danilofreire/taller-evidencia-ucu).

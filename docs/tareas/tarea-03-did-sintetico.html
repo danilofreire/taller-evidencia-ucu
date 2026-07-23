@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Danilo Freire">
 
-<title>Políticas públicas basadas en evidencia – Políticas basadas en evidencia</title>
+<title>Tarea 3: Diferencias en diferencias y control sintético – Políticas basadas en evidencia</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,29 +24,64 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-94010c4b498fe1b662faab7fc5b9b58b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b21131f5c5568dc098e2417f6074305f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-94010c4b498fe1b662faab7fc5b9b58b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9e68f30e75591e36100235718a786973.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,6 +113,35 @@ ul.task-list li input[type="checkbox"] {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -249,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Políticas basadas en evidencia</span>
     </a>
   </div>
@@ -260,23 +325,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./programa.html"> 
+    <a class="nav-link" href="../programa.html"> 
 <span class="menu-text">Programa</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./materiales.html"> 
+    <a class="nav-link" href="../materiales.html"> 
 <span class="menu-text">Materiales</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./tareas.html"> 
+    <a class="nav-link" href="../tareas.html"> 
 <span class="menu-text">Tareas</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./reproducibilidad.html"> 
+    <a class="nav-link" href="../reproducibilidad.html"> 
 <span class="menu-text">Reproducibilidad</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -285,29 +350,29 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-referencia-r">    
         <li>
-    <a class="dropdown-item" href="./referencia-r.html">
+    <a class="dropdown-item" href="../referencia-r.html">
  <span class="dropdown-text">Todas las referencias</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-experimentos.html">
+    <a class="dropdown-item" href="../referencia-experimentos.html">
  <span class="dropdown-text">Experimentos</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-rdd.html">
+    <a class="dropdown-item" href="../referencia-rdd.html">
  <span class="dropdown-text">Regresión discontinua</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-did-sintetico.html">
+    <a class="dropdown-item" href="../referencia-did-sintetico.html">
  <span class="dropdown-text">DiD y control sintético</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-acumulacion.html">
+    <a class="dropdown-item" href="../referencia-acumulacion.html">
  <span class="dropdown-text">Acumulación de evidencia</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./referencias.html"> 
+    <a class="nav-link" href="../referencias.html"> 
 <span class="menu-text">Referencias</span></a>
   </li>  
 </ul>
@@ -344,10 +409,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#el-taller-de-un-vistazo" id="toc-el-taller-de-un-vistazo" class="nav-link active" data-scroll-target="#el-taller-de-un-vistazo">El taller de un vistazo</a></li>
-  <li><a href="#qué-traer" id="toc-qué-traer" class="nav-link" data-scroll-target="#qué-traer">Qué traer</a></li>
+  <li><a href="#de-qué-se-trata" id="toc-de-qué-se-trata" class="nav-link active" data-scroll-target="#de-qué-se-trata"><span class="header-section-number">1</span> De qué se trata</a></li>
+  <li><a href="#cómo-trabajar" id="toc-cómo-trabajar" class="nav-link" data-scroll-target="#cómo-trabajar"><span class="header-section-number">2</span> Cómo trabajar</a></li>
+  <li><a href="#diferencias-en-diferencias" id="toc-diferencias-en-diferencias" class="nav-link" data-scroll-target="#diferencias-en-diferencias"><span class="header-section-number">3</span> Diferencias en diferencias</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-1-el-22-a-mano" id="toc-pregunta-1-el-22-a-mano" class="nav-link" data-scroll-target="#pregunta-1-el-22-a-mano"><span class="header-section-number">3.1</span> Pregunta 1: el 2×2 a mano</a></li>
+  <li><a href="#pregunta-2-el-mismo-número-como-regresión" id="toc-pregunta-2-el-mismo-número-como-regresión" class="nav-link" data-scroll-target="#pregunta-2-el-mismo-número-como-regresión"><span class="header-section-number">3.2</span> Pregunta 2: el mismo número como regresión</a></li>
+  <li><a href="#pregunta-3-son-creíbles-las-tendencias-paralelas" id="toc-pregunta-3-son-creíbles-las-tendencias-paralelas" class="nav-link" data-scroll-target="#pregunta-3-son-creíbles-las-tendencias-paralelas"><span class="header-section-number">3.3</span> Pregunta 3: ¿son creíbles las tendencias paralelas?</a></li>
+  </ul></li>
+  <li><a href="#control-sintético" id="toc-control-sintético" class="nav-link" data-scroll-target="#control-sintético"><span class="header-section-number">4</span> Control sintético</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-4-construir-el-uruguay-sintético" id="toc-pregunta-4-construir-el-uruguay-sintético" class="nav-link" data-scroll-target="#pregunta-4-construir-el-uruguay-sintético"><span class="header-section-number">4.1</span> Pregunta 4: construir el Uruguay sintético</a></li>
+  <li><a href="#pregunta-5-ver-el-ajuste-y-leer-los-pesos" id="toc-pregunta-5-ver-el-ajuste-y-leer-los-pesos" class="nav-link" data-scroll-target="#pregunta-5-ver-el-ajuste-y-leer-los-pesos"><span class="header-section-number">4.2</span> Pregunta 5: ver el ajuste y leer los pesos</a></li>
+  <li><a href="#pregunta-6-es-real-el-efecto-inferencia-por-placebos" id="toc-pregunta-6-es-real-el-efecto-inferencia-por-placebos" class="nav-link" data-scroll-target="#pregunta-6-es-real-el-efecto-inferencia-por-placebos"><span class="header-section-number">4.3</span> Pregunta 6: ¿es real el efecto? Inferencia por placebos</a></li>
+  </ul></li>
+  <li><a href="#interpretar" id="toc-interpretar" class="nav-link" data-scroll-target="#interpretar"><span class="header-section-number">5</span> Interpretar</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-7-los-dos-métodos-y-la-advertencia" id="toc-pregunta-7-los-dos-métodos-y-la-advertencia" class="nav-link" data-scroll-target="#pregunta-7-los-dos-métodos-y-la-advertencia"><span class="header-section-number">5.1</span> Pregunta 7: los dos métodos y la advertencia</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/tareas/tarea-03-did-sintetico.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -355,14 +436,20 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Políticas públicas basadas en evidencia</h1>
-<p class="subtitle lead">Lecciones desde la investigación aplicada en América Latina</p>
+<h1 class="title">Tarea 3: Diferencias en diferencias y control sintético</h1>
+<p class="subtitle lead">Práctica · el control del tabaco en Uruguay</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Danilo Freire </p>
+          </div>
+  </div>
     
   
     
@@ -373,89 +460,132 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Taller intensivo de un día sobre cómo producir y acumular evidencia creíble para la política pública, con casos de América Latina. La mañana responde una pregunta: ¿de dónde sale tu contrafactual? Recorremos tres respuestas: los experimentos, la regresión discontinua y el control sintético. La tarde responde la segunda: ¿cuándo un resultado se vuelve evidencia? Vemos el sesgo de publicación, el meta-análisis y la crisis de replicación. Cada bloque termina con una práctica guiada en R.</p>
-<div class="info-box">
-<div class="info-grid">
-<div class="info-item">
-<p><span class="info-label">Fecha</span></p>
-<p><span class="info-value">Sábado 1 de agosto de 2026</span></p>
-</div>
-<div class="info-item">
-<p><span class="info-label">Lugar</span></p>
-<p><span class="info-value">Universidad Católica del Uruguay, Montevideo</span></p>
-</div>
-<div class="info-item">
-<p><span class="info-label">Duración</span></p>
-<p><span class="info-value">Mañana 9:00–12:30 · Tarde 13:30–15:30</span></p>
-</div>
-<div class="info-item">
-<p><span class="info-label">Instructor</span></p>
-<p><span class="info-value">Danilo Freire</span></p>
-</div>
-</div>
-</div>
-<section id="el-taller-de-un-vistazo" class="level2">
-<h2 class="anchored" data-anchor-id="el-taller-de-un-vistazo">El taller de un vistazo</h2>
-<p>La mañana responde ¿de dónde sale tu contrafactual? y la tarde ¿cuándo un resultado se vuelve evidencia? Cada bloque enlaza a sus diapositivas.</p>
+<section id="de-qué-se-trata" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="de-qué-se-trata"><span class="header-section-number">1</span> De qué se trata</h2>
+<p>Desde 2006, Uruguay aplicó una de las políticas de control del tabaco más fuertes de la región: ambientes libres de humo, advertencias gráficas en los paquetes e impuestos altos. ¿Bajó eso la prevalencia de tabaquismo más de lo que habría bajado igual? No hay sorteo ni umbral: hay una sola unidad tratada (Uruguay), una política que ya ocurrió, y varios años de datos para Uruguay y para otros países que le sirven de espejo. Ese es el terreno de las diferencias en diferencias y el control sintético.</p>
+<p>Trabajás con <code>tabaco_panel.csv</code>, un panel país-año de 12 países entre 1996 y 2013. Cada fila es un país en un año:</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Hora</th>
-<th>Bloque</th>
-<th style="text-align: center;">Duración</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Qué es</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>9:00</td>
-<td><a href="diapositivas/01-apertura.html">Apertura</a>: el problema del contrafactual</td>
-<td style="text-align: center;">30 min</td>
+<td style="text-align: left;"><code>pais</code>, <code>anio</code></td>
+<td style="text-align: left;">identifican cada fila</td>
 </tr>
 <tr class="even">
-<td>9:30</td>
-<td><a href="diapositivas/02-experimentos.html">Experimentos</a>: aleatorización y sesgo de selección</td>
-<td style="text-align: center;">75 min</td>
+<td style="text-align: left;"><code>prevalencia</code></td>
+<td style="text-align: left;">% de adultos que fuma, el resultado</td>
 </tr>
 <tr class="odd">
-<td>10:45</td>
-<td>Café</td>
-<td style="text-align: center;">15 min</td>
+<td style="text-align: left;"><code>tratado</code></td>
+<td style="text-align: left;">1 sólo para Uruguay</td>
 </tr>
 <tr class="even">
-<td>11:00</td>
-<td><a href="diapositivas/03-rdd.html">Regresión discontinua</a>: el RDD de Brasil</td>
-<td style="text-align: center;">75 min</td>
+<td style="text-align: left;"><code>post</code></td>
+<td style="text-align: left;">1 desde 2006, el año de la política</td>
 </tr>
 <tr class="odd">
-<td>12:15</td>
-<td>Cierre de la mañana y discusión</td>
-<td style="text-align: center;">15 min</td>
-</tr>
-<tr class="even">
-<td>13:30</td>
-<td><a href="diapositivas/04-did-sintetico.html">Diferencias en diferencias</a> y control sintético</td>
-<td style="text-align: center;">45 min</td>
-</tr>
-<tr class="odd">
-<td>14:15</td>
-<td><a href="diapositivas/05-acumulacion.html">Acumulación</a>: meta-análisis y replicación</td>
-<td style="text-align: center;">60 min</td>
-</tr>
-<tr class="even">
-<td>15:15</td>
-<td><a href="diapositivas/06-cierre.html">Cierre</a></td>
-<td style="text-align: center;">15 min</td>
+<td style="text-align: left;"><code>pib_pc</code>, <code>urbanizacion</code>, <code>gasto_salud</code>, <code>precio_cigarrillos</code></td>
+<td style="text-align: left;">covariables</td>
 </tr>
 </tbody>
 </table>
-<p>El <a href="./programa.html">programa detallado</a> desarrolla los contenidos y la práctica de cada bloque.</p>
+<p>La <a href="../referencia-did-sintetico.html">Referencia R de DiD y control sintético</a> tiene cada comando explicado sobre un panel con la misma estructura (el caso de los homicidios en São Paulo).</p>
 </section>
-<section id="qué-traer" class="level2">
-<h2 class="anchored" data-anchor-id="qué-traer">Qué traer</h2>
-<p>Traé tu computadora con <a href="https://cran.r-project.org/">R</a> instalado. Cada bloque tiene una práctica con el código ya escrito, que corremos juntos. En <a href="./materiales.html">Materiales</a> está la guía de instalación con los paquetes que vas a necesitar, y en <a href="./referencias.html">Referencias</a> están las lecturas del taller.</p>
-<p>Para después: en <a href="./referencia-r.html">Referencia R</a> queda todo el código de las prácticas explicado función por función, y la <a href="./reproducibilidad.html">guía de reproducibilidad</a> resume el kit mínimo para que tu trabajo lo pueda correr otra persona.</p>
+<section id="cómo-trabajar" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="cómo-trabajar"><span class="header-section-number">2</span> Cómo trabajar</h2>
+<p>Respondé cada pregunta escribiendo código R en el bloque de abajo. Cuando se pida una respuesta escrita, usá texto normal debajo del bloque.</p>
+<ol type="1">
+<li>Descargá este archivo <code>.qmd</code> y el dataset <code>tabaco_panel.csv</code> desde la <a href="../tareas.html">página de Tareas</a>, o cloná el repositorio con <code>git clone https://github.com/danilofreire/taller-evidencia-ucu.git</code></li>
+<li>Necesitás <a href="https://cran.r-project.org/">R</a>, <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> y los paquetes <code>estimatr</code> y <code>tidysynth</code></li>
+<li>Abrí el <code>.qmd</code> en RStudio y corré los bloques con Ctrl+Enter (Cmd+Enter en Mac)</li>
+<li>Cuando termines, apretá “Render”</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estimatr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidysynth)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"datos/tabaco_panel.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># datos &lt;- read_csv("https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/datos/tabaco_panel.csv", show_col_types = FALSE)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="diferencias-en-diferencias" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="diferencias-en-diferencias"><span class="header-section-number">3</span> Diferencias en diferencias</h2>
+<section id="pregunta-1-el-22-a-mano" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="pregunta-1-el-22-a-mano"><span class="header-section-number">3.1</span> Pregunta 1: el 2×2 a mano</h3>
+<p>Armá la tabla de cuatro promedios de <code>prevalencia</code>: Uruguay y los donantes, antes y después de 2006 (agrupá por <code>tratado</code> y <code>post</code>). Con esos cuatro números, calculá la doble resta: (Uruguay después − antes) − (donantes después − antes). ¿Cuánto da el efecto DiD? ¿Qué saca cada una de las dos restas?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+<section id="pregunta-2-el-mismo-número-como-regresión" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="pregunta-2-el-mismo-número-como-regresión"><span class="header-section-number">3.2</span> Pregunta 2: el mismo número como regresión</h3>
+<p>La doble resta es exactamente el coeficiente de una interacción. Estimá <code>lm_robust(prevalencia ~ tratado * post)</code> y leé los cuatro coeficientes: ¿qué representa cada uno (el intercepto, <code>tratado</code>, <code>post</code> y la interacción)? ¿La interacción coincide con tu cuenta de la pregunta 1?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+<section id="pregunta-3-son-creíbles-las-tendencias-paralelas" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="pregunta-3-son-creíbles-las-tendencias-paralelas"><span class="header-section-number">3.3</span> Pregunta 3: ¿son creíbles las tendencias paralelas?</h3>
+<p>El DiD sólo vale si, sin la política, Uruguay hubiera seguido la misma tendencia que los donantes. Eso no se puede probar, pero sí se puede mirar el pasado. Graficá la prevalencia de Uruguay y el promedio de los donantes año a año, con una línea vertical en 2006. Mirá los años <strong>antes</strong> de la política: ¿las dos series iban parejas? ¿Qué te dice eso sobre el supuesto?</p>
+<p><em>Pista:</em> armá dos series (Uruguay, y el promedio de los donantes por año) y unilas con <code>bind_rows()</code> para graficarlas juntas. La sección “La misma cuenta, en un gráfico” de la Referencia R hace justo esto.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+</section>
+<section id="control-sintético" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="control-sintético"><span class="header-section-number">4</span> Control sintético</h2>
+<section id="pregunta-4-construir-el-uruguay-sintético" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="pregunta-4-construir-el-uruguay-sintético"><span class="header-section-number">4.1</span> Pregunta 4: construir el Uruguay sintético</h3>
+<p>El DiD pesa a todos los donantes por igual. El control sintético elige pesos para que un promedio ponderado de los donantes calque la trayectoria de Uruguay antes de 2006. Armá el objeto con <code>tidysynth</code>: definí el problema con <code>synthetic_control()</code> (unidad tratada Uruguay, último año sin política 2005, <code>generate_placebos = TRUE</code>), agregá las covariables como predictores pre-política con <code>generate_predictor()</code>, y cerrá con <code>generate_weights()</code> y <code>generate_control()</code>.</p>
+<p><em>Pista:</em> la sección “El control sintético en un pipe” de la Referencia R tiene el esqueleto completo. Cambiá los nombres de la unidad, el año y las covariables por los de estos datos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+<section id="pregunta-5-ver-el-ajuste-y-leer-los-pesos" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="pregunta-5-ver-el-ajuste-y-leer-los-pesos"><span class="header-section-number">4.2</span> Pregunta 5: ver el ajuste y leer los pesos</h3>
+<p>Con el objeto armado, mostrá dos cosas: el gráfico de <code>plot_trends()</code> (Uruguay real contra su sintético) y los pesos de cada donante con <code>grab_unit_weights()</code>. ¿El sintético calca bien a Uruguay antes de 2006? ¿Qué países arman el Uruguay sintético? ¿Tiene sentido que sean esos?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+<section id="pregunta-6-es-real-el-efecto-inferencia-por-placebos" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="pregunta-6-es-real-el-efecto-inferencia-por-placebos"><span class="header-section-number">4.3</span> Pregunta 6: ¿es real el efecto? Inferencia por placebos</h3>
+<p>El control sintético no usa errores estándar: hace inferencia corriendo el mismo método sobre cada donante, como si él hubiera sido el tratado. Si el efecto de Uruguay es real, su brecha tiene que destacarse. Mostrá <code>plot_placebos()</code> y sacá el valor <span class="math inline">\(p\)</span> estilo Fisher con <code>grab_significance()</code> (mirá el <code>rank</code> de Uruguay y el <code>fishers_exact_pvalue</code>). ¿Qué tan extremo es Uruguay entre los 12 países?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+</section>
+<section id="interpretar" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="interpretar"><span class="header-section-number">5</span> Interpretar</h2>
+<section id="pregunta-7-los-dos-métodos-y-la-advertencia" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="pregunta-7-los-dos-métodos-y-la-advertencia"><span class="header-section-number">5.1</span> Pregunta 7: los dos métodos y la advertencia</h3>
+<p>Compará lo que te dieron los dos métodos: el efecto DiD (pregunta 1-2) y la brecha del control sintético hacia 2013. ¿Coinciden en el signo y el orden de magnitud? Después pensá en la inferencia: hay una sola unidad tratada. ¿Por qué el valor <span class="math inline">\(p\)</span> del control sintético no puede ser muy chico con sólo 12 países? ¿Qué le dirías a alguien que te muestra el valor <span class="math inline">\(p\)</span> de la regresión DiD como si fuera una garantía?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Volver arriba</a></main> <!-- /main -->
@@ -880,7 +1010,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/tareas/tarea-03-did-sintetico.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>Hecho con <a href="https://quarto.org">Quarto</a></p>
 </div>

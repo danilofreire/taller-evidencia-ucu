@@ -1,0 +1,141 @@
+---
+title: "Tarea 1: Experimentos"
+subtitle: "Práctica · un programa de tutorías escolares"
+author: "Danilo Freire"
+toc: true
+toc-depth: 3
+number-sections: true
+code-copy: true
+code-fold: false
+lang: es
+engine: knitr
+---
+
+## De qué se trata
+
+Un municipio quiere saber si un programa de tutorías de refuerzo mejora el rendimiento de los estudiantes de secundaria. En vez de ofrecerlo a todos de una vez, sortea quién lo recibe: de 500 estudiantes, 250 entran al programa (tratamiento) y 250 quedan en lista de espera (control). Como el sorteo es aleatorio, los dos grupos arrancan parejos y la diferencia de resultados estima el efecto causal del programa.
+
+Trabajás con `tutorias_rct.csv`. Cada fila es un estudiante:
+
+| Variable | Qué es |
+|:--|:--|
+| `tratamiento` | 1 si recibió las tutorías, 0 si no |
+| `nota_final` | nota del año (0 a 100), el resultado principal |
+| `aprobo` | 1 si aprobó el año (nota ≥ 60), 0 si no |
+| `nota_base` | nota del año anterior, medida antes del sorteo |
+| `asistencia_previa` | asistencia el año anterior (%), antes del sorteo |
+| `vulnerable` | 1 si el estudiante está en situación de vulnerabilidad socioeconómica |
+| `edad`, `mujer`, `zona` | otras covariables previas |
+
+Esta tarea usa las funciones del bloque de experimentos. Si te trabás, la [Referencia R de experimentos](../referencia-experimentos.qmd) tiene cada comando explicado sobre datos con la misma estructura.
+
+## Cómo trabajar
+
+Respondé cada pregunta escribiendo código R en el bloque que está debajo. Cuando se pida una respuesta escrita, usá texto normal debajo del bloque.
+
+1. Descargá este archivo `.qmd` y el dataset `tutorias_rct.csv` desde la [página de Tareas](../tareas.qmd), o cloná el repositorio con `git clone https://github.com/danilofreire/taller-evidencia-ucu.git`
+2. Necesitás [R](https://cran.r-project.org/) y [RStudio](https://posit.co/download/rstudio-desktop/). Las versiones recientes de RStudio ya traen Quarto
+3. Abrí el `.qmd` en RStudio y corré los bloques con Ctrl+Enter (Cmd+Enter en Mac)
+4. Cuando termines, apretá "Render" para generar el documento completo
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(estimatr)
+
+datos <- read_csv("datos/tutorias_rct.csv", show_col_types = FALSE)
+# datos <- read_csv("https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/datos/tutorias_rct.csv", show_col_types = FALSE)
+
+datos <- datos |>
+  mutate(zona = factor(zona))
+```
+
+## Explorar
+
+### Pregunta 1: la diferencia cruda
+
+Calculá la nota final promedio y la proporción de aprobados en cada grupo (tratamiento y control). ¿Cuál es la diferencia cruda de notas entre los dos grupos? En un experimento aleatorizado, ¿por qué esta simple resta ya es informativa, mientras que en un estudio observacional habría que desconfiar de ella?
+
+```{r p1}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 2: la tabla de balance
+
+Un buen sorteo deja los grupos parejos en las variables medidas antes del tratamiento. Corré una regresión por covariable (`nota_base`, `edad`, `mujer`, `asistencia_previa`, `vulnerable`) sobre `tratamiento` y juntá las diferencias con su valor $p$. ¿Alguna diferencia sale significativa? Si es así, ¿quiere decir que el sorteo falló?
+
+*Pista:* la sección "Tabla de balance" de la Referencia R arma esto con varias regresiones que van a una `data.frame`. Acordate de que, con varias covariables, alguna puede salir significativa sólo por azar.
+
+```{r p2}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+## Estimar el efecto
+
+### Pregunta 3: diferencia de medias
+
+Estimá el efecto del programa sobre `nota_final` con `difference_in_means()`. Reportá el efecto, su intervalo de confianza y su valor $p$. ¿El intervalo cruza el cero? Interpretá el número en la escala del problema (puntos de nota).
+
+```{r p3}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 4: controles para ganar precisión
+
+Estimá el mismo efecto con `lm_robust()`, primero sin covariables y después sumando `nota_base` y `asistencia_previa`. Compará el coeficiente de `tratamiento` y, sobre todo, su error estándar en las dos versiones. ¿Los controles cambian el efecto estimado? ¿Cambian su precisión? ¿Por qué en un experimento no controlamos para quitar sesgo?
+
+```{r p4}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 5: el ajuste a la Lin
+
+Sumar covariables "a lo bruto" puede colar un sesgo chico en muestras finitas. La receta de Lin lo evita centrando cada covariable y multiplicándola por el tratamiento. Estimá el efecto con `lm_lin()` usando `nota_base` y `asistencia_previa` como covariables. Compará su error estándar con el de la regresión sin covariables de la pregunta anterior.
+
+*Pista:* en `lm_lin()` las covariables van en el argumento `covariates = ~ ...`. Está en la sección "Ajuste a la Lin" de la Referencia R.
+
+```{r p5}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+## Mirar más fino
+
+### Pregunta 6: ¿para quién funciona el programa?
+
+Una hipótesis razonable es que las tutorías rindan más para los estudiantes que arrancan con más dificultades. Estimá un modelo con la interacción `tratamiento * vulnerable` y leé los coeficientes: ¿cuál es el efecto para los estudiantes no vulnerables? ¿Y para los vulnerables? ¿La diferencia entre los dos es grande?
+
+*Pista:* con `tratamiento * vulnerable`, el coeficiente de `tratamiento` es el efecto cuando `vulnerable = 0`, y el término de interacción es cuánto se suma cuando `vulnerable = 1`. Tratá este resultado como exploración, no como prueba, salvo que lo hubieras pre-registrado.
+
+```{r p6}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+## Decidir
+
+### Pregunta 7: el efecto sobre aprobar, y una recomendación
+
+Estimá el efecto del programa sobre `aprobo` (la probabilidad de aprobar el año). Después, imaginá que le escribís al equipo de educación del municipio, que tiene presupuesto para ampliar el programa pero no para todos. Con lo que encontraste en las preguntas 3, 6 y 7, ¿qué recomendarías? Considerá el tamaño del efecto, a quién ayuda más y qué te gustaría saber antes de decidir.
+
+```{r p7}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**

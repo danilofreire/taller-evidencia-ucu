@@ -1,0 +1,149 @@
+---
+title: "Tarea 3: Diferencias en diferencias y control sintético — Respuestas"
+subtitle: "Práctica · el control del tabaco en Uruguay"
+author: "Danilo Freire"
+toc: true
+toc-depth: 3
+number-sections: true
+code-copy: true
+code-fold: false
+lang: es
+engine: knitr
+---
+
+```{r setup}
+#| include: false
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
+                      fig.align = "center", fig.width = 8, fig.height = 4.2)
+
+# paleta de la casa (el mismo par azul/rojo de las diapositivas)
+azul <- "#2d4563"
+rojo <- "#b85450"
+
+tema_taller <- ggplot2::theme_minimal(base_size = 13) +
+  ggplot2::theme(panel.grid.minor = ggplot2::element_blank())
+```
+
+Esta es la clave de respuestas de la Tarea 3. Cada bloque trae la solución y, debajo, un comentario con los números. Salen con la semilla de los datos; si corriste la tarea, deberías obtener lo mismo.
+
+```{r datos, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(estimatr)
+library(tidysynth)
+
+datos <- read_csv("datos/tabaco_panel.csv", show_col_types = FALSE)
+```
+
+## Diferencias en diferencias
+
+### Pregunta 1: el 2×2 a mano
+
+```{r p1}
+medias <- datos |>
+  group_by(tratado, post) |>
+  summarise(prev = round(mean(prevalencia), 2), .groups = "drop")
+medias
+
+# la doble resta
+(20.01 - 30.54) - (26.91 - 30.65)
+```
+
+**Respuesta:** los cuatro promedios son: donantes antes 30,7 y después 26,9; Uruguay antes 30,5 y después 20,0. Uruguay baja unos 10,5 puntos; los donantes bajan 3,7 (el tabaquismo venía cayendo en toda la región). La doble resta da ≈ −6,8 puntos porcentuales. La primera resta (Uruguay después − antes) saca todo lo que es fijo de Uruguay; la segunda (donantes después − antes) mide la tendencia común que hay que descontar. Lo que queda es la caída extra de Uruguay: el efecto atribuible a la política.
+
+### Pregunta 2: el mismo número como regresión
+
+```{r p2}
+did <- lm_robust(prevalencia ~ tratado * post, data = datos)
+round(coef(summary(did))[, 1:4], 3)
+```
+
+**Respuesta:** cada coeficiente es una celda del 2×2. El intercepto (30,7) es el donante típico antes de la política; `tratado` (−0,1) es la brecha que ya existía entre Uruguay y los donantes, casi nula; `post` (−3,7) es la caída común a todos desde 2006; y la interacción `tratado:post` (−6,8) es lo que le pasó sólo a Uruguay y sólo después. Coincide exactamente con la doble resta de la pregunta 1: el DiD es esa interacción.
+
+### Pregunta 3: ¿son creíbles las tendencias paralelas?
+
+```{r p3}
+uy <- datos |>
+  filter(tratado == 1) |>
+  transmute(anio, prev = prevalencia, grupo = "Uruguay")
+
+donantes <- datos |>
+  filter(tratado == 0) |>
+  group_by(anio) |>
+  summarise(prev = mean(prevalencia), .groups = "drop") |>
+  mutate(grupo = "Promedio de donantes")
+
+serie <- bind_rows(uy, donantes)
+
+ggplot(serie, aes(anio, prev, color = grupo)) +
+  geom_line(linewidth = 1.1) +
+  geom_point(size = 1.8) +
+  geom_vline(xintercept = 2005.5, linetype = "dashed",
+             color = rojo, linewidth = 0.8) +
+  scale_color_manual(values = c("Uruguay" = azul,
+                                "Promedio de donantes" = "grey55")) +
+  labs(x = NULL, y = "Prevalencia de tabaquismo (%)", color = NULL) +
+  tema_taller +
+  theme(legend.position = "top")
+```
+
+**Respuesta:** antes de 2006 las dos líneas van casi pegadas: la brecha promedio entre Uruguay y los donantes en el período pre-política es de apenas −0,1 puntos, moviéndose dentro de una banda estrecha. Ese paralelismo previo hace más creíble el supuesto de tendencias paralelas, la base del DiD. Después de 2006 las series se separan: Uruguay cae mucho más rápido. Cuidado, igual: pre-tendencias parejas hacen el supuesto plausible, no lo prueban; podría romperse por anticipación o por un shock que coincida con la política.
+
+## Control sintético
+
+### Pregunta 4: construir el Uruguay sintético
+
+```{r p4}
+#| results: hide
+sc <- datos |>
+  synthetic_control(outcome = prevalencia, unit = pais, time = anio,
+                    i_unit = "Uruguay", i_time = 2005,
+                    generate_placebos = TRUE) |>
+  generate_predictor(time_window = 1996:2005,
+                     pib = mean(pib_pc), urb = mean(urbanizacion),
+                     gs = mean(gasto_salud), precio = mean(precio_cigarrillos)) |>
+  generate_predictor(time_window = 1996:2005, prev_pre = mean(prevalencia)) |>
+  generate_weights() |>
+  generate_control()
+```
+
+**Respuesta:** el pipe define el problema (Uruguay como tratado, 2005 como último año sin política), usa las covariables y la prevalencia pre-2006 como predictores, y deja que el método elija los pesos. El objeto `sc` guarda las series, los pesos y los placebos para los pasos siguientes.
+
+### Pregunta 5: ver el ajuste y leer los pesos
+
+```{r p5-trends}
+sc |> plot_trends()
+```
+
+```{r p5-pesos}
+sc |> grab_unit_weights() |> arrange(desc(weight)) |> head(5)
+```
+
+**Respuesta:** antes de 2006 el sintético calca bien a Uruguay, y después el Uruguay real cae por debajo de su clon: esa brecha es el efecto estimado. El Uruguay sintético se arma sobre todo con Panamá (≈ 0,52), México (≈ 0,25) y Perú (≈ 0,21), con aportes chicos de Costa Rica y Argentina. Que el peso se concentre en unos pocos países latinoamericanos con niveles de tabaquismo parecidos es razonable, y es una ventaja del método: los pesos son transparentes, cualquiera puede leerlos y discutir si tienen sentido.
+
+### Pregunta 6: ¿es real el efecto? Inferencia por placebos
+
+```{r p6-placebos}
+sc |> plot_placebos(prune = FALSE)
+```
+
+```{r p6-sig}
+sc |> grab_significance() |>
+  filter(type == "Treated") |>
+  select(unit_name, pre_mspe, post_mspe, mspe_ratio, rank, fishers_exact_pvalue)
+```
+
+**Respuesta:** en el gráfico de placebos, la brecha de Uruguay es la más marcada de todas: ninguno de los 11 donantes, tratado en falso, produce una separación parecida. La razón MSPE (error post sobre error pre) pone a Uruguay en el `rank` 1 de 12, con un valor $p$ estilo Fisher de ≈ 0,083 (que es 1/12). Uruguay es el caso más extremo del panel, justo lo que esperaríamos si la política tuvo un efecto real.
+
+## Interpretar
+
+### Pregunta 7: los dos métodos y la advertencia
+
+```{r p7}
+sc |>
+  grab_synthetic_control() |>
+  filter(time_unit == 2013)
+```
+
+**Respuesta:** los dos métodos coinciden en la historia: el tabaquismo en Uruguay cayó más de lo que habría caído sin la política. El DiD da un efecto promedio de ≈ −6,8 puntos sobre todo el período post; el control sintético muestra una brecha que crece con los años y llega a ≈ −10 puntos hacia 2013 (Uruguay en ≈ 15% frente a un sintético en ≈ 25%). El DiD promedia todo el período y el sintético mira el efecto acumulándose, así que el sintético, más grande al final, es coherente con el DiD.
+
+Sobre la inferencia, hay una sola unidad tratada. El valor $p$ del control sintético no puede bajar de 1/12 ≈ 0,083, porque con 12 países la brecha de Uruguay, aun siendo la más extrema, sólo puede ocupar el primer lugar entre doce: el tamaño del pool pone el piso. Y el valor $p$ de la regresión DiD hay que leerlo con cuidado: descansa en la variación año a año de una única serie tratada, no en muchos "Uruguays", así que suele salir demasiado optimista. A quien me muestre ese $p$ como garantía le diría que, con un solo caso tratado, la inferencia honesta viene de los placebos, no del error estándar de la regresión.

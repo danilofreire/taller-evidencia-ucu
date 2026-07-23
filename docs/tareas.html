@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Políticas públicas basadas en evidencia – Políticas basadas en evidencia</title>
+<title>Tareas – Políticas basadas en evidencia</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -260,7 +260,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
@@ -272,7 +272,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Materiales</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./tareas.html"> 
+    <a class="nav-link active" href="./tareas.html" aria-current="page"> 
 <span class="menu-text">Tareas</span></a>
   </li>  
   <li class="nav-item">
@@ -344,10 +344,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#el-taller-de-un-vistazo" id="toc-el-taller-de-un-vistazo" class="nav-link active" data-scroll-target="#el-taller-de-un-vistazo">El taller de un vistazo</a></li>
-  <li><a href="#qué-traer" id="toc-qué-traer" class="nav-link" data-scroll-target="#qué-traer">Qué traer</a></li>
+  <li><a href="#las-cuatro-tareas" id="toc-las-cuatro-tareas" class="nav-link active" data-scroll-target="#las-cuatro-tareas">Las cuatro tareas</a></li>
+  <li><a href="#si-te-trabás" id="toc-si-te-trabás" class="nav-link" data-scroll-target="#si-te-trabás">Si te trabás</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/tareas.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -355,8 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Políticas públicas basadas en evidencia</h1>
-<p class="subtitle lead">Lecciones desde la investigación aplicada en América Latina</p>
+<h1 class="title">Tareas</h1>
 </div>
 
 
@@ -373,87 +372,62 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Taller intensivo de un día sobre cómo producir y acumular evidencia creíble para la política pública, con casos de América Latina. La mañana responde una pregunta: ¿de dónde sale tu contrafactual? Recorremos tres respuestas: los experimentos, la regresión discontinua y el control sintético. La tarde responde la segunda: ¿cuándo un resultado se vuelve evidencia? Vemos el sesgo de publicación, el meta-análisis y la crisis de replicación. Cada bloque termina con una práctica guiada en R.</p>
-<div class="info-box">
-<div class="info-grid">
-<div class="info-item">
-<p><span class="info-label">Fecha</span></p>
-<p><span class="info-value">Sábado 1 de agosto de 2026</span></p>
+<p>El taller dura un día, y un día alcanza para ver los métodos funcionando, pero no para que se te queden en los dedos. Estas cuatro tareas son para eso: una por cada bloque de métodos, para hacer con calma cuando vuelvas a tu computadora.</p>
+<p>Cada tarea trae una base de datos nueva, distinta de la que usamos juntos. La idea es que no puedas resolverla copiando el código de la práctica: los nombres de las variables cambian, el caso es otro y en algún punto la respuesta correcta también. Son siete preguntas por tarea, con espacio para escribir código y para escribir en palabras qué encontraste, que suele ser la parte difícil.</p>
+<p>Todas las bases son simuladas: reproducen la estructura y el orden de magnitud de estudios reales, sin exponer datos originales. Cada una viene con su script generador, así que podés ver exactamente cómo se armaron y con qué semilla.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Cómo usarlas">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="info-item">
-<p><span class="info-label">Lugar</span></p>
-<p><span class="info-value">Universidad Católica del Uruguay, Montevideo</span></p>
-</div>
-<div class="info-item">
-<p><span class="info-label">Duración</span></p>
-<p><span class="info-value">Mañana 9:00–12:30 · Tarde 13:30–15:30</span></p>
-</div>
-<div class="info-item">
-<p><span class="info-label">Instructor</span></p>
-<p><span class="info-value">Danilo Freire</span></p>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Cómo usarlas
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>Descargá el <code>.qmd</code> de la tarea y su <code>.csv</code>, poné los dos en una carpeta con los datos en un subdirectorio <code>datos/</code>, y abrí el <code>.qmd</code> en RStudio. Si preferís no descargar nada, cada tarea trae comentada la línea que lee los datos directo de internet.</p>
+<p>Las respuestas están publicadas. Resistí la tentación de abrirlas antes de intentar cada pregunta: el valor está en pelearse un rato con el código y con la interpretación. Después compará, sobre todo las respuestas escritas.</p>
 </div>
-<section id="el-taller-de-un-vistazo" class="level2">
-<h2 class="anchored" data-anchor-id="el-taller-de-un-vistazo">El taller de un vistazo</h2>
-<p>La mañana responde ¿de dónde sale tu contrafactual? y la tarde ¿cuándo un resultado se vuelve evidencia? Cada bloque enlaza a sus diapositivas.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Hora</th>
-<th>Bloque</th>
-<th style="text-align: center;">Duración</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>9:00</td>
-<td><a href="diapositivas/01-apertura.html">Apertura</a>: el problema del contrafactual</td>
-<td style="text-align: center;">30 min</td>
-</tr>
-<tr class="even">
-<td>9:30</td>
-<td><a href="diapositivas/02-experimentos.html">Experimentos</a>: aleatorización y sesgo de selección</td>
-<td style="text-align: center;">75 min</td>
-</tr>
-<tr class="odd">
-<td>10:45</td>
-<td>Café</td>
-<td style="text-align: center;">15 min</td>
-</tr>
-<tr class="even">
-<td>11:00</td>
-<td><a href="diapositivas/03-rdd.html">Regresión discontinua</a>: el RDD de Brasil</td>
-<td style="text-align: center;">75 min</td>
-</tr>
-<tr class="odd">
-<td>12:15</td>
-<td>Cierre de la mañana y discusión</td>
-<td style="text-align: center;">15 min</td>
-</tr>
-<tr class="even">
-<td>13:30</td>
-<td><a href="diapositivas/04-did-sintetico.html">Diferencias en diferencias</a> y control sintético</td>
-<td style="text-align: center;">45 min</td>
-</tr>
-<tr class="odd">
-<td>14:15</td>
-<td><a href="diapositivas/05-acumulacion.html">Acumulación</a>: meta-análisis y replicación</td>
-<td style="text-align: center;">60 min</td>
-</tr>
-<tr class="even">
-<td>15:15</td>
-<td><a href="diapositivas/06-cierre.html">Cierre</a></td>
-<td style="text-align: center;">15 min</td>
-</tr>
-</tbody>
-</table>
-<p>El <a href="./programa.html">programa detallado</a> desarrolla los contenidos y la práctica de cada bloque.</p>
+</div>
+<section id="las-cuatro-tareas" class="level2">
+<h2 class="anchored" data-anchor-id="las-cuatro-tareas">Las cuatro tareas</h2>
+<div class="resource-card">
+<p><span class="resource-title">Tarea 1: Experimentos</span></p>
+<p><span class="resource-meta">Parte 2 · un programa de tutorías escolares</span></p>
+<p><span class="resource-meta">Un municipio sortea tutorías de refuerzo entre 500 estudiantes. Diferencia de medias, tabla de balance, controles para ganar precisión, ajuste a la Lin y efectos heterogéneos: ¿el programa rinde igual para todos?</span></p>
+<div class="resource-links">
+<p><a href="tareas/datos/tutorias_rct.csv">Datos (.csv)</a> | <a href="tareas/tarea-01-experimentos.html">Tarea (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/tarea-01-experimentos.qmd">Tarea (.qmd)</a> | <a href="tareas/tarea-01-experimentos-respuestas.html">Respuestas (.html)</a> | <a href="tareas/datos/generar-tutorias.R">Generador (.R)</a></p>
+</div>
+</div>
+<div class="resource-card">
+<p><span class="resource-title">Tarea 2: Regresión discontinua</span></p>
+<p><span class="resource-meta">Parte 3 · un programa de becas de estudio</span></p>
+<p><span class="resource-meta">Una beca que se otorga por encima de un puntaje de vulnerabilidad. <code>rdplot</code> y <code>rdrobust</code>, el test de manipulación, el balance en covariables, el corte placebo y la sensibilidad al ancho de banda. Con una sorpresa: acá la comparación ingenua esconde el efecto en vez de exagerarlo.</span></p>
+<div class="resource-links">
+<p><a href="tareas/datos/beca_puntaje.csv">Datos (.csv)</a> | <a href="tareas/tarea-02-rdd.html">Tarea (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/tarea-02-rdd.qmd">Tarea (.qmd)</a> | <a href="tareas/tarea-02-rdd-respuestas.html">Respuestas (.html)</a> | <a href="tareas/datos/generar-beca.R">Generador (.R)</a></p>
+</div>
+</div>
+<div class="resource-card">
+<p><span class="resource-title">Tarea 3: Diferencias en diferencias y control sintético</span></p>
+<p><span class="resource-meta">Parte 4 · el control del tabaco en Uruguay</span></p>
+<p><span class="resource-meta">Uruguay endurece su política antitabaco en 2006 y hay que medir cuánto bajó el tabaquismo por esa razón. El 2×2 a mano y como regresión, las pre-tendencias, el Uruguay sintético con <code>tidysynth</code>, los pesos de los donantes y la inferencia por placebos.</span></p>
+<div class="resource-links">
+<p><a href="tareas/datos/tabaco_panel.csv">Datos (.csv)</a> | <a href="tareas/tarea-03-did-sintetico.html">Tarea (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/tarea-03-did-sintetico.qmd">Tarea (.qmd)</a> | <a href="tareas/tarea-03-did-sintetico-respuestas.html">Respuestas (.html)</a> | <a href="tareas/datos/generar-tabaco.R">Generador (.R)</a></p>
+</div>
+</div>
+<div class="resource-card">
+<p><span class="resource-title">Tarea 4: Acumulación de evidencia</span></p>
+<p><span class="resource-meta">Parte 5 · salario mínimo y empleo</span></p>
+<p><span class="resource-meta">Cuarenta y cinco estudios sobre una de las preguntas más peleadas de la economía. Efecto combinado, forest y funnel, el test de Egger, trim-and-fill, subgrupos y meta-regresión, para terminar contestando qué dice de verdad esta literatura.</span></p>
+<div class="resource-links">
+<p><a href="tareas/datos/meta_salario.csv">Datos (.csv)</a> | <a href="tareas/tarea-04-acumulacion.html">Tarea (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/tarea-04-acumulacion.qmd">Tarea (.qmd)</a> | <a href="tareas/tarea-04-acumulacion-respuestas.html">Respuestas (.html)</a> | <a href="tareas/datos/generar-meta-salario.R">Generador (.R)</a></p>
+</div>
+</div>
 </section>
-<section id="qué-traer" class="level2">
-<h2 class="anchored" data-anchor-id="qué-traer">Qué traer</h2>
-<p>Traé tu computadora con <a href="https://cran.r-project.org/">R</a> instalado. Cada bloque tiene una práctica con el código ya escrito, que corremos juntos. En <a href="./materiales.html">Materiales</a> está la guía de instalación con los paquetes que vas a necesitar, y en <a href="./referencias.html">Referencias</a> están las lecturas del taller.</p>
-<p>Para después: en <a href="./referencia-r.html">Referencia R</a> queda todo el código de las prácticas explicado función por función, y la <a href="./reproducibilidad.html">guía de reproducibilidad</a> resume el kit mínimo para que tu trabajo lo pueda correr otra persona.</p>
+<section id="si-te-trabás" class="level2">
+<h2 class="anchored" data-anchor-id="si-te-trabás">Si te trabás</h2>
+<p>Cada tarea usa las funciones de su bloque, y las pistas apuntan a la sección correspondiente de la <a href="./referencia-r.html">Referencia R</a>, donde está cada comando explicado con un ejemplo ejecutable. Si el problema es de instalación, la lista completa de paquetes está en <a href="./materiales.html">Materiales</a>.</p>
+<p>Si algo no corre, o si encontrás un error en una respuesta, escribime o abrí un issue en el <a href="https://github.com/danilofreire/taller-evidencia-ucu">repositorio</a>.</p>
 
 
 </section>
@@ -880,7 +854,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/tareas.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>Hecho con <a href="https://quarto.org">Quarto</a></p>
 </div>

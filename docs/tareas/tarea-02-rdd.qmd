@@ -1,0 +1,135 @@
+---
+title: "Tarea 2: Regresión discontinua"
+subtitle: "Práctica · un programa de becas de estudio"
+author: "Danilo Freire"
+toc: true
+toc-depth: 3
+number-sections: true
+code-copy: true
+code-fold: false
+lang: es
+engine: knitr
+---
+
+## De qué se trata
+
+Un programa reparte becas de estudio a los estudiantes de menos recursos. Para decidir quién la recibe, cada estudiante tiene un puntaje de vulnerabilidad socioeconómica de 0 a 100: quienes superan 50 reciben la beca, quienes quedan por debajo, no. Ese umbral administrativo crea un experimento accidental. Cerca del corte, quedar apenas arriba o apenas abajo es casi cuestión de suerte, así que comparar a los dos grupos justo en el borde estima el efecto causal de la beca.
+
+Trabajás con `beca_puntaje.csv`. Cada fila es un estudiante:
+
+| Variable | Qué es |
+|:--|:--|
+| `puntaje` | índice de vulnerabilidad socioeconómica (0 a 100) |
+| `puntaje_c` | el puntaje centrado en el umbral (`puntaje` − 50): la variable de asignación |
+| `beca` | 1 si recibió la beca (`puntaje_c` ≥ 0), 0 si no |
+| `creditos` | créditos aprobados en el primer año, el resultado principal |
+| `permanencia` | 1 si sigue matriculado al año siguiente |
+| `promedio_secundaria`, `ingreso_hogar`, `edad`, `mujer` | covariables previas |
+
+Ojo con la dirección: un puntaje más alto significa **más** vulnerabilidad, y los estudiantes más vulnerables rinden algo menos por otras razones. La [Referencia R de regresión discontinua](../referencia-rdd.qmd) tiene cada comando explicado sobre datos con la misma estructura.
+
+## Cómo trabajar
+
+Respondé cada pregunta escribiendo código R en el bloque de abajo. Cuando se pida una respuesta escrita, usá texto normal debajo del bloque.
+
+1. Descargá este archivo `.qmd` y el dataset `beca_puntaje.csv` desde la [página de Tareas](../tareas.qmd), o cloná el repositorio con `git clone https://github.com/danilofreire/taller-evidencia-ucu.git`
+2. Necesitás [R](https://cran.r-project.org/), [RStudio](https://posit.co/download/rstudio-desktop/) y los paquetes `rdrobust` y `rddensity`
+3. Abrí el `.qmd` en RStudio y corré los bloques con Ctrl+Enter (Cmd+Enter en Mac)
+4. Cuando termines, apretá "Render"
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(estimatr)
+library(rdrobust)
+library(rddensity)
+
+datos <- read_csv("datos/beca_puntaje.csv", show_col_types = FALSE)
+# datos <- read_csv("https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/datos/beca_puntaje.csv", show_col_types = FALSE)
+```
+
+## Mirar antes de estimar
+
+### Pregunta 1: comparabilidad cerca del corte
+
+Si la idea del RDD es cierta, los estudiantes justo arriba y justo abajo del umbral tienen que parecerse en todo lo que se decidió antes. Quedate con los que están a menos de 5 puntos del corte (`abs(puntaje_c) < 5`) y compará las medias de `promedio_secundaria`, `ingreso_hogar`, `edad` y `mujer` entre los que tienen beca y los que no. ¿Se parecen?
+
+```{r p1}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 2: comparación ingenua vs local
+
+Calculá primero la diferencia ingenua: el promedio de `creditos` de todos los becados menos el de todos los no becados. Después estimá una regresión local en una ventana cerca del corte (por ejemplo `abs(puntaje_c) < 15`), con una pendiente a cada lado (`creditos ~ beca * puntaje_c`). Compará los dos números. ¿Cuál es más grande? En este caso, ¿la comparación ingenua exagera o esconde el efecto? ¿Por qué?
+
+*Pista:* pensá en qué dirección va la pendiente. Los más vulnerables (puntaje alto, con beca) rinden menos por otras razones. ¿Eso ayuda o tapa el salto de la beca en la comparación ingenua?
+
+```{r p2}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 3: el salto con rdplot y rdrobust
+
+Graficá la discontinuidad con `rdplot()` (créditos sobre `puntaje_c`). Después estimá el efecto con `rdrobust()`. Reportá el efecto local, su valor $p$ y el ancho de banda que eligió el método. Interpretá el número: ¿cuántos créditos de más produce la beca cerca del corte?
+
+```{r p3}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+## Chequear que el diseño se sostiene
+
+### Pregunta 4: ¿alguien manipuló el puntaje?
+
+El primer supuesto del RDD es que nadie se acomodó para cruzar el umbral. Si los estudiantes (o quien calcula el puntaje) pudieran empujar el número para conseguir la beca, se amontonarían justo arriba de 50. Corré el test de densidad de `rddensity()` sobre `puntaje_c` e interpretá el valor $p$. ¿Hay señales de manipulación?
+
+```{r p4}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 5: balance en covariables
+
+El segundo supuesto es que las variables previas no deberían saltar en el umbral. Corré `rdrobust()` sobre `promedio_secundaria` e `ingreso_hogar` como si fueran resultados (un placebo): no debería aparecer ningún salto. ¿Qué encontrás?
+
+```{r p5}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+### Pregunta 6: corte placebo y ancho de banda
+
+Dos chequeos más. Primero, estimá el efecto sobre `creditos` en un umbral inventado donde la regla no cambia nada (por ejemplo `c = -20`): no debería haber salto. Segundo, volvé a estimar el efecto verdadero con varios anchos de banda fijos (`h =`, por ejemplo 5, 10, 15 y 20) y mirá si el efecto se mantiene estable. ¿El resultado aguanta los dos chequeos?
+
+*Pista:* tanto el corte falso como el ancho de banda se pasan como argumentos a `rdrobust()` (`c =` y `h =`). Están en las secciones "corte placebo" y "sensibilidad al ancho de banda" de la Referencia R.
+
+```{r p6}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**
+
+## Interpretar
+
+### Pregunta 7: el segundo resultado y el alcance del efecto
+
+Estimá con `rdrobust()` el efecto de la beca sobre `permanencia` (seguir matriculado al año siguiente). Después pensá en el alcance de lo que estimaste: el RDD te da el efecto de la beca **para los estudiantes cerca del umbral** (puntaje ≈ 50). Si el programa quisiera ampliar la beca a estudiantes con puntajes mucho más altos (los más vulnerables) o mucho más bajos, ¿tu estimación les aplica directamente? ¿Qué le dirías a quien diseña el programa sobre esta limitación?
+
+```{r p7}
+# Escribí tu código acá
+
+```
+
+**Respuesta:**

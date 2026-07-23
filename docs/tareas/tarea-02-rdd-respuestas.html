@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Danilo Freire">
 
-<title>Materiales – Políticas basadas en evidencia</title>
+<title>Tarea 2: Regresión discontinua — Respuestas – Políticas basadas en evidencia</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -61,26 +62,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-94010c4b498fe1b662faab7fc5b9b58b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b21131f5c5568dc098e2417f6074305f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-94010c4b498fe1b662faab7fc5b9b58b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9e68f30e75591e36100235718a786973.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,6 +113,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -284,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Políticas basadas en evidencia</span>
     </a>
   </div>
@@ -295,23 +325,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./programa.html"> 
+    <a class="nav-link" href="../programa.html"> 
 <span class="menu-text">Programa</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./materiales.html" aria-current="page"> 
+    <a class="nav-link" href="../materiales.html"> 
 <span class="menu-text">Materiales</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./tareas.html"> 
+    <a class="nav-link" href="../tareas.html"> 
 <span class="menu-text">Tareas</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./reproducibilidad.html"> 
+    <a class="nav-link" href="../reproducibilidad.html"> 
 <span class="menu-text">Reproducibilidad</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -320,29 +350,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-referencia-r">    
         <li>
-    <a class="dropdown-item" href="./referencia-r.html">
+    <a class="dropdown-item" href="../referencia-r.html">
  <span class="dropdown-text">Todas las referencias</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-experimentos.html">
+    <a class="dropdown-item" href="../referencia-experimentos.html">
  <span class="dropdown-text">Experimentos</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-rdd.html">
+    <a class="dropdown-item" href="../referencia-rdd.html">
  <span class="dropdown-text">Regresión discontinua</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-did-sintetico.html">
+    <a class="dropdown-item" href="../referencia-did-sintetico.html">
  <span class="dropdown-text">DiD y control sintético</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-acumulacion.html">
+    <a class="dropdown-item" href="../referencia-acumulacion.html">
  <span class="dropdown-text">Acumulación de evidencia</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./referencias.html"> 
+    <a class="nav-link" href="../referencias.html"> 
 <span class="menu-text">Referencias</span></a>
   </li>  
 </ul>
@@ -379,11 +409,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#antes-de-empezar" id="toc-antes-de-empezar" class="nav-link active" data-scroll-target="#antes-de-empezar">Antes de empezar</a></li>
-  <li><a href="#diapositivas-por-bloque" id="toc-diapositivas-por-bloque" class="nav-link" data-scroll-target="#diapositivas-por-bloque">Diapositivas por bloque</a></li>
-  <li><a href="#para-después-del-taller" id="toc-para-después-del-taller" class="nav-link" data-scroll-target="#para-después-del-taller">Para después del taller</a></li>
+  <li><a href="#mirar-antes-de-estimar" id="toc-mirar-antes-de-estimar" class="nav-link active" data-scroll-target="#mirar-antes-de-estimar"><span class="header-section-number">1</span> Mirar antes de estimar</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-1-comparabilidad-cerca-del-corte" id="toc-pregunta-1-comparabilidad-cerca-del-corte" class="nav-link" data-scroll-target="#pregunta-1-comparabilidad-cerca-del-corte"><span class="header-section-number">1.1</span> Pregunta 1: comparabilidad cerca del corte</a></li>
+  <li><a href="#pregunta-2-comparación-ingenua-vs-local" id="toc-pregunta-2-comparación-ingenua-vs-local" class="nav-link" data-scroll-target="#pregunta-2-comparación-ingenua-vs-local"><span class="header-section-number">1.2</span> Pregunta 2: comparación ingenua vs local</a></li>
+  <li><a href="#pregunta-3-el-salto-con-rdplot-y-rdrobust" id="toc-pregunta-3-el-salto-con-rdplot-y-rdrobust" class="nav-link" data-scroll-target="#pregunta-3-el-salto-con-rdplot-y-rdrobust"><span class="header-section-number">1.3</span> Pregunta 3: el salto con rdplot y rdrobust</a></li>
+  </ul></li>
+  <li><a href="#chequear-que-el-diseño-se-sostiene" id="toc-chequear-que-el-diseño-se-sostiene" class="nav-link" data-scroll-target="#chequear-que-el-diseño-se-sostiene"><span class="header-section-number">2</span> Chequear que el diseño se sostiene</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-4-alguien-manipuló-el-puntaje" id="toc-pregunta-4-alguien-manipuló-el-puntaje" class="nav-link" data-scroll-target="#pregunta-4-alguien-manipuló-el-puntaje"><span class="header-section-number">2.1</span> Pregunta 4: ¿alguien manipuló el puntaje?</a></li>
+  <li><a href="#pregunta-5-balance-en-covariables" id="toc-pregunta-5-balance-en-covariables" class="nav-link" data-scroll-target="#pregunta-5-balance-en-covariables"><span class="header-section-number">2.2</span> Pregunta 5: balance en covariables</a></li>
+  <li><a href="#pregunta-6-corte-placebo-y-ancho-de-banda" id="toc-pregunta-6-corte-placebo-y-ancho-de-banda" class="nav-link" data-scroll-target="#pregunta-6-corte-placebo-y-ancho-de-banda"><span class="header-section-number">2.3</span> Pregunta 6: corte placebo y ancho de banda</a></li>
+  </ul></li>
+  <li><a href="#interpretar" id="toc-interpretar" class="nav-link" data-scroll-target="#interpretar"><span class="header-section-number">3</span> Interpretar</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-7-el-segundo-resultado-y-el-alcance-del-efecto" id="toc-pregunta-7-el-segundo-resultado-y-el-alcance-del-efecto" class="nav-link" data-scroll-target="#pregunta-7-el-segundo-resultado-y-el-alcance-del-efecto"><span class="header-section-number">3.1</span> Pregunta 7: el segundo resultado y el alcance del efecto</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/materiales.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/tareas/tarea-02-rdd-respuestas.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -391,13 +434,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Materiales</h1>
+<h1 class="title">Tarea 2: Regresión discontinua — Respuestas</h1>
+<p class="subtitle lead">Práctica · un programa de becas de estudio</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Danilo Freire </p>
+          </div>
+  </div>
     
   
     
@@ -408,131 +458,194 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Acá están las diapositivas, los datos y el código de cada bloque. Cada bloque con práctica trae el archivo de código listo para correr y los datos que usa, con una breve descripción de cada base. Todos los datos son simulados: reproducen la estructura y el orden de magnitud de los estudios reales, sin exponer datos originales. Si querés el código de cada función explicado paso a paso, está en <a href="./referencia-r.html">Referencia R</a>.</p>
-<section id="antes-de-empezar" class="level2">
-<h2 class="anchored" data-anchor-id="antes-de-empezar">Antes de empezar</h2>
-<div class="resource-card">
-<p><span class="resource-title">Preparación: instalá R y los paquetes</span></p>
-<p><span class="resource-meta">Traé tu computadora con todo listo · unos 15 minutos</span></p>
-<p>Instalá <a href="https://cran.r-project.org/">R</a> y <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> (RStudio ya incluye lo necesario para correr el código). Después abrí RStudio y corré este bloque una vez: instala solo los paquetes que te falten. Son todos los que aparecen en el taller, parte por parte.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>paquetes <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># base de todas las prácticas</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>, <span class="st">"estimatr"</span>, <span class="st">"fabricatr"</span>, <span class="st">"randomizr"</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># regresión discontinua</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"rdrobust"</span>, <span class="st">"rddensity"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># diferencias en diferencias y control sintético</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidysynth"</span>, <span class="st">"gsynth"</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># meta-análisis</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metafor"</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># simular diseños e inferencia por aleatorización</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"DeclareDesign"</span>, <span class="st">"DesignLibrary"</span>, <span class="st">"ri2"</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pkg <span class="cf">in</span> paquetes) {</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(pkg, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(pkg, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Los cuatro últimos (<code>gsynth</code>, <code>DeclareDesign</code>, <code>DesignLibrary</code> y <code>ri2</code>) no aparecen en las prácticas que corremos juntos, sino en las diapositivas y en la <a href="./referencia-r.html">referencia en R</a>. Si andás corto de tiempo o de conexión, dejalos para después: el taller funciona igual sin ellos.</p>
+<p>Esta es la clave de respuestas de la Tarea 2. Cada bloque trae la solución y, debajo, un comentario con los números. Los valores salen con la semilla de los datos; si corriste la tarea, deberías obtener lo mismo.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estimatr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdrobust)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rddensity)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"datos/beca_puntaje.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<section id="mirar-antes-de-estimar" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="mirar-antes-de-estimar"><span class="header-section-number">1</span> Mirar antes de estimar</h2>
+<section id="pregunta-1-comparabilidad-cerca-del-corte" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="pregunta-1-comparabilidad-cerca-del-corte"><span class="header-section-number">1.1</span> Pregunta 1: comparabilidad cerca del corte</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">abs</span>(puntaje_c) <span class="sc">&lt;</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(beca) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(promedio_secundaria, ingreso_hogar, edad, mujer), mean),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+   beca promedio_secundaria ingreso_hogar  edad mujer     n
+  &lt;dbl&gt;               &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1     0                7.48          380.  18.5 0.626   139
+2     1                7.44          378.  18.5 0.496   133</code></pre>
+</div>
+</div>
+<p><strong>Respuesta:</strong> en la ventana de 5 puntos alrededor del corte, los dos grupos se parecen mucho: promedio de secundaria de 7,48 frente a 7,44, ingreso del hogar de 380 frente a 378, misma edad media. La proporción de mujeres se mueve un poco más (0,63 frente a 0,50), pero es la clase de fluctuación esperable en una ventana chica, con poco más de 130 estudiantes por lado; el chequeo formal de la pregunta 5 lo confirma. Lo único que cambia de golpe en el umbral es la beca: ese es el experimento que escribió la regla.</p>
 </section>
-<section id="diapositivas-por-bloque" class="level2">
-<h2 class="anchored" data-anchor-id="diapositivas-por-bloque">Diapositivas por bloque</h2>
-<div class="resource-card">
-<p><span class="resource-title">Apertura</span></p>
-<p><span class="resource-meta">Mañana · 9:00–9:30 · 30 min</span></p>
-<p><span class="resource-meta">El problema del contrafactual, el sesgo de selección y por qué la evaluación de impacto importa más en la región.</span></p>
-<div class="resource-links">
-<p><a href="diapositivas/01-apertura.html">Diapositivas (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/01-apertura.qmd">Fuente (.qmd)</a></p>
+<section id="pregunta-2-comparación-ingenua-vs-local" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="pregunta-2-comparación-ingenua-vs-local"><span class="header-section-number">1.2</span> Pregunta 2: comparación ingenua vs local</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ingenua: todos los becados menos todos los no becados</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(datos<span class="sc">$</span>creditos[datos<span class="sc">$</span>beca <span class="sc">==</span> <span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">mean</span>(datos<span class="sc">$</span>creditos[datos<span class="sc">$</span>beca <span class="sc">==</span> <span class="dv">0</span>])</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.633813</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># local: una ventana cerca del corte, con pendiente a cada lado</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cerca <span class="ot">&lt;-</span> <span class="fu">filter</span>(datos, <span class="fu">abs</span>(puntaje_c) <span class="sc">&lt;</span> <span class="dv">15</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm_robust</span>(creditos <span class="sc">~</span> beca <span class="sc">*</span> puntaje_c, <span class="at">data =</span> cerca)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">coef</span>(<span class="fu">summary</span>(fit))[<span class="st">"beca"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">3</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Estimate Std. Error    t value   Pr(&gt;|t|) 
+     6.992      0.710      9.851      0.000 </code></pre>
 </div>
 </div>
-<div class="resource-card">
-<p><span class="resource-title">Experimentos</span></p>
-<p><span class="resource-meta">Mañana · 9:30–10:45 · 75 min</span></p>
-<p><span class="resource-meta">El contrafactual que construís. Un experimento de campo sobre incentivos y dengue en Brasil, un resultado nulo que también enseña, y una introducción a DeclareDesign para simular diseños antes del campo.</span></p>
-<p>Usa una base:</p>
-<ul>
-<li><code>dengue_incentivos.csv</code> (400 agentes de salud): experimento de campo sobre incentivos económicos. Cada fila es un agente; <code>tratamiento</code> marca quién recibió el incentivo y los resultados son <code>visitas</code> (visitas domiciliarias) e <code>indice_larvario</code>.</li>
-</ul>
-<div class="resource-links">
-<p><a href="diapositivas/02-experimentos.html">Diapositivas (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/02-experimentos.qmd">Fuente (.qmd)</a> | <a href="diapositivas/codigo/practica-02.R">Código (.R)</a> | <a href="diapositivas/datos/dengue_incentivos.csv">Datos (.csv)</a></p>
-</div>
-</div>
-<div class="resource-card">
-<p><span class="resource-title">Regresión discontinua</span></p>
-<p><span class="resource-meta">Mañana · 11:00–12:15 · 75 min</span></p>
-<p><span class="resource-meta">El contrafactual que encontrás en un umbral. El tamaño de las legislaturas y el bienestar en Brasil.</span></p>
-<p>Una base:</p>
-<ul>
-<li><code>municipios.csv</code> (2000 municipios): diseño de regresión discontinua sobre el tamaño del concejo. La variable de asignación es <code>poblacion_c</code> (población centrada en el umbral), <code>concejo_grande</code> marca el tratamiento y los resultados incluyen <code>matricula_primaria</code>, <code>mortalidad_infantil</code> e <code>ideb</code>.</li>
-</ul>
-<div class="resource-links">
-<p><a href="diapositivas/03-rdd.html">Diapositivas (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/03-rdd.qmd">Fuente (.qmd)</a> | <a href="diapositivas/codigo/practica-03.R">Código (.R)</a> | <a href="diapositivas/datos/municipios.csv">Datos (.csv)</a></p>
-</div>
-</div>
-<div class="resource-card">
-<p><span class="resource-title">Diferencias en diferencias y control sintético</span></p>
-<p><span class="resource-meta">Tarde · 13:30–14:15 · 45 min</span></p>
-<p><span class="resource-meta">El contrafactual que armás con otras unidades. La prevención de homicidios en São Paulo.</span></p>
-<p>Una base:</p>
-<ul>
-<li><code>homicidios.csv</code> (256 filas, panel estado-año 1990–2005): un control sintético para São Paulo. <code>tasa_homicidios</code> es el resultado, <code>tratado</code> y <code>post</code> marcan la unidad y el período de la política, y <code>pib_pc</code>, <code>gini</code>, <code>poblacion_urbana</code> y <code>jovenes_pct</code> son los predictores.</li>
-</ul>
-<div class="resource-links">
-<p><a href="diapositivas/04-did-sintetico.html">Diapositivas (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/04-did-sintetico.qmd">Fuente (.qmd)</a> | <a href="diapositivas/codigo/practica-04.R">Código (.R)</a> | <a href="diapositivas/datos/homicidios.csv">Datos (.csv)</a></p>
-</div>
-</div>
-<div class="resource-card">
-<p><span class="resource-title">Acumulación de evidencia</span></p>
-<p><span class="resource-meta">Tarde · 14:15–15:15 · 60 min</span></p>
-<p><span class="resource-meta">Por qué un solo estudio engaña: sesgo de publicación, meta-análisis y la crisis de replicación contada desde adentro.</span></p>
-<p>Dos bases:</p>
-<ul>
-<li><code>meta_estudios.csv</code> (21 estudios): la literatura publicada de la demostración, con el sesgo de publicación adentro. Cada fila es un estudio con su <code>efecto</code>, su error estándar <code>ee</code>, el <code>n</code> y el <code>diseno</code>, para armar el forest plot y el funnel plot.</li>
-<li><code>transferencias.csv</code> (24 estudios): la base de la práctica, sobre el efecto de las transferencias condicionadas en la asistencia escolar. Además del <code>efecto</code> y su <code>ee</code>, trae el <code>contexto</code> (<code>rural</code> o <code>urbano</code>), que es la clave del último ejercicio.</li>
-</ul>
-<div class="resource-links">
-<p><a href="diapositivas/05-acumulacion.html">Diapositivas (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/05-acumulacion.qmd">Fuente (.qmd)</a> | <a href="diapositivas/codigo/practica-05.R">Código (.R)</a> | <a href="diapositivas/datos/meta_estudios.csv">Datos meta (.csv)</a> | <a href="diapositivas/datos/transferencias.csv">Datos práctica (.csv)</a></p>
-</div>
-</div>
-<div class="resource-card">
-<p><span class="resource-title">Cierre</span></p>
-<p><span class="resource-meta">Tarde · 15:15–15:30 · 15 min</span></p>
-<p><span class="resource-meta">El mapa completo, hacia dónde va el campo y dónde enchufarse en la región.</span></p>
-<div class="resource-links">
-<p><a href="diapositivas/06-cierre.html">Diapositivas (.html)</a> | <a href="https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/diapositivas/06-cierre.qmd">Fuente (.qmd)</a></p>
-</div>
-</div>
+<p><strong>Respuesta:</strong> la comparación ingenua da apenas +1,63 créditos; la local, ≈ +7. Acá lo interesante es que la ingenua <strong>esconde</strong> el efecto, al revés de lo que suele pasar. La razón es la dirección de la pendiente: los becados son los más vulnerables (puntaje alto), y esos estudiantes aprueban menos créditos por otras razones. Esa tendencia de fondo empuja hacia abajo el promedio de los becados y casi cancela el salto que produce la beca. La regresión local descuenta la pendiente y deja ver el efecto limpio. Moraleja: la comparación ingenua puede exagerar o tapar el efecto según hacia dónde vaya la tendencia; siempre hay que estimar localmente.</p>
 </section>
-<section id="para-después-del-taller" class="level2">
-<h2 class="anchored" data-anchor-id="para-después-del-taller">Para después del taller</h2>
-<div class="resource-card">
-<p><span class="resource-title">Tareas</span></p>
-<p><span class="resource-meta">Una por bloque de métodos, con datos nuevos.</span></p>
-<p><span class="resource-meta">Cuatro tareas para practicar con calma: un experimento de tutorías, un RDD de becas, el control del tabaco en Uruguay y un meta-análisis sobre salario mínimo. Cada una trae una base distinta de las que usamos juntos, así que no se resuelven copiando el código de la práctica. Las respuestas están publicadas.</span></p>
-<div class="resource-links">
-<p><a href="./tareas.html">Ver las tareas</a></p>
+<section id="pregunta-3-el-salto-con-rdplot-y-rdrobust" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="pregunta-3-el-salto-con-rdplot-y-rdrobust"><span class="header-section-number">1.3</span> Pregunta 3: el salto con rdplot y rdrobust</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rdplot</span>(datos<span class="sc">$</span>creditos, datos<span class="sc">$</span>puntaje_c,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">x.label =</span> <span class="st">"Puntaje centrado en el umbral (50)"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">y.label =</span> <span class="st">"Créditos aprobados"</span>, <span class="at">title =</span> <span class="st">""</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tarea-02-rdd-respuestas_files/figure-html/p3-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
+</figure>
 </div>
 </div>
-<div class="resource-card">
-<p><span class="resource-title">Referencia R</span></p>
-<p><span class="resource-meta">Una página por parte, con todo el código explicado.</span></p>
-<p><span class="resource-meta">Cada función que usamos en las prácticas, con un ejemplo ejecutable, su salida real y una nota sobre cuándo conviene usarla. Los números coinciden con los de las diapositivas porque las semillas están fijas.</span></p>
-<div class="resource-links">
-<p><a href="./referencia-r.html">Todas las referencias</a> | <a href="./referencia-experimentos.html">Experimentos</a> | <a href="./referencia-rdd.html">RDD</a> | <a href="./referencia-did-sintetico.html">DiD y sintético</a> | <a href="./referencia-acumulacion.html">Acumulación</a></p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rd <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>creditos, datos<span class="sc">$</span>puntaje_c)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rd)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: rdrobust
+
+Sharp RD estimates using local polynomial regression.
+
+Number of Obs.                 2000
+BW type                       mserd
+Kernel                   Triangular
+VCE method                       NN
+
+                               Left        Right
+Number of Obs.                  993         1007
+Eff. Number of Obs.             245          223
+Order est. (p)                    1            1
+Order bias (q)                    2            2
+BW est. (h)                   8.686        8.686
+BW bias (b)                  16.027       16.027
+rho (h/b)                     0.542        0.542
+Unique Obs.                     882          900
+
+=====================================================================
+                   Point    Robust Inference
+                Estimate         z     P&gt;|z|      [ 95% C.I. ]       
+---------------------------------------------------------------------
+     RD Effect     5.201     4.225     0.000     [2.548 , 6.958]     
+=====================================================================</code></pre>
 </div>
 </div>
-<div class="resource-card">
-<p><span class="resource-title">Guía de reproducibilidad</span></p>
-<p><span class="resource-meta">El kit mínimo, en once prácticas.</span></p>
-<p><span class="resource-meta">Cómo dejar tu trabajo listo para que otra persona (o vos en seis meses) lo pueda correr: estructura de carpetas, rutas relativas, control de versiones y un informe que se calcula al renderizar.</span></p>
-<div class="resource-links">
-<p><a href="./reproducibilidad.html">Abrir la guía</a></p>
+<p><strong>Respuesta:</strong> el gráfico muestra un escalón hacia arriba justo en el corte. <code>rdrobust</code> lo cuantifica: el efecto local es de ≈ 5,2 créditos, con un intervalo robusto que no incluye el cero (<span class="math inline">\(p &lt; 0{,}001\)</span>), y un ancho de banda óptimo de ≈ 8,7 puntos a cada lado. La beca hace que los estudiantes aprueben unos cinco créditos más en el primer año. La fila “Robust” es la que se reporta, porque corrige el sesgo de los bordes.</p>
+</section>
+</section>
+<section id="chequear-que-el-diseño-se-sostiene" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="chequear-que-el-diseño-se-sostiene"><span class="header-section-number">2</span> Chequear que el diseño se sostiene</h2>
+<section id="pregunta-4-alguien-manipuló-el-puntaje" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="pregunta-4-alguien-manipuló-el-puntaje"><span class="header-section-number">2.1</span> Pregunta 4: ¿alguien manipuló el puntaje?</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dens <span class="ot">&lt;-</span> <span class="fu">rddensity</span>(datos<span class="sc">$</span>puntaje_c)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(<span class="at">T =</span> dens<span class="sc">$</span>test<span class="sc">$</span>t_jk, <span class="at">p =</span> dens<span class="sc">$</span>test<span class="sc">$</span>p_jk), <span class="dv">3</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     T      p 
+-0.405  0.686 </code></pre>
 </div>
 </div>
+<p><strong>Respuesta:</strong> el test da <span class="math inline">\(p = 0{,}69\)</span>: no hay salto en la densidad del puntaje en el umbral. No aparece el amontonamiento que esperaríamos si los estudiantes hubieran acomodado su número para cruzar el corte y conseguir la beca. El supuesto de no manipulación se sostiene, que es justo lo que queríamos ver (un <span class="math inline">\(p\)</span> alto es buena noticia).</p>
+</section>
+<section id="pregunta-5-balance-en-covariables" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="pregunta-5-balance-en-covariables"><span class="header-section-number">2.2</span> Pregunta 5: balance en covariables</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>b_prom <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>promedio_secundaria, datos<span class="sc">$</span>puntaje_c)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>b_ing  <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>ingreso_hogar, datos<span class="sc">$</span>puntaje_c)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"promedio_secundaria"</span>, <span class="st">"ingreso_hogar"</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">salto    =</span> <span class="fu">round</span>(<span class="fu">c</span>(b_prom<span class="sc">$</span>coef[<span class="dv">1</span>], b_ing<span class="sc">$</span>coef[<span class="dv">1</span>]), <span class="dv">3</span>),</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_valor  =</span> <span class="fu">round</span>(<span class="fu">c</span>(b_prom<span class="sc">$</span>pv[<span class="dv">1</span>], b_ing<span class="sc">$</span>pv[<span class="dv">1</span>]), <span class="dv">3</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             variable  salto p_valor
+1 promedio_secundaria  0.144   0.468
+2       ingreso_hogar 11.034   0.217</code></pre>
+</div>
+</div>
+<p><strong>Respuesta:</strong> ninguna covariable previa salta en el umbral: el promedio de secundaria tiene un salto de 0,14 (<span class="math inline">\(p = 0{,}47\)</span>) y el ingreso del hogar de 11 (<span class="math inline">\(p = 0{,}22\)</span>), los dos no significativos. Los grupos son comparables de entrada, como pide el diseño. Si una de estas variables hubiera saltado, sospecharíamos que algo más cambia en el corte y el efecto sobre los créditos dejaría de ser creíble.</p>
+</section>
+<section id="pregunta-6-corte-placebo-y-ancho-de-banda" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="pregunta-6-corte-placebo-y-ancho-de-banda"><span class="header-section-number">2.3</span> Pregunta 6: corte placebo y ancho de banda</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># corte falso donde la regla no cambia nada</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rdrobust</span>(datos<span class="sc">$</span>creditos, datos<span class="sc">$</span>puntaje_c, <span class="at">c =</span> <span class="sc">-</span><span class="dv">20</span>)<span class="sc">$</span>pv[<span class="dv">1</span>]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6699422</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># el efecto verdadero con varios anchos de banda fijos</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>), <span class="cf">function</span>(h) {</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">rdrobust</span>(datos<span class="sc">$</span>creditos, datos<span class="sc">$</span>puntaje_c, <span class="at">h =</span> h)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(m<span class="sc">$</span>coef[<span class="dv">1</span>], <span class="dv">2</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.78 5.37 6.50 6.75</code></pre>
+</div>
+</div>
+<p><strong>Respuesta:</strong> los dos chequeos pasan. En el corte inventado en −20 no aparece ningún efecto (<span class="math inline">\(p = 0{,}67\)</span>): el salto vive sólo en el umbral verdadero. Y al variar el ancho de banda, el efecto se queda estable, entre ≈ 5,4 y ≈ 6,8 créditos según la ventana, sin cambiar de signo ni desaparecer. Un resultado creíble no depende de una ventana afortunada, y este aguanta.</p>
+</section>
+</section>
+<section id="interpretar" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="interpretar"><span class="header-section-number">3</span> Interpretar</h2>
+<section id="pregunta-7-el-segundo-resultado-y-el-alcance-del-efecto" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="pregunta-7-el-segundo-resultado-y-el-alcance-del-efecto"><span class="header-section-number">3.1</span> Pregunta 7: el segundo resultado y el alcance del efecto</h3>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rdrobust</span>(datos<span class="sc">$</span>permanencia, datos<span class="sc">$</span>puntaje_c) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: rdrobust
+
+Sharp RD estimates using local polynomial regression.
+
+Number of Obs.                 2000
+BW type                       mserd
+Kernel                   Triangular
+VCE method                       NN
+
+                               Left        Right
+Number of Obs.                  993         1007
+Eff. Number of Obs.             355          311
+Order est. (p)                    1            1
+Order bias (q)                    2            2
+BW est. (h)                  12.707       12.707
+BW bias (b)                  19.725       19.725
+rho (h/b)                     0.644        0.644
+Unique Obs.                     882          900
+
+=====================================================================
+                   Point    Robust Inference
+                Estimate         z     P&gt;|z|      [ 95% C.I. ]       
+---------------------------------------------------------------------
+     RD Effect     0.358     4.250     0.000     [0.201 , 0.545]     
+=====================================================================</code></pre>
+</div>
+</div>
+<p><strong>Respuesta:</strong> la beca también sube la permanencia: el salto en la probabilidad de seguir matriculado es de ≈ 0,36 (<span class="math inline">\(p &lt; 0{,}001\)</span>). Cerca del corte, pasar de no tener beca a tenerla mejora bastante la chance de continuar los estudios.</p>
+<p>Sobre el alcance: el RDD estima el efecto <strong>local</strong>, para los estudiantes con puntaje cercano a 50. No dice qué pasaría con un estudiante de puntaje 20 (poco vulnerable) o de puntaje 85 (muy vulnerable), porque esos están lejos del umbral y no se parecen a los del borde. A quien diseña el programa le diría que el número es sólido justo donde la política decide hoy (mover un poco el corte), pero que extender la beca a grupos con puntajes muy distintos es una extrapolación: podría rendir más o menos, y para saberlo habría que estudiar esos tramos, idealmente con otro umbral o con un experimento. El RDD es fuerte en credibilidad y angosto en alcance; conviene ser honesto sobre las dos cosas.</p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Volver arriba</a></main> <!-- /main -->
@@ -957,7 +1070,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/materiales.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/tareas/tarea-02-rdd-respuestas.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>Hecho con <a href="https://quarto.org">Quarto</a></p>
 </div>

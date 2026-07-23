@@ -1,0 +1,118 @@
+---
+title: "Tarea 1: Experimentos — Respuestas"
+subtitle: "Práctica · un programa de tutorías escolares"
+author: "Danilo Freire"
+toc: true
+toc-depth: 3
+number-sections: true
+code-copy: true
+code-fold: false
+lang: es
+engine: knitr
+---
+
+```{r setup}
+#| include: false
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+Esta es la clave de respuestas de la Tarea 1. Cada bloque trae la solución completa y, debajo, un comentario con los números concretos. Si corriste la tarea con la semilla de los datos, vas a obtener exactamente lo mismo. Recordá que la gracia no es el número, sino poder explicar de dónde sale.
+
+```{r datos, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(estimatr)
+
+datos <- read_csv("datos/tutorias_rct.csv", show_col_types = FALSE) |>
+  mutate(zona = factor(zona))
+```
+
+## Explorar
+
+### Pregunta 1: la diferencia cruda
+
+```{r p1}
+datos |>
+  group_by(tratamiento) |>
+  summarise(nota_media = mean(nota_final),
+            prop_aprobo = mean(aprobo),
+            n = n())
+
+# la diferencia cruda de notas
+mean(datos$nota_final[datos$tratamiento == 1]) -
+  mean(datos$nota_final[datos$tratamiento == 0])
+```
+
+**Respuesta:** el grupo de control promedia 59,5 puntos y aprueba en un 52,8%; el grupo con tutorías promedia 67,2 y aprueba en un 76%. La diferencia cruda de notas es de +7,7 puntos. En este experimento esa resta ya estima el efecto causal, porque el sorteo hizo que los dos grupos arrancaran comparables: cualquier diferencia posterior sólo puede venir del programa. En un estudio observacional desconfiaríamos, porque quienes eligen entrar a un programa de tutorías suelen ser distintos de entrada (más motivados, con familias más presentes), y esa diferencia previa se confundiría con el efecto.
+
+### Pregunta 2: la tabla de balance
+
+```{r p2}
+covariables <- c("nota_base", "edad", "mujer", "asistencia_previa", "vulnerable")
+
+balance <- map_dfr(covariables, function(v) {
+  m <- lm_robust(reformulate("tratamiento", v), data = datos)
+  tibble(variable = v,
+         dif = round(m$coefficients["tratamiento"], 2),
+         p_valor = round(m$p.value["tratamiento"], 3))
+})
+balance
+```
+
+**Respuesta:** casi ninguna covariable difiere entre los grupos: `nota_base` ($p = 0{,}83$), `edad` ($p = 0{,}26$), `mujer` ($p = 0{,}21$) y `asistencia_previa` ($p = 0{,}19$) salen todas sin diferencias. `vulnerable` sí sale significativa ($p = 0{,}04$). Eso no quiere decir que el sorteo falló: con cinco covariables, alrededor de una de cada veinte va a dar significativa sólo por azar, y con cinco pruebas es esperable que alguna cruce el umbral. Un balance imperfecto en una muestra concreta es lo normal; lo que el sorteo garantiza es el balance en expectativa, incluso en las variables que no medimos.
+
+## Estimar el efecto
+
+### Pregunta 3: diferencia de medias
+
+```{r p3}
+difference_in_means(nota_final ~ tratamiento, data = datos)
+```
+
+**Respuesta:** el efecto estimado es de +7,68 puntos, con un intervalo de confianza de [5,95; 9,40] que no cruza el cero ($p < 0{,}001$). Las tutorías suben la nota final en algo menos de 8 puntos sobre 100. Es el mismo número de la diferencia cruda de la pregunta 1, ahora con su error estándar y su intervalo: en un experimento, la diferencia de medias y el efecto causal son lo mismo.
+
+### Pregunta 4: controles para ganar precisión
+
+```{r p4}
+sin_ctrl <- lm_robust(nota_final ~ tratamiento, data = datos)
+con_ctrl <- lm_robust(nota_final ~ tratamiento + nota_base + asistencia_previa,
+                      data = datos)
+
+c(sin_controles = sin_ctrl$std.error["tratamiento"],
+  con_controles = con_ctrl$std.error["tratamiento"])
+```
+
+**Respuesta:** el efecto casi no se mueve (7,68 sin controles, 7,70 con controles), pero el error estándar baja de 0,88 a 0,59, una mejora de un tercio. Eso es lo esperado: en un experimento no controlamos para quitar sesgo, porque el sorteo ya lo quitó. Sumamos covariables medidas antes del tratamiento sólo para ganar precisión, porque explican parte de la variación en la nota. Los coeficientes de `nota_base` o `asistencia_previa` no tienen lectura causal: esas variables no se sortearon.
+
+### Pregunta 5: el ajuste a la Lin
+
+```{r p5}
+lin <- lm_lin(nota_final ~ tratamiento,
+              covariates = ~ nota_base + asistencia_previa,
+              data = datos)
+summary(lin)
+```
+
+**Respuesta:** el ajuste a la Lin da un efecto de +7,70 con un error estándar de 0,59, prácticamente igual al de la regresión con controles, y menor que el 0,88 de la versión sin covariables. La ventaja de `lm_lin()` sobre sumar controles a mano es que centra e interactúa las covariables por vos, evitando el sesgo de muestra finita que señaló Freedman. Mismo efecto, más precisión, con garantías teóricas.
+
+## Mirar más fino
+
+### Pregunta 6: ¿para quién funciona el programa?
+
+```{r p6}
+het <- lm_robust(nota_final ~ tratamiento * vulnerable, data = datos)
+round(coef(summary(het))[, 1:4], 3)
+```
+
+**Respuesta:** el coeficiente de `tratamiento` (≈ +5,5) es el efecto para los estudiantes no vulnerables. El término `tratamiento:vulnerable` (≈ +6,8; $p < 0{,}001$) dice cuánto más rinde el programa para los vulnerables, así que el efecto total en ese grupo es ≈ +12,3 puntos, más del doble. El programa ayuda a todos, pero ayuda mucho más a quienes arrancan en desventaja. Una advertencia: este corte no estaba pre-registrado, así que conviene leerlo como una pista para el próximo estudio, no como una conclusión firme; los subgrupos que salen fuertes por azar son una fuente clásica de resultados que no se replican.
+
+## Decidir
+
+### Pregunta 7: el efecto sobre aprobar, y una recomendación
+
+```{r p7}
+difference_in_means(aprobo ~ tratamiento, data = datos)
+```
+
+**Respuesta:** el programa sube la probabilidad de aprobar el año en 0,23, es decir 23 puntos porcentuales (de 53% a 76%), con un intervalo de [0,15; 0,31] que no cruza el cero. Es un efecto grande sobre un resultado que importa de verdad.
+
+Con presupuesto para ampliar el programa pero no para todos, la recomendación es priorizar a los estudiantes en situación de vulnerabilidad: ahí el efecto sobre la nota es más del doble (≈ +12 frente a ≈ +5 puntos), así que cada cupo rinde más donde más se necesita. Antes de escalar, valdría la pena saber tres cosas: si el efecto dura más allá de un año o se diluye; si se sostiene cuando el programa crece y pierde la atención personalizada del piloto; y cuánto cuesta por estudiante, para compararlo con otras intervenciones. El experimento contesta con solidez la pregunta causal; la decisión de política necesita además esos datos de costo y de plazo.

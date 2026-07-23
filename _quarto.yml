@@ -5,11 +5,15 @@ project:
     - "*.qmd"
     - "diapositivas/*.qmd"
     - "!diapositivas/archivo/"
+    - "tareas/*.qmd"
   resources:
     - "diapositivas/*.qmd"
     - "diapositivas/codigo/*.R"
     - "diapositivas/datos/*.csv"
     - "diapositivas/datos/*.R"
+    - "tareas/*.qmd"
+    - "tareas/datos/*.csv"
+    - "tareas/datos/*.R"
 
 # Los renders del sitio completo reutilizan los resultados cacheados en
 # _freeze/ (commitear esa carpeta); un documento solo se re-ejecuta si su
@@ -36,6 +40,8 @@ website:
         text: Programa
       - href: materiales.qmd
         text: Materiales
+      - href: tareas.qmd
+        text: Tareas
       - href: reproducibilidad.qmd
         text: Reproducibilidad
       - text: Referencia R

@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Danilo Freire">
 
-<title>Políticas públicas basadas en evidencia – Políticas basadas en evidencia</title>
+<title>Tarea 1: Experimentos – Políticas basadas en evidencia</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,29 +24,64 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-94010c4b498fe1b662faab7fc5b9b58b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b21131f5c5568dc098e2417f6074305f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-94010c4b498fe1b662faab7fc5b9b58b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-9e68f30e75591e36100235718a786973.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-73d7940f88e386d68eca05be9fa67a40.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,6 +113,35 @@ ul.task-list li input[type="checkbox"] {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&amp;family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -249,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Políticas basadas en evidencia</span>
     </a>
   </div>
@@ -260,23 +325,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./programa.html"> 
+    <a class="nav-link" href="../programa.html"> 
 <span class="menu-text">Programa</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./materiales.html"> 
+    <a class="nav-link" href="../materiales.html"> 
 <span class="menu-text">Materiales</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./tareas.html"> 
+    <a class="nav-link" href="../tareas.html"> 
 <span class="menu-text">Tareas</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./reproducibilidad.html"> 
+    <a class="nav-link" href="../reproducibilidad.html"> 
 <span class="menu-text">Reproducibilidad</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -285,29 +350,29 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-referencia-r">    
         <li>
-    <a class="dropdown-item" href="./referencia-r.html">
+    <a class="dropdown-item" href="../referencia-r.html">
  <span class="dropdown-text">Todas las referencias</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-experimentos.html">
+    <a class="dropdown-item" href="../referencia-experimentos.html">
  <span class="dropdown-text">Experimentos</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-rdd.html">
+    <a class="dropdown-item" href="../referencia-rdd.html">
  <span class="dropdown-text">Regresión discontinua</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-did-sintetico.html">
+    <a class="dropdown-item" href="../referencia-did-sintetico.html">
  <span class="dropdown-text">DiD y control sintético</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./referencia-acumulacion.html">
+    <a class="dropdown-item" href="../referencia-acumulacion.html">
  <span class="dropdown-text">Acumulación de evidencia</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./referencias.html"> 
+    <a class="nav-link" href="../referencias.html"> 
 <span class="menu-text">Referencias</span></a>
   </li>  
 </ul>
@@ -344,10 +409,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#el-taller-de-un-vistazo" id="toc-el-taller-de-un-vistazo" class="nav-link active" data-scroll-target="#el-taller-de-un-vistazo">El taller de un vistazo</a></li>
-  <li><a href="#qué-traer" id="toc-qué-traer" class="nav-link" data-scroll-target="#qué-traer">Qué traer</a></li>
+  <li><a href="#de-qué-se-trata" id="toc-de-qué-se-trata" class="nav-link active" data-scroll-target="#de-qué-se-trata"><span class="header-section-number">1</span> De qué se trata</a></li>
+  <li><a href="#cómo-trabajar" id="toc-cómo-trabajar" class="nav-link" data-scroll-target="#cómo-trabajar"><span class="header-section-number">2</span> Cómo trabajar</a></li>
+  <li><a href="#explorar" id="toc-explorar" class="nav-link" data-scroll-target="#explorar"><span class="header-section-number">3</span> Explorar</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-1-la-diferencia-cruda" id="toc-pregunta-1-la-diferencia-cruda" class="nav-link" data-scroll-target="#pregunta-1-la-diferencia-cruda"><span class="header-section-number">3.1</span> Pregunta 1: la diferencia cruda</a></li>
+  <li><a href="#pregunta-2-la-tabla-de-balance" id="toc-pregunta-2-la-tabla-de-balance" class="nav-link" data-scroll-target="#pregunta-2-la-tabla-de-balance"><span class="header-section-number">3.2</span> Pregunta 2: la tabla de balance</a></li>
+  </ul></li>
+  <li><a href="#estimar-el-efecto" id="toc-estimar-el-efecto" class="nav-link" data-scroll-target="#estimar-el-efecto"><span class="header-section-number">4</span> Estimar el efecto</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-3-diferencia-de-medias" id="toc-pregunta-3-diferencia-de-medias" class="nav-link" data-scroll-target="#pregunta-3-diferencia-de-medias"><span class="header-section-number">4.1</span> Pregunta 3: diferencia de medias</a></li>
+  <li><a href="#pregunta-4-controles-para-ganar-precisión" id="toc-pregunta-4-controles-para-ganar-precisión" class="nav-link" data-scroll-target="#pregunta-4-controles-para-ganar-precisión"><span class="header-section-number">4.2</span> Pregunta 4: controles para ganar precisión</a></li>
+  <li><a href="#pregunta-5-el-ajuste-a-la-lin" id="toc-pregunta-5-el-ajuste-a-la-lin" class="nav-link" data-scroll-target="#pregunta-5-el-ajuste-a-la-lin"><span class="header-section-number">4.3</span> Pregunta 5: el ajuste a la Lin</a></li>
+  </ul></li>
+  <li><a href="#mirar-más-fino" id="toc-mirar-más-fino" class="nav-link" data-scroll-target="#mirar-más-fino"><span class="header-section-number">5</span> Mirar más fino</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-6-para-quién-funciona-el-programa" id="toc-pregunta-6-para-quién-funciona-el-programa" class="nav-link" data-scroll-target="#pregunta-6-para-quién-funciona-el-programa"><span class="header-section-number">5.1</span> Pregunta 6: ¿para quién funciona el programa?</a></li>
+  </ul></li>
+  <li><a href="#decidir" id="toc-decidir" class="nav-link" data-scroll-target="#decidir"><span class="header-section-number">6</span> Decidir</a>
+  <ul class="collapse">
+  <li><a href="#pregunta-7-el-efecto-sobre-aprobar-y-una-recomendación" id="toc-pregunta-7-el-efecto-sobre-aprobar-y-una-recomendación" class="nav-link" data-scroll-target="#pregunta-7-el-efecto-sobre-aprobar-y-una-recomendación"><span class="header-section-number">6.1</span> Pregunta 7: el efecto sobre aprobar, y una recomendación</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/tareas/tarea-01-experimentos.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -355,14 +439,20 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Políticas públicas basadas en evidencia</h1>
-<p class="subtitle lead">Lecciones desde la investigación aplicada en América Latina</p>
+<h1 class="title">Tarea 1: Experimentos</h1>
+<p class="subtitle lead">Práctica · un programa de tutorías escolares</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Danilo Freire </p>
+          </div>
+  </div>
     
   
     
@@ -373,89 +463,146 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Taller intensivo de un día sobre cómo producir y acumular evidencia creíble para la política pública, con casos de América Latina. La mañana responde una pregunta: ¿de dónde sale tu contrafactual? Recorremos tres respuestas: los experimentos, la regresión discontinua y el control sintético. La tarde responde la segunda: ¿cuándo un resultado se vuelve evidencia? Vemos el sesgo de publicación, el meta-análisis y la crisis de replicación. Cada bloque termina con una práctica guiada en R.</p>
-<div class="info-box">
-<div class="info-grid">
-<div class="info-item">
-<p><span class="info-label">Fecha</span></p>
-<p><span class="info-value">Sábado 1 de agosto de 2026</span></p>
-</div>
-<div class="info-item">
-<p><span class="info-label">Lugar</span></p>
-<p><span class="info-value">Universidad Católica del Uruguay, Montevideo</span></p>
-</div>
-<div class="info-item">
-<p><span class="info-label">Duración</span></p>
-<p><span class="info-value">Mañana 9:00–12:30 · Tarde 13:30–15:30</span></p>
-</div>
-<div class="info-item">
-<p><span class="info-label">Instructor</span></p>
-<p><span class="info-value">Danilo Freire</span></p>
-</div>
-</div>
-</div>
-<section id="el-taller-de-un-vistazo" class="level2">
-<h2 class="anchored" data-anchor-id="el-taller-de-un-vistazo">El taller de un vistazo</h2>
-<p>La mañana responde ¿de dónde sale tu contrafactual? y la tarde ¿cuándo un resultado se vuelve evidencia? Cada bloque enlaza a sus diapositivas.</p>
+<section id="de-qué-se-trata" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="de-qué-se-trata"><span class="header-section-number">1</span> De qué se trata</h2>
+<p>Un municipio quiere saber si un programa de tutorías de refuerzo mejora el rendimiento de los estudiantes de secundaria. En vez de ofrecerlo a todos de una vez, sortea quién lo recibe: de 500 estudiantes, 250 entran al programa (tratamiento) y 250 quedan en lista de espera (control). Como el sorteo es aleatorio, los dos grupos arrancan parejos y la diferencia de resultados estima el efecto causal del programa.</p>
+<p>Trabajás con <code>tutorias_rct.csv</code>. Cada fila es un estudiante:</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Hora</th>
-<th>Bloque</th>
-<th style="text-align: center;">Duración</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: left;">Qué es</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>9:00</td>
-<td><a href="diapositivas/01-apertura.html">Apertura</a>: el problema del contrafactual</td>
-<td style="text-align: center;">30 min</td>
+<td style="text-align: left;"><code>tratamiento</code></td>
+<td style="text-align: left;">1 si recibió las tutorías, 0 si no</td>
 </tr>
 <tr class="even">
-<td>9:30</td>
-<td><a href="diapositivas/02-experimentos.html">Experimentos</a>: aleatorización y sesgo de selección</td>
-<td style="text-align: center;">75 min</td>
+<td style="text-align: left;"><code>nota_final</code></td>
+<td style="text-align: left;">nota del año (0 a 100), el resultado principal</td>
 </tr>
 <tr class="odd">
-<td>10:45</td>
-<td>Café</td>
-<td style="text-align: center;">15 min</td>
+<td style="text-align: left;"><code>aprobo</code></td>
+<td style="text-align: left;">1 si aprobó el año (nota ≥ 60), 0 si no</td>
 </tr>
 <tr class="even">
-<td>11:00</td>
-<td><a href="diapositivas/03-rdd.html">Regresión discontinua</a>: el RDD de Brasil</td>
-<td style="text-align: center;">75 min</td>
+<td style="text-align: left;"><code>nota_base</code></td>
+<td style="text-align: left;">nota del año anterior, medida antes del sorteo</td>
 </tr>
 <tr class="odd">
-<td>12:15</td>
-<td>Cierre de la mañana y discusión</td>
-<td style="text-align: center;">15 min</td>
+<td style="text-align: left;"><code>asistencia_previa</code></td>
+<td style="text-align: left;">asistencia el año anterior (%), antes del sorteo</td>
 </tr>
 <tr class="even">
-<td>13:30</td>
-<td><a href="diapositivas/04-did-sintetico.html">Diferencias en diferencias</a> y control sintético</td>
-<td style="text-align: center;">45 min</td>
+<td style="text-align: left;"><code>vulnerable</code></td>
+<td style="text-align: left;">1 si el estudiante está en situación de vulnerabilidad socioeconómica</td>
 </tr>
 <tr class="odd">
-<td>14:15</td>
-<td><a href="diapositivas/05-acumulacion.html">Acumulación</a>: meta-análisis y replicación</td>
-<td style="text-align: center;">60 min</td>
-</tr>
-<tr class="even">
-<td>15:15</td>
-<td><a href="diapositivas/06-cierre.html">Cierre</a></td>
-<td style="text-align: center;">15 min</td>
+<td style="text-align: left;"><code>edad</code>, <code>mujer</code>, <code>zona</code></td>
+<td style="text-align: left;">otras covariables previas</td>
 </tr>
 </tbody>
 </table>
-<p>El <a href="./programa.html">programa detallado</a> desarrolla los contenidos y la práctica de cada bloque.</p>
+<p>Esta tarea usa las funciones del bloque de experimentos. Si te trabás, la <a href="../referencia-experimentos.html">Referencia R de experimentos</a> tiene cada comando explicado sobre datos con la misma estructura.</p>
 </section>
-<section id="qué-traer" class="level2">
-<h2 class="anchored" data-anchor-id="qué-traer">Qué traer</h2>
-<p>Traé tu computadora con <a href="https://cran.r-project.org/">R</a> instalado. Cada bloque tiene una práctica con el código ya escrito, que corremos juntos. En <a href="./materiales.html">Materiales</a> está la guía de instalación con los paquetes que vas a necesitar, y en <a href="./referencias.html">Referencias</a> están las lecturas del taller.</p>
-<p>Para después: en <a href="./referencia-r.html">Referencia R</a> queda todo el código de las prácticas explicado función por función, y la <a href="./reproducibilidad.html">guía de reproducibilidad</a> resume el kit mínimo para que tu trabajo lo pueda correr otra persona.</p>
+<section id="cómo-trabajar" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="cómo-trabajar"><span class="header-section-number">2</span> Cómo trabajar</h2>
+<p>Respondé cada pregunta escribiendo código R en el bloque que está debajo. Cuando se pida una respuesta escrita, usá texto normal debajo del bloque.</p>
+<ol type="1">
+<li>Descargá este archivo <code>.qmd</code> y el dataset <code>tutorias_rct.csv</code> desde la <a href="../tareas.html">página de Tareas</a>, o cloná el repositorio con <code>git clone https://github.com/danilofreire/taller-evidencia-ucu.git</code></li>
+<li>Necesitás <a href="https://cran.r-project.org/">R</a> y <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>. Las versiones recientes de RStudio ya traen Quarto</li>
+<li>Abrí el <code>.qmd</code> en RStudio y corré los bloques con Ctrl+Enter (Cmd+Enter en Mac)</li>
+<li>Cuando termines, apretá “Render” para generar el documento completo</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(estimatr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"datos/tutorias_rct.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># datos &lt;- read_csv("https://raw.githubusercontent.com/danilofreire/taller-evidencia-ucu/main/tareas/datos/tutorias_rct.csv", show_col_types = FALSE)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">zona =</span> <span class="fu">factor</span>(zona))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="explorar" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="explorar"><span class="header-section-number">3</span> Explorar</h2>
+<section id="pregunta-1-la-diferencia-cruda" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="pregunta-1-la-diferencia-cruda"><span class="header-section-number">3.1</span> Pregunta 1: la diferencia cruda</h3>
+<p>Calculá la nota final promedio y la proporción de aprobados en cada grupo (tratamiento y control). ¿Cuál es la diferencia cruda de notas entre los dos grupos? En un experimento aleatorizado, ¿por qué esta simple resta ya es informativa, mientras que en un estudio observacional habría que desconfiar de ella?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+<section id="pregunta-2-la-tabla-de-balance" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="pregunta-2-la-tabla-de-balance"><span class="header-section-number">3.2</span> Pregunta 2: la tabla de balance</h3>
+<p>Un buen sorteo deja los grupos parejos en las variables medidas antes del tratamiento. Corré una regresión por covariable (<code>nota_base</code>, <code>edad</code>, <code>mujer</code>, <code>asistencia_previa</code>, <code>vulnerable</code>) sobre <code>tratamiento</code> y juntá las diferencias con su valor <span class="math inline">\(p\)</span>. ¿Alguna diferencia sale significativa? Si es así, ¿quiere decir que el sorteo falló?</p>
+<p><em>Pista:</em> la sección “Tabla de balance” de la Referencia R arma esto con varias regresiones que van a una <code>data.frame</code>. Acordate de que, con varias covariables, alguna puede salir significativa sólo por azar.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+</section>
+<section id="estimar-el-efecto" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="estimar-el-efecto"><span class="header-section-number">4</span> Estimar el efecto</h2>
+<section id="pregunta-3-diferencia-de-medias" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="pregunta-3-diferencia-de-medias"><span class="header-section-number">4.1</span> Pregunta 3: diferencia de medias</h3>
+<p>Estimá el efecto del programa sobre <code>nota_final</code> con <code>difference_in_means()</code>. Reportá el efecto, su intervalo de confianza y su valor <span class="math inline">\(p\)</span>. ¿El intervalo cruza el cero? Interpretá el número en la escala del problema (puntos de nota).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+<section id="pregunta-4-controles-para-ganar-precisión" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="pregunta-4-controles-para-ganar-precisión"><span class="header-section-number">4.2</span> Pregunta 4: controles para ganar precisión</h3>
+<p>Estimá el mismo efecto con <code>lm_robust()</code>, primero sin covariables y después sumando <code>nota_base</code> y <code>asistencia_previa</code>. Compará el coeficiente de <code>tratamiento</code> y, sobre todo, su error estándar en las dos versiones. ¿Los controles cambian el efecto estimado? ¿Cambian su precisión? ¿Por qué en un experimento no controlamos para quitar sesgo?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+<section id="pregunta-5-el-ajuste-a-la-lin" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="pregunta-5-el-ajuste-a-la-lin"><span class="header-section-number">4.3</span> Pregunta 5: el ajuste a la Lin</h3>
+<p>Sumar covariables “a lo bruto” puede colar un sesgo chico en muestras finitas. La receta de Lin lo evita centrando cada covariable y multiplicándola por el tratamiento. Estimá el efecto con <code>lm_lin()</code> usando <code>nota_base</code> y <code>asistencia_previa</code> como covariables. Compará su error estándar con el de la regresión sin covariables de la pregunta anterior.</p>
+<p><em>Pista:</em> en <code>lm_lin()</code> las covariables van en el argumento <code>covariates = ~ ...</code>. Está en la sección “Ajuste a la Lin” de la Referencia R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+</section>
+<section id="mirar-más-fino" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="mirar-más-fino"><span class="header-section-number">5</span> Mirar más fino</h2>
+<section id="pregunta-6-para-quién-funciona-el-programa" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="pregunta-6-para-quién-funciona-el-programa"><span class="header-section-number">5.1</span> Pregunta 6: ¿para quién funciona el programa?</h3>
+<p>Una hipótesis razonable es que las tutorías rindan más para los estudiantes que arrancan con más dificultades. Estimá un modelo con la interacción <code>tratamiento * vulnerable</code> y leé los coeficientes: ¿cuál es el efecto para los estudiantes no vulnerables? ¿Y para los vulnerables? ¿La diferencia entre los dos es grande?</p>
+<p><em>Pista:</em> con <code>tratamiento * vulnerable</code>, el coeficiente de <code>tratamiento</code> es el efecto cuando <code>vulnerable = 0</code>, y el término de interacción es cuánto se suma cuando <code>vulnerable = 1</code>. Tratá este resultado como exploración, no como prueba, salvo que lo hubieras pre-registrado.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
+</section>
+</section>
+<section id="decidir" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="decidir"><span class="header-section-number">6</span> Decidir</h2>
+<section id="pregunta-7-el-efecto-sobre-aprobar-y-una-recomendación" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="pregunta-7-el-efecto-sobre-aprobar-y-una-recomendación"><span class="header-section-number">6.1</span> Pregunta 7: el efecto sobre aprobar, y una recomendación</h3>
+<p>Estimá el efecto del programa sobre <code>aprobo</code> (la probabilidad de aprobar el año). Después, imaginá que le escribís al equipo de educación del municipio, que tiene presupuesto para ampliar el programa pero no para todos. Con lo que encontraste en las preguntas 3, 6 y 7, ¿qué recomendarías? Considerá el tamaño del efecto, a quién ayuda más y qué te gustaría saber antes de decidir.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escribí tu código acá</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Respuesta:</strong></p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Volver arriba</a></main> <!-- /main -->
@@ -880,7 +1027,7 @@ ul.task-list li input[type="checkbox"] {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/issues/new" class="toc-action"><i class="bi bi-github"></i>Informar sobre problema</a></li><li><a href="https://github.com/danilofreire/taller-evidencia-ucu/blob/main/tareas/tarea-01-experimentos.qmd" class="toc-action"><i class="bi empty"></i>Ver el código</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>Hecho con <a href="https://quarto.org">Quarto</a></p>
 </div>

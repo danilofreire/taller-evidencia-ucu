@@ -1,0 +1,46 @@
+"estudio","pais","metodo","n","ee","efecto"
+"Lima (2018)","Argentina","OLS",1330,0.025,-0.073
+"Herrera (2008)","Brasil","OLS",4657,0.013,-0.167
+"Ortiz (1995)","Alemania","panel",296,0.052,-0.111
+"Fernández (2007)","México","panel",960,0.029,0.077
+"Smith (2015)","Estados Unidos","panel",537,0.039,-0.143
+"Ríos (2007)","Estados Unidos","experimento",2229,0.019,-0.105
+"Sosa (2008)","Estados Unidos","OLS",443,0.043,-0.128
+"Sosa (2009)","España","panel",697,0.034,-0.09
+"Smith (2008)","México","panel",2550,0.018,-0.012
+"Souza (1995)","México","panel",1631,0.022,-0.121
+"Sosa (2018)","India","OLS",1201,0.026,-0.162
+"Souza (1998)","Reino Unido","OLS",4650,0.013,-0.136
+"Muñoz (1998)","Estados Unidos","panel",2308,0.019,-0.026
+"Lima (2002)","Chile","experimento",2936,0.017,-0.008
+"Fernández (2017)","Reino Unido","OLS",1736,0.022,-0.171
+"Torres (2017)","Chile","OLS",1458,0.024,-0.126
+"Sosa (2021)","Chile","panel",2713,0.017,-0.016
+"Castro (2013)","México","OLS",3338,0.016,-0.131
+"Johnson (2013)","Estados Unidos","panel",1550,0.023,-0.052
+"Castro (2012)","Alemania","OLS",2158,0.019,-0.127
+"Castro (1995)","Sudáfrica","panel",1156,0.026,-0.066
+"Lima (2004)","España","OLS",482,0.041,-0.162
+"Acosta (2001)","Brasil","OLS",1598,0.023,-0.106
+"Souza (2017)","Brasil","panel",1672,0.022,-0.006
+"Núñez (2001)","Sudáfrica","OLS",1281,0.025,-0.087
+"Ferreira (2007)","Chile","panel",2508,0.018,-0.005
+"Smith (1995)","Alemania","experimento",536,0.039,-0.103
+"Sosa (2023)","Brasil","panel",554,0.038,-0.07
+"Müller (2017)","Chile","panel",1587,0.023,-0.104
+"García (2008)","Brasil","experimento",3412,0.015,0.041
+"Johnson (2007)","Alemania","panel",774,0.032,-0.065
+"Sosa (2014)","India","experimento",2339,0.019,-0.04
+"Johnson (2006)","Reino Unido","OLS",271,0.055,-0.24
+"Fernández (2021)","Chile","OLS",3619,0.015,-0.091
+"Castro (2019)","Brasil","panel",1789,0.021,-0.034
+"Núñez (2011)","Reino Unido","OLS",1495,0.023,-0.119
+"Souza (2015)","India","OLS",1225,0.026,-0.062
+"García (2008)","México","OLS",620,0.036,-0.081
+"Smith (2014)","Estados Unidos","panel",1958,0.02,-0.021
+"Fernández (2001)","Argentina","experimento",3386,0.015,-0.027
+"Smith (2007)","Estados Unidos","OLS",2061,0.02,-0.085
+"García (2007)","Chile","panel",488,0.041,-0.084
+"Castro (2023)","Brasil","OLS",315,0.051,-0.104
+"Acosta (2023)","Brasil","OLS",1486,0.023,-0.042
+"Ríos (2012)","India","panel",946,0.029,-0.131
